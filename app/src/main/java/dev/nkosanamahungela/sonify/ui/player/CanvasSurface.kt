@@ -1,6 +1,6 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
-import dev.lelonio.square.ui.components.copyFrame
+import dev.nkosanamahungela.sonify.ui.components.copyFrame
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -18,7 +18,7 @@ import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
-import dev.lelonio.square.R
+import dev.nkosanamahungela.sonify.R
 
 /**
  * The track's Canvas: a few seconds of video, looping behind the player.

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
@@ -41,4 +41,4 @@ internal fun DjMark(
 
 /** Whether [contextUri] is the DJ's queue. */
 internal fun isDjQueue(contextUri: String?) =
-    dev.lelonio.square.backend.spotify.SpotifyDj.isDj(contextUri)
+    dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.isDj(contextUri)

@@ -10,7 +10,7 @@
  * gesture. The rest is theirs.
  */
 
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.Spring
@@ -63,10 +63,10 @@ import com.adamglin.phosphoricons.fill.Devices
 import com.adamglin.phosphoricons.fill.Pause
 import com.adamglin.phosphoricons.fill.Play
 import com.adamglin.phosphoricons.fill.SkipForward
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.glass.InteractiveHighlight
-import dev.lelonio.square.ui.glass.ScrollingWaveformSeekBar
-import dev.lelonio.square.ui.components.Artwork
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.glass.InteractiveHighlight
+import dev.nkosanamahungela.sonify.ui.glass.ScrollingWaveformSeekBar
+import dev.nkosanamahungela.sonify.ui.components.Artwork
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.roundToInt

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.Spring
@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import dev.lelonio.square.backend.spotify.SpotifyDj
+import dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.min
@@ -111,7 +111,7 @@ internal fun DjStarting() {
             DjMark(color = Color.White, fontSize = 28.sp)
             androidx.compose.foundation.layout.Spacer(Modifier.height(18.dp))
             androidx.compose.material3.Text(
-                androidx.compose.ui.res.stringResource(dev.lelonio.square.R.string.spotify_dj_starting),
+                androidx.compose.ui.res.stringResource(dev.nkosanamahungela.sonify.R.string.spotify_dj_starting),
                 style = androidx.compose.material3.MaterialTheme.typography.titleMedium,
                 color = Color.White.copy(alpha = 0.85f),
             )
