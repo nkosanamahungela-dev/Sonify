@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.height
@@ -18,7 +18,7 @@ import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import dev.lelonio.square.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.Ink
 
 /**
  * A title in the wordmark's letters: polylines on the same 6×10 grid, the

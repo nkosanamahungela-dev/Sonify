@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,8 +19,8 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
 
 /**
  * Who is listening, and on which service: the home page's provenance line and

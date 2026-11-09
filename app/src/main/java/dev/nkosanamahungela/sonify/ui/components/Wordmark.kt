@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
@@ -21,8 +21,8 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.theme.Ink
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.theme.Ink
 
 /**
  * The name, drawn rather than typeset.
@@ -91,7 +91,7 @@ fun AppLockup(
      * Null leaves it bare, which is what everywhere but the home header wants:
      * a plate is a control, and a mark in the middle of a login page is not one.
      */
-    plate: dev.lelonio.square.ui.glass.backdrop.Backdrop? = null,
+    plate: dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop? = null,
 ) {
     Row(modifier, verticalAlignment = Alignment.CenterVertically) {
         if (plate == null) {
@@ -124,14 +124,14 @@ fun AppLockup(
 @Composable
 fun AppPlate(
     size: Dp,
-    backdrop: dev.lelonio.square.ui.glass.backdrop.Backdrop,
+    backdrop: dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop,
     modifier: Modifier = Modifier,
 ) {
     val accent = androidx.compose.material3.MaterialTheme.colorScheme.primary
     // The iOS 27 glass, its own edge and light, over the artwork behind the
     // page: that layer stands still while the page scrolls, so the pane is
     // not taken again on every frame of it.
-    dev.lelonio.square.ui.glass.LiquidButton(
+    dev.nkosanamahungela.sonify.ui.glass.LiquidButton(
         onClick = {},
         backdrop = backdrop,
         isInteractive = false,

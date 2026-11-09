@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -12,9 +12,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
 
 /**
  * The ways out of a page that only asks to sign in to Spotify.

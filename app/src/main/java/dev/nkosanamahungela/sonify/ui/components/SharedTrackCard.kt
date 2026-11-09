@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -42,15 +42,15 @@ import com.adamglin.phosphoricons.Fill
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.fill.Play
 import com.adamglin.phosphoricons.regular.Plus
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.backdrop.drawBackdrop
-import dev.lelonio.square.ui.glass.backdrop.effects.blur
-import dev.lelonio.square.R
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.player.GlassSurface
-import dev.lelonio.square.ui.theme.rememberArtworkPalette
-import dev.lelonio.square.ui.theme.softShadow
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.drawBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.blur
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.player.GlassSurface
+import dev.nkosanamahungela.sonify.ui.theme.rememberArtworkPalette
+import dev.nkosanamahungela.sonify.ui.theme.softShadow
 import androidx.compose.ui.res.stringResource
 
 /**

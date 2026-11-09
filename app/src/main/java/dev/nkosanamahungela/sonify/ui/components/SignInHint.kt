@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -25,11 +25,11 @@ import androidx.compose.ui.unit.dp
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Fill
 import com.adamglin.phosphoricons.fill.YoutubeLogo
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.lightPage
-import dev.lelonio.square.ui.theme.pageGround
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.lightPage
+import dev.nkosanamahungela.sonify.ui.theme.pageGround
 
 /**
  * What signing in to YouTube Music would add, where its absence shows.

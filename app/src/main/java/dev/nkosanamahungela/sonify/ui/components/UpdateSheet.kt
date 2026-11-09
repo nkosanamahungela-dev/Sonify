@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -34,15 +34,15 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.glass.LocalGlassEffectConfig
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.liquidGlass
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.glass.shapes.ContinuousCapsule
-import dev.lelonio.square.ui.glass.shapes.ContinuousRoundedRectangle
-import dev.lelonio.square.ui.player.GlassInk
-import dev.lelonio.square.ui.player.GlassInkDim
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.liquidGlass
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousRoundedRectangle
+import dev.nkosanamahungela.sonify.ui.player.GlassInk
+import dev.nkosanamahungela.sonify.ui.player.GlassInkDim
 
 /**
  * What a new version is, and what it changes, before anything is downloaded.

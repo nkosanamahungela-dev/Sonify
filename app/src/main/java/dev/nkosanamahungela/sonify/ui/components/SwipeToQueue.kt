@@ -1,6 +1,6 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
-import dev.lelonio.square.R
+import dev.nkosanamahungela.sonify.R
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
