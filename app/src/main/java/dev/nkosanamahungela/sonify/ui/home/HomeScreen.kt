@@ -726,61 +726,7 @@ private fun Header(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Column(Modifier.weight(1f)) {
-                // The account, and which service it is an account for.
-                //
-                // Small and above rather than large and below, which is where
-                // the name used to be: whose account it is changes nothing about
-                // the page, while *which service* changes everything on it — the
-                // catalogue, the playlists, what the player can do — and that
-                // was nowhere on screen. Together they read as one line of
-                // provenance over the app's own name.
-                //
-                // Height goes with the alpha, so the collapsed header is a bar
-                // rather than a bar with a blank line in it.
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .clickable(
-                            onClickLabel = stringResource(if (service == R.string.backend_spotify) R.string.backend_youtube else R.string.backend_spotify),
-                            onClick = onSwitchSource,
-                        )
-                        .layout { measurable, constraints ->
-                            val placeable = measurable.measure(constraints)
-                            val height = ((1f - collapse()) * placeable.height).toInt()
-                            layout(placeable.width, height) { placeable.place(0, 0) }
-                        }
-                        .graphicsLayer {
-                            clip = true
-                            alpha = (1f - collapse() * 1.6f).coerceIn(0f, 1f)
-                            transformOrigin = TransformOrigin(0f, 0f)
-                        },
-                ) {
-                    Icon(
-                        serviceIcon,
-                        contentDescription = stringResource(service),
-                        tint = InkDim,
-                        modifier = Modifier
-                            .padding(end = 6.dp)
-                            .size(15.dp),
-                    )
-                    Text(
-                        listOfNotNull(
-                            stringResource(service),
-                            name.takeIf { it.isNotBlank() },
-                        ).joinToString(" · "),
-                        modifier = Modifier.weight(1f, fill = false),
-                        style = MaterialTheme.typography.labelLarge,
-                        color = InkDim,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                    Icon(
-                        PhosphorIcons.Regular.ArrowsLeftRight,
-                        contentDescription = null,
-                        tint = InkDim,
-                        modifier = Modifier.padding(start = 6.dp).size(14.dp),
-                    )
-                }
+                // Tap the Home title to switch between music sources.
                 // The app's own name, at the size the account name used to be.
                 // It is what the page is, and unlike the account it is worth
                 // reading at a glance; it shrinks a little as the header
@@ -788,7 +734,8 @@ private fun Header(
                 // it says nothing about where you are.
                 Column(
                     modifier = Modifier
-                        .padding(top = 9.dp)
+                        .padding(top = 0.dp)
+                        .clickable(onClick = onSwitchSource)
                         .graphicsLayer {
                             val scale = 1f - 0.12f * collapse()
                             scaleX = scale
@@ -801,12 +748,6 @@ private fun Header(
                         style = MaterialTheme.typography.displaySmall,
                         fontWeight = FontWeight.Bold,
                         color = Ink,
-                    )
-                    Text(
-                        "Made for your listening",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = InkDim,
-                        modifier = Modifier.padding(top = 1.dp),
                     )
                 }
             }
@@ -1065,14 +1006,14 @@ private fun PlaylistTile(playlist: CatalogPlaylist, onClick: () -> Unit) {
     val corner = if (playlist.isArtist) 76.dp else 20.dp
     Column(
         Modifier
-            .width(152.dp)
+            .width(176.dp)
             .pressable(onClick),
     ) {
         Artwork(
             url = playlist.artworkUrl,
             title = playlist.name,
             modifier = Modifier
-                .size(152.dp)
+                .size(176.dp)
                 .softShadow(RoundedCornerShape(corner), elevation = 18.dp),
             corner = corner,
         )
