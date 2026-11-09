@@ -1,4 +1,4 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 import java.lang.reflect.Proxy
 import java.nio.file.Files

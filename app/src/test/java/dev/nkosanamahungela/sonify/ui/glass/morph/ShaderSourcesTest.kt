@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.glass.morph
+package dev.nkosanamahungela.sonify.ui.glass.morph
 
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

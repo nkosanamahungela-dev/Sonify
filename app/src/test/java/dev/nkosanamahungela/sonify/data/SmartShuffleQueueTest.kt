@@ -1,6 +1,6 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
-import dev.lelonio.square.playback.PlayQueue
+import dev.nkosanamahungela.sonify.playback.PlayQueue
 import org.junit.Assert.*
 import org.junit.Test
 
