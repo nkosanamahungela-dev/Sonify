@@ -7,13 +7,13 @@
  * scale for cheaper effect rendering. KMP expect/actual declarations were
  * merged into this single Android source set. Package renamed accordingly.
  */
-package dev.lelonio.square.ui.glass.backdrop.effects
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.effects
 
 import androidx.annotation.FloatRange
 import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.TileMode
-import dev.lelonio.square.ui.glass.backdrop.BackdropEffectScope
-import dev.lelonio.square.ui.glass.backdrop.isRenderEffectSupported
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.BackdropEffectScope
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.isRenderEffectSupported
 
 fun BackdropEffectScope.blur(
     @FloatRange(from = 0.0) radius: Float,

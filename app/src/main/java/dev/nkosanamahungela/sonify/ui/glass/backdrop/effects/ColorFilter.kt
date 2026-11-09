@@ -7,15 +7,15 @@
  * scale for cheaper effect rendering. KMP expect/actual declarations were
  * merged into this single Android source set. Package renamed accordingly.
  */
-package dev.lelonio.square.ui.glass.backdrop.effects
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.effects
 
 import androidx.annotation.FloatRange
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.graphics.ColorMatrixColorFilter
-import dev.lelonio.square.ui.glass.backdrop.BackdropEffectScope
-import dev.lelonio.square.ui.glass.backdrop.internal.ColorFilterEffect
-import dev.lelonio.square.ui.glass.backdrop.isRenderEffectSupported
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.BackdropEffectScope
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.internal.ColorFilterEffect
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.isRenderEffectSupported
 
 fun BackdropEffectScope.colorFilter(colorFilter: ColorFilter) {
     if (!isRenderEffectSupported()) return

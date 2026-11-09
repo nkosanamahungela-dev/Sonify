@@ -7,7 +7,7 @@
  * scale for cheaper effect rendering. KMP expect/actual declarations were
  * merged into this single Android source set. Package renamed accordingly.
  */
-package dev.lelonio.square.ui.glass.backdrop.effects
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.effects
 
 import androidx.annotation.FloatRange
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
@@ -15,11 +15,11 @@ import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.util.fastCoerceAtLeast
 import androidx.compose.ui.util.fastCoerceAtMost
-import dev.lelonio.square.ui.glass.backdrop.BackdropEffectScope
-import dev.lelonio.square.ui.glass.backdrop.internal.RoundedRectRefractionShaderString
-import dev.lelonio.square.ui.glass.backdrop.internal.RoundedRectRefractionWithDispersionShaderString
-import dev.lelonio.square.ui.glass.backdrop.internal.RuntimeShaderEffect
-import dev.lelonio.square.ui.glass.backdrop.isRuntimeShaderSupported
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.BackdropEffectScope
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.internal.RoundedRectRefractionShaderString
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.internal.RoundedRectRefractionWithDispersionShaderString
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.internal.RuntimeShaderEffect
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.isRuntimeShaderSupported
 
 fun BackdropEffectScope.lens(
     @FloatRange(from = 0.0) refractionHeight: Float,

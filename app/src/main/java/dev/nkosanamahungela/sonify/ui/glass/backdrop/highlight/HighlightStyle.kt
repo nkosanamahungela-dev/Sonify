@@ -7,7 +7,7 @@
  * scale for cheaper effect rendering. KMP expect/actual declarations were
  * merged into this single Android source set. Package renamed accordingly.
  */
-package dev.lelonio.square.ui.glass.backdrop.highlight
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.highlight
 
 import androidx.annotation.FloatRange
 import androidx.compose.foundation.shape.CornerBasedShape
@@ -19,11 +19,11 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.util.fastCoerceAtMost
-import dev.lelonio.square.ui.glass.backdrop.RuntimeShader
-import dev.lelonio.square.ui.glass.backdrop.RuntimeShaderCache
-import dev.lelonio.square.ui.glass.backdrop.internal.AmbientHighlightShaderString
-import dev.lelonio.square.ui.glass.backdrop.internal.DefaultHighlightShaderString
-import dev.lelonio.square.ui.glass.backdrop.isRuntimeShaderSupported
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.RuntimeShader
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.RuntimeShaderCache
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.internal.AmbientHighlightShaderString
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.internal.DefaultHighlightShaderString
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.isRuntimeShaderSupported
 import kotlin.math.PI
 
 @Immutable

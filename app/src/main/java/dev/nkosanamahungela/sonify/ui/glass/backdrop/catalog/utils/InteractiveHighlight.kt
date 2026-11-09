@@ -5,9 +5,9 @@
  *
  * Not published as a library — ported straight from the catalog demo app that
  * showcases Kyant0/backdrop, source-only. Package renamed and RuntimeShader
- * imports repointed at this app's vendored dev.lelonio.square.ui.glass.backdrop.
+ * imports repointed at this app's vendored dev.nkosanamahungela.sonify.ui.glass.backdrop.
  */
-package dev.lelonio.square.ui.glass.backdrop.catalog.utils
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.catalog.utils
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.VectorConverter
@@ -22,9 +22,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.util.fastCoerceIn
-import dev.lelonio.square.ui.glass.backdrop.RuntimeShader
-import dev.lelonio.square.ui.glass.backdrop.asComposeShader
-import dev.lelonio.square.ui.glass.backdrop.isRuntimeShaderSupported
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.RuntimeShader
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.asComposeShader
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.isRuntimeShaderSupported
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

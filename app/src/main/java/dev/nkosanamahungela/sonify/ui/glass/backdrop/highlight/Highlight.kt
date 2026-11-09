@@ -7,7 +7,7 @@
  * scale for cheaper effect rendering. KMP expect/actual declarations were
  * merged into this single Android source set. Package renamed accordingly.
  */
-package dev.lelonio.square.ui.glass.backdrop.highlight
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.highlight
 
 import androidx.annotation.FloatRange
 import androidx.compose.runtime.Immutable
