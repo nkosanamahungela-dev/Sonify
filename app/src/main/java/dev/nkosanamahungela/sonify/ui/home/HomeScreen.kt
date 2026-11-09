@@ -81,7 +81,7 @@ import dev.nkosanamahungela.sonify.ui.MainViewModel
 import dev.nkosanamahungela.sonify.ui.components.AppGlyph
 import dev.nkosanamahungela.sonify.ui.components.AppLockup
 import dev.nkosanamahungela.sonify.ui.components.Artwork
-import dev.nkosanamahungela.sonify.ui.components.SquareWordmark
+import dev.nkosanamahungela.sonify.ui.components.SonifyWordmark
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.Constraints
 import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
@@ -217,7 +217,7 @@ fun HomeScreen(
     when (state) {
         MainViewModel.UiState.LoggedOut -> Centered {
             AppGlyph(64.dp)
-            SquareWordmark(height = 28.dp)
+            SonifyWordmark(height = 28.dp)
             Text(
                 stringResource(R.string.unofficial_client),
                 style = MaterialTheme.typography.bodyMedium,
@@ -1340,7 +1340,7 @@ private fun YouTubeHome(
                     CircularProgressIndicator(color = Ink, strokeWidth = 2.dp)
                 } else {
                     AppGlyph(64.dp)
-                    SquareWordmark(height = 28.dp)
+                    SonifyWordmark(height = 28.dp)
                     Text(
                         stringResource(R.string.youtube_home_empty),
                         style = MaterialTheme.typography.bodyMedium,
