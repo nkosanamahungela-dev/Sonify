@@ -8,7 +8,7 @@
 // Kept as close to upstream as possible (package line and a few Material
 // swaps aside) so a later upstream fix can be diffed in; see LICENSE-backdrop.txt.
 
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.VectorConverter
@@ -23,9 +23,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.util.fastCoerceIn
-import dev.lelonio.square.ui.glass.backdrop.RuntimeShader
-import dev.lelonio.square.ui.glass.backdrop.asComposeShader
-import dev.lelonio.square.ui.glass.backdrop.isRuntimeShaderSupported
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.RuntimeShader
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.asComposeShader
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.isRuntimeShaderSupported
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

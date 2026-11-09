@@ -5,7 +5,7 @@
 // From https://github.com/Kyant0/AndroidLiquidGlass (Apache-2.0);
 // see LICENSE-backdrop.txt.
 
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
 /** Suspends until the next frame is drawn. */
 suspend fun awaitFrame() = kotlinx.coroutines.android.awaitFrame()

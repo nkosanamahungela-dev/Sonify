@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -12,14 +12,14 @@ import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.ui.glass.backdrop.drawBackdrop
-import dev.lelonio.square.ui.glass.backdrop.effects.blur
-import dev.lelonio.square.ui.glass.backdrop.effects.lens
-import dev.lelonio.square.ui.glass.backdrop.effects.vibrancy
-import dev.lelonio.square.ui.glass.backdrop.highlight.Highlight
-import dev.lelonio.square.ui.glass.backdrop.shadow.Shadow
-import dev.lelonio.square.ui.glass.floatingtabbar.gooey
-import dev.lelonio.square.ui.glass.shapes.ContinuousCapsule
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.drawBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.blur
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.lens
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.vibrancy
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.highlight.Highlight
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.shadow.Shadow
+import dev.nkosanamahungela.sonify.ui.glass.floatingtabbar.gooey
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule
 
 /**
  * Compiles the glass shaders before anybody sees them.
@@ -45,7 +45,7 @@ import dev.lelonio.square.ui.glass.shapes.ContinuousCapsule
  * warmed here too, on the same invisible pixel.
  */
 @Composable
-fun GlassWarmUp(backdrop: dev.lelonio.square.ui.glass.backdrop.Backdrop) {
+fun GlassWarmUp(backdrop: dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop) {
     var needed by remember { mutableStateOf(true) }
     if (!needed) return
     LaunchedEffect(Unit) {

@@ -8,7 +8,7 @@
 // Kept as close to upstream as possible (package line and a few Material
 // swaps aside) so a later upstream fix can be diffed in; see LICENSE-backdrop.txt.
 
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring

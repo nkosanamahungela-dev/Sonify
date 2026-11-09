@@ -5,7 +5,7 @@
 //
 // See LICENSE-backdrop.txt.
 
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown

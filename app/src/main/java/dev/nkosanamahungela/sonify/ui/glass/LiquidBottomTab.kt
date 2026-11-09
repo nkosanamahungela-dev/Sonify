@@ -8,7 +8,7 @@
 // Kept as close to upstream as possible (package line and a few Material
 // swaps aside) so a later upstream fix can be diffed in; see LICENSE-backdrop.txt.
 
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,7 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.ui.glass.shapes.ContinuousCapsule
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule
 
 internal val LocalLiquidBottomTabScale =
     staticCompositionLocalOf { { 1f } }

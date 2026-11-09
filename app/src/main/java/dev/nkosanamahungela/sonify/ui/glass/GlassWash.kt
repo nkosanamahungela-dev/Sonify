@@ -1,10 +1,10 @@
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
-import dev.lelonio.square.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.Ink
 
 /**
  * What the glass in this app holds: the colour of what is playing.

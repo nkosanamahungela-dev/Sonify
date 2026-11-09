@@ -14,7 +14,7 @@
 // as the press leaves it; the member itself draws only what sits on the glass
 // (its tint, the ambient lift, its label and the light under the finger).
 
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -39,12 +39,12 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.backdrop.isRenderEffectSupported
-import dev.lelonio.square.ui.glass.morph.LiquidGlassRenderer
-import dev.lelonio.square.ui.glass.morph.LiquidGlassShader
-import dev.lelonio.square.ui.glass.morph.LiquidShape
-import dev.lelonio.square.ui.glass.morph.LiquidShapeType
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.isRenderEffectSupported
+import dev.nkosanamahungela.sonify.ui.glass.morph.LiquidGlassRenderer
+import dev.nkosanamahungela.sonify.ui.glass.morph.LiquidGlassShader
+import dev.nkosanamahungela.sonify.ui.glass.morph.LiquidShape
+import dev.nkosanamahungela.sonify.ui.glass.morph.LiquidShapeType
 
 /** One frame of a blend group, in its surface's pixels. */
 @Immutable
@@ -189,7 +189,7 @@ fun GlassBlendGroup(
                     config = config,
                     shape = RoundedCornerShape(0.dp),
                     blurRadiusDp = (config.blurRadius * blurScale).coerceAtLeast(0f),
-                    highlightAlpha = dev.lelonio.square.ui.player.BarHighlightAlpha,
+                    highlightAlpha = dev.nkosanamahungela.sonify.ui.player.BarHighlightAlpha,
                     ownBackdrop = backdrop,
                     group = frame,
                 ),

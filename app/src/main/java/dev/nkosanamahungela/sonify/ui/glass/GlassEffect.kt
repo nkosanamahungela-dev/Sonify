@@ -3,10 +3,10 @@
  * Licensed under GPL-3.0 | See git history for contributors
  */
 
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
-import dev.lelonio.square.ui.glass.morph.liquidGlassMaterial
-import dev.lelonio.square.ui.glass.morph.LiquidGlassRenderer
+import dev.nkosanamahungela.sonify.ui.glass.morph.liquidGlassMaterial
+import dev.nkosanamahungela.sonify.ui.glass.morph.LiquidGlassRenderer
 import android.app.ActivityManager
 import android.os.Build
 import androidx.compose.foundation.shape.CornerBasedShape
@@ -29,19 +29,19 @@ import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.luminance
-import dev.lelonio.square.ui.glass.backdrop.BackdropEffectScope
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.BackdropEffectScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.backdrop.drawBackdrop
-import dev.lelonio.square.ui.glass.backdrop.isRenderEffectSupported
-import dev.lelonio.square.ui.glass.backdrop.effects.blur
-import dev.lelonio.square.ui.glass.backdrop.effects.colorControls
-import dev.lelonio.square.ui.glass.backdrop.effects.lens
-import dev.lelonio.square.ui.glass.backdrop.highlight.Highlight
-import dev.lelonio.square.ui.glass.backdrop.highlight.HighlightStyle
-import dev.lelonio.square.ui.glass.backdrop.shadow.Shadow
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.drawBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.isRenderEffectSupported
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.blur
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.colorControls
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.lens
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.highlight.Highlight
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.highlight.HighlightStyle
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.shadow.Shadow
 
 /**
  * User-configurable parameters of the liquid glass effect, sourced from DataStore
@@ -520,16 +520,16 @@ fun Modifier.liquidGlass(
     val backdropLuminance = LocalBackdropLuminance.current
     val surfaceTintColor = tinted(if (config.surfaceTintColor.isSpecified) {
         config.surfaceTintColor
-    } else if (dev.lelonio.square.ui.theme.LocalInkOverride.current != null) {
+    } else if (dev.nkosanamahungela.sonify.ui.theme.LocalInkOverride.current != null) {
         // A surface whose ink was chosen for it takes the opposite film.
         //
         // On the player and on a record's page the ink is decided by what is
         // behind the glass rather than by the phone's setting, and a film that
         // followed the setting anyway put light glyphs on a light pane over a
         // dark Canvas.
-        val ink = dev.lelonio.square.ui.theme.LocalInkOverride.current
+        val ink = dev.nkosanamahungela.sonify.ui.theme.LocalInkOverride.current
         if ((ink?.luminance() ?: 1f) > 0.5f) Color(0xFF23232A) else Color(0xFFFAFAFA)
-    } else if (dev.lelonio.square.ui.theme.LocalLightTheme.current) {
+    } else if (dev.nkosanamahungela.sonify.ui.theme.LocalLightTheme.current) {
         Color(0xFFFAFAFA)
     } else {
         // Between the two across the middle of the range rather than at a line,
@@ -653,11 +653,11 @@ fun Modifier.liquidGlass(
     val upstreamBlurPx = if (
         upstreamSettings.effectiveFrost > 0f &&
         upstreamSettings.effectiveBlur * density.density <=
-        dev.lelonio.square.ui.glass.morph.LiquidGlassSettings.FROST_GHOST_MAX_SIGMA
+        dev.nkosanamahungela.sonify.ui.glass.morph.LiquidGlassSettings.FROST_GHOST_MAX_SIGMA
     ) {
         0f
     } else {
-        dev.lelonio.square.ui.glass.morph.blurRadiusForSigma(
+        dev.nkosanamahungela.sonify.ui.glass.morph.blurRadiusForSigma(
             with(density) { upstreamSettings.effectiveBlur.dp.toPx() },
         ) * resolutionScale
     }
@@ -671,7 +671,7 @@ fun Modifier.liquidGlass(
     val approx27 = !upstream && config.ios27 && !plainBlur
     val chainSaturation = if (approx27) upstreamSettings.effectiveSaturation else saturation
     val chainBlurPx = if (approx27) {
-        dev.lelonio.square.ui.glass.morph.blurRadiusForSigma(
+        dev.nkosanamahungela.sonify.ui.glass.morph.blurRadiusForSigma(
             with(density) { maxOf(upstreamSettings.effectiveFrost, upstreamSettings.effectiveBlur).dp.toPx() },
         ) * resolutionScale
     } else {
@@ -923,8 +923,8 @@ private const val TINT_RIM_SATURATION = 0.85f
 fun GlassEffectConfig.toLiquidGlassSettings(
     blurScale: Float = 1f,
     minBlur: Float = 0f,
-): dev.lelonio.square.ui.glass.morph.LiquidGlassSettings {
-    val light = dev.lelonio.square.ui.theme.LocalLightTheme.current
+): dev.nkosanamahungela.sonify.ui.glass.morph.LiquidGlassSettings {
+    val light = dev.nkosanamahungela.sonify.ui.theme.LocalLightTheme.current
     val film = tinted(
         when {
             surfaceTintColor.isSpecified -> surfaceTintColor
@@ -934,7 +934,7 @@ fun GlassEffectConfig.toLiquidGlassSettings(
         this,
     ).copy(alpha = surfaceOpacity.coerceIn(0f, 1f))
     val liquid = style != GlassStyle.BLUR
-    return dev.lelonio.square.ui.glass.morph.LiquidGlassSettings(
+    return dev.nkosanamahungela.sonify.ui.glass.morph.LiquidGlassSettings(
         refractiveIndex = if (liquid) 1f + lensAmount.coerceIn(0f, 1f) * 0.2f else 1f,
         thickness = if (liquid) (lensHeight * LENS_MAX_DP).coerceAtLeast(1f) else 1f,
         chromaticAberration = if (liquid && chromaticAberration) 4f * DISPERSION_SHARE else 0f,
@@ -961,11 +961,11 @@ data class GlassTouch(val position: androidx.compose.ui.geometry.Offset, val int
  * defaults this is the preset exactly. Without the frost, a blur of a
  * quarter of its sigma stands in for it.
  */
-fun ios27Settings(light: Boolean, config: GlassEffectConfig): dev.lelonio.square.ui.glass.morph.LiquidGlassSettings {
+fun ios27Settings(light: Boolean, config: GlassEffectConfig): dev.nkosanamahungela.sonify.ui.glass.morph.LiquidGlassSettings {
     val base = if (light) {
-        dev.lelonio.square.ui.glass.morph.LiquidGlassSettings.Ios27Light
+        dev.nkosanamahungela.sonify.ui.glass.morph.LiquidGlassSettings.Ios27Light
     } else {
-        dev.lelonio.square.ui.glass.morph.LiquidGlassSettings.Ios27Dark
+        dev.nkosanamahungela.sonify.ui.glass.morph.LiquidGlassSettings.Ios27Dark
     }
     val d = GlassEffectConfig()
     fun ratio(value: Float, default: Float) = if (default > 0f) (value / default).coerceAtLeast(0f) else 1f
@@ -1001,6 +1001,6 @@ fun ios27Settings(light: Boolean, config: GlassEffectConfig): dev.lelonio.square
 @Composable
 fun isLightGlassPage(): Boolean =
     !LocalGlassEffectConfig.current.darkGlass &&
-    (dev.lelonio.square.ui.theme.LocalInkOverride.current
+    (dev.nkosanamahungela.sonify.ui.theme.LocalInkOverride.current
         ?.let { it.luminance() < 0.5f }
-        ?: dev.lelonio.square.ui.theme.LocalLightTheme.current)
+        ?: dev.nkosanamahungela.sonify.ui.theme.LocalLightTheme.current)

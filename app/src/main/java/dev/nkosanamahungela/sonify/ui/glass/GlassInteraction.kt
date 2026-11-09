@@ -21,7 +21,7 @@
 // stretched from its far edge; a soft light follows the finger across it and
 // lights the rim nearest it; and its whole surface brightens while it is held.
 
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.CubicBezierEasing
@@ -413,7 +413,7 @@ class GlassPressState internal constructor(
             paint.xfermode = android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.ADD)
             if (blurSigmaDp > 0f && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
                 paint.maskFilter = android.graphics.BlurMaskFilter(
-                    dev.lelonio.square.ui.glass.morph.blurRadiusForSigma(blurSigmaDp * density),
+                    dev.nkosanamahungela.sonify.ui.glass.morph.blurRadiusForSigma(blurSigmaDp * density),
                     android.graphics.BlurMaskFilter.Blur.NORMAL,
                 )
             }
