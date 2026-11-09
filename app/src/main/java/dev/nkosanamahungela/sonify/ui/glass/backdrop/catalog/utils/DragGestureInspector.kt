@@ -6,7 +6,7 @@
  * Not published as a library — ported straight from the catalog demo app that
  * showcases Kyant0/backdrop, source-only. Package renamed accordingly.
  */
-package dev.lelonio.square.ui.glass.backdrop.catalog.utils
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.catalog.utils
 
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
