@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback.websdk
+package dev.nkosanamahungela.sonify.playback.websdk
 
 import android.app.*
 import android.content.Intent
@@ -9,7 +9,7 @@ import android.os.Binder
 import android.os.IBinder
 import android.webkit.*
 import androidx.core.app.NotificationCompat
-import dev.lelonio.square.R
+import dev.nkosanamahungela.sonify.R
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -39,7 +39,7 @@ class WebSdkEngine(private val context: android.content.Context) {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private val mutableState = MutableStateFlow(WebSdkState())
     val state = mutableState.asStateFlow()
-    internal val account = (context.applicationContext as dev.lelonio.square.SquareApplication).spotifySdkAccount
+    internal val account = (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).spotifySdkAccount
     var webView: WebView? = null
         private set
     private var timeout: Job? = null
@@ -128,7 +128,7 @@ class WebSdkEngine(private val context: android.content.Context) {
                 timeout?.cancel()
                 event.optString("deviceId").takeIf { it.isNotBlank() }?.let {
                     registeredDeviceId = it
-                    dev.lelonio.square.data.RemoteConnect.registerSdkDevice(it)
+                    dev.nkosanamahungela.sonify.data.RemoteConnect.registerSdkDevice(it)
                 }
                 update(state.value.copy(stage = "ready", error = null,
                     deviceId = event.optString("deviceId").takeIf { it.isNotBlank() }))
@@ -153,7 +153,7 @@ class WebSdkEngine(private val context: android.content.Context) {
         }
     }
     private fun fail(code: String) {
-        dev.lelonio.square.data.RemoteConnect.unregisterSdkDevice(registeredDeviceId)
+        dev.nkosanamahungela.sonify.data.RemoteConnect.unregisterSdkDevice(registeredDeviceId)
         registeredDeviceId = null
         timeout?.cancel()
         pollJob?.cancel()
@@ -226,7 +226,7 @@ class WebSdkEngine(private val context: android.content.Context) {
         update(WebSdkState())
     }
     private fun stopWebView() {
-        dev.lelonio.square.data.RemoteConnect.unregisterSdkDevice(registeredDeviceId)
+        dev.nkosanamahungela.sonify.data.RemoteConnect.unregisterSdkDevice(registeredDeviceId)
         registeredDeviceId = null
         revision++
         playVersion++

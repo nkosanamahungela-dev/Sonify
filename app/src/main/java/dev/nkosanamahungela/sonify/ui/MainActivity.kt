@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui
+package dev.nkosanamahungela.sonify.ui
 
 import android.content.ComponentName
 import android.os.Bundle
@@ -19,20 +19,20 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionToken
 import com.google.common.util.concurrent.MoreExecutors
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.playback.PlaybackService
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.playback.PlaybackService
 
 /**
  * Owns the connection to the playback service; everything visual lives in
- * [SquareApp].
+ * [SonifyApp].
  *
  * The controller is activity-scoped rather than kept in a ViewModel because it
  * has to be released when the UI goes away — the session keeps playing without
  * it, and holding one from a backgrounded app leaks a binder connection.
  */
 @UnstableApi
-private const val ACTION_LISTEN = "dev.lelonio.square.LISTEN_ONLY"
-private const val ACTION_TOGGLE = "dev.lelonio.square.PIP_TOGGLE"
+private const val ACTION_LISTEN = "dev.nkosanamahungela.sonify.LISTEN_ONLY"
+private const val ACTION_TOGGLE = "dev.nkosanamahungela.sonify.PIP_TOGGLE"
 
 class MainActivity : ComponentActivity() {
 
@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
      * resource this activity reads has to come from a context that carries it.
      */
     override fun attachBaseContext(base: android.content.Context) {
-        val store = (base.applicationContext as dev.lelonio.square.SquareApplication).language
+        val store = (base.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).language
         super.attachBaseContext(store.wrap(base))
     }
 
@@ -89,11 +89,11 @@ class MainActivity : ComponentActivity() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                dev.lelonio.square.playback.websdk.WebSdkRecovery.setupRequests.collect { request ->
+                dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.setupRequests.collect { request ->
                     if (request > 0) {
-                        dev.lelonio.square.playback.websdk.WebSdkRecovery.consume(request)
+                        dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.consume(request)
                         startActivity(android.content.Intent(this@MainActivity,
-                            dev.lelonio.square.playback.websdk.WebSdkActivity::class.java)
+                            dev.nkosanamahungela.sonify.playback.websdk.WebSdkActivity::class.java)
                             .putExtra("recovery", true))
                     }
                 }
@@ -101,8 +101,8 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-            dev.lelonio.square.ui.theme.ChosenTheme {
-                SquareApp(
+            dev.nkosanamahungela.sonify.ui.theme.ChosenTheme {
+                SonifyApp(
                     player = controller,
                     onPlay = ::play,
                     onEnqueue = ::enqueue,
@@ -127,8 +127,8 @@ class MainActivity : ComponentActivity() {
         // Either kind of video: YouTube's, and the music video Spotify has for
         // a track. Leaving the app while watching one means the same thing in
         // both cases.
-        val watching = dev.lelonio.square.backend.youtube.YouTubeVideoMode.enabled.value ||
-            dev.lelonio.square.backend.spotify.SpotifyVideoMode.enabled.value
+        val watching = dev.nkosanamahungela.sonify.backend.youtube.YouTubeVideoMode.enabled.value ||
+            dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.enabled.value
         if (!watching) return
         runCatching { enterPictureInPictureMode(pipParams()) }
     }
@@ -152,13 +152,13 @@ class MainActivity : ComponentActivity() {
             android.graphics.drawable.Icon.createWithResource(
                 this,
                 if (playing) {
-                    dev.lelonio.square.R.drawable.ic_pip_pause
+                    dev.nkosanamahungela.sonify.R.drawable.ic_pip_pause
                 } else {
-                    dev.lelonio.square.R.drawable.ic_pip_play
+                    dev.nkosanamahungela.sonify.R.drawable.ic_pip_play
                 },
             ),
-            getString(if (playing) dev.lelonio.square.R.string.pause else dev.lelonio.square.R.string.play),
-            getString(if (playing) dev.lelonio.square.R.string.pause else dev.lelonio.square.R.string.play),
+            getString(if (playing) dev.nkosanamahungela.sonify.R.string.pause else dev.nkosanamahungela.sonify.R.string.play),
+            getString(if (playing) dev.nkosanamahungela.sonify.R.string.pause else dev.nkosanamahungela.sonify.R.string.play),
             android.app.PendingIntent.getBroadcast(
                 this,
                 1,
@@ -169,9 +169,9 @@ class MainActivity : ComponentActivity() {
         )
 
         val listen = android.app.RemoteAction(
-            android.graphics.drawable.Icon.createWithResource(this, dev.lelonio.square.R.drawable.ic_headphones),
-            getString(dev.lelonio.square.R.string.pip_listen),
-            getString(dev.lelonio.square.R.string.pip_listen),
+            android.graphics.drawable.Icon.createWithResource(this, dev.nkosanamahungela.sonify.R.drawable.ic_headphones),
+            getString(dev.nkosanamahungela.sonify.R.string.pip_listen),
+            getString(dev.nkosanamahungela.sonify.R.string.pip_listen),
             android.app.PendingIntent.getBroadcast(
                 this,
                 0,
@@ -201,17 +201,17 @@ class MainActivity : ComponentActivity() {
             }
             if (intent?.action != ACTION_LISTEN) return
             val at = controller?.currentPosition ?: 0L
-            if (dev.lelonio.square.backend.spotify.SpotifyVideoMode.enabled.value) {
-                dev.lelonio.square.backend.spotify.SpotifyVideoMode.listen(at)
+            if (dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.enabled.value) {
+                dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.listen(at)
             } else {
-                controller?.let(dev.lelonio.square.backend.youtube.YouTubeVideoMode::toggle)
+                controller?.let(dev.nkosanamahungela.sonify.backend.youtube.YouTubeVideoMode::toggle)
             }
             // Said before finishing, and this matters: the flag is the app's,
             // not the window's, and finishing from inside a floating window
             // does not always report the window closing. Left set, the next
             // time the app was opened it drew the floating window's layout —
             // a black rectangle with a video surface and nothing else.
-            dev.lelonio.square.backend.youtube.YouTubeVideoMode.setPictureInPicture(false)
+            dev.nkosanamahungela.sonify.backend.youtube.YouTubeVideoMode.setPictureInPicture(false)
 
             // Closing the window rather than going back to a full screen the
             // listener has already left. The music is in the service, and it
@@ -229,7 +229,7 @@ class MainActivity : ComponentActivity() {
     ) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
         inPictureInPicture = isInPictureInPictureMode
-        dev.lelonio.square.backend.youtube.YouTubeVideoMode.setPictureInPicture(
+        dev.nkosanamahungela.sonify.backend.youtube.YouTubeVideoMode.setPictureInPicture(
             isInPictureInPictureMode,
         )
     }
@@ -252,29 +252,29 @@ class MainActivity : ComponentActivity() {
     private fun takeLink(intent: android.content.Intent) {
         // A playlist tapped on the home-screen widget, with what is needed to
         // show it before it has loaded.
-        if (intent.action == dev.lelonio.square.widget.SquareWidget.ACTION_OPEN_PLAYLIST) {
-            val uri = intent.getStringExtra(dev.lelonio.square.widget.SquareWidget.EXTRA_URI) ?: return
+        if (intent.action == dev.nkosanamahungela.sonify.widget.SquareWidget.ACTION_OPEN_PLAYLIST) {
+            val uri = intent.getStringExtra(dev.nkosanamahungela.sonify.widget.SquareWidget.EXTRA_URI) ?: return
             link = LinkRequest(
                 uri = uri,
                 n = (link?.n ?: 0) + 1,
-                name = intent.getStringExtra(dev.lelonio.square.widget.SquareWidget.EXTRA_NAME).orEmpty(),
-                artworkUrl = intent.getStringExtra(dev.lelonio.square.widget.SquareWidget.EXTRA_ARTWORK),
+                name = intent.getStringExtra(dev.nkosanamahungela.sonify.widget.SquareWidget.EXTRA_NAME).orEmpty(),
+                artworkUrl = intent.getStringExtra(dev.nkosanamahungela.sonify.widget.SquareWidget.EXTRA_ARTWORK),
                 fromWidget = true,
             )
             return
         }
         if (intent.action != android.content.Intent.ACTION_VIEW) return
-        val uri = dev.lelonio.square.data.SpotifyLink.parse(intent.data) ?: return
+        val uri = dev.nkosanamahungela.sonify.data.SpotifyLink.parse(intent.data) ?: return
         link = LinkRequest(uri, (link?.n ?: 0) + 1)
     }
 
     private fun android.content.Intent.opensPlayer(): Boolean =
-        action == dev.lelonio.square.playback.ACTION_OPEN_PLAYER ||
-            getBooleanExtra(dev.lelonio.square.playback.EXTRA_OPEN_PLAYER, false)
+        action == dev.nkosanamahungela.sonify.playback.ACTION_OPEN_PLAYER ||
+            getBooleanExtra(dev.nkosanamahungela.sonify.playback.EXTRA_OPEN_PLAYER, false)
 
     override fun onStart() {
         touchRefreshRate.hold()
-        dev.lelonio.square.data.RemoteConnect.onAppOpened()
+        dev.nkosanamahungela.sonify.data.RemoteConnect.onAppOpened()
         androidx.core.content.ContextCompat.registerReceiver(
             this,
             listenRequest,
@@ -333,7 +333,7 @@ class MainActivity : ComponentActivity() {
         val tapped = tracks.getOrNull(index)
         @Suppress("NAME_SHADOWING")
         val positionMs = if (positionMs == 0L && tapped?.isEpisode == true) {
-            (application as dev.lelonio.square.SquareApplication).episodeProgress.resumeFor(tapped)
+            (application as dev.nkosanamahungela.sonify.SonifyApplication).episodeProgress.resumeFor(tapped)
         } else {
             positionMs
         }
@@ -347,10 +347,10 @@ class MainActivity : ComponentActivity() {
         // like the download had failed rather than like the song after it was
         // never here. Files on the phone play in every mode; they were never
         // coming over the network.
-        val reachable = if (!dev.lelonio.square.playback.OfflineMode.active.value) {
+        val reachable = if (!dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) {
             tracks
         } else {
-            val here = (application as dev.lelonio.square.SquareApplication)
+            val here = (application as dev.nkosanamahungela.sonify.SonifyApplication)
                 .downloads.files.value
             tracks.filter { it.uri.startsWith("local:") || it.localFile != null || it.uri in here }
         }
@@ -360,7 +360,7 @@ class MainActivity : ComponentActivity() {
         // the engine opens the matched file between the streamed tracks — and
         // an entry with no file on this phone is left out, as the engine could
         // only skip it. The phone's own shelf plays on the files' own player.
-        val local = dev.lelonio.square.data.LocalLibrary
+        val local = dev.nkosanamahungela.sonify.data.LocalLibrary
         val tappedLocal = tracks.getOrNull(index)?.uri?.let(local::isLocal) == true
         val playable = reachable.filter {
             local.isLocal(it.uri) == tappedLocal && (!local.isSpotifyLocal(it.uri) || it.localFile != null)
@@ -409,7 +409,7 @@ class MainActivity : ComponentActivity() {
             // the listener cannot see from here.
             android.widget.Toast.makeText(
                 this,
-                getString(dev.lelonio.square.R.string.added_to_queue, track.name),
+                getString(dev.nkosanamahungela.sonify.R.string.added_to_queue, track.name),
                 android.widget.Toast.LENGTH_SHORT,
             ).show()
         }
@@ -464,7 +464,7 @@ class MainActivity : ComponentActivity() {
                     // with a blank tile on the lock screen.
                     .setArtworkUri(
                         track.artworkUrl?.let { url ->
-                            dev.lelonio.square.download.DownloadExtras.fileOf(url, "art")
+                            dev.nkosanamahungela.sonify.download.DownloadExtras.fileOf(url, "art")
                                 ?.let(android.net.Uri::fromFile)
                                 ?: android.net.Uri.parse(url)
                         },
@@ -520,29 +520,29 @@ data class LinkRequest(
 )
 
 /** Key for the context URI carried in a media item's metadata extras. */
-const val EXTRA_CONTEXT_URI = "dev.lelonio.square.CONTEXT_URI"
+const val EXTRA_CONTEXT_URI = "dev.nkosanamahungela.sonify.CONTEXT_URI"
 
-/** Whether that queue is the context in its own order; see SquareApp's `onPlay`. */
-const val EXTRA_CONTEXT_ORDERED = "dev.lelonio.square.CONTEXT_ORDERED"
+/** Whether that queue is the context in its own order; see SonifyApp's `onPlay`. */
+const val EXTRA_CONTEXT_ORDERED = "dev.nkosanamahungela.sonify.CONTEXT_ORDERED"
 
 /**
  * Set by "add to queue": play this right after the current track rather than at
  * the end of the queue.
  */
-const val EXTRA_PLAY_NEXT = "dev.lelonio.square.PLAY_NEXT"
+const val EXTRA_PLAY_NEXT = "dev.nkosanamahungela.sonify.PLAY_NEXT"
 
 /** What to show the listener: "Playlist · Estate 2025", "Ricerca". */
-const val EXTRA_CONTEXT_LABEL = "dev.lelonio.square.CONTEXT_LABEL"
+const val EXTRA_CONTEXT_LABEL = "dev.nkosanamahungela.sonify.CONTEXT_LABEL"
 
 /** The first artist's own uri, so the player's second line can be opened. */
-const val EXTRA_ARTIST_URI = "dev.lelonio.square.ARTIST_URI"
+const val EXTRA_ARTIST_URI = "dev.nkosanamahungela.sonify.ARTIST_URI"
 
 /** The record the playing track is from; see [EXTRA_ARTIST_URI]. */
-const val EXTRA_ALBUM_URI = "dev.lelonio.square.ALBUM_URI"
+const val EXTRA_ALBUM_URI = "dev.nkosanamahungela.sonify.ALBUM_URI"
 
 /** Whether the track carries Spotify's explicit-content rating. */
-const val EXTRA_EXPLICIT = "dev.lelonio.square.EXPLICIT"
+const val EXTRA_EXPLICIT = "dev.nkosanamahungela.sonify.EXPLICIT"
 
 /** Every credited artist, in order, as two lists that line up. */
-const val EXTRA_ARTIST_NAMES = "dev.lelonio.square.ARTIST_NAMES"
-const val EXTRA_ARTIST_URIS = "dev.lelonio.square.ARTIST_URIS"
+const val EXTRA_ARTIST_NAMES = "dev.nkosanamahungela.sonify.ARTIST_NAMES"
+const val EXTRA_ARTIST_URIS = "dev.nkosanamahungela.sonify.ARTIST_URIS"

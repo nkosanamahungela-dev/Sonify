@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback.websdk
+package dev.nkosanamahungela.sonify.playback.websdk
 
 import android.content.Context
 import android.os.Looper
@@ -44,7 +44,7 @@ class WebSdkPlayer(private val context: Context, looper: Looper) : SimpleBasePla
                 wantPlay = false
                 if (error == null) {
                     engine.command("pause")
-                    error = PlaybackException(context.getString(dev.lelonio.square.R.string.web_sdk_play_error),
+                    error = PlaybackException(context.getString(dev.nkosanamahungela.sonify.R.string.web_sdk_play_error),
                         null, PlaybackException.ERROR_CODE_REMOTE_ERROR)
                     if (next.error in setOf("authentication_error", "account_error")) WebSdkRecovery.requestSetup()
                 }

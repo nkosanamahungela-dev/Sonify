@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.browse
+package dev.nkosanamahungela.sonify.ui.browse
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -41,13 +41,13 @@ import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Bold
 import com.adamglin.phosphoricons.bold.CaretRight
 import com.adamglin.phosphoricons.bold.DotsThree
-import dev.lelonio.square.R
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.data.SearchItem
-import dev.lelonio.square.ui.MainViewModel
-import dev.lelonio.square.ui.components.Artwork
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.data.SearchItem
+import dev.nkosanamahungela.sonify.ui.MainViewModel
+import dev.nkosanamahungela.sonify.ui.components.Artwork
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
 
 /**
  * What has just come out, as a page rather than as one shelf on the home page.
@@ -75,7 +75,7 @@ fun NewScreen(
      * assembled per listener and change daily, and they are the reason the tab
      * has something to say on a Tuesday.
      */
-    shelves: List<dev.lelonio.square.data.HomeShelf>,
+    shelves: List<dev.nkosanamahungela.sonify.data.HomeShelf>,
     /** Whether those rows are still coming; see SkeletonRow. */
     shelvesLoading: Boolean,
     contentPadding: PaddingValues,
@@ -128,7 +128,7 @@ fun NewScreen(
     ) {
         // Where every main tab's heading is; see TabHeader.
         item(contentType = "title") {
-            dev.lelonio.square.ui.components.TabHeader(
+            dev.nkosanamahungela.sonify.ui.components.TabHeader(
                 title = stringResource(R.string.tab_new),
                 modifier = Modifier.padding(bottom = 14.dp),
             )
@@ -457,7 +457,7 @@ private fun SongRow(track: CatalogTrack, onMenu: () -> Unit, onClick: () -> Unit
                 overflow = TextOverflow.Ellipsis,
             )
             Text(
-                if (track.isEpisode) dev.lelonio.square.ui.library.episodeLine(track, showName = true) else track.artist,
+                if (track.isEpisode) dev.nkosanamahungela.sonify.ui.library.episodeLine(track, showName = true) else track.artist,
                 style = MaterialTheme.typography.bodySmall,
                 color = InkDim,
                 maxLines = 1,

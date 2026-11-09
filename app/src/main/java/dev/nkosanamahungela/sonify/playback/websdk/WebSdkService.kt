@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback.websdk
+package dev.nkosanamahungela.sonify.playback.websdk
 
 import android.app.*
 import android.content.Intent
@@ -9,7 +9,7 @@ import android.os.Binder
 import android.os.IBinder
 import android.webkit.*
 import androidx.core.app.NotificationCompat
-import dev.lelonio.square.R
+import dev.nkosanamahungela.sonify.R
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

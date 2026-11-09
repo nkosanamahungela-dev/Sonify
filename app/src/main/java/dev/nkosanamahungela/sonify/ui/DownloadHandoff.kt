@@ -1,10 +1,10 @@
-package dev.lelonio.square.ui
+package dev.nkosanamahungela.sonify.ui
 
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import dev.lelonio.square.backend.youtube.YouTubeBackend
-import dev.lelonio.square.data.CatalogPlaylist
+import dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend
+import dev.nkosanamahungela.sonify.data.CatalogPlaylist
 
 /**
  * Downloading, handed to whoever the user already trusts with it.

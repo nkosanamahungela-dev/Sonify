@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import java.nio.ByteBuffer
 import java.nio.ByteOrder

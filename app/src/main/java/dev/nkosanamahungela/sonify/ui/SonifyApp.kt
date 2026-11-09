@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui
+package dev.nkosanamahungela.sonify.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.core.Animatable
@@ -49,8 +49,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.setValue
-import dev.lelonio.square.ui.components.FriendsPanel
-import dev.lelonio.square.ui.components.SharedTrackCard
+import dev.nkosanamahungela.sonify.ui.components.FriendsPanel
+import dev.nkosanamahungela.sonify.ui.components.SharedTrackCard
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.ui.input.pointer.pointerInput
@@ -64,14 +64,14 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
 import com.adamglin.phosphoricons.fill.XCircle
-import dev.lelonio.square.ui.glass.floatingtabbar.FloatingTabBar
-import dev.lelonio.square.ui.glass.floatingtabbar.sharedSearchTab
-import dev.lelonio.square.ui.glass.floatingtabbar.FloatingTabBarDefaults
-import dev.lelonio.square.ui.glass.floatingtabbar.rememberFloatingTabBarScrollConnection
+import dev.nkosanamahungela.sonify.ui.glass.floatingtabbar.FloatingTabBar
+import dev.nkosanamahungela.sonify.ui.glass.floatingtabbar.sharedSearchTab
+import dev.nkosanamahungela.sonify.ui.glass.floatingtabbar.FloatingTabBarDefaults
+import dev.nkosanamahungela.sonify.ui.glass.floatingtabbar.rememberFloatingTabBarScrollConnection
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.em
-import dev.lelonio.square.ui.glass.liquidGlass
-import dev.lelonio.square.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.glass.liquidGlass
+import dev.nkosanamahungela.sonify.ui.glass.pressable
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
@@ -104,37 +104,37 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.platform.LocalContext
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.layerBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberLayerBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberCombinedBackdrop
-import dev.lelonio.square.ui.glass.backdrop.drawBackdrop
-import dev.lelonio.square.R
-import dev.lelonio.square.data.CanvasClip
-import dev.lelonio.square.data.Catalog
-import dev.lelonio.square.data.CatalogPlaylist
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.data.Lyrics
-import dev.lelonio.square.backend.youtube.YouTubeVideoMode
-import dev.lelonio.square.playback.AudioEffects
-import dev.lelonio.square.ui.glass.LiquidBottomTab
-import dev.lelonio.square.ui.browse.NewScreen
-import dev.lelonio.square.ui.browse.RadioScreen
-import dev.lelonio.square.ui.glass.LiquidBottomTabs
-import dev.lelonio.square.ui.glass.LiquidBottomTab
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.home.HomeScreen
-import dev.lelonio.square.ui.library.LibraryScreen
-import dev.lelonio.square.ui.library.PlaylistScreen
-import dev.lelonio.square.ui.player.GlassFilm
-import dev.lelonio.square.ui.player.AddToPlaylistSheet
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.layerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberLayerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberCombinedBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.drawBackdrop
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.CanvasClip
+import dev.nkosanamahungela.sonify.data.Catalog
+import dev.nkosanamahungela.sonify.data.CatalogPlaylist
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.data.Lyrics
+import dev.nkosanamahungela.sonify.backend.youtube.YouTubeVideoMode
+import dev.nkosanamahungela.sonify.playback.AudioEffects
+import dev.nkosanamahungela.sonify.ui.glass.LiquidBottomTab
+import dev.nkosanamahungela.sonify.ui.browse.NewScreen
+import dev.nkosanamahungela.sonify.ui.browse.RadioScreen
+import dev.nkosanamahungela.sonify.ui.glass.LiquidBottomTabs
+import dev.nkosanamahungela.sonify.ui.glass.LiquidBottomTab
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.home.HomeScreen
+import dev.nkosanamahungela.sonify.ui.library.LibraryScreen
+import dev.nkosanamahungela.sonify.ui.library.PlaylistScreen
+import dev.nkosanamahungela.sonify.ui.player.GlassFilm
+import dev.nkosanamahungela.sonify.ui.player.AddToPlaylistSheet
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.IntOffset
-import dev.lelonio.square.ui.components.TrackSheet
-import dev.lelonio.square.ui.components.TrackSheetAction
-import dev.lelonio.square.ui.components.UpdateSheet
-import dev.lelonio.square.update.Updater
-import dev.lelonio.square.ui.library.openLink
+import dev.nkosanamahungela.sonify.ui.components.TrackSheet
+import dev.nkosanamahungela.sonify.ui.components.TrackSheetAction
+import dev.nkosanamahungela.sonify.ui.components.UpdateSheet
+import dev.nkosanamahungela.sonify.update.Updater
+import dev.nkosanamahungela.sonify.ui.library.openLink
 import com.adamglin.phosphoricons.regular.Download
 import com.adamglin.phosphoricons.regular.LinkSimple
 import com.adamglin.phosphoricons.regular.PencilSimple
@@ -147,38 +147,38 @@ import com.adamglin.phosphoricons.regular.Export
 import com.adamglin.phosphoricons.regular.Trash
 import com.adamglin.phosphoricons.regular.User
 import com.adamglin.phosphoricons.regular.VinylRecord
-import dev.lelonio.square.data.RemoteConnect
-import dev.lelonio.square.ui.player.asPlaybackState
-import dev.lelonio.square.ui.player.rememberRemotePositionMs
+import dev.nkosanamahungela.sonify.data.RemoteConnect
+import dev.nkosanamahungela.sonify.ui.player.asPlaybackState
+import dev.nkosanamahungela.sonify.ui.player.rememberRemotePositionMs
 import kotlinx.coroutines.Dispatchers
-import dev.lelonio.square.ui.player.FloatingMiniPlayer
-import dev.lelonio.square.ui.player.MiniPlayer
-import dev.lelonio.square.ui.player.PlaybackState
-import dev.lelonio.square.ui.player.MiniPlayerHeight
-import dev.lelonio.square.ui.player.NowPlayingSheet
-import dev.lelonio.square.ui.player.PlayerScreen
-import dev.lelonio.square.ui.player.progressOf
-import dev.lelonio.square.ui.player.rememberPlaybackState
-import dev.lelonio.square.ui.player.rememberPositionMs
-import dev.lelonio.square.ui.player.rememberQueue
-import dev.lelonio.square.ui.search.SearchScreen
-import dev.lelonio.square.ui.onboarding.BackendChoiceScreen
-import dev.lelonio.square.ui.onboarding.OnboardingScreen
-import dev.lelonio.square.ui.settings.SettingsScreen
-import dev.lelonio.square.ui.theme.footToneFor
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.pageColorFor
-import dev.lelonio.square.ui.theme.pageColorForHex
-import dev.lelonio.square.ui.theme.pageGround
+import dev.nkosanamahungela.sonify.ui.player.FloatingMiniPlayer
+import dev.nkosanamahungela.sonify.ui.player.MiniPlayer
+import dev.nkosanamahungela.sonify.ui.player.PlaybackState
+import dev.nkosanamahungela.sonify.ui.player.MiniPlayerHeight
+import dev.nkosanamahungela.sonify.ui.player.NowPlayingSheet
+import dev.nkosanamahungela.sonify.ui.player.PlayerScreen
+import dev.nkosanamahungela.sonify.ui.player.progressOf
+import dev.nkosanamahungela.sonify.ui.player.rememberPlaybackState
+import dev.nkosanamahungela.sonify.ui.player.rememberPositionMs
+import dev.nkosanamahungela.sonify.ui.player.rememberQueue
+import dev.nkosanamahungela.sonify.ui.search.SearchScreen
+import dev.nkosanamahungela.sonify.ui.onboarding.BackendChoiceScreen
+import dev.nkosanamahungela.sonify.ui.onboarding.OnboardingScreen
+import dev.nkosanamahungela.sonify.ui.settings.SettingsScreen
+import dev.nkosanamahungela.sonify.ui.theme.footToneFor
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.pageColorFor
+import dev.nkosanamahungela.sonify.ui.theme.pageColorForHex
+import dev.nkosanamahungela.sonify.ui.theme.pageGround
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.togetherWith
-import dev.lelonio.square.ui.theme.SquareTheme
-import dev.lelonio.square.ui.theme.rememberArtworkColor
-import dev.lelonio.square.ui.theme.rememberArtworkFootColor
+import dev.nkosanamahungela.sonify.ui.theme.SquareTheme
+import dev.nkosanamahungela.sonify.ui.theme.rememberArtworkColor
+import dev.nkosanamahungela.sonify.ui.theme.rememberArtworkFootColor
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -210,7 +210,7 @@ private data class NamingRequest(val playlist: CatalogPlaylist?)
 
 /** A track menu waiting to be drawn: what it is about, and where it points. */
 private data class TrackMenuRequest(
-    val track: dev.lelonio.square.data.CatalogTrack,
+    val track: dev.nkosanamahungela.sonify.data.CatalogTrack,
     val removable: Boolean,
 )
 
@@ -253,7 +253,7 @@ private fun inkTintedBy(color: Color): Color {
     // Bright over a dark page and deep over a light one. Fixed bright was the
     // whole of this before there was a light side, and there it gave a pale
     // icon on a white film — the tint was right and the direction was not.
-    hsv[2] = if (dev.lelonio.square.ui.theme.lightPage()) 0.38f else 0.9f
+    hsv[2] = if (dev.nkosanamahungela.sonify.ui.theme.lightPage()) 0.38f else 0.9f
     return androidx.compose.ui.graphics.lerp(Ink, Color(android.graphics.Color.HSVToColor(hsv)), 0.3f)
 }
 
@@ -272,7 +272,7 @@ private fun litTabInk(color: Color): Color {
     android.graphics.Color.colorToHSV(color.toArgb(), hsv)
     if (hsv[1] < 0.06f) return neutralTabInk()
     hsv[1] = hsv[1].coerceIn(0.55f, 1f)
-    hsv[2] = if (dev.lelonio.square.ui.theme.lightPage()) 0.42f else 1f
+    hsv[2] = if (dev.nkosanamahungela.sonify.ui.theme.lightPage()) 0.42f else 1f
     return Color(android.graphics.Color.HSVToColor(hsv))
 }
 
@@ -282,8 +282,8 @@ private fun litTabInk(color: Color): Color {
  * the glass recipe gives the bar on each side; see GlassEffect.
  */
 @Composable
-private fun neutralTabInk(): Color = dev.lelonio.square.ui.theme.inkOn(
-    if (dev.lelonio.square.ui.theme.lightPage()) Color(0xFFFAFAFA) else Color(0xFF23232A),
+private fun neutralTabInk(): Color = dev.nkosanamahungela.sonify.ui.theme.inkOn(
+    if (dev.nkosanamahungela.sonify.ui.theme.lightPage()) Color(0xFFFAFAFA) else Color(0xFF23232A),
 )
 
 /** Roughly what the search circle takes: the row's height, which is its own. */
@@ -417,14 +417,14 @@ private fun rememberLocalAudioPermission(onAnswered: () -> Unit): () -> Unit {
         ActivityResultContracts.RequestPermission(),
     ) { onAnswered() }
     return {
-        if (dev.lelonio.square.data.LocalLibrary.granted(context)) onAnswered()
-        else launcher.launch(dev.lelonio.square.data.LocalLibrary.permission)
+        if (dev.nkosanamahungela.sonify.data.LocalLibrary.granted(context)) onAnswered()
+        else launcher.launch(dev.nkosanamahungela.sonify.data.LocalLibrary.permission)
     }
 }
 
 @UnstableApi
 @Composable
-fun SquareApp(
+fun SonifyApp(
     player: Player?,
     /**
      * Plays a queue.
@@ -476,7 +476,7 @@ fun SquareApp(
      * empty screen next to music the user can hear. This is what the official
      * client does with a speaker in another room.
      */
-    val elsewhere by dev.lelonio.square.data.RemoteConnect.playback.collectAsStateWithLifecycle()
+    val elsewhere by dev.nkosanamahungela.sonify.data.RemoteConnect.playback.collectAsStateWithLifecycle()
 
     /**
      * Whether the screen is attached to another device.
@@ -488,13 +488,13 @@ fun SquareApp(
      * while the music was elsewhere, which left the play button reaching for
      * nothing and a spinner turning for ever.
      */
-    val elsewhereActive by dev.lelonio.square.data.RemoteConnect.elsewhereActive
+    val elsewhereActive by dev.nkosanamahungela.sonify.data.RemoteConnect.elsewhereActive
         .collectAsStateWithLifecycle()
     val inPlaylists by viewModel.inPlaylists.collectAsStateWithLifecycle()
     val homeShelves by viewModel.homeShelves.collectAsStateWithLifecycle()
     val homeShelvesLoading by viewModel.homeShelvesLoading.collectAsStateWithLifecycle()
     val remote = elsewhere?.takeIf { elsewhereActive }
-    val showConnectedDevice by (context.applicationContext as dev.lelonio.square.SquareApplication)
+    val showConnectedDevice by (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication)
         .preferences.showConnectedDevice.collectAsStateWithLifecycle()
     val remoteLabel = stringResource(R.string.playing_on, remote?.deviceName.orEmpty())
     val playback = remote?.asPlaybackState(if (showConnectedDevice) remoteLabel else "") ?: local
@@ -575,7 +575,7 @@ fun SquareApp(
             queueUndo = null
         }
     }
-    val queueActions = dev.lelonio.square.ui.player.QueueActions(
+    val queueActions = dev.nkosanamahungela.sonify.ui.player.QueueActions(
         onPlay = { player?.seekTo(it, 0L) },
         onRemove = { indices ->
             player?.let { p ->
@@ -637,7 +637,7 @@ fun SquareApp(
     // always on screen is a capture and a GPU-to-CPU copy for ever. The colours
     // of the cover playing are already extracted for the aura and the accent,
     // and they answer the same question: is what is behind this light or dark.
-    val palette by dev.lelonio.square.ui.theme.rememberArtworkPalette(playback.artworkUrl)
+    val palette by dev.nkosanamahungela.sonify.ui.theme.rememberArtworkPalette(playback.artworkUrl)
     val backdropLuminance by animateFloatAsState(
         targetValue = remember(palette) {
             if (palette.isEmpty()) 0f else palette.map { it.luminance() }.average().toFloat()
@@ -748,9 +748,9 @@ fun SquareApp(
     val podcastsLoading by viewModel.podcastsLoading.collectAsStateWithLifecycle()
     val newEpisodes by viewModel.newEpisodes.collectAsStateWithLifecycle()
     val videoFileId by viewModel.videoFileId.collectAsStateWithLifecycle()
-    val spotifyVideoOn by dev.lelonio.square.backend.spotify.SpotifyVideoMode.enabled
+    val spotifyVideoOn by dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.enabled
         .collectAsStateWithLifecycle()
-    val spotifyVideoGeneration by dev.lelonio.square.backend.spotify.SpotifyVideoMode.generation
+    val spotifyVideoGeneration by dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.generation
         .collectAsStateWithLifecycle()
 
     val liveQueue by queueSource
@@ -762,7 +762,7 @@ fun SquareApp(
     // are still waiting — the engine holding them is parked, not stopped — so
     // the list keeps showing them rather than lying about it.
     var queuedBeforeVideo by remember {
-        mutableStateOf<List<dev.lelonio.square.ui.player.QueueEntry>>(emptyList())
+        mutableStateOf<List<dev.nkosanamahungela.sonify.ui.player.QueueEntry>>(emptyList())
     }
     val queue = if (spotifyVideoOn) queuedBeforeVideo else liveQueue
     LaunchedEffect(spotifyVideoOn, liveQueue) {
@@ -781,8 +781,8 @@ fun SquareApp(
     }
     // While the DJ talks, the DJ is what is playing: the song after it has not
     // started, and its cover and title would be a promise made too early.
-    val djTalking by dev.lelonio.square.backend.spotify.SpotifyDj.speaking.collectAsStateWithLifecycle()
-    val djSpeaking = djTalking && dev.lelonio.square.backend.spotify.SpotifyDj.isDj(playback.contextUri)
+    val djTalking by dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.speaking.collectAsStateWithLifecycle()
+    val djSpeaking = djTalking && dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.isDj(playback.contextUri)
     val djTalkingLabel = stringResource(R.string.spotify_dj_talking)
     val playerState = if (spotifyVideoOn) {
         playback.copy(
@@ -897,7 +897,7 @@ fun SquareApp(
     // The song's colour at the depth the grey film sat at, see playerFilmTint,
     // eased from one song to the next rather than cut, like the field under it.
     val playerFilm by animateColorAsState(
-        targetValue = glassAccent?.let { dev.lelonio.square.ui.player.playerFilmTint(it) }
+        targetValue = glassAccent?.let { dev.nkosanamahungela.sonify.ui.player.playerFilmTint(it) }
             ?: Color(0xFF23232A),
         animationSpec = tween(PLAYER_FILM_FADE_MS),
         label = "playerFilm",
@@ -929,7 +929,7 @@ fun SquareApp(
     // the player it was opened from.
     val overlayBackdrop = rememberLayerBackdrop()
     // Where the modal sheets are drawn, over that layer; see GlassSheetHost.
-    val sheetHost = remember { dev.lelonio.square.ui.components.GlassSheetHost() }
+    val sheetHost = remember { dev.nkosanamahungela.sonify.ui.components.GlassSheetHost() }
     sheetHost.backdrop = overlayBackdrop
 
     // Where the player was left, read before anything is drawn.
@@ -941,7 +941,7 @@ fun SquareApp(
     // controller to connect and *then* animating is what showed the home page
     // for a moment first.
     val preferences = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).preferences
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).preferences
     }
 
     /** False only until the source has been picked once; see BackendChoiceScreen. */
@@ -953,7 +953,7 @@ fun SquareApp(
     // Whether YouTube Music knows whose it is, for the pages that suggest
     // signing in when it does not.
     val youtubeAccountName by remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).youtubeAccount.accountName
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).youtubeAccount.accountName
     }.collectAsStateWithLifecycle()
     // What is kept on the phone. Read here rather than inside the pages that
     // draw it, because the same answer is wanted by the playlist button, the
@@ -964,7 +964,7 @@ fun SquareApp(
     val downloadSingles by viewModel.downloadSingles.collectAsStateWithLifecycle()
     // Whether only what is on the phone can be played. Read once here: half the
     // screens ask, and every one of them asks the same question.
-    val offlineNow by dev.lelonio.square.playback.OfflineMode.active
+    val offlineNow by dev.nkosanamahungela.sonify.playback.OfflineMode.active
         .collectAsStateWithLifecycle()
 
     // Once the source is YouTube Music. Keyed on the backend so switching to it
@@ -1005,7 +1005,7 @@ fun SquareApp(
         if (djStarting) return
         djStarting = true
         scope.launch {
-            val tracks = runCatching { dev.lelonio.square.backend.spotify.SpotifyDj.start(context) }
+            val tracks = runCatching { dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.start(context) }
                 .onFailure { android.util.Log.w("SquareDj", "dj session failed: ${it.message}") }
                 .getOrDefault(emptyList())
             if (tracks.isEmpty()) {
@@ -1013,7 +1013,7 @@ fun SquareApp(
                 android.widget.Toast.makeText(context, djFailed, android.widget.Toast.LENGTH_LONG).show()
                 return@launch
             }
-            onPlay(tracks, 0, dev.lelonio.square.data.Catalog.DJ_URI, false, DJ_LABEL, 0L)
+            onPlay(tracks, 0, dev.nkosanamahungela.sonify.data.Catalog.DJ_URI, false, DJ_LABEL, 0L)
             // Straight into the player, where the DJ is about to talk.
             expand.animateTo(1f, expandSpec)
             djStarting = false
@@ -1126,8 +1126,8 @@ fun SquareApp(
         // that came down with the download.
         if (uri != null &&
             canvasEnabled &&
-            coverSource == dev.lelonio.square.data.PreferencesStore.CoverSource.SPOTIFY &&
-            backend == dev.lelonio.square.backend.BackendId.SPOTIFY
+            coverSource == dev.nkosanamahungela.sonify.data.PreferencesStore.CoverSource.SPOTIFY &&
+            backend == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY
         ) {
             // After the song, not beside it: a Canvas is a video, and fetching
             // one while the track is still arriving takes the connection the
@@ -1141,7 +1141,7 @@ fun SquareApp(
             // url on a CDN that cannot be reached, so without this a downloaded
             // Canvas was a video sitting unplayed on the phone.
             canvas = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
-                dev.lelonio.square.download.DownloadExtras.localCanvas(uri)
+                dev.nkosanamahungela.sonify.download.DownloadExtras.localCanvas(uri)
             } ?: if (offlineNow) null else Catalog.canvas(uri)
         }
     }
@@ -1204,7 +1204,7 @@ fun SquareApp(
         if (playback.mediaId != uri && localState.value.mediaId != uri) return@LaunchedEffect
 
         lyrics = runCatching {
-            (context.applicationContext as dev.lelonio.square.SquareApplication)
+            (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication)
                 .activeBackend
                 .lyrics(
                     uri = uri,
@@ -1226,7 +1226,7 @@ fun SquareApp(
     // source further down the order. Swapped in if that song is still on.
     val playingUri by rememberUpdatedState(playback.mediaId)
     LaunchedEffect(Unit) {
-        dev.lelonio.square.backend.lyrics.LyricsLibrary.upgrades.collect { (uri, better) ->
+        dev.nkosanamahungela.sonify.backend.lyrics.LyricsLibrary.upgrades.collect { (uri, better) ->
             if (uri == playingUri) {
                 lyrics = better
                 lyricsFor = uri
@@ -1238,7 +1238,7 @@ fun SquareApp(
     // which is the only way a Compose tree already built out of one set of
     // resources can be rebuilt out of another.
     val languageStore = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).language
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).language
     }
     val language by languageStore.tag.collectAsStateWithLifecycle()
     val setLanguage: (String) -> Unit = remember(languageStore, context) {
@@ -1287,11 +1287,11 @@ fun SquareApp(
                     // Fitted, not filled: the system clamps the window's
                     // shape, and a picture wider than it allows was stretched
                     // to the window.
-                    dev.lelonio.square.ui.player.VideoSurface(
+                    dev.nkosanamahungela.sonify.ui.player.VideoSurface(
                         it,
                         attachKey = key,
                         modifier = Modifier.aspectRatio(
-                            dev.lelonio.square.ui.player.rememberVideoRatio(it, key),
+                            dev.nkosanamahungela.sonify.ui.player.rememberVideoRatio(it, key),
                         ),
                     )
                 }
@@ -1314,12 +1314,12 @@ fun SquareApp(
     val rotationContext = androidx.compose.ui.platform.LocalContext.current
     LaunchedEffect(videoOn || spotifyVideoOn) {
         if (!(videoOn || spotifyVideoOn)) {
-            dev.lelonio.square.ui.player.lockVideoOrientation(rotationContext, null)
+            dev.nkosanamahungela.sonify.ui.player.lockVideoOrientation(rotationContext, null)
         }
     }
     if (landscape && (videoOn || spotifyVideoOn) && player != null) {
         SquareTheme(seed = glassAccent) {
-            dev.lelonio.square.ui.player.FullScreenVideo(
+            dev.nkosanamahungela.sonify.ui.player.FullScreenVideo(
                 player = player,
                 attachKey = spotifyVideoGeneration,
                 state = playerState,
@@ -1327,14 +1327,14 @@ fun SquareApp(
                 onTogglePlay = { player.togglePlay() },
                 onNext = {
                     if (spotifyVideoOn) {
-                        dev.lelonio.square.backend.spotify.SpotifyVideoMode.skip(forward = true)
+                        dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.skip(forward = true)
                     } else {
                         player.seekToNextMediaItem()
                     }
                 },
                 onPrevious = {
                     if (spotifyVideoOn) {
-                        dev.lelonio.square.backend.spotify.SpotifyVideoMode.skip(forward = false)
+                        dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.skip(forward = false)
                     } else {
                         // The track before in the first three seconds, the
                         // start of this one after, decided here by the position
@@ -1351,7 +1351,7 @@ fun SquareApp(
                 // again once the video is off; see the effect above.
                 onSwitchToSong = {
                     if (spotifyVideoOn) {
-                        dev.lelonio.square.backend.spotify.SpotifyVideoMode.listen(player.currentPosition)
+                        dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.listen(player.currentPosition)
                     } else {
                         YouTubeVideoMode.toggle(player)
                     }
@@ -1370,7 +1370,7 @@ fun SquareApp(
     }
 
     androidx.compose.runtime.CompositionLocalProvider(
-        dev.lelonio.square.ui.glass.LocalBackdropLuminance provides backdropLuminance,
+        dev.nkosanamahungela.sonify.ui.glass.LocalBackdropLuminance provides backdropLuminance,
     ) {
     SquareTheme(seed = glassAccent) {
         // Material's default content colour is black, and it used to arrive from
@@ -1385,7 +1385,7 @@ fun SquareApp(
         // library's built-in defaults, which is how the settings below could
         // move a slider and change nothing outside the bar.
         val glassStore = remember(context) {
-            (context.applicationContext as dev.lelonio.square.SquareApplication).glass
+            (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).glass
         }
         val glassConfig by glassStore.config.collectAsStateWithLifecycle()
 
@@ -1405,7 +1405,7 @@ fun SquareApp(
         // which knows something the library's own does not — whether the page
         // has any more room above it.
         val tabBarScroll = rememberFloatingTabBarScrollConnection(
-            inlineBehavior = dev.lelonio.square.ui.glass.floatingtabbar
+            inlineBehavior = dev.nkosanamahungela.sonify.ui.glass.floatingtabbar
                 .FloatingTabBarInlineBehavior.Never,
         )
         val foldThresholdPx = with(LocalDensity.current) { 50.dp.toPx() }
@@ -1416,7 +1416,7 @@ fun SquareApp(
         val sideways = rememberUpdatedState(landscape)
         LaunchedEffect(landscape) { if (landscape) tabBarScroll.inline() }
         val scrollActivity = remember(tabBarScroll, foldThresholdPx) {
-            dev.lelonio.square.ui.glass.ScrollActivity(
+            dev.nkosanamahungela.sonify.ui.glass.ScrollActivity(
                 onFold = { tabBarScroll.inline() },
                 // Only at the top. Scrolling up in the middle of a list leaves
                 // the bar where it is: it went away because the reader is
@@ -1432,7 +1432,7 @@ fun SquareApp(
         // re-recorded the whole page for each frame of its own animation. Keyed
         // on the route and on the open page, because the detail screen swaps its
         // contents without the route changing at all.
-        val navFreeze = remember { dev.lelonio.square.ui.glass.NavTransitionFreeze() }
+        val navFreeze = remember { dev.nkosanamahungela.sonify.ui.glass.NavTransitionFreeze() }
         val pageMoving = remember(scrollActivity, navFreeze) {
             { scrollActivity.scrolling || navFreeze.frozen() }
         }
@@ -1443,13 +1443,13 @@ fun SquareApp(
         val openSettings = remember { mutableStateOf<() -> Unit>({}) }
         val serviceLabel = stringResource(
             when (backend) {
-                dev.lelonio.square.backend.BackendId.SPOTIFY -> R.string.backend_spotify
-                dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC -> R.string.backend_youtube
+                dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY -> R.string.backend_spotify
+                dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC -> R.string.backend_youtube
             },
         )
         val ready = state as? MainViewModel.UiState.Ready
         val tabAccount = remember(serviceLabel, ready?.displayName, ready?.avatarUrl) {
-            dev.lelonio.square.ui.components.TabAccount(
+            dev.nkosanamahungela.sonify.ui.components.TabAccount(
                 service = serviceLabel,
                 name = ready?.displayName.orEmpty(),
                 avatarUrl = ready?.avatarUrl,
@@ -1459,17 +1459,17 @@ fun SquareApp(
 
         CompositionLocalProvider(
             LocalContentColor provides Ink,
-            dev.lelonio.square.ui.components.LocalTabAccount provides tabAccount,
-            dev.lelonio.square.ui.glass.LocalGlassEffectConfig provides glassConfig,
-            dev.lelonio.square.ui.glass.LocalGlassFrozen provides pageMoving,
-            dev.lelonio.square.ui.components.LocalGlassSheetHost provides sheetHost,
+            dev.nkosanamahungela.sonify.ui.components.LocalTabAccount provides tabAccount,
+            dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig provides glassConfig,
+            dev.nkosanamahungela.sonify.ui.glass.LocalGlassFrozen provides pageMoving,
+            dev.nkosanamahungela.sonify.ui.components.LocalGlassSheetHost provides sheetHost,
         ) {
             Box(Modifier.fillMaxSize()) {
                 val navController = rememberNavController()
                 // The settings, for the headings of the main tabs; see tabAccount.
                 androidx.compose.runtime.SideEffect { openSettings.value = { navController.navigate(Routes.SETTINGS) } }
                 val openList: (CatalogPlaylist) -> Unit = { playlist ->
-                    if (playlist.uri == dev.lelonio.square.data.Catalog.DJ_URI) startDj()
+                    if (playlist.uri == dev.nkosanamahungela.sonify.data.Catalog.DJ_URI) startDj()
                     else navController.openPlaylist(viewModel, playlist)
                 }
                 val currentEntry by navController.currentBackStackEntryAsState()
@@ -1537,7 +1537,7 @@ fun SquareApp(
                     val uri = link?.uri ?: return@LaunchedEffect
                     if (link?.fromWidget == true) {
                         viewModel.openPlaylist(
-                            dev.lelonio.square.data.CatalogPlaylist(uri = uri, name = link?.name.orEmpty(), artworkUrl = link?.artworkUrl),
+                            dev.nkosanamahungela.sonify.data.CatalogPlaylist(uri = uri, name = link?.name.orEmpty(), artworkUrl = link?.artworkUrl),
                         )
                         if (navController.currentDestination?.route != Routes.PLAYLIST) {
                             navController.navigate(Routes.PLAYLIST) { launchSingleTop = true }
@@ -1776,7 +1776,7 @@ fun SquareApp(
                                 },
                                 backdrop = artBackdrop,
                                 youtubeMode =
-                                    backend == dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC,
+                                    backend == dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC,
                                 onRetryOnline = viewModel::retryOnline,
                                 youtubeHome = youtubeHome,
                                 shelves = homeShelves,
@@ -1787,7 +1787,7 @@ fun SquareApp(
                                 onPlayEpisode = { entry, label ->
                                     onPlay(
                                         listOf(
-                                            dev.lelonio.square.data.CatalogTrack(
+                                            dev.nkosanamahungela.sonify.data.CatalogTrack(
                                                 uri = entry.uri,
                                                 name = entry.name,
                                                 artist = entry.subtitle.orEmpty(),
@@ -1807,13 +1807,13 @@ fun SquareApp(
                                 onYouTubeSignIn = { showYouTubeLogin = true },
                                 onSwitchSource = {
                                     preferences.setBackend(
-                                        if (backend == dev.lelonio.square.backend.BackendId.SPOTIFY)
-                                            dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC
-                                        else dev.lelonio.square.backend.BackendId.SPOTIFY,
+                                        if (backend == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY)
+                                            dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC
+                                        else dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY,
                                     )
                                 },
                                 onUseYouTube = {
-                                    preferences.setBackend(dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC)
+                                    preferences.setBackend(dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC)
                                 },
                                 onOpenSettings = { navController.navigate(Routes.SETTINGS) },
                                 friends = friends,
@@ -1833,13 +1833,13 @@ fun SquareApp(
                             // Spotify's gateway and has nothing to show for any
                             // other catalogue.
                             LaunchedEffect(backend) { viewModel.loadNewEpisodes() }
-                            if (backend != dev.lelonio.square.backend.BackendId.SPOTIFY) {
+                            if (backend != dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY) {
                                 LaunchedEffect(backend) { viewModel.loadSourceNew() }
                                 val episodesTitle = stringResource(R.string.new_episodes)
-                                dev.lelonio.square.ui.home.SourceRowsPage(
+                                dev.nkosanamahungela.sonify.ui.home.SourceRowsPage(
                                     title = newLabel,
                                     rows = listOfNotNull(
-                                        dev.lelonio.square.backend.HomeRow(title = episodesTitle, tracks = newEpisodes)
+                                        dev.nkosanamahungela.sonify.backend.HomeRow(title = episodesTitle, tracks = newEpisodes)
                                             .takeIf { newEpisodes.isNotEmpty() },
                                     ) + sourceNew.rows,
                                     loading = sourceNew.loading,
@@ -1888,9 +1888,9 @@ fun SquareApp(
 
                         composable(Routes.RADIO) {
                             // The same for the stations; see the New tab above.
-                            if (backend != dev.lelonio.square.backend.BackendId.SPOTIFY) {
+                            if (backend != dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY) {
                                 LaunchedEffect(backend) { viewModel.loadSourceRadio() }
-                                dev.lelonio.square.ui.home.SourceRowsPage(
+                                dev.nkosanamahungela.sonify.ui.home.SourceRowsPage(
                                     title = stringResource(R.string.tab_radio),
                                     rows = sourceRadio.rows,
                                     loading = sourceRadio.loading,
@@ -2031,7 +2031,7 @@ fun SquareApp(
                                 onLogOut = viewModel::logOut,
                                 onOpenPlaylist = openList,
                                 listeningEvents = listeningEvents,
-                                listeningFromSpotify = backend == dev.lelonio.square.backend.BackendId.SPOTIFY,
+                                listeningFromSpotify = backend == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY,
                                 playlistOrder = playlistOrder,
                                 pinned = pinnedPlaylists,
                                 canEdit = viewModel.canEditPlaylists,
@@ -2046,11 +2046,11 @@ fun SquareApp(
                                 albums = savedAlbums,
                                 podcasts = savedShows,
                                 onRetryOnline = viewModel::retryOnline,
-                                signInHint = backend == dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC &&
+                                signInHint = backend == dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC &&
                                     youtubeAccountName == null,
                                 onSignIn = { showYouTubeLogin = true },
                                 onUseYouTube = {
-                                    preferences.setBackend(dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC)
+                                    preferences.setBackend(dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC)
                                 },
                                 onOpenSettings = { navController.navigate(Routes.SETTINGS) },
                                 onOpenArtist = { artist ->
@@ -2179,12 +2179,12 @@ fun SquareApp(
                                     trackDownload = { track ->
                                         when {
                                             track.uri in downloadedFiles ->
-                                                dev.lelonio.square.data.DownloadState.Done
+                                                dev.nkosanamahungela.sonify.data.DownloadState.Done
                                             downloadProgress[track.uri] != null ->
-                                                dev.lelonio.square.data.DownloadState.Running(
+                                                dev.nkosanamahungela.sonify.data.DownloadState.Running(
                                                     downloadProgress.getValue(track.uri),
                                                 )
-                                            else -> dev.lelonio.square.data.DownloadState.None
+                                            else -> dev.nkosanamahungela.sonify.data.DownloadState.None
                                         }
                                     },
                                     contentPadding = listPadding,
@@ -2268,7 +2268,7 @@ fun SquareApp(
                                     },
                                     downloadState = page.uri
                                         ?.let { downloadOwners[it] }
-                                        ?: dev.lelonio.square.data.OwnerState.None,
+                                        ?: dev.nkosanamahungela.sonify.data.OwnerState.None,
                                     onToggleDownload = { viewModel.toggleDownload(page) },
                                     // Pages of the source that is playing, on
                                     // either source now: Spotify's through its
@@ -2352,7 +2352,7 @@ fun SquareApp(
                     // layer it samples recurses on the render thread until the
                     // process dies.
                     androidx.compose.runtime.CompositionLocalProvider(
-                        dev.lelonio.square.ui.glass.LocalAppBackdrop provides pageBackdrop,
+                        dev.nkosanamahungela.sonify.ui.glass.LocalAppBackdrop provides pageBackdrop,
                     ) {
                     // One pane of glass, given to both the bar and the pill
                     // above it — which is how the reference does it: the tab bar
@@ -2363,7 +2363,7 @@ fun SquareApp(
                     // meant for the page under it and reads as nothing at all —
                     // but the film, which is the same thing a phone without the
                     // hardware blur gets.
-                    val flat = dev.lelonio.square.ui.glass.GlassStyle.TRANSPARENT
+                    val flat = dev.nkosanamahungela.sonify.ui.glass.GlassStyle.TRANSPARENT
                     // Convx's lens and base film, on the bar and the mini
                     // player alike: a deeper bend at the rim and a lighter
                     // film, so what is behind shows through the glass instead
@@ -2374,8 +2374,8 @@ fun SquareApp(
                     // scale them, so at their defaults this is the tuning and
                     // moved, the bar and the pill follow like every other pane.
                     // Set once as numbers, the film slider did nothing to them.
-                    val lightBar = dev.lelonio.square.ui.theme.LocalLightTheme.current
-                    val defaults = dev.lelonio.square.ui.glass.GlassEffectConfig()
+                    val lightBar = dev.nkosanamahungela.sonify.ui.theme.LocalLightTheme.current
+                    val defaults = dev.nkosanamahungela.sonify.ui.glass.GlassEffectConfig()
                     fun scaled(tuned: Float, set: Float, default: Float) =
                         (tuned * set / default).coerceIn(0f, 1f)
                     val chromeConfig = glassConfig.copy(
@@ -2484,8 +2484,8 @@ fun SquareApp(
                                             }
                                         },
                                     ),
-                                inline = dev.lelonio.square.ui.glass.floatingtabbar.LocalFloatingTabBarInline.current,
-                                collapseProgress = dev.lelonio.square.ui.glass.floatingtabbar.LocalFloatingTabBarCollapseProgress.current?.invoke(),
+                                inline = dev.nkosanamahungela.sonify.ui.glass.floatingtabbar.LocalFloatingTabBarInline.current,
+                                collapseProgress = dev.nkosanamahungela.sonify.ui.glass.floatingtabbar.LocalFloatingTabBarCollapseProgress.current?.invoke(),
                                 onClick = {
                                     scope.launch { expand.animateTo(1f, expandSpec) }
                                 },
@@ -2516,7 +2516,7 @@ fun SquareApp(
                     }
 
                     // Before anything is drawn for real; see GlassWarmUp.
-                    dev.lelonio.square.ui.glass.GlassWarmUp(pageBackdrop)
+                    dev.nkosanamahungela.sonify.ui.glass.GlassWarmUp(pageBackdrop)
                     // Two tabs and a circle beside them: the capsule takes what
                     // is left of the row once the circle has its 80dp, and never
                     // more than the 88dp a tab is designed for. Without this the
@@ -2611,7 +2611,7 @@ fun SquareApp(
                     // dark; over a white film the same wash is a solid blob
                     // with the page's colour in it, and what should be a mark
                     // reads as a button someone pressed and left down.
-                    val puckWash = if (dev.lelonio.square.ui.theme.lightPage()) {
+                    val puckWash = if (dev.nkosanamahungela.sonify.ui.theme.lightPage()) {
                         Color.Black.copy(
                             alpha = (glassConfig.puckOpacity.coerceIn(0f, 1f) * 0.13f)
                                 .coerceAtMost(0.11f),
@@ -2735,7 +2735,7 @@ fun SquareApp(
                             // glass so the bar answers the listener's settings
                             // like every other pane. See LiquidBottomTabs.
                             CompositionLocalProvider(
-                                dev.lelonio.square.ui.glass.LocalGlassEffectConfig provides barConfig,
+                                dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig provides barConfig,
                             ) {
                             LiquidBottomTabs(
                                 selectedTabIndex = selectedTabIndex,
@@ -2763,7 +2763,7 @@ fun SquareApp(
                                 // own.
                                 indicatorVisible = activeTab in tabRoutes,
                                 modifier = tabsModifier,
-                                drawContainer = !dev.lelonio.square.ui.glass.floatingtabbar.LocalGeometricFloatingTabBar.current,
+                                drawContainer = !dev.nkosanamahungela.sonify.ui.glass.floatingtabbar.LocalGeometricFloatingTabBar.current,
                             ) {
                                 BarTab(
                                     R.string.home,
@@ -2818,7 +2818,7 @@ fun SquareApp(
                                     // The circle and labelled tab share bounds,
                                     // retaining their surfaces during the fold.
                                     // The incoming tab inherits the capsule clip.
-                                    modifier = if (dev.lelonio.square.ui.glass.LocalLiquidBottomTabsReplica.current) {
+                                    modifier = if (dev.nkosanamahungela.sonify.ui.glass.LocalLiquidBottomTabsReplica.current) {
                                         Modifier
                                     } else sharedSearchTab(tabsVisibility),
                                 ) {
@@ -3089,7 +3089,7 @@ fun SquareApp(
                             // is the catalogue's where it gave one and the
                             // picture's own where it did not, which is the same
                             // rule every page in the app follows.
-                            dev.lelonio.square.ui.components.AmbientArtworkBackground(
+                            dev.nkosanamahungela.sonify.ui.components.AmbientArtworkBackground(
                                 artworkModel = ambientArt,
                                 // The shape the cover above is drawn at, so
                                 // this lies exactly under it; see PlayerScreen.
@@ -3135,22 +3135,22 @@ fun SquareApp(
                           // one that buys the most. Off leaves the film every
                           // pane falls back to, not a hole.
                           androidx.compose.runtime.CompositionLocalProvider(
-                              dev.lelonio.square.ui.player.LocalGlassEnabled provides
+                              dev.nkosanamahungela.sonify.ui.player.LocalGlassEnabled provides
                                   (glassConfig.playerEnabled &&
-                                      dev.lelonio.square.ui.player.LocalGlassEnabled.current),
+                                      dev.nkosanamahungela.sonify.ui.player.LocalGlassEnabled.current),
                               // Light ink on every surface of the player, and
                               // through it the dark film on its glass; see
                               // playerInk above and GlassEffect.
-                              dev.lelonio.square.ui.theme.LocalInkOverride provides playerInk,
+                              dev.nkosanamahungela.sonify.ui.theme.LocalInkOverride provides playerInk,
                               androidx.compose.material3.LocalContentColor provides playerInk,
                               // The record's film, to the panes that draw their
                               // own and, through the config, to the ones the
                               // glass recipe fills. A colour set by hand in the
                               // settings still wins, as it does everywhere.
-                              dev.lelonio.square.ui.player.LocalPlayerFilm provides
+                              dev.nkosanamahungela.sonify.ui.player.LocalPlayerFilm provides
                                   playerFilm.copy(alpha = 0.5f),
-                              dev.lelonio.square.ui.glass.LocalGlassEffectConfig provides
-                                  dev.lelonio.square.ui.glass.LocalGlassEffectConfig.current.let {
+                              dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig provides
+                                  dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig.current.let {
                                       if (it.surfaceTintColor.isSpecified) it.copy(darkGlass = true)
                                       else it.copy(surfaceTintColor = playerFilm, darkGlass = true)
                                   },
@@ -3168,7 +3168,7 @@ fun SquareApp(
                                         it.startsWith("spotify:track:") ||
                                             // YouTube has no lookup to fall back
                                             // on: the record's address or nothing.
-                                            (it.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.TRACK_PREFIX) &&
+                                            (it.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.TRACK_PREFIX) &&
                                                 playback.albumUri != null)
                                     }
                                     ?.let { track ->
@@ -3200,10 +3200,10 @@ fun SquareApp(
                                     val at = player?.currentPosition ?: 0L
                                     val id = videoFileId
                                     if (spotifyVideoOn) {
-                                        dev.lelonio.square.backend.spotify
+                                        dev.nkosanamahungela.sonify.backend.spotify
                                             .SpotifyVideoMode.listen(at)
                                     } else if (id != null) {
-                                        dev.lelonio.square.backend.spotify
+                                        dev.nkosanamahungela.sonify.backend.spotify
                                             .SpotifyVideoMode.watch(id, at)
                                     }
                                 },
@@ -3225,7 +3225,7 @@ fun SquareApp(
                                     // nowhere of its own to go, and the queue
                                     // is held by the engine parked behind it.
                                     else if (spotifyVideoOn) {
-                                        dev.lelonio.square.backend.spotify
+                                        dev.nkosanamahungela.sonify.backend.spotify
                                             .SpotifyVideoMode.skip(forward = true)
                                     } else {
                                         player?.seekToNextMediaItem()
@@ -3234,7 +3234,7 @@ fun SquareApp(
                                 onPrevious = {
                                     if (remote != null) onRemote(RemoteConnect::previous)
                                     else if (spotifyVideoOn) {
-                                        dev.lelonio.square.backend.spotify
+                                        dev.nkosanamahungela.sonify.backend.spotify
                                             .SpotifyVideoMode.skip(forward = false)
                                     } else {
                                         player?.seekToPrevious()
@@ -3252,8 +3252,8 @@ fun SquareApp(
                                         val wanted = remote?.shuffle != true
                                         onRemote { id -> RemoteConnect.setShuffle(id, wanted) }
                                     } else {
-                                        if (backend == dev.lelonio.square.backend.BackendId.SPOTIFY && player is androidx.media3.session.MediaController) {
-                                            player.sendCustomCommand(androidx.media3.session.SessionCommand(dev.lelonio.square.data.SmartShuffle.COMMAND, android.os.Bundle.EMPTY), android.os.Bundle.EMPTY)
+                                        if (backend == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY && player is androidx.media3.session.MediaController) {
+                                            player.sendCustomCommand(androidx.media3.session.SessionCommand(dev.nkosanamahungela.sonify.data.SmartShuffle.COMMAND, android.os.Bundle.EMPTY), android.os.Bundle.EMPTY)
                                         } else player?.let { it.shuffleModeEnabled = !it.shuffleModeEnabled }
                                     }
                                 },
@@ -3273,7 +3273,7 @@ fun SquareApp(
                                 queue = queue,
                                 lyrics = lyrics,
                                 lyricsQuery = playback.mediaId?.takeIf { playback.title.isNotBlank() }?.let { uri ->
-                                    dev.lelonio.square.backend.lyrics.LyricsQuery(
+                                    dev.nkosanamahungela.sonify.backend.lyrics.LyricsQuery(
                                         uri = uri,
                                         title = playback.title,
                                         artist = playback.artist,
@@ -3346,7 +3346,7 @@ fun SquareApp(
                                 // source chosen, and moving covers are on.
                                 coverMotionUrl = nowPlayingArt?.motionUrl.takeIf {
                                     canvasEnabled &&
-                                        coverSource == dev.lelonio.square.data.PreferencesStore.CoverSource.APPLE_MUSIC
+                                        coverSource == dev.nkosanamahungela.sonify.data.PreferencesStore.CoverSource.APPLE_MUSIC
                                 },
                                 coverSquareUrl = nowPlayingArt?.coverUrl,
                                 // Spotify's cover is the fallback, not the
@@ -3376,7 +3376,7 @@ fun SquareApp(
                                 onRadio = playback.mediaId
                                     ?.takeIf {
                                         (it.startsWith("spotify:track:") &&
-                                            backend == dev.lelonio.square.backend.BackendId.SPOTIFY) ||
+                                            backend == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY) ||
                                             (!it.startsWith("spotify:") && viewModel.hasRadio(it))
                                     }
                                     ?.let { uri ->
@@ -3406,7 +3406,7 @@ fun SquareApp(
                                                         0L,
                                                     )
                                                 }.onFailure {
-                                                    android.util.Log.e("SquareApp", "Failed to start radio: ${it.message}")
+                                                    android.util.Log.e("SonifyApp", "Failed to start radio: ${it.message}")
                                                 }
                                             }
                                             Unit
@@ -3414,7 +3414,7 @@ fun SquareApp(
                                     },
                                 onOpenDevices = viewModel::openDevices,
                                 connectAvailable =
-                                    backend == dev.lelonio.square.backend.BackendId.SPOTIFY &&
+                                    backend == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY &&
                                         // Offline there is no device to hand
                                         // playback to, and no list to draw: the
                                         // engine came up without a Connect
@@ -3449,7 +3449,7 @@ fun SquareApp(
                                 onToggleLike = playback.mediaId
                                     ?.takeIf {
                                         it.startsWith("spotify:") &&
-                                            backend == dev.lelonio.square.backend.BackendId.SPOTIFY
+                                            backend == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY
                                     }
                                     ?.let { uri ->
                                     {
@@ -3464,7 +3464,7 @@ fun SquareApp(
                                 addToPlaylist = addToPlaylist,
                                 onPickPlaylist = viewModel::addToPlaylist,
                                 playlistEditAvailable =
-                                    backend == dev.lelonio.square.backend.BackendId.SPOTIFY ||
+                                    backend == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY ||
                                         (viewModel.canEditPlaylists && !offlineNow &&
                                             playback.mediaId?.startsWith("ytmusic:track:") == true),
                                 onWatchVideo = player
@@ -3474,14 +3474,14 @@ fun SquareApp(
                                         !offlineNow &&
                                             playback.mediaId?.let { id ->
                                                 id.startsWith("ytmusic:track:") ||
-                                                    id.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.VIDEO_PREFIX)
+                                                    id.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.VIDEO_PREFIX)
                                             } == true
                                     }
                                     ?.let { { YouTubeVideoMode.toggle(it) } },
                                 videoOn = videoOn || spotifyVideoOn,
                                 videoNotice = playback.mediaId
-                                    ?.takeIf { it.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.TRACK_PREFIX) }
-                                    ?.let { videoUnavailable[dev.lelonio.square.backend.youtube.YouTubeBackend.videoIdOfUri(it)] }
+                                    ?.takeIf { it.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.TRACK_PREFIX) }
+                                    ?.let { videoUnavailable[dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.videoIdOfUri(it)] }
                                     ?.let { reason ->
                                         stringResource(
                                             if (reason == YouTubeVideoMode.Unavailable.AGE_RESTRICTED) {
@@ -3509,7 +3509,7 @@ fun SquareApp(
                     enter = androidx.compose.animation.fadeIn(androidx.compose.animation.core.tween(320)),
                     exit = androidx.compose.animation.fadeOut(androidx.compose.animation.core.tween(420)),
                 ) {
-                    dev.lelonio.square.ui.player.DjStarting()
+                    dev.nkosanamahungela.sonify.ui.player.DjStarting()
                 }
 
                 }
@@ -3573,7 +3573,7 @@ fun SquareApp(
                         // The whole playlist in one link. yt-dlp and the apps
                         // built on it expand a playlist URL themselves, so this
                         // is the entire "download an album" feature.
-                        if (backend == dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC) {
+                        if (backend == dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC) {
                             val label = if (downloaderInstalled(context)) {
                                 stringResource(R.string.download_with)
                             } else {
@@ -3609,7 +3609,7 @@ fun SquareApp(
                             !offlineNow
                         if (keepable) {
                             val kept = downloadOwners[shownPlaylist.uri]
-                            val isKept = kept != null && kept !is dev.lelonio.square.data.OwnerState.None
+                            val isKept = kept != null && kept !is dev.nkosanamahungela.sonify.data.OwnerState.None
                             TrackSheetAction(
                                 stringResource(
                                     if (isKept) R.string.remove_download else R.string.download,
@@ -3644,7 +3644,7 @@ fun SquareApp(
                                         .setType("text/plain")
                                         .putExtra(
                                             android.content.Intent.EXTRA_TEXT,
-                                            dev.lelonio.square.ui.library.openLinkOf(
+                                            dev.nkosanamahungela.sonify.ui.library.openLinkOf(
                                                 shownPlaylist.uri,
                                             ),
                                         ),
@@ -3664,7 +3664,7 @@ fun SquareApp(
                     }
                 }
 
-                dev.lelonio.square.ui.components.ConfirmDialog(
+                dev.nkosanamahungela.sonify.ui.components.ConfirmDialog(
                     target = unkeeping,
                     title = { stringResource(R.string.remove_download) },
                     message = { stringResource(R.string.remove_download_confirm, it.name) },
@@ -3676,7 +3676,7 @@ fun SquareApp(
                     onDismiss = { unkeeping = null },
                 )
 
-                dev.lelonio.square.ui.components.ConfirmDialog(
+                dev.nkosanamahungela.sonify.ui.components.ConfirmDialog(
                     target = deleting,
                     title = { stringResource(R.string.delete_playlist_title) },
                     message = { stringResource(R.string.delete_playlist_message, it.name) },
@@ -3690,7 +3690,7 @@ fun SquareApp(
 
                 val editing by viewModel.editingPlaylist.collectAsStateWithLifecycle()
                 editing?.let { edit ->
-                    dev.lelonio.square.ui.components.CreatePlaylistDialog(
+                    dev.nkosanamahungela.sonify.ui.components.CreatePlaylistDialog(
                         title = stringResource(R.string.edit_playlist),
                         confirmLabel = stringResource(R.string.save),
                         describes = viewModel.describesPlaylists,
@@ -3707,7 +3707,7 @@ fun SquareApp(
 
                 naming?.takeIf { it.playlist == null }?.let {
                     val creating by viewModel.creatingPlaylist.collectAsStateWithLifecycle()
-                    dev.lelonio.square.ui.components.CreatePlaylistDialog(
+                    dev.nkosanamahungela.sonify.ui.components.CreatePlaylistDialog(
                         title = stringResource(R.string.new_playlist),
                         confirmLabel = stringResource(R.string.create),
                         describes = viewModel.describesPlaylists,
@@ -3727,7 +3727,7 @@ fun SquareApp(
                 }
 
                 naming?.playlist?.let { playlist ->
-                    dev.lelonio.square.ui.components.NameDialog(
+                    dev.nkosanamahungela.sonify.ui.components.NameDialog(
                         title = stringResource(R.string.rename),
                         initial = playlist.name,
                         confirmLabel = stringResource(R.string.save),
@@ -3768,7 +3768,7 @@ fun SquareApp(
                         // Writing to a playlist needs the account: Spotify's
                         // Web API, or a signed-in YouTube Music. With no
                         // network the entry would only ever fail.
-                        if ((backend == dev.lelonio.square.backend.BackendId.SPOTIFY ||
+                        if ((backend == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY ||
                                 viewModel.canEditPlaylists) && !offlineNow
                         ) {
                             TrackSheetAction(stringResource(R.string.add_to_playlist), PhosphorIcons.Regular.Plus) {
@@ -3883,7 +3883,7 @@ fun SquareApp(
                         // YouTube only. A Spotify link handed to a downloader
                         // is a link it cannot do anything with, so offering the
                         // action there would be offering a failure.
-                        if (backend == dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC) {
+                        if (backend == dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC) {
                             // Says which app it will open, and says the other
                             // thing when there is no app to open: a row that
                             // promised a download and delivered a web page
@@ -3918,7 +3918,7 @@ fun SquareApp(
                     backdrop = overlayBackdrop,
                     onOpenTrack = { friend ->
                         friendsOpen = false
-                        sharedTrack = dev.lelonio.square.data.CatalogTrack(
+                        sharedTrack = dev.nkosanamahungela.sonify.data.CatalogTrack(
                             uri = friend.trackUri,
                             name = friend.trackName,
                             artist = friend.artist,
@@ -3985,15 +3985,15 @@ fun SquareApp(
                         Modifier
                             .fillMaxSize()
                             // Opaque, using the same light/dark ground as the pages.
-                            .background(dev.lelonio.square.ui.theme.pageGround()),
+                            .background(dev.nkosanamahungela.sonify.ui.theme.pageGround()),
                         contentAlignment = Alignment.Center,
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(16.dp),
                         ) {
-                            dev.lelonio.square.ui.components.AppGlyph(64.dp)
-                            dev.lelonio.square.ui.components.SquareWordmark(height = 28.dp)
+                            dev.nkosanamahungela.sonify.ui.components.AppGlyph(64.dp)
+                            dev.nkosanamahungela.sonify.ui.components.SquareWordmark(height = 28.dp)
                             // Which source is being opened, named and marked:
                             // the whole point of the wait is that the app is
                             // becoming a different one, and a bare spinner says
@@ -4004,9 +4004,9 @@ fun SquareApp(
                             ) {
                                 Icon(
                                     when (backend) {
-                                        dev.lelonio.square.backend.BackendId.SPOTIFY ->
+                                        dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY ->
                                             PhosphorIcons.Regular.SpotifyLogo
-                                        dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC ->
+                                        dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC ->
                                             PhosphorIcons.Regular.YoutubeLogo
                                     },
                                     contentDescription = null,
@@ -4016,9 +4016,9 @@ fun SquareApp(
                                 Text(
                                     stringResource(
                                         when (backend) {
-                                            dev.lelonio.square.backend.BackendId.SPOTIFY ->
+                                            dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY ->
                                                 R.string.backend_spotify
-                                            dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC ->
+                                            dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC ->
                                                 R.string.backend_youtube
                                         },
                                     ),
@@ -4042,7 +4042,7 @@ fun SquareApp(
                 // a page someone is typing a password into.
                 if (showYouTubeLogin) {
                     val account = remember(context) {
-                        (context.applicationContext as dev.lelonio.square.SquareApplication)
+                        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication)
                             .youtubeAccount
                     }
                     Box(
@@ -4050,7 +4050,7 @@ fun SquareApp(
                             .fillMaxSize()
                             .background(androidx.compose.ui.graphics.Color(0xFF101012)),
                     ) {
-                        dev.lelonio.square.backend.youtube.YouTubeLoginScreen(
+                        dev.nkosanamahungela.sonify.backend.youtube.YouTubeLoginScreen(
                             account = account,
                             onDone = {
                                 showYouTubeLogin = false
@@ -4072,7 +4072,7 @@ fun SquareApp(
                     // reachable from the settings, which is where someone who
                     // means to switch to Spotify would go.
                     showTutorial ||
-                    (!onboarded && backend == dev.lelonio.square.backend.BackendId.SPOTIFY)
+                    (!onboarded && backend == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY)
                 ) {
                     OnboardingScreen(
                         state = state,
@@ -4359,14 +4359,14 @@ private fun Player.cycleRepeatMode() {
  */
 @Composable
 private fun UpdatePrompt(
-    backdrop: dev.lelonio.square.ui.glass.backdrop.Backdrop,
+    backdrop: dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop,
     onOpenChange: (Boolean) -> Unit,
 ) {
     val context = LocalContext.current
     val updater = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).updater
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).updater
     }
-    val prefs = remember(context) { dev.lelonio.square.data.PreferencesStore(context) }
+    val prefs = remember(context) { dev.nkosanamahungela.sonify.data.PreferencesStore(context) }
     val scope = rememberCoroutineScope()
     val state by updater.state.collectAsStateWithLifecycle()
 
@@ -4439,7 +4439,7 @@ private fun UpdatePrompt(
 private const val UPDATE_CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000L
 
 private fun savedPlaybackSeed(context: android.content.Context): PlaybackState? {
-    val saved = dev.lelonio.square.data.PlaybackStore(context).load() ?: return null
+    val saved = dev.nkosanamahungela.sonify.data.PlaybackStore(context).load() ?: return null
     val position = saved.shuffleOrder?.getOrNull(saved.index) ?: saved.index
     val track = saved.tracks.getOrNull(position)?.takeIf { it.name.isNotBlank() } ?: return null
     return PlaybackState(
@@ -4501,7 +4501,7 @@ private fun BarSearchField(
     // The field inside the searchable bar, at GlassTextField.search's
     // measures: 12 in from the bar's edge, the magnifier 20 across and 8 from
     // the words, the words at 16, the clear button 18, fading and growing in.
-    val light = dev.lelonio.square.ui.glass.isLightGlassPage()
+    val light = dev.nkosanamahungela.sonify.ui.glass.isLightGlassPage()
     val iconColor = if (light) Color(0x99000000) else Color(0x99FFFFFF)
     val textColor = ink.copy(alpha = 0.9f)
     val textStyle = androidx.compose.ui.text.TextStyle(fontSize = 16.sp, lineHeight = 1.2.em, color = textColor)
@@ -4574,7 +4574,7 @@ private fun BarSearchField(
  * after this, they are fetched anyway.
  */
 private suspend fun awaitAudible(
-    state: androidx.compose.runtime.State<dev.lelonio.square.ui.player.PlaybackState>,
+    state: androidx.compose.runtime.State<dev.nkosanamahungela.sonify.ui.player.PlaybackState>,
 ) {
     kotlinx.coroutines.withTimeoutOrNull(AUDIBLE_TIMEOUT_MS) {
         snapshotFlow { state.value.isBuffering }.first { !it }

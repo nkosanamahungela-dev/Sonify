@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.browse
+package dev.nkosanamahungela.sonify.ui.browse
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -39,11 +39,11 @@ import androidx.compose.ui.unit.dp
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Fill
 import com.adamglin.phosphoricons.fill.Broadcast
-import dev.lelonio.square.R
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.ui.components.Artwork
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.ui.components.Artwork
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
 
 /**
  * Radio: one station per artist the account actually listens to.
@@ -70,14 +70,14 @@ fun RadioScreen(
      * assembled on their side, out of things the listener has not played yet,
      * and they change from one day to the next.
      */
-    shelves: List<dev.lelonio.square.data.HomeShelf>,
+    shelves: List<dev.nkosanamahungela.sonify.data.HomeShelf>,
     /** Whether those rows are still coming; see SkeletonRow. */
     shelvesLoading: Boolean,
     loading: Boolean,
     contentPadding: PaddingValues,
     onOpen: (CatalogTrack) -> Unit,
     /** Opens one of Spotify's own, which is a context rather than a seed. */
-    onOpenMix: (dev.lelonio.square.data.CatalogPlaylist) -> Unit,
+    onOpenMix: (dev.nkosanamahungela.sonify.data.CatalogPlaylist) -> Unit,
 ) {
     if (seeds.isEmpty() && shelves.isEmpty() && !shelvesLoading) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -112,7 +112,7 @@ fun RadioScreen(
         // Where every main tab's heading is (see TabHeader), out of the
         // grid's own 16 to the page's edge.
         item(key = "tab_radio_title", span = { GridItemSpan(maxLineSpan) }) {
-            dev.lelonio.square.ui.components.TabHeader(
+            dev.nkosanamahungela.sonify.ui.components.TabHeader(
                 title = stringResource(R.string.tab_radio),
                 modifier = Modifier
                     .layout { measurable, constraints ->
@@ -203,7 +203,7 @@ private const val SKELETON_ROWS = 2
  */
 @Composable
 private fun MixTile(
-    mix: dev.lelonio.square.data.CatalogPlaylist,
+    mix: dev.nkosanamahungela.sonify.data.CatalogPlaylist,
     onClick: () -> Unit,
 ) {
     Column(

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui
+package dev.nkosanamahungela.sonify.ui
 
 import android.app.Activity
 import android.os.Build

@@ -1,42 +1,42 @@
-package dev.lelonio.square.ui
+package dev.nkosanamahungela.sonify.ui
 
 import coil.imageLoader
 import android.app.Application
 import androidx.annotation.StringRes
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import dev.lelonio.square.SquareApplication
-import dev.lelonio.square.auth.SpotifyOAuth
-import dev.lelonio.square.backend.BackendAuthState
-import dev.lelonio.square.backend.BackendId
-import dev.lelonio.square.backend.HomeChip
-import dev.lelonio.square.backend.HomeRow
-import dev.lelonio.square.backend.SearchLabels
-import dev.lelonio.square.R
-import dev.lelonio.square.data.Catalog
-import dev.lelonio.square.data.SpotifyApi
-import dev.lelonio.square.data.DownloadStore
-import dev.lelonio.square.download.DownloadService
-import dev.lelonio.square.data.AddTracksRequestDto
-import dev.lelonio.square.data.IdsDto
-import dev.lelonio.square.data.RemoveTracksRequestDto
-import dev.lelonio.square.data.TrackUriDto
-import dev.lelonio.square.data.CatalogPlaylist
-import dev.lelonio.square.data.HomeShelf
-import dev.lelonio.square.data.SpotifyHome
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.data.ContextCacheStore
-import dev.lelonio.square.data.GatewayPage
-import dev.lelonio.square.data.LocalLibrary
-import dev.lelonio.square.data.SearchItem
-import dev.lelonio.square.data.TransferRequestDto
-import dev.lelonio.square.data.SearchResults
-import dev.lelonio.square.data.toCatalogTrack
-import dev.lelonio.square.data.toResults
-import dev.lelonio.square.nativecore.NativeBridge
-import dev.lelonio.square.playback.BuiltInPresets
-import dev.lelonio.square.playback.EffectPreset
-import dev.lelonio.square.playback.PlaybackService
+import dev.nkosanamahungela.sonify.SonifyApplication
+import dev.nkosanamahungela.sonify.auth.SpotifyOAuth
+import dev.nkosanamahungela.sonify.backend.BackendAuthState
+import dev.nkosanamahungela.sonify.backend.BackendId
+import dev.nkosanamahungela.sonify.backend.HomeChip
+import dev.nkosanamahungela.sonify.backend.HomeRow
+import dev.nkosanamahungela.sonify.backend.SearchLabels
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.Catalog
+import dev.nkosanamahungela.sonify.data.SpotifyApi
+import dev.nkosanamahungela.sonify.data.DownloadStore
+import dev.nkosanamahungela.sonify.download.DownloadService
+import dev.nkosanamahungela.sonify.data.AddTracksRequestDto
+import dev.nkosanamahungela.sonify.data.IdsDto
+import dev.nkosanamahungela.sonify.data.RemoveTracksRequestDto
+import dev.nkosanamahungela.sonify.data.TrackUriDto
+import dev.nkosanamahungela.sonify.data.CatalogPlaylist
+import dev.nkosanamahungela.sonify.data.HomeShelf
+import dev.nkosanamahungela.sonify.data.SpotifyHome
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.data.ContextCacheStore
+import dev.nkosanamahungela.sonify.data.GatewayPage
+import dev.nkosanamahungela.sonify.data.LocalLibrary
+import dev.nkosanamahungela.sonify.data.SearchItem
+import dev.nkosanamahungela.sonify.data.TransferRequestDto
+import dev.nkosanamahungela.sonify.data.SearchResults
+import dev.nkosanamahungela.sonify.data.toCatalogTrack
+import dev.nkosanamahungela.sonify.data.toResults
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.playback.BuiltInPresets
+import dev.nkosanamahungela.sonify.playback.EffectPreset
+import dev.nkosanamahungela.sonify.playback.PlaybackService
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -264,22 +264,22 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         /** YouTube's count of the channel's subscribers, as it words it. */
         val subscribers: String? = null,
         /** An artist page's rows in the source's own order; see ArtistShelf. */
-        val shelves: List<dev.lelonio.square.data.ArtistShelf> = emptyList(),
+        val shelves: List<dev.nkosanamahungela.sonify.data.ArtistShelf> = emptyList(),
         /** Where the top songs' "see all" leads, when the source has a list for it. */
         val topSongsMoreUri: String? = null,
         /** The playlist's Spotify Mix, when it was mixed in Spotify's app; see Mixes. */
-        val mix: dev.lelonio.square.playback.Mixes.PlaylistMix? = null,
+        val mix: dev.nkosanamahungela.sonify.playback.Mixes.PlaylistMix? = null,
         /** Whether the mix is on here: it plays, and the page shows it. */
         val mixOn: Boolean = false,
         /** Tempo and key of the songs, by URI, once a mix is on; see Mixes. */
-        val audioAttributes: Map<String, dev.lelonio.square.playback.Mixes.Attributes> = emptyMap(),
+        val audioAttributes: Map<String, dev.nkosanamahungela.sonify.playback.Mixes.Attributes> = emptyMap(),
     )
 
-    private val container get() = getApplication<SquareApplication>()
+    private val container get() = getApplication<SonifyApplication>()
 
     /** The app's own text, which lives in resources so it can be translated. */
     private fun string(@StringRes id: Int, vararg args: Any): String =
-        getApplication<SquareApplication>().getString(id, *args)
+        getApplication<SonifyApplication>().getString(id, *args)
 
     private var inFlight: Job? = null
     private var playlistJob: Job? = null
@@ -344,7 +344,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private var newPageJob: Job? = null
 
     data class FollowedReleaseState(
-        val albums: List<dev.lelonio.square.data.AlbumDto> = emptyList(),
+        val albums: List<dev.nkosanamahungela.sonify.data.AlbumDto> = emptyList(),
         val loading: Boolean = false,
         val loaded: Boolean = false,
         val artistCount: Int = 0,
@@ -353,7 +353,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         val error: String? = null,
     )
     private val followedReleaseRepository by lazy {
-        dev.lelonio.square.data.FollowedReleases(container.api, java.io.File(getApplication<SquareApplication>().cacheDir, "followed-releases"))
+        dev.nkosanamahungela.sonify.data.FollowedReleases(container.api, java.io.File(getApplication<SonifyApplication>().cacheDir, "followed-releases"))
     }
     private val _followedReleases = MutableStateFlow(FollowedReleaseState())
     val followedReleases = _followedReleases.asStateFlow()
@@ -442,7 +442,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 .sortedByDescending { it.releaseDate.orEmpty() }
 
             val week = java.time.LocalDate.now().minusDays(7).toString()
-            fun item(album: dev.lelonio.square.data.AlbumDto): SearchItem? = SearchItem(
+            fun item(album: dev.nkosanamahungela.sonify.data.AlbumDto): SearchItem? = SearchItem(
                 uri = album.uri ?: return null,
                 title = album.name,
                 subtitle = album.artists.joinToString(", ") { it.name },
@@ -855,11 +855,11 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         // when this starts, and running it twice would be two libraries built
         // at once.
         viewModelScope.launch {
-            dev.lelonio.square.playback.OfflineMode.active
+            dev.nkosanamahungela.sonify.playback.OfflineMode.active
                 .drop(1)
                 .distinctUntilChanged()
                 .collectLatest { offline ->
-                    if (offline && dev.lelonio.square.playback.OfflineMode.reason.value != dev.lelonio.square.playback.OfflineMode.Reason.MANUAL) {
+                    if (offline && dev.nkosanamahungela.sonify.playback.OfflineMode.reason.value != dev.nkosanamahungela.sonify.playback.OfflineMode.Reason.MANUAL) {
                         // Only an offline that lasts. The session drops for a
                         // moment often enough, on starting up or changing
                         // network, and taking Spotify's own shelves off the home
@@ -902,7 +902,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         // it was closed and opened again. The cluster arrives on its own from
         // the session's own socket, and it is the same list.
         viewModelScope.launch {
-            dev.lelonio.square.data.RemoteConnect.devices.collect { cluster ->
+            dev.nkosanamahungela.sonify.data.RemoteConnect.devices.collect { cluster ->
                 if (cluster.isEmpty()) return@collect
                 _devices.value = _devices.value.copy(
                     loading = false,
@@ -930,7 +930,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      */
     private fun ordered(devices: List<SpotifyDevice>): List<SpotifyDevice> =
         devices.sortedWith(
-            compareByDescending<SpotifyDevice> { dev.lelonio.square.data.RemoteConnect.isThisPhone(it.id) }
+            compareByDescending<SpotifyDevice> { dev.nkosanamahungela.sonify.data.RemoteConnect.isThisPhone(it.id) }
                 .thenBy(String.CASE_INSENSITIVE_ORDER) { it.name }
                 .thenBy { it.id },
         )
@@ -941,7 +941,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * coin toss.
      */
     private fun named(id: String, name: String): String =
-        if (dev.lelonio.square.data.RemoteConnect.isThisPhone(id)) string(R.string.device_this_app, name) else name
+        if (dev.nkosanamahungela.sonify.data.RemoteConnect.isThisPhone(id)) string(R.string.device_this_app, name) else name
 
     fun openDevices() {
         _devices.value = _devices.value.copy(open = true)
@@ -977,7 +977,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     // leaves out speakers it considers asleep (a Sonos, mostly),
                     // and replacing the list with its answer when the sheet
                     // opened took the very speaker being reached for off it.
-                    if (dev.lelonio.square.data.RemoteConnect.devices.value.isNotEmpty()) {
+                    if (dev.nkosanamahungela.sonify.data.RemoteConnect.devices.value.isNotEmpty()) {
                         _devices.value = _devices.value.copy(loading = false)
                         return@onSuccess
                     }
@@ -1049,8 +1049,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         // Reading only the "somewhere else" half meant the request quietly did
         // nothing whenever the engine had already decided this phone was
         // active: choosing Square answered with silence and no explanation.
-        val remote = dev.lelonio.square.data.RemoteConnect.playback.value
-            ?: dev.lelonio.square.data.RemoteConnect.here.value
+        val remote = dev.nkosanamahungela.sonify.data.RemoteConnect.playback.value
+            ?: dev.nkosanamahungela.sonify.data.RemoteConnect.here.value
         if (remote == null) {
             android.util.Log.i(TAG, "nothing to bring back: the account is playing nothing")
             return@launch
@@ -1080,7 +1080,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         if (started) {
             // The account will not say this phone is active now; see
             // RemoteConnect.refresh, which works it out from the engine.
-            withContext(Dispatchers.IO) { runCatching { dev.lelonio.square.data.RemoteConnect.refresh() } }
+            withContext(Dispatchers.IO) { runCatching { dev.nkosanamahungela.sonify.data.RemoteConnect.refresh() } }
             return@launch
         }
 
@@ -1116,19 +1116,19 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     private suspend fun switchTo(deviceId: String, positionMs: Long) {
-        val devices = dev.lelonio.square.data.RemoteConnect.devices.value
+        val devices = dev.nkosanamahungela.sonify.data.RemoteConnect.devices.value
         android.util.Log.i(TAG, "device chosen: $deviceId, ${devices.size} known")
         // Asked of the engine rather than looked up in the list: the list is
         // filled by cluster updates and is empty until the first one arrives,
         // and a handover chosen in that window took the wrong road entirely.
-        if (dev.lelonio.square.data.RemoteConnect.isThisPhone(deviceId)) {
+        if (dev.nkosanamahungela.sonify.data.RemoteConnect.isThisPhone(deviceId)) {
             takeBackPlayback().join()
             return
         }
         // The queue is republished as the playlist it came from first, so
         // whatever carries the handover has something resolvable to carry; see
         // NativeBridge.publishContext.
-        if (!dev.lelonio.square.data.RemoteConnect.elsewhereActive.value) {
+        if (!dev.nkosanamahungela.sonify.data.RemoteConnect.elsewhereActive.value) {
             val republished = withContext(Dispatchers.IO) {
                 runCatching { NativeBridge.publishContext(positionMs.toInt()) }
                     .onFailure { android.util.Log.w(TAG, "context not republished: $it") }
@@ -1148,7 +1148,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         // silence and controls that answer to nothing.
         if (!container.webApi.isReady) {
             withContext(Dispatchers.IO) {
-                dev.lelonio.square.data.RemoteConnect.transferTo(deviceId)
+                dev.nkosanamahungela.sonify.data.RemoteConnect.transferTo(deviceId)
             }
             return
         }
@@ -1373,11 +1373,11 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     LocalLibrary.spotifyUri(file).also { uri ->
                         // Playable at once from the playlist, without waiting
                         // for its page to be matched again.
-                        file.localFile?.let { path -> dev.lelonio.square.data.LocalFileBindings.bind(mapOf(uri to path)) }
+                        file.localFile?.let { path -> dev.nkosanamahungela.sonify.data.LocalFileBindings.bind(mapOf(uri to path)) }
                     }
                 }
                 withContext(Dispatchers.IO) {
-                    dev.lelonio.square.nativecore.NativeBridge.addToPlaylist(playlist.uri, entry)
+                    dev.nkosanamahungela.sonify.nativecore.NativeBridge.addToPlaylist(playlist.uri, entry)
                 }
             }.onSuccess {
                 _addToPlaylist.value = _addToPlaylist.value.copy(busy = null, done = playlist.name)
@@ -1592,7 +1592,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             return
         }
 
-        val spotifyLink = dev.lelonio.square.data.util.SpotifyLinkParser.parse(query)
+        val spotifyLink = dev.nkosanamahungela.sonify.data.util.SpotifyLinkParser.parse(query)
         if (spotifyLink != null) {
             searchJob = viewModelScope.launch {
                 _search.value = _search.value.copy(loading = true, error = null)
@@ -1657,10 +1657,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    private suspend fun resolveSpotifyLink(link: dev.lelonio.square.data.util.SpotifyLink): SearchResults =
+    private suspend fun resolveSpotifyLink(link: dev.nkosanamahungela.sonify.data.util.SpotifyLink): SearchResults =
         withContext(Dispatchers.IO) {
             when (link) {
-                is dev.lelonio.square.data.util.SpotifyLink.Track -> {
+                is dev.nkosanamahungela.sonify.data.util.SpotifyLink.Track -> {
                     val trackDto = runCatching { container.api.track(link.id) }.getOrNull()
                     if (trackDto != null) {
                         SearchResults(tracks = listOf(trackDto.toCatalogTrack()))
@@ -1669,7 +1669,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                         SearchResults(tracks = tracks)
                     }
                 }
-                is dev.lelonio.square.data.util.SpotifyLink.Album -> {
+                is dev.nkosanamahungela.sonify.data.util.SpotifyLink.Album -> {
                     val tracks = runCatching { container.activeBackend.tracksOf(link.uri) }.getOrDefault(emptyList())
                     val albumDto = runCatching { container.api.album(link.id) }.getOrNull()
                     val first = tracks.firstOrNull()
@@ -1685,7 +1685,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     )
                     SearchResults(albums = listOf(albumItem), tracks = tracks)
                 }
-                is dev.lelonio.square.data.util.SpotifyLink.Playlist -> {
+                is dev.nkosanamahungela.sonify.data.util.SpotifyLink.Playlist -> {
                     val playlistDto = runCatching { container.api.playlist(link.id) }.getOrNull()
                     val tracks = runCatching { container.activeBackend.tracksOf(link.uri) }.getOrDefault(emptyList())
                     val title = playlistDto?.name ?: string(R.string.playlist)
@@ -1699,7 +1699,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     )
                     SearchResults(playlists = listOf(item), tracks = tracks)
                 }
-                is dev.lelonio.square.data.util.SpotifyLink.Artist -> {
+                is dev.nkosanamahungela.sonify.data.util.SpotifyLink.Artist -> {
                     val artistDto = runCatching { container.api.artist(link.id) }.getOrNull()
                     val tracks = runCatching { container.activeBackend.tracksOf(link.uri) }.getOrDefault(emptyList())
                     val title = artistDto?.name ?: tracks.firstOrNull()?.artist ?: string(R.string.artist)
@@ -1921,7 +1921,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     fun deleteEffectPreset(id: String) = container.effectPresets.delete(id)
 
-    /** Locally recorded listening history; see [dev.lelonio.square.data.RecentStore]. */
+    /** Locally recorded listening history; see [dev.nkosanamahungela.sonify.data.RecentStore]. */
     /**
      * Recently played, filtered to the source in use.
      *
@@ -1931,7 +1931,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * still there.
      */
     private val _friends =
-        MutableStateFlow<List<dev.lelonio.square.data.FriendListen>>(emptyList())
+        MutableStateFlow<List<dev.nkosanamahungela.sonify.data.FriendListen>>(emptyList())
 
     /**
      * What the people this account follows are playing.
@@ -1940,7 +1940,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * own schedule and not on the app's, and the header shows a corner of it
      * whether or not anybody has opened the list.
      */
-    val friends: StateFlow<List<dev.lelonio.square.data.FriendListen>> = _friends.asStateFlow()
+    val friends: StateFlow<List<dev.nkosanamahungela.sonify.data.FriendListen>> = _friends.asStateFlow()
 
     /**
      * Reads the list again.
@@ -1956,7 +1956,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             return@launch
         }
         if (!awaitEngine()) return@launch
-        runCatching { dev.lelonio.square.data.FriendActivity.friends() }
+        runCatching { dev.nkosanamahungela.sonify.data.FriendActivity.friends() }
             .onSuccess { _friends.value = it }
             .onFailure { android.util.Log.w(TAG, "friend activity unavailable: ${describe(it)}") }
     }
@@ -2065,7 +2065,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         // Offline there is no video to offer: it is streamed, and the lookup
         // itself is a request. Leaving the answer null is what takes the button
         // off the player — the button is drawn from having one.
-        if (dev.lelonio.square.playback.OfflineMode.active.value) return
+        if (dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) return
         videoLookup = viewModelScope.launch(Dispatchers.IO) {
             val answer = NativeBridge.trackVideo(trackUri) ?: return@launch
             val fileId = runCatching {
@@ -2087,8 +2087,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             container.preferences.backend.collect { backend ->
                 container.listeningStore.show(
                     when (backend) {
-                        BackendId.SPOTIFY -> dev.lelonio.square.data.ListeningStore.Source.SPOTIFY
-                        BackendId.YOUTUBE_MUSIC -> dev.lelonio.square.data.ListeningStore.Source.YOUTUBE_MUSIC
+                        BackendId.SPOTIFY -> dev.nkosanamahungela.sonify.data.ListeningStore.Source.SPOTIFY
+                        BackendId.YOUTUBE_MUSIC -> dev.nkosanamahungela.sonify.data.ListeningStore.Source.YOUTUBE_MUSIC
                     },
                 )
             }
@@ -2099,13 +2099,13 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     fun syncListeningHistory() {
         if (listeningSync?.isActive == true || System.currentTimeMillis() - lastListeningSync < 60_000) return
-        if (container.preferences.backend.value == dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC) {
+        if (container.preferences.backend.value == dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC) {
             syncYouTubeListening()
             return
         }
         listeningSync = viewModelScope.launch {
             runCatching {
-                val owner = meId ?: runCatching { dev.lelonio.square.nativecore.NativeBridge.username() }
+                val owner = meId ?: runCatching { dev.nkosanamahungela.sonify.nativecore.NativeBridge.username() }
                     .getOrNull()?.takeIf { it.isNotBlank() }
                     ?: container.api.me().id.also { meId = it }
                 container.listeningStore.useAccount(owner)
@@ -2132,7 +2132,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * Reads the account's YouTube Music history into the month in music.
      *
      * Only while the app is open, as Spotify's is: every few minutes, from the
-     * loop in SquareApp. Between two readings a song played again goes back to
+     * loop in SonifyApp. Between two readings a song played again goes back to
      * the top of the page, and that is what is counted; see YouTubeListening.
      */
     private fun syncYouTubeListening() {
@@ -2142,21 +2142,21 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 val sections = container.youtubeBackend.listeningHistory() ?: return@runCatching
                 val now = System.currentTimeMillis()
                 val last = store.youtubeReading()
-                val plays = dev.lelonio.square.data.YouTubeListening.plays(
+                val plays = dev.nkosanamahungela.sonify.data.YouTubeListening.plays(
                     sections = sections,
                     previous = last?.first,
                     previousAt = last?.second ?: now,
                     now = now,
                 )
-                store.importRemote(plays, dev.lelonio.square.data.ListeningStore.YOUTUBE_OWNER)
+                store.importRemote(plays, dev.nkosanamahungela.sonify.data.ListeningStore.YOUTUBE_OWNER)
                 // And which songs already have a heart: the account's liked
                 // list, so the heart in the notification starts right.
                 runCatching {
                     val liked = container.youtubeBackend.tracksOf(
-                        dev.lelonio.square.backend.youtube.YouTubeBackend.LIKED_MUSIC_URI,
+                        dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.LIKED_MUSIC_URI,
                     )
                     container.likedStore.replaceSource(
-                        dev.lelonio.square.backend.youtube.YouTubeBackend.TRACK_PREFIX,
+                        dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.TRACK_PREFIX,
                         liked.map { it.uri },
                     )
                 }.onFailure { android.util.Log.w(TAG, "youtube likes unavailable: ${describe(it)}") }
@@ -2171,7 +2171,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         combine(container.recentStore.tracks, container.preferences.backend) { tracks, _ ->
             // A nameless row is one that was recorded before the session had
             // finished describing the track; see the history effect in
-            // SquareApp. (From HectorZL's #19.)
+            // SonifyApp. (From HectorZL's #19.)
             tracks.filter { it.name.isNotBlank() && container.activeBackend.owns(it.uri) }
         }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
@@ -2199,13 +2199,13 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * for the places that can only use a song: the radio's seeds, and anything
      * that plays rather than opens.
      */
-    val searchTrail: StateFlow<List<dev.lelonio.square.data.SearchHistoryEntry>> =
+    val searchTrail: StateFlow<List<dev.nkosanamahungela.sonify.data.SearchHistoryEntry>> =
         combine(container.searchHistory.entries, container.preferences.backend) { entries, _ ->
             entries.filter { container.activeBackend.owns(it.uri) }
         }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     private val _credits =
-        MutableStateFlow<dev.lelonio.square.backend.spotify.SpotifyCredits.Credits?>(null)
+        MutableStateFlow<dev.nkosanamahungela.sonify.backend.spotify.SpotifyCredits.Credits?>(null)
 
     /**
      * Who made the track on screen, once somebody asks.
@@ -2214,7 +2214,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * most listeners never look at, and a request per song for it would be a
      * request per song nobody wanted.
      */
-    val credits: StateFlow<dev.lelonio.square.backend.spotify.SpotifyCredits.Credits?> =
+    val credits: StateFlow<dev.nkosanamahungela.sonify.backend.spotify.SpotifyCredits.Credits?> =
         _credits.asStateFlow()
 
     private val _creditsLoading = MutableStateFlow(false)
@@ -2225,7 +2225,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     /** Asked for the open track; a repeat for the same one is free. */
     fun loadCredits(trackUri: String?) {
-        val youtube = trackUri?.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.TRACK_PREFIX) == true
+        val youtube = trackUri?.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.TRACK_PREFIX) == true
         if (trackUri == null || (!trackUri.startsWith("spotify:track:") && !youtube)) {
             creditsJob?.cancel()
             creditsFor = null
@@ -2241,9 +2241,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         _creditsLoading.value = true
         creditsJob = viewModelScope.launch {
             val found = if (youtube) {
-                dev.lelonio.square.backend.youtube.YouTubeCredits.of(trackUri)
+                dev.nkosanamahungela.sonify.backend.youtube.YouTubeCredits.of(trackUri)
             } else {
-                dev.lelonio.square.backend.spotify.SpotifyCredits.of(trackUri)
+                dev.nkosanamahungela.sonify.backend.spotify.SpotifyCredits.of(trackUri)
             }
             if (creditsFor == trackUri) {
                 _credits.value = found
@@ -2258,9 +2258,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /** And when a search result that is a page rather than a song is opened. */
-    fun recordSearchOpen(item: dev.lelonio.square.data.SearchItem) = viewModelScope.launch {
+    fun recordSearchOpen(item: dev.nkosanamahungela.sonify.data.SearchItem) = viewModelScope.launch {
         container.searchHistory.record(
-            dev.lelonio.square.data.SearchHistoryEntry(
+            dev.nkosanamahungela.sonify.data.SearchHistoryEntry(
                 uri = item.uri,
                 title = item.title,
                 subtitle = item.subtitle,
@@ -2342,10 +2342,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         container.spotifySdkAccount.disconnect()
         getApplication<android.app.Application>().getSharedPreferences("square_keys", android.content.Context.MODE_PRIVATE)
             .edit().remove("account_refused").apply()
-        dev.lelonio.square.playback.websdk.WebSdkRecovery.refresh(getApplication())
+        dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.refresh(getApplication())
         // The engine's own credential too, or the next launch would log itself
         // back in with it and signing out would mean nothing.
-        dev.lelonio.square.auth.EngineCredentials.clear(getApplication())
+        dev.nkosanamahungela.sonify.auth.EngineCredentials.clear(getApplication())
         container.recentStore.clear()
         listeningSync?.cancel()
         lastListeningSync = 0L
@@ -2420,7 +2420,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     @kotlinx.serialization.Serializable
     private data class LibrarySnapshot(val displayName: String, val playlists: List<CatalogPlaylist>, val avatarUrl: String? = null)
 
-    private fun librarySnapshotFile() = java.io.File(getApplication<SquareApplication>().filesDir, "library-snapshot.json")
+    private fun librarySnapshotFile() = java.io.File(getApplication<SonifyApplication>().filesDir, "library-snapshot.json")
 
     private suspend fun readLibrarySnapshot(): UiState.Ready? = withContext(Dispatchers.IO) {
         runCatching {
@@ -2453,7 +2453,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             // music, and nothing else. It went on to ask the service, which
             // with signal and no data never answers, so the button that says
             // "switch to offline mode" put the same spinner back.
-            if (dev.lelonio.square.playback.OfflineMode.active.value) {
+            if (dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) {
                 val known = (backend.authState.value as? BackendAuthState.LoggedIn)?.displayName
                 _state.value = offlineLibrary()
                     ?.let { it.copy(displayName = known.orEmpty().ifEmpty { it.displayName }) }
@@ -2510,7 +2510,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         // there for several seconds before the downloads appeared — the one
         // moment the app should be quickest, since everything it is about to
         // show is already on the phone.
-        if (dev.lelonio.square.playback.OfflineMode.active.value) {
+        if (dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) {
             offlineLibrary()?.let {
                 _state.value = it
                 return@launch
@@ -2607,16 +2607,16 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * Online only, and quietly: a failure here means a tile stays drawn.
      */
     private fun keepPageCovers() = viewModelScope.launch {
-        if (dev.lelonio.square.playback.OfflineMode.active.value) return@launch
+        if (dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) return@launch
         val owners = container.downloads.owners.value.keys
         if (owners.isEmpty()) return@launch
         withContext(Dispatchers.IO) {
             owners.forEach { uri ->
                 val url = container.downloads.labelOf(uri)?.artworkUrl ?: return@forEach
-                if (dev.lelonio.square.download.DownloadExtras.fileOf(url, "art") != null) {
+                if (dev.nkosanamahungela.sonify.download.DownloadExtras.fileOf(url, "art") != null) {
                     return@forEach
                 }
-                runCatching { dev.lelonio.square.download.DownloadExtras.keep(url, "art") }
+                runCatching { dev.nkosanamahungela.sonify.download.DownloadExtras.keep(url, "art") }
             }
         }
     }
@@ -2632,7 +2632,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * and only when there is really something to fetch.
      */
     private fun catchUpDownloads() = viewModelScope.launch {
-        if (dev.lelonio.square.playback.OfflineMode.active.value) return@launch
+        if (dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) return@launch
         val wanting = withContext(Dispatchers.IO) {
             runCatching { container.downloadQueue.anythingMissing() }.getOrDefault(false)
         }
@@ -2690,7 +2690,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             CatalogPlaylist(
                 uri = DownloadStore.SINGLES,
                 name = string(R.string.downloaded_tracks),
-                artworkUrl = dev.lelonio.square.ui.components.DOWNLOADS_COVER,
+                artworkUrl = dev.nkosanamahungela.sonify.ui.components.DOWNLOADS_COVER,
             ),
         ) + playlists.filterNot { it.uri == DownloadStore.SINGLES || it.uri == LocalLibrary.CONTEXT_URI }
             .distinctBy { it.uri }
@@ -2767,7 +2767,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 // The picture itself, beside the downloads, so it is a file
                 // rather than a URL that cannot be fetched.
                 profile.images.lastOrNull()?.url?.let {
-                    launch { dev.lelonio.square.download.DownloadExtras.keep(it, "art") }
+                    launch { dev.nkosanamahungela.sonify.download.DownloadExtras.keep(it, "art") }
                 }
             }
             .onFailure { android.util.Log.w(TAG, "profile unavailable: ${describe(it)}") }
@@ -2806,7 +2806,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     /** The address of the station [radioFor] builds from [trackUri]: Spotify's, or YouTube's. */
     fun stationFor(trackUri: String): String =
         if (isYouTubeSong(trackUri)) {
-            dev.lelonio.square.backend.youtube.YouTubeBackend.stationUri(trackUri)
+            dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.stationUri(trackUri)
         } else {
             "spotify:station:track:" + trackUri.substringAfterLast(':')
         }
@@ -2817,11 +2817,11 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     /** A YouTube Music show, which opens as a list whose id starts "MPSP". */
     private fun isYouTubePodcast(uri: String) =
-        uri.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.PLAYLIST_PREFIX + "MPSP")
+        uri.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.PLAYLIST_PREFIX + "MPSP")
 
     private fun isYouTubeSong(uri: String) =
-        uri.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.TRACK_PREFIX) ||
-            uri.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.VIDEO_PREFIX)
+        uri.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.TRACK_PREFIX) ||
+            uri.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.VIDEO_PREFIX)
 
     /** How the detail screen sorts its tracks; remembered between visits. */
     val trackOrders get() = container.preferences.trackOrders
@@ -3047,12 +3047,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 // A podcast is kept through the gateway, as Spotify's own
                 // player keeps one: the Web API asks for an application
                 // registered with permission for it, which almost nobody has.
-                dev.lelonio.square.data.SpotifyPodcasts.isShow(uri) ->
+                dev.nkosanamahungela.sonify.data.SpotifyPodcasts.isShow(uri) ->
                     check(container.gateway.setInLibrary(listOf(uri), keep = !was)) { "the gateway refused" }
 
                 isYouTubePodcast(uri) ->
                     com.metrolist.innertube.YouTube.savePodcast(
-                        uri.removePrefix(dev.lelonio.square.backend.youtube.YouTubeBackend.PLAYLIST_PREFIX),
+                        uri.removePrefix(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.PLAYLIST_PREFIX),
                         save = !was,
                     ).getOrThrow()
 
@@ -3117,7 +3117,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 DetailKind.ALBUM -> if (container.webApi.isReady) container.api.album(id).name else null
                 DetailKind.PLAYLIST -> if (container.webApi.isReady) container.api.playlist(id).name else null
                 DetailKind.SHOW -> container.gateway.show(uri)
-                    ?.let(dev.lelonio.square.data.SpotifyPodcasts::parseShow)?.name
+                    ?.let(dev.nkosanamahungela.sonify.data.SpotifyPodcasts::parseShow)?.name
             }
         }
             .onFailure { android.util.Log.w(TAG, "no name for $uri: ${describe(it)}") }
@@ -3127,7 +3127,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
         if (kind == DetailKind.ARTIST) {
             runCatching {
-                dev.lelonio.square.data.SpotifyWebArtist.fetch(id, container.sharedHttpClient, getApplication<SquareApplication>().resources)?.name
+                dev.nkosanamahungela.sonify.data.SpotifyWebArtist.fetch(id, container.sharedHttpClient, getApplication<SonifyApplication>().resources)?.name
             }.getOrNull()?.takeIf { it.isNotEmpty() }?.let { return it }
         }
 
@@ -3179,7 +3179,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      */
     fun goOffline() {
         container.downloadSettings.setOfflineMode(true)
-        dev.lelonio.square.playback.OfflineMode.setManual(true)
+        dev.nkosanamahungela.sonify.playback.OfflineMode.setManual(true)
         refresh(restart = true)
     }
 
@@ -3191,8 +3191,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 .onFailure { android.util.Log.w(TAG, "retry failed: ${describe(it)}") }
         }
         val offline = runCatching { NativeBridge.isOffline }.getOrDefault(false)
-        dev.lelonio.square.playback.OfflineMode.setNoSession(offline)
-        dev.lelonio.square.playback.OfflineMode.setSlow(false)
+        dev.nkosanamahungela.sonify.playback.OfflineMode.setNoSession(offline)
+        dev.nkosanamahungela.sonify.playback.OfflineMode.setSlow(false)
         if (!offline) {
             // The library was built from the download index while there was no
             // session; now there is one, and it is a different library.
@@ -3259,14 +3259,14 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * Worked out together because they share one rule, that no playlist is on
      * two of them; see TabContents. Each source updates it as it arrives.
      */
-    private val tabs: StateFlow<dev.lelonio.square.data.TabContents.Tabs> = combine(
+    private val tabs: StateFlow<dev.nkosanamahungela.sonify.data.TabContents.Tabs> = combine(
         _homeShelves,
         _releasesPage,
         _chartsPage,
         _madeForYouPage,
     ) { home, releases, charts, madeForYou ->
-        dev.lelonio.square.data.TabContents.split(home, releases, charts, madeForYou)
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, dev.lelonio.square.data.TabContents.Tabs())
+        dev.nkosanamahungela.sonify.data.TabContents.split(home, releases, charts, madeForYou)
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, dev.nkosanamahungela.sonify.data.TabContents.Tabs())
 
     val homeShelves: StateFlow<List<HomeShelf>> = tabs.map { it.home }
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
@@ -3316,15 +3316,15 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         browseJob = viewModelScope.launch {
             suspend fun page(uri: String) = withContext(Dispatchers.IO) {
                 container.gateway.browsePage(uri)
-                    ?.let { dev.lelonio.square.data.SpotifyBrowse.parse(it) }
+                    ?.let { dev.nkosanamahungela.sonify.data.SpotifyBrowse.parse(it) }
                     .orEmpty()
             }
 
-            page(dev.lelonio.square.data.SpotifyBrowse.Pages.NEW_RELEASES)
+            page(dev.nkosanamahungela.sonify.data.SpotifyBrowse.Pages.NEW_RELEASES)
                 .takeIf { it.isNotEmpty() }?.let { _releasesPage.value = it }
-            page(dev.lelonio.square.data.SpotifyBrowse.Pages.MADE_FOR_YOU)
+            page(dev.nkosanamahungela.sonify.data.SpotifyBrowse.Pages.MADE_FOR_YOU)
                 .takeIf { it.isNotEmpty() }?.let { _madeForYouPage.value = it }
-            page(dev.lelonio.square.data.SpotifyBrowse.Pages.CHARTS)
+            page(dev.nkosanamahungela.sonify.data.SpotifyBrowse.Pages.CHARTS)
                 .takeIf { it.isNotEmpty() }?.let { _chartsPage.value = it }
 
             android.util.Log.i(
@@ -3383,7 +3383,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     /** Spotify's shelves are on their way: online, on Spotify, not yet answered. */
     val homeShelvesLoading: StateFlow<Boolean> = combine(
         homeShelvesSettled,
-        dev.lelonio.square.playback.OfflineMode.active,
+        dev.nkosanamahungela.sonify.playback.OfflineMode.active,
         container.preferences.backend,
     ) { settled, offline, backend ->
         !settled && !offline && backend == BackendId.SPOTIFY && container.spotifySignedIn
@@ -3394,10 +3394,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         for (wait in HOME_RETRY_MS) {
             kotlinx.coroutines.delay(wait)
             shelves = fetchHomeShelves()
-            if (shelves.isNotEmpty() || dev.lelonio.square.playback.OfflineMode.active.value) break
+            if (shelves.isNotEmpty() || dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) break
         }
         if (shelves.isEmpty() && _homeShelves.value.isEmpty() && shelvesBeforeOffline.isNotEmpty() &&
-            !dev.lelonio.square.playback.OfflineMode.active.value
+            !dev.nkosanamahungela.sonify.playback.OfflineMode.active.value
         ) {
             android.util.Log.i(TAG, "home: kept the shelves from before going offline")
             _homeShelves.value = shelvesBeforeOffline
@@ -3633,15 +3633,15 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             if (syncResult.isSuccess && container.downloadSettings.downloadLikedSongs.value) {
                 if (nowLiked) {
                     // Nothing to fetch it with while the official SDK plays.
-                    if (!dev.lelonio.square.playback.websdk.WebSdkRecovery.inUse.value) {
+                    if (!dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.inUse.value) {
                         container.downloads.addLiked(resolvedTrack)
-                        dev.lelonio.square.download.DownloadService.start(container)
+                        dev.nkosanamahungela.sonify.download.DownloadService.start(container)
                     }
                 } else {
                     container.downloads.removeLiked(trackUri)
                     container.downloads.pruneOrphans().forEach {
-                        runCatching { dev.lelonio.square.download.YouTubeDownloads.forget(getApplication(), it) }
-                        dev.lelonio.square.download.DownloadExtras.forget(it)
+                        runCatching { dev.nkosanamahungela.sonify.download.YouTubeDownloads.forget(getApplication(), it) }
+                        dev.nkosanamahungela.sonify.download.DownloadExtras.forget(it)
                     }
                 }
             }
@@ -3809,10 +3809,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             android.widget.Toast.makeText(
                 app,
                 app.getString(
-                    dev.lelonio.square.R.string.download_waiting_wifi_hint,
-                    app.getString(dev.lelonio.square.R.string.settings),
-                    app.getString(dev.lelonio.square.R.string.page_downloads),
-                    app.getString(dev.lelonio.square.R.string.download_wifi_only),
+                    dev.nkosanamahungela.sonify.R.string.download_waiting_wifi_hint,
+                    app.getString(dev.nkosanamahungela.sonify.R.string.settings),
+                    app.getString(dev.nkosanamahungela.sonify.R.string.page_downloads),
+                    app.getString(dev.nkosanamahungela.sonify.R.string.download_wifi_only),
                 ),
                 android.widget.Toast.LENGTH_LONG,
             ).show()
@@ -3840,14 +3840,14 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 // JNI calls to stop the one or two that are running.
                 val inFlight = container.downloads.progress.value.keys.toList()
                 container.downloads.removeOwner(uri)
-                inFlight.forEach { runCatching { dev.lelonio.square.download.YouTubeDownloads.stop(it) } }
+                inFlight.forEach { runCatching { dev.nkosanamahungela.sonify.download.YouTubeDownloads.stop(it) } }
                 sweepOrphans()
             } else {
                 // The page's own cover, kept like the songs are. It is one
                 // picture against a playlist's worth of audio, and without it
                 // the library offline is a wall of drawn tiles.
                 page.artworkUrl?.let {
-                    launch { dev.lelonio.square.download.DownloadExtras.keep(it, "art") }
+                    launch { dev.nkosanamahungela.sonify.download.DownloadExtras.keep(it, "art") }
                 }
                 container.downloads.setOwner(
                     ownerUri = uri,
@@ -3882,7 +3882,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      */
     private fun followKept(uri: String, tracks: List<CatalogTrack>) {
         val kept = container.downloads.owners.value[uri] ?: return
-        if (tracks.isEmpty() || dev.lelonio.square.playback.OfflineMode.active.value) return
+        if (tracks.isEmpty() || dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) return
         val now = tracks.map { it.uri }
         if (now == kept) return
         viewModelScope.launch {
@@ -3909,10 +3909,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private fun followKeptYouTube() = viewModelScope.launch {
         delay(KEPT_SYNC_DELAY_MS)
         container.downloads.ensureLoaded()
-        if (dev.lelonio.square.playback.OfflineMode.active.value) return@launch
+        if (dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) return@launch
         val youtube = container.youtubeBackend
         val kept = container.downloads.owners.value.keys
-        kept.filter { it.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.PLAYLIST_PREFIX) }
+        kept.filter { it.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.PLAYLIST_PREFIX) }
             .forEach { uri ->
                 runCatching { youtube.tracksOf(uri) }
                     .onSuccess { followKept(uri, it) }
@@ -3921,7 +3921,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         val spotify = kept.filter { it.startsWith("spotify:playlist:") || it.endsWith(":collection") }
         if (spotify.isEmpty() || !container.spotifySignedIn || !awaitEngine()) return@launch
         spotify.forEach { uri ->
-            if (dev.lelonio.square.playback.OfflineMode.active.value) return@launch
+            if (dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) return@launch
             val stamp = snapshotOf(uri)
             val known = (contextCache[uri] ?: container.contextCache.read(uri))?.snapshotId
             if (stamp != null && stamp == known) return@forEach
@@ -3941,7 +3941,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             val singles = container.downloads.owners.value[DownloadStore.SINGLES].orEmpty()
             if (track.uri in singles) {
                 container.downloads.removeSingle(track.uri)
-                runCatching { dev.lelonio.square.download.YouTubeDownloads.stop(track.uri) }
+                runCatching { dev.nkosanamahungela.sonify.download.YouTubeDownloads.stop(track.uri) }
                 sweepOrphans()
             } else {
                 container.downloads.addSingle(track)
@@ -3965,14 +3965,14 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      */
     private suspend fun sweepOrphans() {
         container.downloads.pruneOrphans().forEach {
-            runCatching { dev.lelonio.square.download.YouTubeDownloads.forget(getApplication(), it) }
-            dev.lelonio.square.download.DownloadExtras.forget(it)
+            runCatching { dev.nkosanamahungela.sonify.download.YouTubeDownloads.forget(getApplication(), it) }
+            dev.nkosanamahungela.sonify.download.DownloadExtras.forget(it)
         }
         // And whatever is left in the extras that no surviving track can
         // explain: covers, words and Canvases of songs that are gone.
         withContext(Dispatchers.IO) {
             val tracks = container.downloads.files.value.keys
-            dev.lelonio.square.download.DownloadExtras.sweep(
+            dev.nkosanamahungela.sonify.download.DownloadExtras.sweep(
                 trackUris = tracks,
                 coverUrls = tracks.mapNotNull { container.downloads.trackOf(it)?.artworkUrl },
             )
@@ -3982,7 +3982,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun clearDownloads() {
         viewModelScope.launch {
             container.downloads.progress.value.keys.forEach {
-                runCatching { dev.lelonio.square.download.YouTubeDownloads.stop(it) }
+                runCatching { dev.nkosanamahungela.sonify.download.YouTubeDownloads.stop(it) }
             }
             container.downloads.clearAll()
         }
@@ -4117,7 +4117,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         // Told to the engine as they are found, and kept, on disk too: a queue
         // started on one page plays on while another is open, and after the
         // app is closed and opened again; see LocalFileBindings.
-        dev.lelonio.square.data.LocalFileBindings.bind(
+        dev.nkosanamahungela.sonify.data.LocalFileBindings.bind(
             matched.mapNotNull { track ->
                 track.localFile?.takeIf { LocalLibrary.isSpotifyLocal(track.uri) }?.let { track.uri to it }
             }.toMap(),
@@ -4127,7 +4127,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
 
     private fun mixPrefs() =
-        getApplication<SquareApplication>().getSharedPreferences(MIX_PREFS, android.content.Context.MODE_PRIVATE)
+        getApplication<SonifyApplication>().getSharedPreferences(MIX_PREFS, android.content.Context.MODE_PRIVATE)
 
     /**
      * Whether a playlist plays as a mix here: as Spotify has it, unless the
@@ -4162,7 +4162,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         val listed = prefs.getStringSet(key, emptySet()).orEmpty().toMutableSet()
         if (on == mix.mixed) listed.remove(uri) else listed.add(uri)
         prefs.edit().putStringSet(key, listed).apply()
-        dev.lelonio.square.playback.Mixes.set(uri, mix.takeIf { on })
+        dev.nkosanamahungela.sonify.playback.Mixes.set(uri, mix.takeIf { on })
         _playlist.value = page.copy(mixOn = on)
         if (on) viewModelScope.launch { loadMixData(uri) }
     }
@@ -4179,7 +4179,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      */
     private suspend fun loadMixData(
         uri: String,
-    ): Pair<Map<String, dev.lelonio.square.playback.Mixes.Attributes>, dev.lelonio.square.playback.Mixes.PlaylistMix>? {
+    ): Pair<Map<String, dev.nkosanamahungela.sonify.playback.Mixes.Attributes>, dev.nkosanamahungela.sonify.playback.Mixes.PlaylistMix>? {
         val tracks = withTimeoutOrNull(ARTIST_WAIT_MS) {
             while (_playlist.value.uri == uri && _playlist.value.tracks.isEmpty()) delay(POLL_INTERVAL_MS)
             _playlist.value.tracks
@@ -4188,7 +4188,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         if (uris.isEmpty()) return null
         val json = org.json.JSONArray(uris).toString()
         val attributes = withContext(Dispatchers.IO) {
-            dev.lelonio.square.playback.Mixes.parseAttributes(NativeBridge.tracksAudioAttributes(json))
+            dev.nkosanamahungela.sonify.playback.Mixes.parseAttributes(NativeBridge.tracksAudioAttributes(json))
         }
         android.util.Log.i(TAG, "mix of $uri: tempo and key for ${attributes.size} of ${uris.size} songs")
         val page = _playlist.value
@@ -4197,7 +4197,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             durations = page.tracks.filter { it.durationMs > 0 }.associate { it.uri to it.durationMs },
         )
         _playlist.value = page.copy(audioAttributes = attributes, mix = mix)
-        if (page.mixOn) dev.lelonio.square.playback.Mixes.set(uri, mix)
+        if (page.mixOn) dev.nkosanamahungela.sonify.playback.Mixes.set(uri, mix)
         return attributes to mix
     }
 
@@ -4239,7 +4239,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         // the home page should keep at the front.
         container.playlistOrder.record(playlist.uri)
         container.widgetPlaylists.record(playlist.uri, playlist.name, playlist.artworkUrl, container.activeBackend.id)
-        dev.lelonio.square.widget.SquareWidget.refresh(getApplication())
+        dev.nkosanamahungela.sonify.widget.SquareWidget.refresh(getApplication())
 
         if (playlist.uri == LocalLibrary.CONTEXT_URI) {
             openLocalFiles(playlist)
@@ -4257,7 +4257,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         // the request cannot even be attempted, and the whole list is already
         // here — in the order the playlist had when it was downloaded, which is
         // the order it should still be in.
-        if (dev.lelonio.square.playback.OfflineMode.active.value) {
+        if (dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) {
             val wanted = container.downloads.owners.value[playlist.uri]
             if (wanted != null) {
                 openDownloadedContext(playlist, wanted)
@@ -4355,11 +4355,11 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             // transitions alone. On by default only where Spotify has it mixed.
             if (playlist.uri.startsWith("spotify:playlist:") &&
                 container.activeBackend.id == BackendId.SPOTIFY &&
-                !dev.lelonio.square.playback.OfflineMode.active.value
+                !dev.nkosanamahungela.sonify.playback.OfflineMode.active.value
             ) launch {
                 if (!awaitEngine()) return@launch
                 val mix = withContext(Dispatchers.IO) {
-                    dev.lelonio.square.playback.Mixes.parseMix(NativeBridge.playlistMix(playlist.uri))
+                    dev.nkosanamahungela.sonify.playback.Mixes.parseMix(NativeBridge.playlistMix(playlist.uri))
                 } ?: return@launch
                 val on = mixOn(playlist.uri, mix.mixed)
                 android.util.Log.i(TAG, "mix of ${playlist.uri}: mixed=${mix.mixed}, ${mix.transitions.size} saved, on=$on")
@@ -4367,7 +4367,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 if (!isActive || _playlist.value.uri != playlist.uri) return@launch
                 _playlist.value = _playlist.value.copy(mix = mix, mixOn = on)
                 if (on) {
-                    dev.lelonio.square.playback.Mixes.set(playlist.uri, mix)
+                    dev.nkosanamahungela.sonify.playback.Mixes.set(playlist.uri, mix)
                     loadMixData(playlist.uri)?.let { (attributes, withLengths) ->
                         base = base.copy(audioAttributes = attributes, mix = withLengths)
                     }
@@ -4388,7 +4388,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             // without it, and a list Spotify has nothing to pair with simply
             // ends where its songs do.
             if (kind == DetailKind.PLAYLIST && playlist.uri.startsWith("spotify:playlist:") &&
-                !dev.lelonio.square.playback.OfflineMode.active.value
+                !dev.nkosanamahungela.sonify.playback.OfflineMode.active.value
             ) launch {
                 val related = relatedCache[playlist.uri]
                     ?: container.gateway.relatedPlaylists(playlist.uri)
@@ -4409,7 +4409,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             // without it, and an artist it has never heard of simply keeps the
             // header it has.
             if (kind == DetailKind.ARTIST || kind == DetailKind.ALBUM) {
-                if (!dev.lelonio.square.playback.OfflineMode.active.value) {
+                if (!dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) {
                     base = base.copy(heroPending = true)
                     if (isActive && _playlist.value.uri == playlist.uri) {
                         _playlist.value = _playlist.value.copy(heroPending = true)
@@ -4453,7 +4453,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     // than page by page: the Spotify paths below are built
                     // around the Web API's paging and the access point's
                     // per-track lookups, neither of which exists here.
-                    val youtube = container.activeBackend as? dev.lelonio.square.backend.youtube.YouTubeBackend
+                    val youtube = container.activeBackend as? dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend
                     val artistPage = if (kind == DetailKind.ARTIST && youtube != null) {
                         youtube.artistPage(playlist.uri)
                     } else {
@@ -4481,7 +4481,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     // A YouTube Music list is kept like a Spotify one: read in
                     // full only when its first page says it has changed. Long
                     // lists are a page a hundred songs, asked one after another.
-                    val youtubeLists = container.activeBackend as? dev.lelonio.square.backend.youtube.YouTubeBackend
+                    val youtubeLists = container.activeBackend as? dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend
                     val tracks = if (youtubeLists != null) {
                         val (stamp, fresh) = youtubeLists.tracksIfChanged(
                             playlist.uri,
@@ -4564,7 +4564,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     // part of what the list says.
                     awaitEngine()
                     val showAnswer = container.gateway.show(playlist.uri)
-                    val show = showAnswer?.let(dev.lelonio.square.data.SpotifyPodcasts::parseShow)
+                    val show = showAnswer?.let(dev.nkosanamahungela.sonify.data.SpotifyPodcasts::parseShow)
                     if (show == null) {
                         android.util.Log.w(TAG, "show ${playlist.uri} unreadable: ${showAnswer?.take(400)}")
                     }
@@ -4687,7 +4687,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         val base = PlaylistState(
             uri = DownloadStore.SINGLES,
             name = name,
-            artworkUrl = dev.lelonio.square.ui.components.DOWNLOADS_COVER,
+            artworkUrl = dev.nkosanamahungela.sonify.ui.components.DOWNLOADS_COVER,
             kind = DetailKind.PLAYLIST,
             mine = false,
         )
@@ -4722,7 +4722,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         )
 
         playlistJob = viewModelScope.launch {
-            if (missingInitial.isNotEmpty() && !dev.lelonio.square.playback.OfflineMode.active.value) {
+            if (missingInitial.isNotEmpty() && !dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) {
                 runCatching {
                     val fetched = withContext(Dispatchers.IO) {
                         Catalog.tracks(missingInitial)
@@ -4741,7 +4741,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     .map { it.key }
 
                 val missing = currentUris.filter { container.downloads.trackOf(it) == null && !resolvedInMemory.containsKey(it) }
-                if (missing.isNotEmpty() && !dev.lelonio.square.playback.OfflineMode.active.value) {
+                if (missing.isNotEmpty() && !dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) {
                     runCatching {
                         val fetched = withContext(Dispatchers.IO) {
                             Catalog.tracks(missing)
@@ -4853,7 +4853,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 DetailKind.ALBUM -> if (container.webApi.isReady) container.api.album(id).images.firstOrNull()?.url else null
                 DetailKind.PLAYLIST -> if (container.webApi.isReady) container.api.playlist(id).images.firstOrNull()?.url else null
                 DetailKind.SHOW -> container.gateway.show(uri)
-                    ?.let(dev.lelonio.square.data.SpotifyPodcasts::parseShow)?.artworkUrl
+                    ?.let(dev.nkosanamahungela.sonify.data.SpotifyPodcasts::parseShow)?.artworkUrl
             }
         }
             .onFailure { android.util.Log.w(TAG, "no cover for $uri: ${describe(it)}") }
@@ -4862,7 +4862,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
         if (kind == DetailKind.ARTIST) {
             runCatching {
-                dev.lelonio.square.data.SpotifyWebArtist.fetch(id, container.sharedHttpClient, getApplication<SquareApplication>().resources)?.artworkUrl
+                dev.nkosanamahungela.sonify.data.SpotifyWebArtist.fetch(id, container.sharedHttpClient, getApplication<SonifyApplication>().resources)?.artworkUrl
             }.getOrNull()?.takeIf { !it.isNullOrEmpty() }?.let { return it }
         }
 
@@ -4956,7 +4956,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 if (LocalLibrary.isSpotifyLocal(track.uri)) {
                     // The Web API cannot take out what it could not put in.
                     withContext(Dispatchers.IO) {
-                        dev.lelonio.square.nativecore.NativeBridge.removeFromPlaylist(uri, track.uri)
+                        dev.nkosanamahungela.sonify.nativecore.NativeBridge.removeFromPlaylist(uri, track.uri)
                     }
                 } else {
                     container.api.removeFromPlaylist(
@@ -4995,7 +4995,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         return backend.owns(it) && when (backend.id) {
             // The official SDK streams and keeps nothing; see WebSdkRecovery.inUse.
             BackendId.SPOTIFY -> it.startsWith("spotify:") && !LocalLibrary.isSpotifyLocal(it) &&
-                !dev.lelonio.square.playback.websdk.WebSdkRecovery.inUse.value
+                !dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.inUse.value
             BackendId.YOUTUBE_MUSIC -> true
         }
     }
@@ -5150,7 +5150,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     /** The edit sheet of an existing playlist: what it shows and how it is going. */
     data class EditPlaylistState(
         val playlist: CatalogPlaylist,
-        val details: dev.lelonio.square.backend.PlaylistDetails? = null,
+        val details: dev.nkosanamahungela.sonify.backend.PlaylistDetails? = null,
         val loading: Boolean = false,
         val busy: Boolean = false,
         val error: String? = null,
@@ -5162,7 +5162,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     /** Opens the edit sheet, reading what the playlist has now where the source keeps it. */
     fun openEditPlaylist(playlist: CatalogPlaylist) {
         val backend = container.activeBackend
-        val plain = dev.lelonio.square.backend.PlaylistDetails(playlist.name, "", false, playlist.artworkUrl)
+        val plain = dev.nkosanamahungela.sonify.backend.PlaylistDetails(playlist.name, "", false, playlist.artworkUrl)
         if (!backend.describesPlaylists) {
             _editingPlaylist.value = EditPlaylistState(playlist, details = plain)
             return
@@ -5641,8 +5641,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * again for anything the catalogue does not have — the player then shows the
      * square cover it already had.
      */
-    private val _nowPlayingArt = MutableStateFlow<dev.lelonio.square.data.AppleCatalog.Album?>(null)
-    val nowPlayingArt: StateFlow<dev.lelonio.square.data.AppleCatalog.Album?> =
+    private val _nowPlayingArt = MutableStateFlow<dev.nkosanamahungela.sonify.data.AppleCatalog.Album?>(null)
+    val nowPlayingArt: StateFlow<dev.nkosanamahungela.sonify.data.AppleCatalog.Album?> =
         _nowPlayingArt.asStateFlow()
 
     /**
@@ -5679,7 +5679,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * did not come with it.
      */
     fun prefetchRemoteArt(uri: String, title: String, artist: String) {
-        if (artist.isBlank() || dev.lelonio.square.playback.OfflineMode.active.value) return
+        if (artist.isBlank() || dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) return
         viewModelScope.launch {
             val record = withContext(Dispatchers.IO) {
                 runCatching { container.activeBackend.tracksOf(uri).firstOrNull()?.album }.getOrNull()
@@ -5689,16 +5689,16 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun prefetchArt(title: String, album: String, artist: String) {
-        if (artist.isBlank() || dev.lelonio.square.playback.OfflineMode.active.value) return
+        if (artist.isBlank() || dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) return
         prefetchArtJob?.cancel()
         prefetchArtJob = viewModelScope.launch {
-            val found = dev.lelonio.square.data.AppleCatalog.album(album, artist)
+            val found = dev.nkosanamahungela.sonify.data.AppleCatalog.album(album, artist)
                 .takeIf { album.isNotBlank() }
             val cover = found?.coverUrl
-                ?: dev.lelonio.square.data.AppleCatalog.song(title, artist, album)
+                ?: dev.nkosanamahungela.sonify.data.AppleCatalog.song(title, artist, album)
             // The bytes and the decode as well as the answer: Coil keeps what it
             // has already read, and this is the half that takes the longest.
-            val context = getApplication<SquareApplication>()
+            val context = getApplication<SonifyApplication>()
             // At the size the player will ask for, not at the picture's own.
             // Coil files what it has decoded under the size it decoded it at, so
             // a copy read at sixteen hundred across is not the copy the screen
@@ -5723,7 +5723,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             // warmArtworkColor.
             (found?.heroUrl ?: cover)?.let { url ->
                 runCatching {
-                    dev.lelonio.square.ui.theme.warmArtworkColor(context, url)
+                    dev.nkosanamahungela.sonify.ui.theme.warmArtworkColor(context, url)
                 }
             }
         }
@@ -5869,7 +5869,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             if (record.isBlank()) delay(ALBUM_WAIT_MS)
 
             val askedAt = android.os.SystemClock.elapsedRealtime()
-            val found = dev.lelonio.square.data.AppleCatalog.album(record, artist)
+            val found = dev.nkosanamahungela.sonify.data.AppleCatalog.album(record, artist)
                 .takeIf { record.isNotBlank() }
             _nowPlayingArt.value = found
             android.util.Log.i(
@@ -5884,9 +5884,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             // falling back to a soft picture — where Apple keeps a song's
             // artwork at several thousand.
             if (found?.coverUrl == null && title.isNotBlank()) {
-                val fromSong = dev.lelonio.square.data.AppleCatalog.song(title, artist, record)
+                val fromSong = dev.nkosanamahungela.sonify.data.AppleCatalog.song(title, artist, record)
                 if (fromSong != null) {
-                    _nowPlayingArt.value = (found ?: dev.lelonio.square.data.AppleCatalog.Album(
+                    _nowPlayingArt.value = (found ?: dev.nkosanamahungela.sonify.data.AppleCatalog.Album(
                         heroUrl = null,
                         coverUrl = null,
                     )).copy(coverUrl = fromSong)
@@ -5904,7 +5904,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * catalogue still might have something; an [album] of null means it was
      * asked and had nothing, and there is nothing to wait for.
      */
-    private class KeptArt(val album: dev.lelonio.square.data.AppleCatalog.Album?)
+    private class KeptArt(val album: dev.nkosanamahungela.sonify.data.AppleCatalog.Album?)
 
     /**
      * The pictures kept beside a downloaded song, as the player wants them.
@@ -5915,10 +5915,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private suspend fun keptArt(uri: String?): KeptArt? {
         val track = uri ?: return null
         return withContext(Dispatchers.IO) {
-            val extras = dev.lelonio.square.download.DownloadExtras
+            val extras = dev.nkosanamahungela.sonify.download.DownloadExtras
             val (hero, cover) = extras.art(track) ?: return@withContext null
             val onDisk = { url: String? -> url?.takeIf { extras.fileOf(it, "art") != null } }
-            val kept = dev.lelonio.square.data.AppleCatalog.Album(
+            val kept = dev.nkosanamahungela.sonify.data.AppleCatalog.Album(
                 heroUrl = onDisk(hero),
                 coverUrl = onDisk(cover),
             )
@@ -5971,7 +5971,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }
 
         if (kind == DetailKind.ARTIST) {
-            val found = dev.lelonio.square.data.AppleCatalog.artist(name)
+            val found = dev.nkosanamahungela.sonify.data.AppleCatalog.artist(name)
             if (found == null) {
                 done()
                 return
@@ -6006,7 +6006,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         // The rows it writes expire after a month; the pictures beside a
         // download do not, so a record kept on the phone opens on its own
         // photograph however long it has been there.
-        val found = dev.lelonio.square.data.AppleCatalog.album(name, artist)
+        val found = dev.nkosanamahungela.sonify.data.AppleCatalog.album(name, artist)
             ?: keptArt(_playlist.value.tracks.firstOrNull()?.uri)?.album
         if (found == null) {
             done()
@@ -6053,7 +6053,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private data class BasicArtistMeta(val name: String, val artworkUrl: String?, val followers: Int)
 
     private suspend fun fetchArtistMetadata(id: String): BasicArtistMeta? = withContext(Dispatchers.IO) {
-        val token = dev.lelonio.square.nativecore.NativeBridge.accessToken() ?: return@withContext null
+        val token = dev.nkosanamahungela.sonify.nativecore.NativeBridge.accessToken() ?: return@withContext null
         runCatching {
             val request = okhttp3.Request.Builder()
                 .url("https://api.spotify.com/v1/artists/$id")
@@ -6124,9 +6124,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 val searchRes = runCatching {
                     withTimeoutOrNull(3000L) {
                         container.gateway.search(resolvedName)?.let {
-                            dev.lelonio.square.data.GatewaySearch.parse(
+                            dev.nkosanamahungela.sonify.data.GatewaySearch.parse(
                                 it,
-                                dev.lelonio.square.backend.SearchLabels(
+                                dev.nkosanamahungela.sonify.backend.SearchLabels(
                                     artist = string(R.string.artist),
                                     album = string(R.string.album),
                                     playlist = string(R.string.playlist),
@@ -6202,9 +6202,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     val searchRes = runCatching {
                         withTimeoutOrNull(3000L) {
                             container.gateway.search(resolvedName)?.let {
-                                dev.lelonio.square.data.GatewaySearch.parse(
+                                dev.nkosanamahungela.sonify.data.GatewaySearch.parse(
                                     it,
-                                    dev.lelonio.square.backend.SearchLabels(
+                                    dev.nkosanamahungela.sonify.backend.SearchLabels(
                                         artist = string(R.string.artist),
                                         album = string(R.string.album),
                                         playlist = string(R.string.playlist),
@@ -6239,10 +6239,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         // Secondary fallback: Web player entity (when Web API is not configured or rate-limited)
         val webArtist = runCatching {
             withTimeoutOrNull(4000L) {
-                dev.lelonio.square.data.SpotifyWebArtist.fetch(
+                dev.nkosanamahungela.sonify.data.SpotifyWebArtist.fetch(
                     id,
                     container.sharedHttpClient,
-                    getApplication<SquareApplication>().resources,
+                    getApplication<SonifyApplication>().resources,
                 )
             }
         }.onFailure {
@@ -6273,9 +6273,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             val searchRes = runCatching {
                 withTimeoutOrNull(3000L) {
                     container.gateway.search(searchName)?.let {
-                        dev.lelonio.square.data.GatewaySearch.parse(
+                        dev.nkosanamahungela.sonify.data.GatewaySearch.parse(
                             it,
-                            dev.lelonio.square.backend.SearchLabels(
+                            dev.nkosanamahungela.sonify.backend.SearchLabels(
                                 artist = string(R.string.artist),
                                 album = string(R.string.album),
                                 playlist = string(R.string.playlist),
@@ -6347,7 +6347,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     private fun formatMonthlyListeners(count: Long): String? {
         if (count <= 0) return null
-        val res = getApplication<SquareApplication>().resources
+        val res = getApplication<SonifyApplication>().resources
         val locale = java.util.Locale.getDefault()
         val formattedCount = when {
             count >= 1_000_000 -> String.format(locale, "%.1f M", count / 1_000_000.0)
@@ -6362,7 +6362,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * The playlists an artist is in, "This Is" first.
      *
      * Read from the gateway, which answers with the row the desktop client
-     * heads "Featuring"; see [dev.lelonio.square.data.ArtistPlaylists]. The
+     * heads "Featuring"; see [dev.nkosanamahungela.sonify.data.ArtistPlaylists]. The
      * search below is what is left when the gateway will not answer.
      */
     private suspend fun artistPlaylistsFor(uri: String, name: String): List<SearchItem> =
@@ -6482,7 +6482,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 val changed = kotlinx.coroutines.withContext(Dispatchers.IO) {
                     container.widgetPlaylists.fill(order, ready.playlists + albums, container.activeBackend.id)
                 }
-                if (changed) dev.lelonio.square.widget.SquareWidget.refresh(getApplication())
+                if (changed) dev.nkosanamahungela.sonify.widget.SquareWidget.refresh(getApplication())
             }
         }
     }
@@ -6549,7 +6549,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 if (!awaitEngine()) return@launch
                 val json = container.gateway.homeFacet(PODCASTS_FACET) ?: return@launch
                 _podcastShelves.value = withContext(Dispatchers.Default) {
-                    dev.lelonio.square.data.SpotifyHome.parse(json, podcasts = true)
+                    dev.nkosanamahungela.sonify.data.SpotifyHome.parse(json, podcasts = true)
                 }
             } finally {
                 _podcastsLoading.value = false
@@ -6575,7 +6575,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         val gathered = mutableListOf<CatalogPlaylist>()
         while (gathered.size < MAX_SHOWS) {
             val page = container.gateway.followedShows(offset = gathered.size)
-                ?.let(dev.lelonio.square.data.SpotifyPodcasts::parseFollowed)
+                ?.let(dev.nkosanamahungela.sonify.data.SpotifyPodcasts::parseFollowed)
                 ?: break
             gathered += page
             if (page.isEmpty()) break
@@ -6613,7 +6613,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                                 batch.map { show ->
                                     async {
                                         container.gateway.showEpisodes(show.uri, 0, EPISODES_A_SHOW)
-                                            ?.let { dev.lelonio.square.data.SpotifyPodcasts.parseEpisodes(it, show.name) }
+                                            ?.let { dev.nkosanamahungela.sonify.data.SpotifyPodcasts.parseEpisodes(it, show.name) }
                                             ?.tracks.orEmpty()
                                     }
                                 }.awaitAll().flatten()
@@ -6685,7 +6685,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         var offset = 0
         while (loaded.size < SHOW_EPISODES_LIMIT) {
             val page = container.gateway.showEpisodes(uri, offset)
-                ?.let { dev.lelonio.square.data.SpotifyPodcasts.parseEpisodes(it, showName) }
+                ?.let { dev.nkosanamahungela.sonify.data.SpotifyPodcasts.parseEpisodes(it, showName) }
                 ?: return loaded.takeIf { it.isNotEmpty() }
             loaded += page.tracks.map(container.episodeProgress::apply)
             val next = page.nextOffset
@@ -6701,10 +6701,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         uri.startsWith("spotify:artist:") -> DetailKind.ARTIST
         // An artist on the other source is an artist too: the page they open on
         // is the one with the follow button, whichever catalogue they are from.
-        uri.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.ARTIST_PREFIX) ->
+        uri.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.ARTIST_PREFIX) ->
             DetailKind.ARTIST
         uri.startsWith("spotify:album:") -> DetailKind.ALBUM
-        dev.lelonio.square.data.SpotifyPodcasts.isShow(uri) -> DetailKind.SHOW
+        dev.nkosanamahungela.sonify.data.SpotifyPodcasts.isShow(uri) -> DetailKind.SHOW
         else -> DetailKind.PLAYLIST
     }
 

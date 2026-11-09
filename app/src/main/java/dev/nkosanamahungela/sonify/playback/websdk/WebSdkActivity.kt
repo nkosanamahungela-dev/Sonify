@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback.websdk
+package dev.nkosanamahungela.sonify.playback.websdk
 
 import android.content.ComponentName
 import android.content.Context
@@ -32,17 +32,17 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import dev.lelonio.square.R
-import dev.lelonio.square.SquareApplication
-import dev.lelonio.square.auth.SpotifyOAuth
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.SonifyApplication
+import dev.nkosanamahungela.sonify.auth.SpotifyOAuth
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.regular.ArrowLeft
 import com.adamglin.phosphoricons.regular.ArrowUpRight
-import dev.lelonio.square.ui.onboarding.*
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.InkDim
-import dev.lelonio.square.ui.theme.SquareTheme
+import dev.nkosanamahungela.sonify.ui.onboarding.*
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.ui.theme.SquareTheme
 import kotlinx.coroutines.*
 
 /** Native controls around a service-owned WebView, retained when the screen goes off. */
@@ -60,7 +60,7 @@ class WebSdkActivity : ComponentActivity() {
         override fun onServiceDisconnected(name: ComponentName) { service = null }
     }
     override fun attachBaseContext(base: Context) {
-        super.attachBaseContext((base.applicationContext as SquareApplication).language.wrap(base))
+        super.attachBaseContext((base.applicationContext as SonifyApplication).language.wrap(base))
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +82,7 @@ class WebSdkActivity : ComponentActivity() {
                     finish()
                 }
             }
-            val hint = (application as SquareApplication).webApi.clientId.value.orEmpty()
+            val hint = (application as SonifyApplication).webApi.clientId.value.orEmpty()
             var clientId by rememberSaveable(backend) {
                 mutableStateOf(backend?.account?.clientId?.takeIf { it.isNotBlank() } ?: hint)
             }
@@ -173,7 +173,7 @@ class WebSdkActivity : ComponentActivity() {
                 detail = DASHBOARD_URL.removePrefix("https://"),
                 icon = PhosphorIcons.Regular.ArrowUpRight,
                 onClick = {
-                    dev.lelonio.square.ui.onboarding.openOrCopy(uriHandler, clipboard, context, DASHBOARD_URL)
+                    dev.nkosanamahungela.sonify.ui.onboarding.openOrCopy(uriHandler, clipboard, context, DASHBOARD_URL)
                 },
                 modifier = Modifier.padding(top = 18.dp),
             )

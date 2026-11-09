@@ -1,8 +1,8 @@
-package dev.lelonio.square.playback.websdk
+package dev.nkosanamahungela.sonify.playback.websdk
 
 import android.content.Context
-import dev.lelonio.square.auth.SpotifyOAuth
-import dev.lelonio.square.auth.TokenStore
+import dev.nkosanamahungela.sonify.auth.SpotifyOAuth
+import dev.nkosanamahungela.sonify.auth.TokenStore
 
 /** App-owned OAuth credentials, separate from both the native engine and search. */
 internal class WebSdkAccount(context: Context) {

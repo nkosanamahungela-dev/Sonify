@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback.websdk
+package dev.nkosanamahungela.sonify.playback.websdk
 
 import android.content.Context
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -23,7 +23,7 @@ object WebSdkRecovery {
     private val stops = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
     val disconnected = stops.asSharedFlow()
     fun stopPlayback() { stops.tryEmit(Unit) }
-    fun isConfigured(context: Context) = (context.applicationContext as dev.lelonio.square.SquareApplication).spotifySdkAccount.configured
+    fun isConfigured(context: Context) = (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).spotifySdkAccount.configured
 
     private val use = MutableStateFlow(false)
 
@@ -36,13 +36,13 @@ object WebSdkRecovery {
 
     /** Read again after anything that can change either half of [inUse]. */
     fun refresh(context: Context) {
-        val app = context.applicationContext as dev.lelonio.square.SquareApplication
-        use.value = app.preferences.backend.value == dev.lelonio.square.backend.BackendId.SPOTIFY &&
-            dev.lelonio.square.backend.spotify.SpotifyWebPlayback.needed(app) && isConfigured(app)
+        val app = context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication
+        use.value = app.preferences.backend.value == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY &&
+            dev.nkosanamahungela.sonify.backend.spotify.SpotifyWebPlayback.needed(app) && isConfigured(app)
     }
 
     fun complete(context: Context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).spotifySdkAccount.enable()
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).spotifySdkAccount.enable()
         refresh(context)
         changes.tryEmit(Unit)
     }
