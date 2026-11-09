@@ -1,12 +1,12 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 import android.app.ActivityManager
 import android.content.Context
 import android.os.Build
 import androidx.annotation.StringRes
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.glass.GlassEffectConfig
-import dev.lelonio.square.ui.glass.GlassStyle
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.glass.GlassEffectConfig
+import dev.nkosanamahungela.sonify.ui.glass.GlassStyle
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -242,9 +242,9 @@ class GlassStore(private val context: Context) {
             puckColor = androidx.compose.ui.graphics.Color.White,
             puckOpacity = prefs.getFloat(KEY_PUCK, DEFAULT_PUCK_OPACITY),
             tintHue = if (prefs.getBoolean(KEY_TINT_SYSTEM, false)) {
-                systemHue() ?: dev.lelonio.square.ui.glass.NO_TINT
+                systemHue() ?: dev.nkosanamahungela.sonify.ui.glass.NO_TINT
             } else {
-                prefs.getFloat(KEY_TINT_HUE, dev.lelonio.square.ui.glass.NO_TINT)
+                prefs.getFloat(KEY_TINT_HUE, dev.nkosanamahungela.sonify.ui.glass.NO_TINT)
             },
             tintStrength = prefs.getFloat(KEY_TINT_STRENGTH, DEFAULT_TINT_STRENGTH),
         )

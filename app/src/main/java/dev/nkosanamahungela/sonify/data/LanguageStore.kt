@@ -1,4 +1,4 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 import android.content.Context
 import android.content.res.Configuration
@@ -75,7 +75,7 @@ class LanguageStore(context: Context) {
         val audio = app.getSystemService(android.media.AudioManager::class.java)
         val quiet = audio?.isMusicActive != true
         Thread {
-            runCatching { dev.lelonio.square.nativecore.NativeBridge.setLanguage(language, quiet) }
+            runCatching { dev.nkosanamahungela.sonify.nativecore.NativeBridge.setLanguage(language, quiet) }
                 .onFailure { android.util.Log.w("SquareLanguage", "language not passed on: ${it.message}") }
         }.start()
     }

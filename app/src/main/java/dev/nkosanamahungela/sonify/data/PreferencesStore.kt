@@ -1,4 +1,4 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 import android.content.Context
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -303,7 +303,7 @@ class PreferencesStore(context: Context) {
         _skipFade.value = value
         prefs.edit().putBoolean(KEY_SKIP_FADE, value).apply()
         runCatching {
-            dev.lelonio.square.nativecore.NativeBridge.setSkipFade(skipFadeMs())
+            dev.nkosanamahungela.sonify.nativecore.NativeBridge.setSkipFade(skipFadeMs())
         }
     }
 
@@ -319,7 +319,7 @@ class PreferencesStore(context: Context) {
         _trimSilence.value = value
         prefs.edit().putBoolean(KEY_TRIM_SILENCE, value).apply()
         runCatching {
-            dev.lelonio.square.nativecore.NativeBridge.setTrimSilence(value)
+            dev.nkosanamahungela.sonify.nativecore.NativeBridge.setTrimSilence(value)
         }
     }
 
@@ -338,14 +338,14 @@ class PreferencesStore(context: Context) {
     }
 
     private val _backend = MutableStateFlow(
-        runCatching { dev.lelonio.square.backend.BackendId.valueOf(prefs.getString(KEY_BACKEND, null) ?: "") }
-            .getOrDefault(dev.lelonio.square.backend.BackendId.SPOTIFY),
+        runCatching { dev.nkosanamahungela.sonify.backend.BackendId.valueOf(prefs.getString(KEY_BACKEND, null) ?: "") }
+            .getOrDefault(dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY),
     )
 
-    /** Which [dev.lelonio.square.backend.MusicBackend] the app plays through. */
-    val backend: StateFlow<dev.lelonio.square.backend.BackendId> = _backend.asStateFlow()
+    /** Which [dev.nkosanamahungela.sonify.backend.MusicBackend] the app plays through. */
+    val backend: StateFlow<dev.nkosanamahungela.sonify.backend.BackendId> = _backend.asStateFlow()
 
-    fun setBackend(value: dev.lelonio.square.backend.BackendId) {
+    fun setBackend(value: dev.nkosanamahungela.sonify.backend.BackendId) {
         _backend.value = value
         _backendChosen.value = true
         prefs.edit().putString(KEY_BACKEND, value.name).apply()

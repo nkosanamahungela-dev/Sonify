@@ -1,4 +1,4 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 import android.content.Context
 import java.io.File
@@ -44,6 +44,6 @@ object LocalFileBindings {
     /** Everything kept, to the engine: on every match, and when it starts. */
     fun push() {
         if (bindings.isEmpty()) return
-        runCatching { dev.lelonio.square.nativecore.NativeBridge.setLocalFiles(JSONObject(bindings.toMap()).toString()) }
+        runCatching { dev.nkosanamahungela.sonify.nativecore.NativeBridge.setLocalFiles(JSONObject(bindings.toMap()).toString()) }
     }
 }

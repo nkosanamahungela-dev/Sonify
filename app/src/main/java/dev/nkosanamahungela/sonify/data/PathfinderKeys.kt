@@ -1,4 +1,4 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
@@ -154,7 +154,7 @@ class PathfinderKeys(context: Context) {
         const val HASH_LENGTH = 64
 
         const val URL =
-            "https://raw.githubusercontent.com/${dev.lelonio.square.update.Updater.REPO}" +
+            "https://raw.githubusercontent.com/${dev.nkosanamahungela.sonify.update.Updater.REPO}" +
                 "/master/pathfinder.json"
 
         /** What was true when this version was built; see the note above. */

@@ -1,4 +1,4 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 import kotlinx.serialization.Serializable
 import java.time.Instant
