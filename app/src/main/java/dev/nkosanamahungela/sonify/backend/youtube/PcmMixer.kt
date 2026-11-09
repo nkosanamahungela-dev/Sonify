@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.youtube
+package dev.nkosanamahungela.sonify.backend.youtube
 
 import android.content.Context
 import android.media.AudioDeviceInfo

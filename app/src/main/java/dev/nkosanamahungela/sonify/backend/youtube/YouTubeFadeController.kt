@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.youtube
+package dev.nkosanamahungela.sonify.backend.youtube
 
 import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
@@ -6,7 +6,7 @@ import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
-import dev.lelonio.square.data.CrossfadeStore
+import dev.nkosanamahungela.sonify.data.CrossfadeStore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -127,7 +127,7 @@ class YouTubeFadeController(
         // No crossfade while a sleep timer waits for the end of this song: the
         // fade moved to the next song seconds early, the timer took that for
         // a skip, and the music never paused. The song now plays to its end.
-        if (dev.lelonio.square.playback.SleepTimer.atTrackEnd.value) return
+        if (dev.nkosanamahungela.sonify.playback.SleepTimer.atTrackEnd.value) return
         val fadeMs = crossfadeStore?.durationMs() ?: 0
         if (fadeMs <= 0) {
             if (preparedItem != null) cancelOverlap()

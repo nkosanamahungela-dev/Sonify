@@ -1,21 +1,21 @@
-package dev.lelonio.square.backend.youtube
+package dev.nkosanamahungela.sonify.backend.youtube
 
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
-import dev.lelonio.square.backend.BackendAuthState
-import dev.lelonio.square.backend.BackendId
-import dev.lelonio.square.backend.MusicBackend
-import dev.lelonio.square.backend.PlaybackHost
-import dev.lelonio.square.backend.SearchLabels
-import dev.lelonio.square.backend.lyrics.LrcLib
-import dev.lelonio.square.backend.lyrics.Lossless
-import dev.lelonio.square.backend.lyrics.LyricsOvh
-import dev.lelonio.square.data.CatalogPlaylist
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.data.Lyrics
-import dev.lelonio.square.data.SearchItem
-import dev.lelonio.square.data.SearchResults
-import dev.lelonio.square.download.DownloadExtras
+import dev.nkosanamahungela.sonify.backend.BackendAuthState
+import dev.nkosanamahungela.sonify.backend.BackendId
+import dev.nkosanamahungela.sonify.backend.MusicBackend
+import dev.nkosanamahungela.sonify.backend.PlaybackHost
+import dev.nkosanamahungela.sonify.backend.SearchLabels
+import dev.nkosanamahungela.sonify.backend.lyrics.LrcLib
+import dev.nkosanamahungela.sonify.backend.lyrics.Lossless
+import dev.nkosanamahungela.sonify.backend.lyrics.LyricsOvh
+import dev.nkosanamahungela.sonify.data.CatalogPlaylist
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.data.Lyrics
+import dev.nkosanamahungela.sonify.data.SearchItem
+import dev.nkosanamahungela.sonify.data.SearchResults
+import dev.nkosanamahungela.sonify.download.DownloadExtras
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.encodeToString
 import kotlinx.coroutines.Dispatchers
@@ -35,9 +35,9 @@ import com.metrolist.innertube.models.PlaylistItem
 import com.metrolist.innertube.models.SongItem
 import com.metrolist.innertube.models.YTItem
 import com.metrolist.innertube.pages.HomePage
-import dev.lelonio.square.backend.HomeChip
-import dev.lelonio.square.backend.HomeFeed
-import dev.lelonio.square.backend.HomeRow
+import dev.nkosanamahungela.sonify.backend.HomeChip
+import dev.nkosanamahungela.sonify.backend.HomeFeed
+import dev.nkosanamahungela.sonify.backend.HomeRow
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -495,7 +495,7 @@ class YouTubeBackend(private val account: YouTubeAccount) : MusicBackend {
             name.isNotEmpty() && name.lowercase() !in BYLINE_JOINERS && name.any { it.isLetterOrDigit() }
         }
         val credited = named.map { artist ->
-            dev.lelonio.square.data.CatalogArtist(
+            dev.nkosanamahungela.sonify.data.CatalogArtist(
                 name = artist.name.trim(),
                 uri = artist.id?.takeIf { it.isNotBlank() }?.let { "$ARTIST_PREFIX$it" },
             )
@@ -681,7 +681,7 @@ class YouTubeBackend(private val account: YouTubeAccount) : MusicBackend {
      * each shelf under its own heading — albums, singles, videos, performances,
      * the lists they are in, the artists their fans also play.
      */
-    suspend fun artistPage(uri: String): dev.lelonio.square.data.YouTubeArtistPage? = withContext(Dispatchers.IO) {
+    suspend fun artistPage(uri: String): dev.nkosanamahungela.sonify.data.YouTubeArtistPage? = withContext(Dispatchers.IO) {
         val id = publicArtistId(uri.removePrefix(ARTIST_PREFIX))
         val page = runCatching { YouTube.artist(id).getOrThrow() }
             .onFailure { android.util.Log.w(TAG, "artist $id", it) }
@@ -695,7 +695,7 @@ class YouTubeBackend(private val account: YouTubeAccount) : MusicBackend {
             val more = moreUriOf(section.moreEndpoint?.browseId)
             val songs = section.items.filterIsInstance<SongItem>()
             if (songs.size == section.items.size && songs.isNotEmpty()) {
-                return@mapNotNull dev.lelonio.square.data.ArtistShelf(
+                return@mapNotNull dev.nkosanamahungela.sonify.data.ArtistShelf(
                     title = section.title,
                     tracks = songs.map(::toVideoTrack),
                     moreUri = section.moreEndpoint?.browseId?.takeIf { it.startsWith("VL") }
@@ -713,10 +713,10 @@ class YouTubeBackend(private val account: YouTubeAccount) : MusicBackend {
                 )
             }
             items.takeIf { it.isNotEmpty() }?.let {
-                dev.lelonio.square.data.ArtistShelf(title = section.title, items = it)
+                dev.nkosanamahungela.sonify.data.ArtistShelf(title = section.title, items = it)
             }
         }
-        dev.lelonio.square.data.YouTubeArtistPage(
+        dev.nkosanamahungela.sonify.data.YouTubeArtistPage(
             name = page.artist.title,
             artworkUrl = page.artist.thumbnail?.atSize(HERO_SIZE),
             description = page.description?.takeIf { it.isNotBlank() },
@@ -777,14 +777,14 @@ class YouTubeBackend(private val account: YouTubeAccount) : MusicBackend {
     ): Lyrics? {
         DownloadExtras.lyrics(uri)?.let { raw ->
             runCatching { lyricsJson.decodeFromString<Lyrics>(raw) }.getOrNull()
-                ?.takeIf { dev.lelonio.square.backend.lyrics.LyricsLibrary.shows(uri, it) }
+                ?.takeIf { dev.nkosanamahungela.sonify.backend.lyrics.LyricsLibrary.shows(uri, it) }
                 ?.let { downloaded ->
                 // As for Spotify's downloads: the sources asked whether one is
                 // timed to the word now, and which one this copy came from.
-                val library = dev.lelonio.square.backend.lyrics.LyricsLibrary
+                val library = dev.nkosanamahungela.sonify.backend.lyrics.LyricsLibrary
                 if (library.worthAskingAgain(uri, downloaded)) {
                     library.improveLater(
-                        dev.lelonio.square.backend.lyrics.LyricsQuery(uri, title, artist, durationMs),
+                        dev.nkosanamahungela.sonify.backend.lyrics.LyricsQuery(uri, title, artist, durationMs),
                         downloaded,
                     )
                 }
@@ -792,8 +792,8 @@ class YouTubeBackend(private val account: YouTubeAccount) : MusicBackend {
             }
         }
 
-        val found = dev.lelonio.square.backend.lyrics.LyricsLibrary.lyrics(
-            dev.lelonio.square.backend.lyrics.LyricsQuery(uri, title, artist, durationMs),
+        val found = dev.nkosanamahungela.sonify.backend.lyrics.LyricsLibrary.lyrics(
+            dev.nkosanamahungela.sonify.backend.lyrics.LyricsQuery(uri, title, artist, durationMs),
         )
 
         if (found != null) {

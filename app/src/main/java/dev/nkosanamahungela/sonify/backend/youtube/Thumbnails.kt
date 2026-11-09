@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.youtube
+package dev.nkosanamahungela.sonify.backend.youtube
 
 /**
  * Asks Google's image host for a cover at a usable size.

@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.youtube
+package dev.nkosanamahungela.sonify.backend.youtube
 
 import androidx.media3.common.Player
 import kotlinx.coroutines.CoroutineScope
@@ -11,7 +11,7 @@ import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.datasource.ResolvingDataSource
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
-import dev.lelonio.square.backend.PlaybackHost
+import dev.nkosanamahungela.sonify.backend.PlaybackHost
 import org.schabi.newpipe.extractor.NewPipe
 import org.schabi.newpipe.extractor.ServiceList
 import org.schabi.newpipe.extractor.localization.Localization
@@ -38,7 +38,7 @@ object YouTubePlayerFactory {
             .setPrioritizeTimeOverSizeThresholds(true)
             .build()
 
-        val crossfadeStore = (host.context.applicationContext as? dev.lelonio.square.SquareApplication)?.crossfade
+        val crossfadeStore = (host.context.applicationContext as? dev.nkosanamahungela.sonify.SonifyApplication)?.crossfade
 
         // One speaker for both players; see PcmMixer.
         val mixer = PcmMixer()
@@ -87,9 +87,9 @@ object YouTubePlayerFactory {
                         val causes = generateSequence<Throwable>(error) { it.cause }.toList()
                         val message = when {
                             causes.any { it is SignedInStreams.SignInRequired } ->
-                                dev.lelonio.square.R.string.youtube_sign_in_required
+                                dev.nkosanamahungela.sonify.R.string.youtube_sign_in_required
                             causes.any { it is SignedInStreams.Refused } ->
-                                dev.lelonio.square.R.string.youtube_signed_in_unplayable
+                                dev.nkosanamahungela.sonify.R.string.youtube_signed_in_unplayable
                             else -> {
                                 recover(exo, error)
                                 return
@@ -130,7 +130,7 @@ object YouTubePlayerFactory {
                 val fades = YouTubeFadeController(exo, crossfadeStore, mixer, mainSlot, tailSlot) {
                     buildPlayer(false, tailSlot)
                 }
-                val preferences = (host.context.applicationContext as? dev.lelonio.square.SquareApplication)
+                val preferences = (host.context.applicationContext as? dev.nkosanamahungela.sonify.SonifyApplication)
                     ?.preferences
                 // Each song found for a video in the queue renames its entry, so
                 // the player shows what it plays; see SongCounterparts.
@@ -252,7 +252,7 @@ object YouTubePlayerFactory {
             // Saved here as on the Spotify path (see LibrespotPlayer): never
             // saved for a YouTube song, the effects button went on reading the
             // speed of the last Spotify one, lit after "Original".
-            dev.lelonio.square.playback.AudioEffects.rememberSpeedAndPitch(parameters.speed, parameters.pitch)
+            dev.nkosanamahungela.sonify.playback.AudioEffects.rememberSpeedAndPitch(parameters.speed, parameters.pitch)
         }
 
         override fun onLoadError(
@@ -345,7 +345,7 @@ object YouTubePlayerFactory {
                 .setAudioProcessorChain(
                     // Then every stream at the mixer's rate, so a 44.1 kHz song
                     // and a 48 kHz one can be summed; see MixerRateProcessor.
-                    dev.lelonio.square.playback.BungeeProcessorChain(after = arrayOf(MixerRateProcessor())),
+                    dev.nkosanamahungela.sonify.playback.BungeeProcessorChain(after = arrayOf(MixerRateProcessor())),
                 )
                 .build()
         }
@@ -407,11 +407,11 @@ private class YouTubeStreamResolver(
         // A song kept on the phone plays from the phone. Not while the video is
         // showing and there is a network to fetch it over: the file is the
         // sound alone.
-        val kept = dev.lelonio.square.download.YouTubeDownloads.fileFor(context, base)
+        val kept = dev.nkosanamahungela.sonify.download.YouTubeDownloads.fileFor(context, base)
         // Never for half of a video: the picture is the official video's, and
         // its sound has to be that video's too or the two drift apart.
         if (kept != null && part == null &&
-            (!video || dev.lelonio.square.playback.OfflineMode.active.value)
+            (!video || dev.nkosanamahungela.sonify.playback.OfflineMode.active.value)
         ) {
             return dataSpec.withUri(android.net.Uri.fromFile(kept))
         }
@@ -493,11 +493,11 @@ private class YouTubeStreamResolver(
 
     /** Whether the lower rate is wanted now; see PreferencesStore.youtubeQuality. */
     private fun wantsLowRate(): Boolean {
-        val chosen = (context.applicationContext as? dev.lelonio.square.SquareApplication)
+        val chosen = (context.applicationContext as? dev.nkosanamahungela.sonify.SonifyApplication)
             ?.preferences?.youtubeQuality?.value
         return when (chosen) {
-            dev.lelonio.square.data.PreferencesStore.YouTubeQuality.LOW -> true
-            dev.lelonio.square.data.PreferencesStore.YouTubeQuality.HIGH -> false
+            dev.nkosanamahungela.sonify.data.PreferencesStore.YouTubeQuality.LOW -> true
+            dev.nkosanamahungela.sonify.data.PreferencesStore.YouTubeQuality.HIGH -> false
             else -> context.getSystemService(android.net.ConnectivityManager::class.java)
                 ?.isActiveNetworkMetered == true
         }

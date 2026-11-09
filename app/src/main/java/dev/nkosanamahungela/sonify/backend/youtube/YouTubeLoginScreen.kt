@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.youtube
+package dev.nkosanamahungela.sonify.backend.youtube
 
 import android.annotation.SuppressLint
 import android.webkit.CookieManager
@@ -30,7 +30,7 @@ import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.fill.LockSimple
 import com.adamglin.phosphoricons.regular.ShieldCheck
 import com.adamglin.phosphoricons.regular.X
-import dev.lelonio.square.R
+import dev.nkosanamahungela.sonify.R
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -146,7 +146,7 @@ fun YouTubeLoginScreen(account: YouTubeAccount, onDone: () -> Unit) {
                     // found Google already signed in and did the same.
                     if (!refused && "SAPISID=" in cookie) {
                         val name = YouTube.accounts().getOrNull()?.firstOrNull()?.name
-                        keep(name ?: context.getString(dev.lelonio.square.R.string.youtube_account_fallback_name))
+                        keep(name ?: context.getString(dev.nkosanamahungela.sonify.R.string.youtube_account_fallback_name))
                         return@onFailure
                     }
                     // Put back what was there, or the refused cookie went on
@@ -155,7 +155,7 @@ fun YouTubeLoginScreen(account: YouTubeAccount, onDone: () -> Unit) {
                     completing = false
                     android.widget.Toast.makeText(
                         context,
-                        context.getString(dev.lelonio.square.R.string.youtube_sign_in_failed),
+                        context.getString(dev.nkosanamahungela.sonify.R.string.youtube_sign_in_failed),
                         android.widget.Toast.LENGTH_LONG,
                     ).show()
                     close()

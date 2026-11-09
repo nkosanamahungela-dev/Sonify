@@ -1,6 +1,6 @@
-package dev.lelonio.square.backend.youtube
+package dev.nkosanamahungela.sonify.backend.youtube
 
-import dev.lelonio.square.backend.spotify.SpotifyCredits
+import dev.nkosanamahungela.sonify.backend.spotify.SpotifyCredits
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType

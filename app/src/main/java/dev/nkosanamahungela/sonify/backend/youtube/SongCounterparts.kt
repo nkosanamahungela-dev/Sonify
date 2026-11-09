@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.youtube
+package dev.nkosanamahungela.sonify.backend.youtube
 
 import com.metrolist.innertube.YouTube
 import com.metrolist.innertube.models.Album

@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.youtube
+package dev.nkosanamahungela.sonify.backend.youtube
 
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
@@ -77,7 +77,7 @@ class SkipFadePlayer(
     }
 
     private fun isQueued(item: MediaItem) =
-        item.mediaMetadata.extras?.getBoolean(dev.lelonio.square.ui.EXTRA_PLAY_NEXT) == true
+        item.mediaMetadata.extras?.getBoolean(dev.nkosanamahungela.sonify.ui.EXTRA_PLAY_NEXT) == true
 
     /** Just past the run of queued songs that follows the one playing. */
     private fun queueEnd(): Int {

@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.youtube
+package dev.nkosanamahungela.sonify.backend.youtube
 
 import androidx.media3.common.Player
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 /**
  * Whether YouTube tracks play as video rather than as sound alone.
  *
- * Process-wide, like [dev.lelonio.square.playback.AudioEffects], and for the
+ * Process-wide, like [dev.nkosanamahungela.sonify.playback.AudioEffects], and for the
  * same reason: the thing that reads it is the stream resolver, which runs inside
  * the playback service on ExoPlayer's loading thread, while the thing that sets
  * it is a button in the player. There is no session command that carries it.
