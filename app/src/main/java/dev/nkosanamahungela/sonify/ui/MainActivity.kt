@@ -70,8 +70,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Transparent bars; SquareTheme sets the icon colour, because it is the
-        // only place that knows whether the app is currently light or dark.
+        // Transparent system bars; the selected Sonify theme controls their icon colour.
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.auto(
                 android.graphics.Color.TRANSPARENT,
