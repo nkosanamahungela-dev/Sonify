@@ -177,7 +177,7 @@ class DownloadService : android.app.Service() {
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(getString(R.string.downloading))
+            .setContentTitle("${getString(R.string.app_name)} · ${getString(R.string.downloading)}")
             .setContentText(text)
             // Indeterminate while waiting: a bar frozen at 30% reads as a stuck
             // download, and the reason is in the text right beside it.
@@ -213,7 +213,7 @@ class DownloadService : android.app.Service() {
         private const val CHANNEL_ID = "downloads"
         private const val NOTIFICATION_ID = 42
         private const val ACTION_STOP = "dev.nkosanamahungela.sonify.action.STOP_DOWNLOADS"
-        private const val TAG = "SquareDownloads"
+        private const val TAG = "SonifyDownloads"
 
         /**
          * Starts working through whatever the store says is owed.
