@@ -2,7 +2,7 @@
  * Convx Project (C) 2026
  * Licensed under GPL-3.0 | See git history for contributors
  */
-package dev.lelonio.square.ui.glass.backdrop.backdrops
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

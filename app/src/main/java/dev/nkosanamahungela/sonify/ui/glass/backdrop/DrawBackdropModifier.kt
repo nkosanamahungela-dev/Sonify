@@ -7,7 +7,7 @@
  * scale for cheaper effect rendering. KMP expect/actual declarations were
  * merged into this single Android source set. Package renamed accordingly.
  */
-package dev.lelonio.square.ui.glass.backdrop
+package dev.nkosanamahungela.sonify.ui.glass.backdrop
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -43,15 +43,15 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.util.fastCoerceIn
 import androidx.compose.ui.unit.toSize
-import dev.lelonio.square.ui.glass.backdrop.backdrops.LayerBackdrop
-import dev.lelonio.square.ui.glass.backdrop.highlight.Highlight
-import dev.lelonio.square.ui.glass.backdrop.highlight.HighlightElement
-import dev.lelonio.square.ui.glass.backdrop.internal.ShapeProvider
-import dev.lelonio.square.ui.glass.backdrop.internal.recordLayer
-import dev.lelonio.square.ui.glass.backdrop.shadow.InnerShadow
-import dev.lelonio.square.ui.glass.backdrop.shadow.InnerShadowElement
-import dev.lelonio.square.ui.glass.backdrop.shadow.Shadow
-import dev.lelonio.square.ui.glass.backdrop.shadow.ShadowElement
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.LayerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.highlight.Highlight
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.highlight.HighlightElement
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.internal.ShapeProvider
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.internal.recordLayer
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.shadow.InnerShadow
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.shadow.InnerShadowElement
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.shadow.Shadow
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.shadow.ShadowElement
 
 private val DefaultHighlight = { Highlight.Default }
 private val DefaultShadow = { Shadow.Default }

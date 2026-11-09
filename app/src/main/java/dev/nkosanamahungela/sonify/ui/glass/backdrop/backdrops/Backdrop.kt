@@ -7,7 +7,7 @@
  * scale for cheaper effect rendering. KMP expect/actual declarations were
  * merged into this single Android source set. Package renamed accordingly.
  */
-package dev.lelonio.square.ui.glass.backdrop.backdrops
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.GraphicsLayerScope
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.unit.Density
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
 
 @Composable
 fun rememberBackdrop(
