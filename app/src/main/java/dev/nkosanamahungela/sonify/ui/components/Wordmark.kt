@@ -27,14 +27,10 @@ import dev.nkosanamahungela.sonify.ui.theme.Ink
 /**
  * The name, drawn rather than typeset.
  *
- * The icon is a square wave: one stroke width, right angles only, no curve
- * anywhere. No font shipped with Android says that — a bold sans still has
- * round bowls on S and Q and a diagonal on R — and pulling in a display face
- * for six letters costs more than the six letters do.
- *
- * So the letterforms are the same primitive as the icon: polylines on a 6×10
- * grid, orthogonal segments, square caps and joins. The Q's tail drops below
- * the baseline, which is the one thing that keeps it from reading as an O.
+ * The Sonify wordmark is drawn rather than typeset. Its six capital letters use
+ * the same compact, right-angled visual language as the app mark: polylines on
+ * a 6×10 grid, with square caps and joins. Drawing the letters keeps the
+ * branding consistent without shipping a separate display font.
  *
  * Sized by its height: the width follows from the grid, so callers give this a
  * height and let it measure itself.
