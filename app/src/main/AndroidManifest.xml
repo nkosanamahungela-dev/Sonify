@@ -54,6 +54,11 @@
         android:theme="@style/Theme.Sonify">
 
         <activity
+            android:name=".ui.CrashRecoveryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Sonify" />
+
+        <activity
             android:name=".playback.websdk.WebSdkActivity"
             android:exported="false"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden" />

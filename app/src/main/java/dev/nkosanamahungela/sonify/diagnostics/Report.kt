@@ -45,6 +45,8 @@ object Report {
         Thread.setDefaultUncaughtExceptionHandler { thread, error ->
             runCatching {
                 dir.mkdirs()
+                context.getSharedPreferences(CRASH_PREFS, Context.MODE_PRIVATE)
+                    .edit().putBoolean(PENDING_CRASH, true).commit()
                 val trace = android.util.Log.getStackTraceString(error)
                 File(dir, "crash-${System.currentTimeMillis()}.txt").writeText(
                     "${stamp(System.currentTimeMillis())} on ${thread.name}, " +
@@ -57,6 +59,14 @@ object Report {
             previous?.uncaughtException(thread, error)
         }
         record(context)
+    }
+
+    /** True once after a previous process died from an uncaught Kotlin crash. */
+    fun consumePendingCrash(context: Context): Boolean {
+        val prefs = context.getSharedPreferences(CRASH_PREFS, Context.MODE_PRIVATE)
+        val pending = prefs.getBoolean(PENDING_CRASH, false)
+        if (pending) prefs.edit().remove(PENDING_CRASH).commit()
+        return pending
     }
 
     /**
@@ -269,6 +279,8 @@ object Report {
         Regex("""\b31[a-z0-9]{26}\b""") to "<account>",
     )
 
+    private const val CRASH_PREFS = "sonify_crash_recovery"
+    private const val PENDING_CRASH = "pending_crash"
     private const val CRASH_DIR = "crashes"
     private const val REPORT_DIR = "reports"
     private const val CRASHES_KEPT = 3

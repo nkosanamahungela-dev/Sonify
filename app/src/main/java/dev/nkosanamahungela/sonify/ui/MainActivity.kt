@@ -70,6 +70,13 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // If the previous launch crashed, open the standalone recovery screen
+        // before constructing Compose or connecting to the playback service.
+        if (dev.nkosanamahungela.sonify.diagnostics.Report.consumePendingCrash(this)) {
+            startActivity(android.content.Intent(this, CrashRecoveryActivity::class.java))
+            finish()
+            return
+        }
         // Transparent system bars; the selected Sonify theme controls their icon colour.
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.auto(
