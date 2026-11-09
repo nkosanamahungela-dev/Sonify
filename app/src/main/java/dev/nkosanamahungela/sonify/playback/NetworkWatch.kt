@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -99,7 +99,7 @@ class NetworkWatch(context: Context, private val scope: CoroutineScope) {
         // At once, unlike offline below: a handshake under way is given up on
         // the moment it can only hang, and the downloads play (see engine.rs,
         // NETWORK_GONE).
-        runCatching { dev.lelonio.square.nativecore.NativeBridge.setNetworkGone(!connected) }
+        runCatching { dev.nkosanamahungela.sonify.nativecore.NativeBridge.setNetworkGone(!connected) }
         probeIfDoubtful()
         val returned = connected && lastConnected == false
         lastConnected = connected

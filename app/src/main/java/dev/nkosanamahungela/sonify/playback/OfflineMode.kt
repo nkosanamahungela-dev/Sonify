@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
  * Whether the app is playing from the phone rather than from Spotify.
  *
  * An object rather than something injected, for the same reason
- * [dev.lelonio.square.data.RemoteConnect] is one: there is a single engine
+ * [dev.nkosanamahungela.sonify.data.RemoteConnect] is one: there is a single engine
  * behind it and the answer is wanted from the service, the player and half the
  * screens.
  *

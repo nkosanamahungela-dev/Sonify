@@ -1,9 +1,9 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import dev.lelonio.square.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
 import org.json.JSONObject
 import java.util.concurrent.ConcurrentHashMap
 

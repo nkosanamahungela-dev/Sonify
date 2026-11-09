@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import android.media.audiofx.EnvironmentalReverb
 import androidx.media3.common.AuxEffectInfo

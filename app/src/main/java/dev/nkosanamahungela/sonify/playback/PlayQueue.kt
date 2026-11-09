@@ -1,11 +1,11 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import android.net.Uri
 import androidx.media3.common.MediaItem
-import dev.lelonio.square.ui.EXTRA_CONTEXT_LABEL
-import dev.lelonio.square.ui.EXTRA_CONTEXT_ORDERED
-import dev.lelonio.square.ui.EXTRA_CONTEXT_URI
-import dev.lelonio.square.ui.EXTRA_PLAY_NEXT
+import dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_LABEL
+import dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_ORDERED
+import dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_URI
+import dev.nkosanamahungela.sonify.ui.EXTRA_PLAY_NEXT
 
 /**
  * The queue the engine plays through.
@@ -34,7 +34,7 @@ class PlayQueue {
         /** The first artist's uri, when it is known; see EXTRA_ARTIST_URI. */
         val artistUri: String? = null,
         /** Every credited artist with a page of their own, in credit order. */
-        val artists: List<dev.lelonio.square.data.CatalogArtist> = emptyList(),
+        val artists: List<dev.nkosanamahungela.sonify.data.CatalogArtist> = emptyList(),
         /**
          * The record it is on, and its address where the source gave one.
          *
@@ -231,7 +231,7 @@ class PlayQueue {
     fun enableSmartShuffle(recommendations: List<Track>) {
         val excluded = items.mapTo(mutableSetOf()) { it.uri }
         val candidates = recommendations.filter { it.uri !in excluded }.distinctBy { it.uri }
-        val points = dev.lelonio.square.data.SmartShuffle.insertionPoints(items.map { it.queued }, currentIndex, candidates.size)
+        val points = dev.nkosanamahungela.sonify.data.SmartShuffle.insertionPoints(items.map { it.queued }, currentIndex, candidates.size)
         points.zip(candidates).asReversed().forEach { (at, track) ->
             add(at, listOf(track.copy(recommended = true, queued = false)))
         }
@@ -404,11 +404,11 @@ class PlayQueue {
     /** The two parallel lists put back together; see EXTRA_ARTIST_NAMES. */
     private fun creditedArtists(
         extras: android.os.Bundle?,
-    ): List<dev.lelonio.square.data.CatalogArtist> {
-        val names = extras?.getStringArrayList(dev.lelonio.square.ui.EXTRA_ARTIST_NAMES)
-        val uris = extras?.getStringArrayList(dev.lelonio.square.ui.EXTRA_ARTIST_URIS)
+    ): List<dev.nkosanamahungela.sonify.data.CatalogArtist> {
+        val names = extras?.getStringArrayList(dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_NAMES)
+        val uris = extras?.getStringArrayList(dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_URIS)
         if (names == null || uris == null) return emptyList()
-        return names.zip(uris) { name, uri -> dev.lelonio.square.data.CatalogArtist(name, uri) }
+        return names.zip(uris) { name, uri -> dev.nkosanamahungela.sonify.data.CatalogArtist(name, uri) }
     }
 
     /**
@@ -444,15 +444,15 @@ class PlayQueue {
             uri = uri,
             title = metadata.title?.toString().orEmpty(),
             artist = metadata.artist?.toString().orEmpty(),
-            artistUri = metadata.extras?.getString(dev.lelonio.square.ui.EXTRA_ARTIST_URI),
+            artistUri = metadata.extras?.getString(dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_URI),
             artists = creditedArtists(metadata.extras),
             album = metadata.albumTitle?.toString().orEmpty(),
-            albumUri = metadata.extras?.getString(dev.lelonio.square.ui.EXTRA_ALBUM_URI),
+            albumUri = metadata.extras?.getString(dev.nkosanamahungela.sonify.ui.EXTRA_ALBUM_URI),
             durationMs = metadata.durationMs ?: 0L,
             artworkUri = metadata.artworkUri,
             queued = metadata.extras?.getBoolean(EXTRA_PLAY_NEXT) == true,
-            explicit = metadata.extras?.getBoolean(dev.lelonio.square.ui.EXTRA_EXPLICIT) == true,
-            recommended = metadata.extras?.getBoolean(dev.lelonio.square.data.SmartShuffle.RECOMMENDED) == true,
+            explicit = metadata.extras?.getBoolean(dev.nkosanamahungela.sonify.ui.EXTRA_EXPLICIT) == true,
+            recommended = metadata.extras?.getBoolean(dev.nkosanamahungela.sonify.data.SmartShuffle.RECOMMENDED) == true,
         )
     }
 }

@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import android.content.Context
 import android.net.Uri
@@ -16,15 +16,15 @@ import androidx.media3.session.SessionResult
 import com.google.common.collect.ImmutableList
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
-import dev.lelonio.square.R
-import dev.lelonio.square.SquareApplication
-import dev.lelonio.square.data.Catalog
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.data.toCatalogTrack
-import dev.lelonio.square.nativecore.NativeBridge
-import dev.lelonio.square.ui.EXTRA_CONTEXT_LABEL
-import dev.lelonio.square.ui.EXTRA_CONTEXT_ORDERED
-import dev.lelonio.square.ui.EXTRA_CONTEXT_URI
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.SonifyApplication
+import dev.nkosanamahungela.sonify.data.Catalog
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.data.toCatalogTrack
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_LABEL
+import dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_ORDERED
+import dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_URI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -88,14 +88,14 @@ class MediaBrowseTree(
         resumption()?.let { Futures.immediateFuture(it) }
             ?: Futures.immediateFailedFuture(UnsupportedOperationException("nothing to resume"))
 
-    private val app = context.applicationContext as SquareApplication
+    private val app = context.applicationContext as SonifyApplication
 
     /**
      * Resources read in the app's own language.
      *
      * A service is not re-created when the language changes and below Android 13
      * its configuration is the phone's, not the app's — the same reason the
-     * engine asks [SquareApplication.language] rather than its own resources.
+     * engine asks [SonifyApplication.language] rather than its own resources.
      */
     private val strings: Context = app.language.wrap(app)
 
@@ -199,7 +199,7 @@ class MediaBrowseTree(
      */
     private fun likeable(uri: String?): Boolean = uri != null && (
         uri.startsWith("spotify:track:") ||
-            (uri.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.TRACK_PREFIX) && app.youtubeAccount.isSignedIn)
+            (uri.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.TRACK_PREFIX) && app.youtubeAccount.isSignedIn)
         )
 
     override fun onConnect(
@@ -209,7 +209,7 @@ class MediaBrowseTree(
         val commands = MediaSession.ConnectionResult.DEFAULT_SESSION_AND_LIBRARY_COMMANDS
             .buildUpon()
             .add(SessionCommand(CMD_SHUFFLE, Bundle.EMPTY))
-            .add(SessionCommand(dev.lelonio.square.data.SmartShuffle.COMMAND, Bundle.EMPTY))
+            .add(SessionCommand(dev.nkosanamahungela.sonify.data.SmartShuffle.COMMAND, Bundle.EMPTY))
             .add(SessionCommand(CMD_REPEAT, Bundle.EMPTY))
             .add(SessionCommand(CMD_RADIO, Bundle.EMPTY))
             .add(SessionCommand(CMD_LIKE, Bundle.EMPTY))
@@ -234,7 +234,7 @@ class MediaBrowseTree(
     ): ListenableFuture<SessionResult> {
         val player = session.player
         when (customCommand.customAction) {
-            dev.lelonio.square.data.SmartShuffle.COMMAND -> {
+            dev.nkosanamahungela.sonify.data.SmartShuffle.COMMAND -> {
                 return scope.future {
                     try {
                         if (player is LibrespotPlayer) player.cycleShuffle()
@@ -286,7 +286,7 @@ class MediaBrowseTree(
         val player = session.player
         val uri = player.currentMediaItem?.mediaId ?: return
         if (!likeable(uri)) return
-        val youtube = uri.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.TRACK_PREFIX)
+        val youtube = uri.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.TRACK_PREFIX)
 
         val nowLiked = app.likedStore.toggle(uri)
         val id = uri.substringAfterLast(':')
@@ -308,11 +308,11 @@ class MediaBrowseTree(
                 // YouTube Music keeps liked songs as a list of its own, and
                 // liking is adding to it, as the app's own plus does.
                 if (youtube) {
-                    val liked = dev.lelonio.square.backend.youtube.YouTubeBackend.LIKED_MUSIC_URI
+                    val liked = dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.LIKED_MUSIC_URI
                     if (nowLiked) app.youtubeBackend.addToPlaylist(liked, uri)
                     else app.youtubeBackend.removeFromPlaylist(liked, uri)
                 } else if (nowLiked) {
-                    app.api.saveToLibrary("spotify:track:$id", dev.lelonio.square.data.SpotifyApi.EMPTY_BODY)
+                    app.api.saveToLibrary("spotify:track:$id", dev.nkosanamahungela.sonify.data.SpotifyApi.EMPTY_BODY)
                 } else {
                     app.api.removeFromLibrary("spotify:track:$id")
                 }
@@ -347,12 +347,12 @@ class MediaBrowseTree(
                         artworkUrl = meta?.artworkUri?.toString(),
                     )
                     app.downloads.addLiked(track)
-                    dev.lelonio.square.download.DownloadService.start(app)
+                    dev.nkosanamahungela.sonify.download.DownloadService.start(app)
                 } else {
                     app.downloads.removeLiked(uri)
                     app.downloads.pruneOrphans().forEach { orphanUri ->
-                        runCatching { dev.lelonio.square.download.YouTubeDownloads.forget(app, orphanUri) }
-                        dev.lelonio.square.download.DownloadExtras.forget(orphanUri)
+                        runCatching { dev.nkosanamahungela.sonify.download.YouTubeDownloads.forget(app, orphanUri) }
+                        dev.nkosanamahungela.sonify.download.DownloadExtras.forget(orphanUri)
                     }
                 }
             }
@@ -369,8 +369,8 @@ class MediaBrowseTree(
     private fun startRadio(session: MediaSession) {
         val player = session.player
         val uri = player.currentMediaItem?.mediaId ?: return
-        val youtube = uri.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.TRACK_PREFIX) ||
-            uri.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.VIDEO_PREFIX)
+        val youtube = uri.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.TRACK_PREFIX) ||
+            uri.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.VIDEO_PREFIX)
         if (!uri.startsWith("spotify:track:") && !youtube) return
 
         scope.launch {
@@ -710,10 +710,10 @@ class MediaBrowseTree(
         const val TAG = "MediaBrowseTree"
 
         /** The two modes the car cannot reach through the standard transport. */
-        const val CMD_SHUFFLE = "dev.lelonio.square.SHUFFLE"
-        const val CMD_REPEAT = "dev.lelonio.square.REPEAT"
-        const val CMD_RADIO = "dev.lelonio.square.RADIO"
-        const val CMD_LIKE = "dev.lelonio.square.LIKE"
+        const val CMD_SHUFFLE = "dev.nkosanamahungela.sonify.SHUFFLE"
+        const val CMD_REPEAT = "dev.nkosanamahungela.sonify.REPEAT"
+        const val CMD_RADIO = "dev.nkosanamahungela.sonify.RADIO"
+        const val CMD_LIKE = "dev.nkosanamahungela.sonify.LIKE"
 
         const val ID_ROOT = "sq/root"
         const val ID_PLAYLISTS = "sq/playlists"

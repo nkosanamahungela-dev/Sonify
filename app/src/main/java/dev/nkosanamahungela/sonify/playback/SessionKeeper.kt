@@ -1,6 +1,6 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
-import dev.lelonio.square.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

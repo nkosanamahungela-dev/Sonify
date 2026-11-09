@@ -1,17 +1,17 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import android.content.Intent
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.session.MediaLibraryService
 import androidx.media3.session.MediaSession
-import dev.lelonio.square.auth.SpotifyOAuth
-import dev.lelonio.square.auth.TokenStore
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.data.PlaybackStore
-import dev.lelonio.square.backend.spotify.licenseUrl
-import dev.lelonio.square.backend.spotify.toMpd
-import dev.lelonio.square.data.SavedPlayback
-import dev.lelonio.square.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.auth.SpotifyOAuth
+import dev.nkosanamahungela.sonify.auth.TokenStore
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.data.PlaybackStore
+import dev.nkosanamahungela.sonify.backend.spotify.licenseUrl
+import dev.nkosanamahungela.sonify.backend.spotify.toMpd
+import dev.nkosanamahungela.sonify.data.SavedPlayback
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -32,10 +32,10 @@ import kotlinx.coroutines.withContext
  */
 @UnstableApi
 /** Set on the intent the notification fires: open straight into the player. */
-const val EXTRA_OPEN_PLAYER = "dev.lelonio.square.OPEN_PLAYER"
+const val EXTRA_OPEN_PLAYER = "dev.nkosanamahungela.sonify.OPEN_PLAYER"
 
 /** Its action; see the note where the PendingIntent is built. */
-const val ACTION_OPEN_PLAYER = "dev.lelonio.square.action.OPEN_PLAYER"
+const val ACTION_OPEN_PLAYER = "dev.nkosanamahungela.sonify.action.OPEN_PLAYER"
 
 class PlaybackService : MediaLibraryService() {
 
@@ -45,7 +45,7 @@ class PlaybackService : MediaLibraryService() {
     private var session: MediaLibrarySession? = null
     private var engineStarted = false
 
-    private lateinit var container: dev.lelonio.square.SquareApplication
+    private lateinit var container: dev.nkosanamahungela.sonify.SonifyApplication
     private lateinit var browseTree: MediaBrowseTree
 
     private fun redrawButtons() {
@@ -186,12 +186,12 @@ class PlaybackService : MediaLibraryService() {
         if (reason != androidx.media3.common.Player.MEDIA_ITEM_TRANSITION_REASON_SEEK) return
         if (previous < 0 || kotlin.math.abs(index - previous) == 1) return
         val item = mediaItem ?: return
-        if (!dev.lelonio.square.backend.spotify.SpotifyDj.isDj(contextOf(item))) return
+        if (!dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.isDj(contextOf(item))) return
         NativeBridge.djJumped(item.mediaId)
     }
 
     private fun contextOf(item: androidx.media3.common.MediaItem?): String? =
-        item?.mediaMetadata?.extras?.getString(dev.lelonio.square.ui.EXTRA_CONTEXT_URI)
+        item?.mediaMetadata?.extras?.getString(dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_URI)
 
     private var djInFlight = false
 
@@ -200,18 +200,18 @@ class PlaybackService : MediaLibraryService() {
      * way autoplay keeps any other queue going. The DJ never runs out.
      */
     private fun maybeContinueDj(current: androidx.media3.common.MediaItem): Boolean {
-        if (!dev.lelonio.square.backend.spotify.SpotifyDj.isDj(contextOf(current))) return false
-        if (!dev.lelonio.square.backend.spotify.SpotifyDj.enabled) return true
+        if (!dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.isDj(contextOf(current))) return false
+        if (!dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.enabled) return true
         val remaining = player.mediaItemCount - player.currentMediaItemIndex - 1
         if (remaining > 2 || djInFlight) return true
         djInFlight = true
         scope.launch(Dispatchers.IO) {
             try {
-                val more = dev.lelonio.square.backend.spotify.SpotifyDj.more(this@PlaybackService)
+                val more = dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.more(this@PlaybackService)
                 withContext(Dispatchers.Main) {
                     val queued = (0 until player.mediaItemCount).map { player.getMediaItemAt(it).mediaId }.toSet()
                     val fresh = more.filter { it.uri !in queued }
-                    dev.lelonio.square.backend.spotify.SpotifyDj.prepare(this@PlaybackService, fresh)
+                    dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.prepare(this@PlaybackService, fresh)
                     val items = fresh.map { track ->
                         androidx.media3.common.MediaItem.Builder()
                             .setMediaId(track.uri)
@@ -278,8 +278,8 @@ class PlaybackService : MediaLibraryService() {
             try {
                 val id = currentUri.substringAfterLast(':')
                 val stationUri = "spotify:station:track:$id"
-                val stationTrackUris = dev.lelonio.square.data.Catalog.contextTrackUris(stationUri)
-                val catalogTracks = dev.lelonio.square.data.Catalog.tracks(stationTrackUris)
+                val stationTrackUris = dev.nkosanamahungela.sonify.data.Catalog.contextTrackUris(stationUri)
+                val catalogTracks = dev.nkosanamahungela.sonify.data.Catalog.tracks(stationTrackUris)
                 withContext(Dispatchers.Main) {
                     val currentUris = (0 until player.mediaItemCount)
                         .mapNotNull { player.getMediaItemAt(it).mediaId }
@@ -298,7 +298,7 @@ class PlaybackService : MediaLibraryService() {
                                         .setDurationMs(track.durationMs.takeIf { it > 0 })
                                         .setArtworkUri(
                                             track.artworkUrl?.let { url ->
-                                                dev.lelonio.square.download.DownloadExtras.fileOf(url, "art")
+                                                dev.nkosanamahungela.sonify.download.DownloadExtras.fileOf(url, "art")
                                                     ?.let(android.net.Uri::fromFile)
                                                     ?: android.net.Uri.parse(url)
                                             }
@@ -346,11 +346,11 @@ class PlaybackService : MediaLibraryService() {
     private val audioOutput get() = container.spotifyBackend.audioOutput
 
     private lateinit var playbackStore: PlaybackStore
-    private lateinit var quality: dev.lelonio.square.data.QualityStore
-    private lateinit var crossfade: dev.lelonio.square.data.CrossfadeStore
+    private lateinit var quality: dev.nkosanamahungela.sonify.data.QualityStore
+    private lateinit var crossfade: dev.nkosanamahungela.sonify.data.CrossfadeStore
     private var saveJob: Job? = null
 
-    private val playbackHost = object : dev.lelonio.square.backend.PlaybackHost {
+    private val playbackHost = object : dev.nkosanamahungela.sonify.backend.PlaybackHost {
         override val context get() = this@PlaybackService
         override val looper get() = mainLooper
     }
@@ -361,7 +361,7 @@ class PlaybackService : MediaLibraryService() {
         // SessionKeeper.engine.
         SessionKeeper.engine = SessionKeeper.Engine(running = { engineStarted }, start = { connectEngine() })
         playbackStore = PlaybackStore(this)
-        container = application as dev.lelonio.square.SquareApplication
+        container = application as dev.nkosanamahungela.sonify.SonifyApplication
         // The container's own store, not one of this service's making. Two
         // instances mean two refresh locks, so the screen and the engine could
         // refresh the same token at once: Spotify retires it as it issues the
@@ -390,7 +390,7 @@ class PlaybackService : MediaLibraryService() {
                     // intent is never delivered — the app came up on whatever
                     // screen it was last on and onNewIntent never fired. A
                     // custom action is delivered.
-                    android.content.Intent(this, dev.lelonio.square.ui.MainActivity::class.java)
+                    android.content.Intent(this, dev.nkosanamahungela.sonify.ui.MainActivity::class.java)
                         .setAction(ACTION_OPEN_PLAYER)
                         .putExtra(EXTRA_OPEN_PLAYER, true),
                     android.app.PendingIntent.FLAG_IMMUTABLE or
@@ -405,7 +405,7 @@ class PlaybackService : MediaLibraryService() {
         setMediaNotificationProvider(
             androidx.media3.session.DefaultMediaNotificationProvider.Builder(this)
                 .build()
-                .apply { setSmallIcon(dev.lelonio.square.R.drawable.ic_notification) },
+                .apply { setSmallIcon(dev.nkosanamahungela.sonify.R.drawable.ic_notification) },
         )
 
         // The notification and car buttons carry their own state (shuffle, repeat,
@@ -420,13 +420,13 @@ class PlaybackService : MediaLibraryService() {
 
         // Only an explicit account-level refusal offers SDK recovery.
         scope.launch {
-            dev.lelonio.square.backend.spotify.SpotifyWebPlayback.accountRefused.collect {
+            dev.nkosanamahungela.sonify.backend.spotify.SpotifyWebPlayback.accountRefused.collect {
                 runCatching { moveToWebPlayback() }
                     .onFailure { android.util.Log.w(TAG, "SDK recovery failed", it) }
             }
         }
         scope.launch {
-            dev.lelonio.square.playback.websdk.WebSdkRecovery.configured.collect {
+            dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.configured.collect {
                 if (webPlaybackNeeded()) {
                     if (playerKind == PlayerKind.SPOTIFY_WEB) { player.prepare(); player.play() }
                     else moveToWebPlayback()
@@ -526,7 +526,7 @@ class PlaybackService : MediaLibraryService() {
                     else -> -1L
                 }
             }.collect { value ->
-                runCatching { dev.lelonio.square.nativecore.NativeBridge.setSleepTimer(value) }
+                runCatching { dev.nkosanamahungela.sonify.nativecore.NativeBridge.setSleepTimer(value) }
             }
         }
 
@@ -561,7 +561,7 @@ class PlaybackService : MediaLibraryService() {
         // session plays rather than running beside it, so this is a swap of the
         // player like changing source — see SpotifyVideoMode.
         scope.launch {
-            dev.lelonio.square.backend.spotify.SpotifyVideoMode.requests.collect { request ->
+            dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.requests.collect { request ->
                 runCatching { playVideoRequest(request) }
                     .onFailure { android.util.Log.w(TAG, "video: $it") }
             }
@@ -595,7 +595,7 @@ class PlaybackService : MediaLibraryService() {
         scope.launch {
             container.effectQuality.quality.collect { quality ->
                 audioOutput.setLightEffects(
-                    quality == dev.lelonio.square.data.EffectQuality.Light,
+                    quality == dev.nkosanamahungela.sonify.data.EffectQuality.Light,
                 )
             }
         }
@@ -614,7 +614,7 @@ class PlaybackService : MediaLibraryService() {
         // nothing after it. Watched here rather than in the UI because the
         // queue belongs to the service, and this has to work with no screen on.
         scope.launch {
-            dev.lelonio.square.data.RemoteConnect.here.collect(::adoptRemoteQueue)
+            dev.nkosanamahungela.sonify.data.RemoteConnect.here.collect(::adoptRemoteQueue)
         }
 
         // Playback on another device, mirrored into this one's player.
@@ -623,7 +623,7 @@ class PlaybackService : MediaLibraryService() {
         // controller read the player and nothing else, so without this they
         // showed a stopped app while the account was playing in the next room.
         scope.launch {
-            dev.lelonio.square.data.RemoteConnect.playback.collect { elsewhere ->
+            dev.nkosanamahungela.sonify.data.RemoteConnect.playback.collect { elsewhere ->
                 librespot?.showRemote(elsewhere?.let { describeRemote(it) })
             }
         }
@@ -685,13 +685,13 @@ class PlaybackService : MediaLibraryService() {
      * stops working on those days would be a video nobody trusts.
      */
     private suspend fun playVideoRequest(
-        request: dev.lelonio.square.backend.spotify.SpotifyVideoMode.Request,
+        request: dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.Request,
     ) {
         when (request) {
-            is dev.lelonio.square.backend.spotify.SpotifyVideoMode.Request.Watch -> {
+            is dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.Request.Watch -> {
                 val token = withContext(Dispatchers.IO) { NativeBridge.accessToken() }
                     ?: error("the engine has no token")
-                val manifest = dev.lelonio.square.backend.spotify.SpotifyVideo
+                val manifest = dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideo
                     .manifest(request.fileId, token)
                 val file = withContext(Dispatchers.IO) {
                     cacheDir.resolve("video-${request.fileId}.mpd")
@@ -731,21 +731,21 @@ class PlaybackService : MediaLibraryService() {
                 player.prepare()
                 player.seekTo(request.positionMs)
                 player.play()
-                dev.lelonio.square.backend.spotify.SpotifyVideoMode.setManifest(manifest)
-                dev.lelonio.square.backend.spotify.SpotifyVideoMode.setEnabled(true)
+                dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.setManifest(manifest)
+                dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.setEnabled(true)
             }
 
-            is dev.lelonio.square.backend.spotify.SpotifyVideoMode.Request.Skip -> {
-                dev.lelonio.square.backend.spotify.SpotifyVideoMode.setEnabled(false)
-                dev.lelonio.square.backend.spotify.SpotifyVideoMode.setManifest(null)
+            is dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.Request.Skip -> {
+                dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.setEnabled(false)
+                dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.setManifest(null)
                 swapPlayer(kindFor(container.preferences.backend.value), restore = true)
                 if (request.forward) player.seekToNext() else player.seekToPrevious()
                 player.play()
             }
 
-            is dev.lelonio.square.backend.spotify.SpotifyVideoMode.Request.Listen -> {
-                dev.lelonio.square.backend.spotify.SpotifyVideoMode.setEnabled(false)
-                dev.lelonio.square.backend.spotify.SpotifyVideoMode.setManifest(null)
+            is dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.Request.Listen -> {
+                dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.setEnabled(false)
+                dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.setManifest(null)
                 swapPlayer(kindFor(container.preferences.backend.value), restore = true)
                 player.seekTo(request.positionMs)
                 player.play()
@@ -777,9 +777,9 @@ class PlaybackService : MediaLibraryService() {
      * local files therefore does not survive a restart; it is put back the
      * moment one is played again.
      */
-    private fun kindFor(backendId: dev.lelonio.square.backend.BackendId) = when (backendId) {
-        dev.lelonio.square.backend.BackendId.SPOTIFY -> PlayerKind.SPOTIFY
-        dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC -> PlayerKind.YOUTUBE
+    private fun kindFor(backendId: dev.nkosanamahungela.sonify.backend.BackendId) = when (backendId) {
+        dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY -> PlayerKind.SPOTIFY
+        dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC -> PlayerKind.YOUTUBE
     }
 
     /**
@@ -793,17 +793,17 @@ class PlaybackService : MediaLibraryService() {
      */
     suspend fun ensurePlayerFor(firstUri: String?) {
         pendingWebPlayback = null
-        val wanted = if (firstUri != null && dev.lelonio.square.data.LocalLibrary.isLocal(firstUri)) {
+        val wanted = if (firstUri != null && dev.nkosanamahungela.sonify.data.LocalLibrary.isLocal(firstUri)) {
             PlayerKind.LOCAL
         } else {
             kindFor(container.preferences.backend.value).let { kind ->
                 // An account Spotify refuses its keys goes on playing the web
                 // player's way, once the engine is up to lend it a token.
                 if (kind == PlayerKind.SPOTIFY && webPlaybackNeeded()) {
-                    if (dev.lelonio.square.playback.websdk.WebSdkRecovery.isConfigured(this)) {
+                    if (dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.isConfigured(this)) {
                         PlayerKind.SPOTIFY_WEB
                     } else {
-                        dev.lelonio.square.playback.websdk.WebSdkRecovery.requestSetup()
+                        dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.requestSetup()
                         kind
                     }
                 } else kind
@@ -819,8 +819,8 @@ class PlaybackService : MediaLibraryService() {
         // — a black rectangle over a song that was playing perfectly well, with
         // the switch back to audio pointing at a video that no longer existed.
         if (playerKind == PlayerKind.VIDEO) {
-            dev.lelonio.square.backend.spotify.SpotifyVideoMode.setEnabled(false)
-            dev.lelonio.square.backend.spotify.SpotifyVideoMode.setManifest(null)
+            dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.setEnabled(false)
+            dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.setManifest(null)
         }
         // Nothing to put back: the queue that caused this swap is about to be
         // set on the new player by the session itself.
@@ -828,12 +828,12 @@ class PlaybackService : MediaLibraryService() {
     }
 
     private fun buildPlayer(
-        backendId: dev.lelonio.square.backend.BackendId,
+        backendId: dev.nkosanamahungela.sonify.backend.BackendId,
     ): androidx.media3.common.Player = buildPlayer(kindFor(backendId))
 
     private fun webPlaybackNeeded(): Boolean =
-        container.preferences.backend.value == dev.lelonio.square.backend.BackendId.SPOTIFY &&
-            dev.lelonio.square.backend.spotify.SpotifyWebPlayback.needed(this)
+        container.preferences.backend.value == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY &&
+            dev.nkosanamahungela.sonify.backend.spotify.SpotifyWebPlayback.needed(this)
 
     private data class PendingWebPlayback(
         val items: List<androidx.media3.common.MediaItem>,
@@ -855,9 +855,9 @@ class PlaybackService : MediaLibraryService() {
                 engine.currentMediaItemIndex.coerceIn(0, items.lastIndex),
                 engine.currentPosition.coerceAtLeast(0), engine.shuffleModeEnabled, engine.repeatMode)
         }
-        if (!dev.lelonio.square.playback.websdk.WebSdkRecovery.isConfigured(this)) {
+        if (!dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.isConfigured(this)) {
             engine.pause()
-            dev.lelonio.square.playback.websdk.WebSdkRecovery.requestSetup()
+            dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.requestSetup()
             return
         }
         val pending = pendingWebPlayback ?: return
@@ -925,7 +925,7 @@ class PlaybackService : MediaLibraryService() {
                             scope.launch {
                                 runCatching {
                                     playVideoRequest(
-                                        dev.lelonio.square.backend.spotify.SpotifyVideoMode
+                                        dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode
                                             .Request.Skip(forward = true),
                                     )
                                 }.onFailure {
@@ -937,21 +937,21 @@ class PlaybackService : MediaLibraryService() {
                 }
         }
 
-        PlayerKind.SPOTIFY -> buildBackendPlayer(dev.lelonio.square.backend.BackendId.SPOTIFY)
-        PlayerKind.YOUTUBE -> buildBackendPlayer(dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC)
+        PlayerKind.SPOTIFY -> buildBackendPlayer(dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY)
+        PlayerKind.YOUTUBE -> buildBackendPlayer(dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC)
 
         // Keep the engine parked for catalogue access; only the SDK owns playback.
         PlayerKind.SPOTIFY_WEB -> {
             librespot = null
             playerKind = kind
-            dev.lelonio.square.playback.websdk.WebSdkPlayer(this, playbackHost.looper)
+            dev.nkosanamahungela.sonify.playback.websdk.WebSdkPlayer(this, playbackHost.looper)
         }
     }
 
     private fun buildBackendPlayer(
-        backendId: dev.lelonio.square.backend.BackendId,
+        backendId: dev.nkosanamahungela.sonify.backend.BackendId,
     ): androidx.media3.common.Player = when (backendId) {
-        dev.lelonio.square.backend.BackendId.SPOTIFY -> {
+        dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY -> {
             val built = container.spotifyBackend.createPlayer(playbackHost) as LibrespotPlayer
             librespot = built
 
@@ -977,7 +977,7 @@ class PlaybackService : MediaLibraryService() {
             built
         }
 
-        dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC -> {
+        dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC -> {
             librespot = null
             container.youtubeBackend.createPlayer(playbackHost).also { built ->
                 built.playbackParameters = androidx.media3.common.PlaybackParameters(
@@ -995,7 +995,7 @@ class PlaybackService : MediaLibraryService() {
      * every controller bound to it, and the media session API exists precisely
      * so the player behind it can be replaced.
      */
-    private fun switchBackend(backendId: dev.lelonio.square.backend.BackendId) = scope.launch {
+    private fun switchBackend(backendId: dev.nkosanamahungela.sonify.backend.BackendId) = scope.launch {
         swapPlayer(kindFor(backendId))
     }
 
@@ -1100,7 +1100,7 @@ class PlaybackService : MediaLibraryService() {
         }
         runCatching { player.release() }
         // Video belongs to the source that was playing it.
-        dev.lelonio.square.backend.youtube.YouTubeVideoMode.reset()
+        dev.nkosanamahungela.sonify.backend.youtube.YouTubeVideoMode.reset()
 
         player = buildPlayer(kind)
         player.addListener(buttonsListener)
@@ -1153,7 +1153,7 @@ class PlaybackService : MediaLibraryService() {
     private fun restoreLocalQueueIfLast() {
         val saved = runCatching { playbackStore.load() }.getOrNull() ?: return
         val first = saved.tracks.firstOrNull()?.uri ?: return
-        if (!dev.lelonio.square.data.LocalLibrary.isLocal(first)) return
+        if (!dev.nkosanamahungela.sonify.data.LocalLibrary.isLocal(first)) return
         scope.launch {
             // Not if something has started in the meantime.
             //
@@ -1181,24 +1181,24 @@ class PlaybackService : MediaLibraryService() {
      * too. One catalogue read for all of them; a local file is described by its
      * own URI, which spells out its tags.
      */
-    private suspend fun describeRemoteNext(playback: dev.lelonio.square.data.RemotePlayback) {
+    private suspend fun describeRemoteNext(playback: dev.nkosanamahungela.sonify.data.RemotePlayback) {
         val unnamed = playback.next.filter { it.title.isEmpty() && it.uri !in askedNext }
         if (unnamed.isEmpty()) return
         // Bounded: a day of following another device's queue is a lot of
         // tracks, and an answer already given is kept by RemoteConnect.
         if (askedNext.size > ASKED_NEXT_LIMIT) askedNext.clear()
-        val local = unnamed.filter { dev.lelonio.square.data.LocalLibrary.isSpotifyLocal(it.uri) }.map { track ->
-            val parts = track.uri.removePrefix(dev.lelonio.square.data.LocalLibrary.SPOTIFY_PREFIX).split(':')
+        val local = unnamed.filter { dev.nkosanamahungela.sonify.data.LocalLibrary.isSpotifyLocal(it.uri) }.map { track ->
+            val parts = track.uri.removePrefix(dev.nkosanamahungela.sonify.data.LocalLibrary.SPOTIFY_PREFIX).split(':')
                 .map { runCatching { java.net.URLDecoder.decode(it, "UTF-8") }.getOrDefault(it) }
             track.copy(artist = parts.getOrNull(0).orEmpty(), title = parts.getOrNull(2).orEmpty())
         }
         val catalogue = unnamed.map { it.uri }.filter { it.startsWith("spotify:track:") }
         val read = if (catalogue.isEmpty()) emptyList() else {
-            runCatching { dev.lelonio.square.data.Catalog.tracks(catalogue) }
+            runCatching { dev.nkosanamahungela.sonify.data.Catalog.tracks(catalogue) }
                 .onFailure { android.util.Log.w(TAG, "cannot read what comes next there: $it") }
                 .getOrDefault(emptyList())
                 .map { track ->
-                    dev.lelonio.square.data.RemoteTrack(track.uri, track.name, track.artist, track.artworkUrl.orEmpty())
+                    dev.nkosanamahungela.sonify.data.RemoteTrack(track.uri, track.name, track.artist, track.artworkUrl.orEmpty())
                 }
         }
         // Only what was answered counts as asked: a read that failed on a
@@ -1206,7 +1206,7 @@ class PlaybackService : MediaLibraryService() {
         // leaving those tracks without a name for the rest of the session.
         askedNext += local.map { it.uri } + read.map { it.uri }
         if (local.isNotEmpty() || read.isNotEmpty()) {
-            dev.lelonio.square.data.RemoteConnect.describeNext(local + read)
+            dev.nkosanamahungela.sonify.data.RemoteConnect.describeNext(local + read)
         }
     }
 
@@ -1219,8 +1219,8 @@ class PlaybackService : MediaLibraryService() {
      * always there, and this app can read a track from a uri, so it does.
      */
     private suspend fun describeRemote(
-        playback: dev.lelonio.square.data.RemotePlayback,
-    ): dev.lelonio.square.data.RemotePlayback {
+        playback: dev.nkosanamahungela.sonify.data.RemotePlayback,
+    ): dev.nkosanamahungela.sonify.data.RemotePlayback {
         describeRemoteNext(playback)
         if (playback.title.isNotEmpty() && playback.artist.isNotEmpty()) return playback
         val track = runCatching { container.activeBackend.tracksOf(playback.uri).firstOrNull() }
@@ -1236,7 +1236,7 @@ class PlaybackService : MediaLibraryService() {
         // Kept there rather than here: every part of the app reads that state,
         // and the next cluster update rebuilds it from what the other device
         // published, which is what left this out in the first place.
-        dev.lelonio.square.data.RemoteConnect.describe(filled)
+        dev.nkosanamahungela.sonify.data.RemoteConnect.describe(filled)
         return filled
     }
 
@@ -1250,7 +1250,7 @@ class PlaybackService : MediaLibraryService() {
      * puts it in the queue first, and re-resolving the context then would throw
      * away the order the listener is looking at.
      */
-    private suspend fun adoptRemoteQueue(here: dev.lelonio.square.data.RemotePlayback?) {
+    private suspend fun adoptRemoteQueue(here: dev.nkosanamahungela.sonify.data.RemotePlayback?) {
         val engine = librespot ?: return
         if (here == null || here.uri.isEmpty()) return
         if (queue?.items.orEmpty().any { it.uri == here.uri }) return
@@ -1337,7 +1337,7 @@ class PlaybackService : MediaLibraryService() {
                 for (i in 0 until (array?.length() ?: 0)) add(array!!.getString(i))
             }
             tracks = withContext(Dispatchers.IO) {
-                runCatching { dev.lelonio.square.data.Catalog.tracks(queued) }
+                runCatching { dev.nkosanamahungela.sonify.data.Catalog.tracks(queued) }
                     .onFailure { android.util.Log.w(TAG, "cannot read the engine's queue: $it") }
                     .getOrDefault(emptyList())
             }
@@ -1477,7 +1477,7 @@ class PlaybackService : MediaLibraryService() {
             // device logging in for the first time: refusing to start without
             // one would throw away a session that works because the OAuth half
             // of it, which playback does not use, has lapsed.
-            val kept = dev.lelonio.square.auth.EngineCredentials.exist(this@PlaybackService)
+            val kept = dev.nkosanamahungela.sonify.auth.EngineCredentials.exist(this@PlaybackService)
             val accessToken = runCatching { tokens.validAccessToken() }
                 .getOrElse { error ->
                     if (!kept) throw error
@@ -1532,7 +1532,7 @@ class PlaybackService : MediaLibraryService() {
             // Not up at all, which on no data is ordinary: the keeper starts it
             // again when there is a chance it works. A refused account below
             // signs out, and the keeper then finds nothing wanted.
-            dev.lelonio.square.playback.OfflineMode.setNoSession(true)
+            dev.nkosanamahungela.sonify.playback.OfflineMode.setNoSession(true)
             SessionKeeper.sessionMissing()
             // Only a refused account ends the session here. Everything else the
             // handshake can fail with — no network, an access point that is
@@ -1544,10 +1544,10 @@ class PlaybackService : MediaLibraryService() {
                 // Back to the login screen, with a reason. Staying signed in
                 // would leave an app that looks connected and plays nothing.
                 tokens.clear()
-                dev.lelonio.square.auth.EngineCredentials.clear(this@PlaybackService)
+                dev.nkosanamahungela.sonify.auth.EngineCredentials.clear(this@PlaybackService)
                 android.widget.Toast.makeText(
                     this@PlaybackService,
-                    getString(dev.lelonio.square.R.string.premium_required),
+                    getString(dev.nkosanamahungela.sonify.R.string.premium_required),
                     android.widget.Toast.LENGTH_LONG,
                 ).show()
             }
@@ -1558,7 +1558,7 @@ class PlaybackService : MediaLibraryService() {
             // it got: everything that streams is unavailable in the second, and
             // the downloads play exactly as they always did.
             val offline = runCatching { NativeBridge.isOffline }.getOrDefault(false)
-            dev.lelonio.square.playback.OfflineMode.setNoSession(offline)
+            dev.nkosanamahungela.sonify.playback.OfflineMode.setNoSession(offline)
             android.util.Log.i(TAG, if (offline) "engine started offline" else "engine connected")
             // Before the queue is handed over: a local song that was playing
             // when the app closed is only playable once the engine knows its
@@ -1568,7 +1568,7 @@ class PlaybackService : MediaLibraryService() {
             // than left silent until their playlist is opened.
             runCatching { bindSavedLocalEntries() }
                 .onFailure { android.util.Log.w(TAG, "local files not matched: $it") }
-            dev.lelonio.square.data.LocalFileBindings.push()
+            dev.nkosanamahungela.sonify.data.LocalFileBindings.push()
             // Up with no session: try again for as long as there is a network.
             if (offline) SessionKeeper.sessionMissing()
             if (restoreQueue) restoreQueue()
@@ -1580,16 +1580,16 @@ class PlaybackService : MediaLibraryService() {
     private suspend fun bindSavedLocalEntries() {
         val saved = playbackStore.load() ?: return
         val unmatched = saved.tracks.filter {
-            dev.lelonio.square.data.LocalLibrary.isSpotifyLocal(it.uri) &&
-                !dev.lelonio.square.data.LocalFileBindings.has(it.uri)
+            dev.nkosanamahungela.sonify.data.LocalLibrary.isSpotifyLocal(it.uri) &&
+                !dev.nkosanamahungela.sonify.data.LocalFileBindings.has(it.uri)
         }
         if (unmatched.isEmpty()) return
-        val files = dev.lelonio.square.data.LocalLibrary.tracks(this)
+        val files = dev.nkosanamahungela.sonify.data.LocalLibrary.tracks(this)
         val found = unmatched.mapNotNull { entry ->
-            dev.lelonio.square.data.LocalLibrary.match(entry, files)?.localFile?.let { entry.uri to it }
+            dev.nkosanamahungela.sonify.data.LocalLibrary.match(entry, files)?.localFile?.let { entry.uri to it }
         }.toMap()
         android.util.Log.i(TAG, "matched ${found.size} of ${unmatched.size} local entries of the saved queue")
-        dev.lelonio.square.data.LocalFileBindings.bind(found)
+        dev.nkosanamahungela.sonify.data.LocalFileBindings.bind(found)
     }
 
     /**
@@ -1667,7 +1667,7 @@ class PlaybackService : MediaLibraryService() {
                 if (left != null && left != mediaItem?.mediaId &&
                     reason == androidx.media3.common.Player.MEDIA_ITEM_TRANSITION_REASON_AUTO
                 ) {
-                    (application as dev.lelonio.square.SquareApplication).episodeProgress.finished(left)
+                    (application as dev.nkosanamahungela.sonify.SonifyApplication).episodeProgress.finished(left)
                 }
             }
         })
@@ -1717,9 +1717,9 @@ class PlaybackService : MediaLibraryService() {
                 val metadata = item?.mediaMetadata
                 val title = metadata?.title?.toString()
                 if (!title.isNullOrBlank()) {
-                    dev.lelonio.square.widget.SquareWidget.publish(
+                    dev.nkosanamahungela.sonify.widget.SquareWidget.publish(
                         this@PlaybackService,
-                        dev.lelonio.square.widget.SquareWidget.NowPlaying(
+                        dev.nkosanamahungela.sonify.widget.SquareWidget.NowPlaying(
                             title = title,
                             artist = metadata.artist?.toString().orEmpty(),
                             artworkUri = metadata.artworkUri?.toString(),
@@ -1734,7 +1734,7 @@ class PlaybackService : MediaLibraryService() {
 
     /** Measures only playback on this device, independently of the activity. */
     private fun startListeningRecorder() {
-        val sampler = dev.lelonio.square.data.ListeningSampler()
+        val sampler = dev.nkosanamahungela.sonify.data.ListeningSampler()
         scope.launch {
             var owner: String? = null
             var sampledPlayer: androidx.media3.common.Player? = null
@@ -1752,8 +1752,8 @@ class PlaybackService : MediaLibraryService() {
                     // Filed under the source it was played from: Spotify's
                     // account, or YouTube Music's history on this phone.
                     val source = when (container.preferences.backend.value) {
-                        dev.lelonio.square.backend.BackendId.SPOTIFY -> dev.lelonio.square.data.ListeningStore.Source.SPOTIFY
-                        dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC -> dev.lelonio.square.data.ListeningStore.Source.YOUTUBE_MUSIC
+                        dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY -> dev.nkosanamahungela.sonify.data.ListeningStore.Source.SPOTIFY
+                        dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC -> dev.nkosanamahungela.sonify.data.ListeningStore.Source.YOUTUBE_MUSIC
                     }
                     val account = container.listeningStore.ownerOf(source)
                     if (account != owner) { sampler.reset(); owner = account }
@@ -1772,7 +1772,7 @@ class PlaybackService : MediaLibraryService() {
                         artist = metadata?.artist?.toString().orEmpty(),
                         artists = creditedArtists(metadata?.extras),
                         album = metadata?.albumTitle?.toString().orEmpty(),
-                        albumUri = metadata?.extras?.getString(dev.lelonio.square.ui.EXTRA_ALBUM_URI),
+                        albumUri = metadata?.extras?.getString(dev.nkosanamahungela.sonify.ui.EXTRA_ALBUM_URI),
                         durationMs = metadata?.durationMs ?: player.duration.coerceAtLeast(0),
                         artworkUrl = metadata?.artworkUri?.toString(),
                     ) else null
@@ -1809,7 +1809,7 @@ class PlaybackService : MediaLibraryService() {
     private fun recordEpisode() {
         val uri = player.currentMediaItem?.mediaId ?: return
         if (!uri.startsWith("spotify:episode:")) return
-        (application as dev.lelonio.square.SquareApplication).episodeProgress
+        (application as dev.nkosanamahungela.sonify.SonifyApplication).episodeProgress
             .record(uri, player.currentPosition, player.duration.coerceAtLeast(0))
     }
 
@@ -1862,7 +1862,7 @@ class PlaybackService : MediaLibraryService() {
                 // Kept per track rather than taken from the current one: the
                 // artist page a row opens is its own.
                 artistUri = metadata.extras
-                    ?.getString(dev.lelonio.square.ui.EXTRA_ARTIST_URI),
+                    ?.getString(dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_URI),
                 artists = creditedArtists(metadata.extras),
                 durationMs = metadata.durationMs ?: 0L,
                 artworkUrl = metadata.artworkUri?.toString(),
@@ -1878,9 +1878,9 @@ class PlaybackService : MediaLibraryService() {
                 index = player.currentMediaItemIndex,
                 positionMs = player.currentPosition.coerceAtLeast(0),
                 repeatMode = player.repeatMode,
-                contextUri = extras?.getString(dev.lelonio.square.ui.EXTRA_CONTEXT_URI),
-                contextOrdered = extras?.getBoolean(dev.lelonio.square.ui.EXTRA_CONTEXT_ORDERED) == true,
-                contextLabel = extras?.getString(dev.lelonio.square.ui.EXTRA_CONTEXT_LABEL).orEmpty(),
+                contextUri = extras?.getString(dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_URI),
+                contextOrdered = extras?.getBoolean(dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_ORDERED) == true,
+                contextLabel = extras?.getString(dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_LABEL).orEmpty(),
             ),
         )
     }
@@ -1888,23 +1888,23 @@ class PlaybackService : MediaLibraryService() {
     /**
      * Puts the last queue back into a plain [androidx.media3.common.Player].
      *
-     * Paused, like the Spotify one: see [dev.lelonio.square.data.PlaybackStore].
+     * Paused, like the Spotify one: see [dev.nkosanamahungela.sonify.data.PlaybackStore].
      * A queue saved by the other backend is left alone — its URIs mean nothing
      * to this player, and loading them would fill the screen with tracks that
      * fail one after another.
      */
-    private fun restoreTimeline(backendId: dev.lelonio.square.backend.BackendId) {
+    private fun restoreTimeline(backendId: dev.nkosanamahungela.sonify.backend.BackendId) {
         if (player.mediaItemCount > 0) return
         val saved = playbackStore.load() ?: return
         // The phone's own files belong to no backend, so they are matched
         // against the player that is actually behind the session rather than
         // against a catalogue.
         if (playerKind == PlayerKind.LOCAL) {
-            if (saved.tracks.none { dev.lelonio.square.data.LocalLibrary.isLocal(it.uri) }) return
+            if (saved.tracks.none { dev.nkosanamahungela.sonify.data.LocalLibrary.isLocal(it.uri) }) return
         } else {
             val backend = when (backendId) {
-                dev.lelonio.square.backend.BackendId.SPOTIFY -> container.spotifyBackend
-                dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC -> container.youtubeBackend
+                dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY -> container.spotifyBackend
+                dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC -> container.youtubeBackend
             }
             if (saved.tracks.none { backend.owns(it.uri) }) return
         }
@@ -1924,34 +1924,34 @@ class PlaybackService : MediaLibraryService() {
                             .setExtras(
                                 android.os.Bundle().apply {
                                     track.artistUri?.let {
-                                        putString(dev.lelonio.square.ui.EXTRA_ARTIST_URI, it)
+                                        putString(dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_URI, it)
                                     }
                                     track.albumUri?.let {
-                                        putString(dev.lelonio.square.ui.EXTRA_ALBUM_URI, it)
+                                        putString(dev.nkosanamahungela.sonify.ui.EXTRA_ALBUM_URI, it)
                                     }
                                     if (track.explicit) {
-                                        putBoolean(dev.lelonio.square.ui.EXTRA_EXPLICIT, true)
+                                        putBoolean(dev.nkosanamahungela.sonify.ui.EXTRA_EXPLICIT, true)
                                     }
                                     val credited = track.artists.filter { it.uri != null }
                                     if (credited.isNotEmpty()) {
                                         putStringArrayList(
-                                            dev.lelonio.square.ui.EXTRA_ARTIST_NAMES,
+                                            dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_NAMES,
                                             ArrayList(credited.map { it.name }),
                                         )
                                         putStringArrayList(
-                                            dev.lelonio.square.ui.EXTRA_ARTIST_URIS,
+                                            dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_URIS,
                                             ArrayList(credited.map { it.uri!! }),
                                         )
                                     }
                                     saved.contextUri?.let {
-                                        putString(dev.lelonio.square.ui.EXTRA_CONTEXT_URI, it)
+                                        putString(dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_URI, it)
                                     }
                                     putBoolean(
-                                        dev.lelonio.square.ui.EXTRA_CONTEXT_ORDERED,
+                                        dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_ORDERED,
                                         saved.contextOrdered,
                                     )
                                     putString(
-                                        dev.lelonio.square.ui.EXTRA_CONTEXT_LABEL,
+                                        dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_LABEL,
                                         saved.contextLabel,
                                     )
                                 },
@@ -1996,11 +1996,11 @@ class PlaybackService : MediaLibraryService() {
     /** The two parallel lists put back together; see EXTRA_ARTIST_NAMES. */
     private fun creditedArtists(
         extras: android.os.Bundle?,
-    ): List<dev.lelonio.square.data.CatalogArtist> {
-        val names = extras?.getStringArrayList(dev.lelonio.square.ui.EXTRA_ARTIST_NAMES)
-        val uris = extras?.getStringArrayList(dev.lelonio.square.ui.EXTRA_ARTIST_URIS)
+    ): List<dev.nkosanamahungela.sonify.data.CatalogArtist> {
+        val names = extras?.getStringArrayList(dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_NAMES)
+        val uris = extras?.getStringArrayList(dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_URIS)
         if (names == null || uris == null) return emptyList()
-        return names.zip(uris) { name, uri -> dev.lelonio.square.data.CatalogArtist(name, uri) }
+        return names.zip(uris) { name, uri -> dev.nkosanamahungela.sonify.data.CatalogArtist(name, uri) }
     }
 
     override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaLibrarySession? =
@@ -2041,7 +2041,7 @@ class PlaybackService : MediaLibraryService() {
         runCatching { savePlayback() }
         // Closing a controller must leave the other device playing. Media3's
         // helper pauses every player, including our mirrored Connect player.
-        if (dev.lelonio.square.data.RemoteConnect.elsewhereActive.value) {
+        if (dev.nkosanamahungela.sonify.data.RemoteConnect.elsewhereActive.value) {
             stopSelf()
             return
         }
@@ -2073,9 +2073,9 @@ class PlaybackService : MediaLibraryService() {
         // Nothing plays once the service is gone, whatever the widget last heard.
         runCatching {
             player.currentMediaItem?.mediaMetadata?.let { metadata ->
-                dev.lelonio.square.widget.SquareWidget.publish(
+                dev.nkosanamahungela.sonify.widget.SquareWidget.publish(
                     this,
-                    dev.lelonio.square.widget.SquareWidget.NowPlaying(
+                    dev.nkosanamahungela.sonify.widget.SquareWidget.NowPlaying(
                         title = metadata.title?.toString().orEmpty(),
                         artist = metadata.artist?.toString().orEmpty(),
                         artworkUri = metadata.artworkUri?.toString(),
@@ -2128,7 +2128,7 @@ class PlaybackService : MediaLibraryService() {
         private const val PREMIUM_REQUIRED = "premium account required"
 
         /** Tells the service a Spotify session now exists. */
-        const val ACTION_CONNECT = "dev.lelonio.square.action.CONNECT"
+        const val ACTION_CONNECT = "dev.nkosanamahungela.sonify.action.CONNECT"
 
         fun connect(context: android.content.Context) {
             context.startService(
@@ -2153,4 +2153,4 @@ class PlaybackService : MediaLibraryService() {
  * would still be yesterday's.
  */
 private fun android.content.Context.appLanguage(): String =
-    (applicationContext as dev.lelonio.square.SquareApplication).language.language()
+    (applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).language.language()

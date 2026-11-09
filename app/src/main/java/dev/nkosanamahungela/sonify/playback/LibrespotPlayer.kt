@@ -1,21 +1,21 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import android.os.Looper
 import android.net.Uri
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
-import dev.lelonio.square.ui.EXTRA_CONTEXT_LABEL
+import dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_LABEL
 import androidx.media3.common.Player
 import androidx.media3.common.SimpleBasePlayer
 import androidx.media3.common.util.UnstableApi
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
-import dev.lelonio.square.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
-import dev.lelonio.square.nativecore.NativeEvents
+import dev.nkosanamahungela.sonify.nativecore.NativeEvents
 
 /**
  * Adapts the native librespot engine to the Media3 [Player] interface.
@@ -99,8 +99,8 @@ class LibrespotPlayer(
         val contextUri = queue.contextUri.orEmpty()
         // The DJ's lines are said only over the DJ's own queue; see SpotifyDj.
         NativeBridge.djSetActive(
-            dev.lelonio.square.backend.spotify.SpotifyDj.enabled &&
-                dev.lelonio.square.backend.spotify.SpotifyDj.isDj(contextUri),
+            dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.enabled &&
+                dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.isDj(contextUri),
         )
         // Never as a context, whatever it is.
         //
@@ -183,7 +183,7 @@ class LibrespotPlayer(
         onResume = { engine("play") { NativeBridge.play() } },
         onDuck = ::applyDuck,
         pauseOnLoss = {
-            (context.applicationContext as? dev.lelonio.square.SquareApplication)
+            (context.applicationContext as? dev.nkosanamahungela.sonify.SonifyApplication)
                 ?.preferences?.pauseForOtherApps?.value != false
         },
     )
@@ -220,7 +220,7 @@ class LibrespotPlayer(
      * is allowed to have an opinion.
      */
     private val quality =
-        (context.applicationContext as dev.lelonio.square.SquareApplication).quality
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).quality
 
     /**
      * Follows what the connection can actually carry; see [BandwidthWatch].
@@ -229,8 +229,8 @@ class LibrespotPlayer(
      * said which file they want and a stall is their business, not ours.
      */
     private val bandwidth = BandwidthWatch { kbps ->
-        if (quality.quality.value == dev.lelonio.square.data.Quality.Auto) {
-            runCatching { dev.lelonio.square.nativecore.NativeBridge.setBitrate(kbps) }
+        if (quality.quality.value == dev.nkosanamahungela.sonify.data.Quality.Auto) {
+            runCatching { dev.nkosanamahungela.sonify.nativecore.NativeBridge.setBitrate(kbps) }
         }
     }
 
@@ -266,7 +266,7 @@ class LibrespotPlayer(
      * a second idea of what is playing. Fed by the service; see
      * PlaybackService.
      */
-    private var remote: dev.lelonio.square.data.RemotePlayback? = null
+    private var remote: dev.nkosanamahungela.sonify.data.RemotePlayback? = null
     val isRemotePlayback: Boolean get() = remote != null
 
     /**
@@ -293,13 +293,13 @@ class LibrespotPlayer(
         Mixes.onChange = { handler.post { if (!released) followMix() } }
     }
 
-    fun showRemote(playback: dev.lelonio.square.data.RemotePlayback?) {
+    fun showRemote(playback: dev.nkosanamahungela.sonify.data.RemotePlayback?) {
         if (released) return
         val was = remote
         remote = playback
         // Rebuilt when what it shows changes — the track, its names, what comes
         // next — and not for the position, which moves every second.
-        val shown = { p: dev.lelonio.square.data.RemotePlayback? -> p?.copy(positionMs = 0, playing = false) }
+        val shown = { p: dev.nkosanamahungela.sonify.data.RemotePlayback? -> p?.copy(positionMs = 0, playing = false) }
         if (shown(was) != shown(playback)) cachedPlaylist = null
         invalidateState()
     }
@@ -366,7 +366,7 @@ class LibrespotPlayer(
      * playing, not the list behind it, and inventing the rest would be inventing
      * a queue this app cannot skip through anyway.
      */
-    private fun remoteState(playback: dev.lelonio.square.data.RemotePlayback): State {
+    private fun remoteState(playback: dev.nkosanamahungela.sonify.data.RemotePlayback): State {
         fun item(uid: String, uri: String, title: String, artist: String, album: String, cover: String) =
             MediaItemData.Builder(uid).setMediaItem(
                 MediaItem.Builder()
@@ -520,7 +520,7 @@ class LibrespotPlayer(
     private var reconnecting = false
 
     /** How long a track dissolves into the next; the listener's own setting. */
-    private val crossfade = dev.lelonio.square.data.CrossfadeStore(context)
+    private val crossfade = dev.nkosanamahungela.sonify.data.CrossfadeStore(context)
 
     /** For the notices this says to the listener; see onKeyRefused. */
     private val appContext = context.applicationContext
@@ -537,7 +537,7 @@ class LibrespotPlayer(
         override fun run() {
             if (released) return
             if (!reconnecting && !OfflineMode.active.value) {
-                runCatching { dev.lelonio.square.data.RemoteConnect.refresh() }
+                runCatching { dev.nkosanamahungela.sonify.data.RemoteConnect.refresh() }
             }
             if (!reconnecting && remote == null && !OfflineMode.active.value &&
                 (playWhenReady || wantPlay) && queue.items.isNotEmpty() && deviceGone
@@ -552,7 +552,7 @@ class LibrespotPlayer(
         }
     }
 
-    private val resumeHereHandler: (dev.lelonio.square.data.RemotePlayback) -> Unit = { target ->
+    private val resumeHereHandler: (dev.nkosanamahungela.sonify.data.RemotePlayback) -> Unit = { target ->
         handler.post {
             if (!released && focus.requestFocus()) {
                 Thread({
@@ -568,7 +568,7 @@ class LibrespotPlayer(
     }
 
     init {
-        dev.lelonio.square.data.RemoteConnect.resumeHereHandler = resumeHereHandler
+        dev.nkosanamahungela.sonify.data.RemoteConnect.resumeHereHandler = resumeHereHandler
         handler.postDelayed(sessionWatch, 2_000L)
         // Coming back online, the engine has to be given this queue again.
         //
@@ -579,7 +579,7 @@ class LibrespotPlayer(
         // so the music stopped and stayed stopped, on a queue of songs that
         // were all sitting on the phone.
         watch.launch {
-            dev.lelonio.square.playback.OfflineMode.active
+            dev.nkosanamahungela.sonify.playback.OfflineMode.active
                 .drop(1)
                 .distinctUntilChanged()
                 .collect { offline ->
@@ -744,7 +744,7 @@ class LibrespotPlayer(
         if (remote != null) {
             val forward = index >= queue.currentIndex
             onRemote(if (forward) "next" else "previous") { id ->
-                if (forward) dev.lelonio.square.data.RemoteConnect.next(id) else dev.lelonio.square.data.RemoteConnect.previous(id)
+                if (forward) dev.nkosanamahungela.sonify.data.RemoteConnect.next(id) else dev.nkosanamahungela.sonify.data.RemoteConnect.previous(id)
             }
             return
         }
@@ -902,7 +902,7 @@ class LibrespotPlayer(
         // own engine, which is silent while another device is playing.
         val wanted = playWhenReady
         if (onRemote(if (wanted) "play" else "pause") { id ->
-                if (wanted) dev.lelonio.square.data.RemoteConnect.play(id) else dev.lelonio.square.data.RemoteConnect.pause(id)
+                if (wanted) dev.nkosanamahungela.sonify.data.RemoteConnect.play(id) else dev.nkosanamahungela.sonify.data.RemoteConnect.pause(id)
             }
         ) {
             return Futures.immediateVoidFuture()
@@ -1020,13 +1020,13 @@ class LibrespotPlayer(
             when (seekCommand) {
                 Player.COMMAND_SEEK_TO_NEXT,
                 Player.COMMAND_SEEK_TO_NEXT_MEDIA_ITEM,
-                -> onRemote("next", dev.lelonio.square.data.RemoteConnect::next)
+                -> onRemote("next", dev.nkosanamahungela.sonify.data.RemoteConnect::next)
 
                 Player.COMMAND_SEEK_TO_PREVIOUS,
                 Player.COMMAND_SEEK_TO_PREVIOUS_MEDIA_ITEM,
-                -> onRemote("previous", dev.lelonio.square.data.RemoteConnect::previous)
+                -> onRemote("previous", dev.nkosanamahungela.sonify.data.RemoteConnect::previous)
 
-                else -> onRemote("seek") { id -> dev.lelonio.square.data.RemoteConnect.seek(id, newPositionMs) }
+                else -> onRemote("seek") { id -> dev.nkosanamahungela.sonify.data.RemoteConnect.seek(id, newPositionMs) }
             }
             return Futures.immediateVoidFuture()
         }
@@ -1406,7 +1406,7 @@ class LibrespotPlayer(
         smartLoading = true
         val initialTracks = queue.items.toList()
         try {
-            val recommendations = dev.lelonio.square.data.SmartShuffle.recommendations(context, initialTracks.mapTo(mutableSetOf()) { it.uri })
+            val recommendations = dev.nkosanamahungela.sonify.data.SmartShuffle.recommendations(context, initialTracks.mapTo(mutableSetOf()) { it.uri })
             // A new playlist, a reorder, a remote transfer or shuffle off cancels this result.
             if (released || isRemotePlayback || queue.contextUri != context || queue.items != initialTracks || !shuffleEnabled) return
             check(recommendations.isNotEmpty()) { "No enhanced recommendations returned" }
@@ -1497,8 +1497,8 @@ class LibrespotPlayer(
 
     override fun handleRelease(): ListenableFuture<*> {
         released = true
-        if (dev.lelonio.square.data.RemoteConnect.resumeHereHandler === resumeHereHandler) {
-            dev.lelonio.square.data.RemoteConnect.resumeHereHandler = null
+        if (dev.nkosanamahungela.sonify.data.RemoteConnect.resumeHereHandler === resumeHereHandler) {
+            dev.nkosanamahungela.sonify.data.RemoteConnect.resumeHereHandler = null
         }
         watch.cancel()
         handler.removeCallbacks(sessionWatch)
@@ -1516,7 +1516,7 @@ class LibrespotPlayer(
         // what is playing. Taken off here rather than posted to the player's
         // handler, where a progress tick several times a second would queue
         // behind whatever the player is in the middle of.
-        if (dev.lelonio.square.download.DownloadEvents.accept(type, uri, positionMs)) return
+        if (dev.nkosanamahungela.sonify.download.DownloadEvents.accept(type, uri, positionMs)) return
         if (type == "key_refused") {
             handler.post { onKeyRefused(positionMs) }
             return
@@ -1562,13 +1562,13 @@ class LibrespotPlayer(
         if (what == 0L) {
             refusalShown = false
             keyNotes.edit().remove(ACCOUNT_REFUSED).apply()
-            dev.lelonio.square.playback.websdk.WebSdkRecovery.refresh(appContext)
+            dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.refresh(appContext)
             return
         }
         val account = what == 2L || keyNotes.getBoolean(ACCOUNT_REFUSED, false)
         if (what == 2L) {
             keyNotes.edit().putBoolean(ACCOUNT_REFUSED, true).apply()
-            dev.lelonio.square.playback.websdk.WebSdkRecovery.refresh(appContext)
+            dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.refresh(appContext)
         } else if (refusalShown) {
             return
         }
@@ -1580,16 +1580,16 @@ class LibrespotPlayer(
             appContext,
             appContext.getString(
                 if (account) {
-                    dev.lelonio.square.R.string.playback_refused_account
+                    dev.nkosanamahungela.sonify.R.string.playback_refused_account
                 } else {
-                    dev.lelonio.square.R.string.playback_refused
+                    dev.nkosanamahungela.sonify.R.string.playback_refused
                 },
             ),
             android.widget.Toast.LENGTH_LONG,
         ).show()
         // The whole account refused: there is another way to play it.
         if (account) {
-            dev.lelonio.square.backend.spotify.SpotifyWebPlayback.reportAccountRefused()
+            dev.nkosanamahungela.sonify.backend.spotify.SpotifyWebPlayback.reportAccountRefused()
         }
     }
 
@@ -1686,7 +1686,7 @@ class LibrespotPlayer(
         // A song playing is the account being given keys after all.
         if (type == "playing" && keyNotes.contains(ACCOUNT_REFUSED)) {
             keyNotes.edit().remove(ACCOUNT_REFUSED).apply()
-            dev.lelonio.square.playback.websdk.WebSdkRecovery.refresh(appContext)
+            dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.refresh(appContext)
         }
 
         // Nothing is coming out of the speaker any more, so the next load is a
@@ -1830,7 +1830,7 @@ class LibrespotPlayer(
             // here plays, so nothing here has to react: the state is read and
             // published, and whoever is showing it redraws.
             "cluster" -> {
-                dev.lelonio.square.data.RemoteConnect.refresh()
+                dev.nkosanamahungela.sonify.data.RemoteConnect.refresh()
                 // And again shortly after.
                 //
                 // A handover is two facts arriving separately: the account says
@@ -1839,8 +1839,8 @@ class LibrespotPlayer(
                 // read first leaves the screen describing the wrong device
                 // until something else happens to change it, which can be
                 // never. The second look costs two reads of memory.
-                handler.postDelayed({ dev.lelonio.square.data.RemoteConnect.refresh() }, 700)
-                handler.postDelayed({ dev.lelonio.square.data.RemoteConnect.refresh() }, 2_000)
+                handler.postDelayed({ dev.nkosanamahungela.sonify.data.RemoteConnect.refresh() }, 700)
+                handler.postDelayed({ dev.nkosanamahungela.sonify.data.RemoteConnect.refresh() }, 2_000)
                 return
             }
 
@@ -1882,7 +1882,7 @@ class LibrespotPlayer(
         // deciding with an answer from before the handover, which is how a
         // pause pressed here went out to a laptop.
         if (type == "playing" || type == "paused" || type == "stopped") {
-            dev.lelonio.square.data.RemoteConnect.refresh()
+            dev.nkosanamahungela.sonify.data.RemoteConnect.refresh()
         }
 
         invalidateState()
@@ -1914,31 +1914,31 @@ class LibrespotPlayer(
                             // moment the queue was rebuilt.
                             .setExtras(
                                 android.os.Bundle().apply {
-                                    putBoolean(dev.lelonio.square.data.SmartShuffle.MODE, queue.smartShuffle)
-                                    putBoolean(dev.lelonio.square.data.SmartShuffle.RECOMMENDED, track.recommended)
+                                    putBoolean(dev.nkosanamahungela.sonify.data.SmartShuffle.MODE, queue.smartShuffle)
+                                    putBoolean(dev.nkosanamahungela.sonify.data.SmartShuffle.RECOMMENDED, track.recommended)
                                     queue.contextLabel.takeIf { it.isNotEmpty() }?.let {
                                         putString(EXTRA_CONTEXT_LABEL, it)
                                     }
                                     queue.contextUri?.let {
-                                        putString(dev.lelonio.square.ui.EXTRA_CONTEXT_URI, it)
+                                        putString(dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_URI, it)
                                     }
                                     track.artistUri?.let {
-                                        putString(dev.lelonio.square.ui.EXTRA_ARTIST_URI, it)
+                                        putString(dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_URI, it)
                                     }
                                     track.albumUri?.let {
-                                        putString(dev.lelonio.square.ui.EXTRA_ALBUM_URI, it)
+                                        putString(dev.nkosanamahungela.sonify.ui.EXTRA_ALBUM_URI, it)
                                     }
                                     if (track.explicit) {
-                                        putBoolean(dev.lelonio.square.ui.EXTRA_EXPLICIT, true)
+                                        putBoolean(dev.nkosanamahungela.sonify.ui.EXTRA_EXPLICIT, true)
                                     }
                                     val credited = track.artists.filter { it.uri != null }
                                     if (credited.isNotEmpty()) {
                                         putStringArrayList(
-                                            dev.lelonio.square.ui.EXTRA_ARTIST_NAMES,
+                                            dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_NAMES,
                                             ArrayList(credited.map { it.name }),
                                         )
                                         putStringArrayList(
-                                            dev.lelonio.square.ui.EXTRA_ARTIST_URIS,
+                                            dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_URIS,
                                             ArrayList(credited.map { it.uri!! }),
                                         )
                                     }

@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import android.content.Context
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -392,19 +392,19 @@ class EqualizerFilter {
  * from one of these to what their own pair needs.
  */
 val BuiltInEqPresets: List<Pair<Int, List<Float>>> = listOf(
-    dev.lelonio.square.R.string.eq_flat to listOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
-    dev.lelonio.square.R.string.eq_bass_boost to listOf(6f, 5f, 4f, 2f, 0.5f, 0f, 0f, 0f, 0f, 0f),
-    dev.lelonio.square.R.string.eq_bass_reducer to listOf(-6f, -5f, -4f, -2f, -0.5f, 0f, 0f, 0f, 0f, 0f),
-    dev.lelonio.square.R.string.eq_treble_boost to listOf(0f, 0f, 0f, 0f, 0f, 0.5f, 2f, 3.5f, 5f, 6f),
-    dev.lelonio.square.R.string.eq_treble_reducer to listOf(0f, 0f, 0f, 0f, 0f, -0.5f, -2f, -3.5f, -5f, -6f),
-    dev.lelonio.square.R.string.eq_vocal to listOf(-2f, -2f, -1f, 1f, 3f, 4f, 3.5f, 1.5f, 0f, -1f),
-    dev.lelonio.square.R.string.eq_spoken to listOf(-4f, -3f, -1.5f, 0.5f, 2.5f, 3.5f, 4f, 2.5f, 0.5f, -2f),
-    dev.lelonio.square.R.string.eq_loudness to listOf(5f, 4f, 2f, 0f, -1f, -1f, 0f, 2f, 4f, 5f),
-    dev.lelonio.square.R.string.eq_rock to listOf(4.5f, 3.5f, 2f, 0.5f, -1f, -1f, 0.5f, 2f, 3f, 4f),
-    dev.lelonio.square.R.string.eq_pop to listOf(-1f, 0f, 1.5f, 3f, 4f, 3f, 1.5f, 0f, -0.5f, -1f),
-    dev.lelonio.square.R.string.eq_hip_hop to listOf(5f, 4.5f, 2f, 2.5f, -1f, -1f, 1f, 0f, 1.5f, 2.5f),
-    dev.lelonio.square.R.string.eq_electronic to listOf(4.5f, 4f, 1.5f, 0f, -2f, 1.5f, 0.5f, 1f, 3.5f, 4.5f),
-    dev.lelonio.square.R.string.eq_classical to listOf(4f, 3f, 2f, 1f, -1f, -1f, 0f, 2f, 3f, 4f),
-    dev.lelonio.square.R.string.eq_jazz to listOf(3f, 2f, 1f, 2f, -1.5f, -1.5f, 0f, 1f, 2f, 3f),
-    dev.lelonio.square.R.string.eq_acoustic to listOf(4f, 4f, 3f, 1f, 2f, 1.5f, 3f, 3.5f, 3f, 2f),
+    dev.nkosanamahungela.sonify.R.string.eq_flat to listOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
+    dev.nkosanamahungela.sonify.R.string.eq_bass_boost to listOf(6f, 5f, 4f, 2f, 0.5f, 0f, 0f, 0f, 0f, 0f),
+    dev.nkosanamahungela.sonify.R.string.eq_bass_reducer to listOf(-6f, -5f, -4f, -2f, -0.5f, 0f, 0f, 0f, 0f, 0f),
+    dev.nkosanamahungela.sonify.R.string.eq_treble_boost to listOf(0f, 0f, 0f, 0f, 0f, 0.5f, 2f, 3.5f, 5f, 6f),
+    dev.nkosanamahungela.sonify.R.string.eq_treble_reducer to listOf(0f, 0f, 0f, 0f, 0f, -0.5f, -2f, -3.5f, -5f, -6f),
+    dev.nkosanamahungela.sonify.R.string.eq_vocal to listOf(-2f, -2f, -1f, 1f, 3f, 4f, 3.5f, 1.5f, 0f, -1f),
+    dev.nkosanamahungela.sonify.R.string.eq_spoken to listOf(-4f, -3f, -1.5f, 0.5f, 2.5f, 3.5f, 4f, 2.5f, 0.5f, -2f),
+    dev.nkosanamahungela.sonify.R.string.eq_loudness to listOf(5f, 4f, 2f, 0f, -1f, -1f, 0f, 2f, 4f, 5f),
+    dev.nkosanamahungela.sonify.R.string.eq_rock to listOf(4.5f, 3.5f, 2f, 0.5f, -1f, -1f, 0.5f, 2f, 3f, 4f),
+    dev.nkosanamahungela.sonify.R.string.eq_pop to listOf(-1f, 0f, 1.5f, 3f, 4f, 3f, 1.5f, 0f, -0.5f, -1f),
+    dev.nkosanamahungela.sonify.R.string.eq_hip_hop to listOf(5f, 4.5f, 2f, 2.5f, -1f, -1f, 1f, 0f, 1.5f, 2.5f),
+    dev.nkosanamahungela.sonify.R.string.eq_electronic to listOf(4.5f, 4f, 1.5f, 0f, -2f, 1.5f, 0.5f, 1f, 3.5f, 4.5f),
+    dev.nkosanamahungela.sonify.R.string.eq_classical to listOf(4f, 3f, 2f, 1f, -1f, -1f, 0f, 2f, 3f, 4f),
+    dev.nkosanamahungela.sonify.R.string.eq_jazz to listOf(3f, 2f, 1f, 2f, -1.5f, -1.5f, 0f, 1f, 2f, 3f),
+    dev.nkosanamahungela.sonify.R.string.eq_acoustic to listOf(4f, 4f, 3f, 1f, 2f, 1.5f, 3f, 3.5f, 3f, 2f),
 )

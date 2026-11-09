@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import androidx.annotation.OptIn
 import androidx.media3.common.C
@@ -8,8 +8,8 @@ import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.ResolvingDataSource
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
-import dev.lelonio.square.backend.PlaybackHost
-import dev.lelonio.square.data.LocalLibrary
+import dev.nkosanamahungela.sonify.backend.PlaybackHost
+import dev.nkosanamahungela.sonify.data.LocalLibrary
 
 /**
  * The player for music that is already on the phone.
