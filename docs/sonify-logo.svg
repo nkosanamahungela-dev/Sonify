@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1536" role="img" aria-labelledby="title">
+  <title id="title">Sonify logo</title>
+  <defs>
+    <linearGradient id="sonify-green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5AF5A8"/>
+      <stop offset="1" stop-color="#00B86B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1536" height="1536" fill="#050908"/>
+  <circle cx="768" cy="768" r="674" fill="url(#sonify-green)"/>
+  <g fill="none" stroke="#00110B" stroke-width="104" stroke-linecap="round">
+    <path d="M500 443 C 790 443 1110 690 1110 1050"/>
+    <path d="M500 651 C 710 651 900 820 900 1050"/>
+    <path d="M500 859 C 610 859 680 930 680 1050"/>
+  </g>
+  <circle cx="500" cy="1058" r="78" fill="#00110B"/>
+</svg>
