@@ -65,7 +65,7 @@ import kotlin.math.roundToInt
  *   the search button, which is where the row has just made space for it.
  */
 @Composable
-fun SquareBottomBar(
+fun SonifyBottomBar(
     /** 0 open, 1 folded. Held by the caller so the scroll can drive it. */
     fold: State<Float>,
     /** The tab the capsule keeps when it folds. */
@@ -153,7 +153,7 @@ fun SquareBottomBar(
 }
 
 /**
- * Drives [SquareBottomBar] from whatever is being scrolled.
+ * Drives [SonifyBottomBar] from whatever is being scrolled.
  *
  * Folds on the way down and unfolds at the top of the page, and nowhere else:
  * scrolling back up is a request for what is further up, not for the bar, and a
