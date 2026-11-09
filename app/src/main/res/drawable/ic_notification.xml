@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    The square wave, for the media notification.
-
-    White and flat on purpose: Android draws a notification's small icon as a
-    silhouette from its alpha channel alone, so any colour in here would be
-    thrown away. Traced from app/icon-src/wave-square.svg, which is where the
-    app's own mark comes from.
--->
+<!-- Monochrome Sonify mark for Android's small notification-icon slot. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
-    android:viewportWidth="256"
-    android:viewportHeight="256">
+    android:viewportWidth="108"
+    android:viewportHeight="108">
     <path
-        android:fillColor="#FFFFFFFF"
-        android:pathData="M240,128v56a8,8,0,0,1,-8,8H128a8,8,0,0,1,-8,-8V80H32v48a8,8,0,0,1,-16,0V72a8,8,0,0,1,8,-8H128a8,8,0,0,1,8,8V176h88V128a8,8,0,0,1,16,0Z" />
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M38,33 C65,33 87,55 87,82 M38,49 C56,49 71,64 71,82 M38,65 C47,65 55,73 55,82" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M38,77A5,5 0,1 0,38 87A5,5 0,1 0,38 77Z" />
 </vector>
