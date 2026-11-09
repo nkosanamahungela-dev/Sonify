@@ -23,7 +23,7 @@ object LucideIcons {
         )
         paths.forEach { data ->
             builder.addPath(
-                pathData = PathParser().parsePathString(data).toPath(),
+                pathData = PathParser().parsePathString(data).toNodes(),
                 fill = SolidColor(Color.Transparent),
                 stroke = SolidColor(Color.Black),
                 strokeLineWidth = 2f,
