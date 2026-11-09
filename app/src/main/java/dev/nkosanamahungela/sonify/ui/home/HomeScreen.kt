@@ -409,6 +409,37 @@ fun HomeScreen(
                     }
                 }
 
+                // A compact launchpad for the listener's own most-used
+                // playlists. It reuses the existing catalogue and open action.
+                if (filter == Feed.ALL && playlists.isNotEmpty()) {
+                    item(key = "home-shortcuts", contentType = "shortcuts") {
+                        Column(
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(start = 20.dp, end = 20.dp, top = 12.dp),
+                            verticalArrangement = Arrangement.spacedBy(9.dp),
+                        ) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text("YOUR ROTATION", style = MaterialTheme.typography.labelLarge, color = InkDim)
+                                Spacer(Modifier.weight(1f))
+                                Text("Recently played", style = MaterialTheme.typography.labelSmall, color = InkDim)
+                            }
+                            playlists.take(4).chunked(2).forEach { pair ->
+                                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                    pair.forEach { playlist ->
+                                        PlaylistShortcut(
+                                            playlist = playlist,
+                                            modifier = Modifier.weight(1f),
+                                            onClick = { onOpenPlaylist(playlist) },
+                                        )
+                                    }
+                                    if (pair.size == 1) Spacer(Modifier.weight(1f))
+                                }
+                            }
+                        }
+                    }
+                }
+
                 // Spotify's own shelves come first, because they are what the
                 // listener recognises as their home and the only rows here that
                 // this app could not have built itself. What the account has
@@ -754,22 +785,29 @@ private fun Header(
                 // reading at a glance; it shrinks a little as the header
                 // collapses rather than leaving, because a bar with nothing in
                 // it says nothing about where you are.
-                AppLockup(
-                    // Larger than the bare mark was: the glass around it is
-                    // part of the shape now, and the drawing inside has to stay
-                    // the size it was to read at a glance.
-                    iconSize = 44.dp,
-                    nameHeight = 22.dp,
-                    plate = backdrop,
+                Column(
                     modifier = Modifier
-                        .padding(top = 10.dp)
+                        .padding(top = 9.dp)
                         .graphicsLayer {
-                            val scale = 1f - 0.22f * collapse()
+                            val scale = 1f - 0.12f * collapse()
                             scaleX = scale
                             scaleY = scale
                             transformOrigin = TransformOrigin(0f, 0.5f)
                         },
-                )
+                ) {
+                    Text(
+                        "Home",
+                        style = MaterialTheme.typography.displaySmall,
+                        fontWeight = FontWeight.Bold,
+                        color = Ink,
+                    )
+                    Text(
+                        "Made for your listening",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = InkDim,
+                        modifier = Modifier.padding(top = 1.dp),
+                    )
+                }
             }
 
             // Falls back to the generated cover keyed on the name, which is what
@@ -973,6 +1011,38 @@ private fun ArtistTile(artist: SearchItem, onClick: () -> Unit) {
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 10.dp),
+        )
+    }
+}
+
+@Composable
+private fun PlaylistShortcut(
+    playlist: CatalogPlaylist,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+) {
+    Row(
+        modifier
+            .clip(RoundedCornerShape(15.dp))
+            .background(Ink.copy(alpha = 0.075f))
+            .pressable(onClick)
+            .padding(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Artwork(
+            url = playlist.artworkUrl,
+            title = playlist.name,
+            modifier = Modifier.size(46.dp),
+            corner = 10.dp,
+            decodeSize = 46.dp,
+        )
+        Text(
+            playlist.name,
+            style = MaterialTheme.typography.labelLarge,
+            color = Ink,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.padding(start = 9.dp),
         )
     }
 }
