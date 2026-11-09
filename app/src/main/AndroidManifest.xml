@@ -156,7 +156,7 @@
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/sonify_widget_tile_info" />
+                android:resource="@xml/square_widget_tile_info" />
         </receiver>
 
         <!-- The home-screen widget; see widget/SonifyWidget. -->
@@ -169,7 +169,7 @@
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/sonify_widget_info" />
+                android:resource="@xml/square_widget_info" />
         </receiver>
 
         <service
