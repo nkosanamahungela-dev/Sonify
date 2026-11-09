@@ -40,7 +40,7 @@ import dev.nkosanamahungela.sonify.ui.theme.Ink
  * height and let it measure itself.
  */
 @Composable
-fun SquareWordmark(
+fun SonifyWordmark(
     height: Dp,
     modifier: Modifier = Modifier,
     color: Color = Ink,
@@ -100,7 +100,7 @@ fun AppLockup(
             AppPlate(iconSize, plate)
         }
         Spacer(Modifier.width(iconSize * 0.32f))
-        SquareWordmark(nameHeight)
+        SonifyWordmark(nameHeight)
     }
 }
 
@@ -181,30 +181,28 @@ fun AppGlyph(size: Dp, modifier: Modifier = Modifier, tint: Color = Ink) {
     )
 }
 
-/** S Q U A R E, as polylines on the grid described in [SquareWordmark]. */
+/** S O N I F Y, as polylines on the grid described in [SonifyWordmark]. */
 private val GLYPHS: List<List<List<Pair<Float, Float>>>> = listOf(
     // S
     listOf(listOf(6f to 0f, 0f to 0f, 0f to 5f, 6f to 5f, 6f to 10f, 0f to 10f)),
-    // Q: a closed box with the tail dropped out of the bottom right.
+    // O
+    listOf(listOf(0f to 0f, 6f to 0f, 6f to 10f, 0f to 10f, 0f to 0f)),
+    // N
+    listOf(listOf(0f to 10f, 0f to 0f, 6f to 0f, 6f to 10f)),
+    // I
     listOf(
-        listOf(0f to 0f, 6f to 0f, 6f to 10f, 0f to 10f, 0f to 0f),
-        listOf(4f to 8f, 4f to 12f),
+        listOf(0f to 0f, 6f to 0f),
+        listOf(3f to 0f, 3f to 10f),
+        listOf(0f to 10f, 6f to 10f),
     ),
-    // U
-    listOf(listOf(0f to 0f, 0f to 10f, 6f to 10f, 6f to 0f)),
-    // A: the apex is a corner, not a point.
+    // F
     listOf(
-        listOf(0f to 10f, 0f to 0f, 6f to 0f, 6f to 10f),
-        listOf(0f to 6f, 6f to 6f),
-    ),
-    // R: the leg comes straight down instead of splaying.
-    listOf(
-        listOf(0f to 10f, 0f to 0f, 6f to 0f, 6f to 5f, 0f to 5f),
-        listOf(3f to 5f, 3f to 10f),
-    ),
-    // E
-    listOf(
-        listOf(6f to 0f, 0f to 0f, 0f to 10f, 6f to 10f),
+        listOf(6f to 0f, 0f to 0f, 0f to 10f),
         listOf(0f to 5f, 4f to 5f),
+    ),
+    // Y
+    listOf(
+        listOf(0f to 0f, 0f to 5f, 6f to 5f),
+        listOf(6f to 0f, 6f to 10f, 0f to 10f),
     ),
 )
