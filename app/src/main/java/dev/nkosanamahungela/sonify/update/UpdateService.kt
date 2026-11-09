@@ -70,7 +70,7 @@ class UpdateService : Service() {
     private fun notification(version: String, progress: Float?): Notification {
         val percent = progress?.let { (it * 100).toInt().coerceIn(0, 100) }
         return Notification.Builder(this, CHANNEL_ID)
-            .setContentTitle(getString(R.string.update_downloading))
+            .setContentTitle("${getString(R.string.app_name)} · ${getString(R.string.update_downloading)}")
             .setContentText(
                 listOfNotNull(version.takeIf { it.isNotEmpty() }, percent?.let { "$it%" })
                     .joinToString(" · "),
@@ -99,7 +99,7 @@ class UpdateService : Service() {
         getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     companion object {
-        private const val CHANNEL_ID = "square_update"
+        private const val CHANNEL_ID = "sonify_updates"
         private const val NOTIFICATION_ID = 4_201
 
         private const val EXTRA_URL = "url"
