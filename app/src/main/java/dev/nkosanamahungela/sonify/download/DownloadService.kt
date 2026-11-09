@@ -199,7 +199,7 @@ class DownloadService : android.app.Service() {
         manager.createNotificationChannel(
             NotificationChannel(
                 CHANNEL_ID,
-                getString(R.string.downloads),
+                getString(R.string.download_channel),
                 // Low: this is a progress bar, not news. It should be findable
                 // in the shade and never interrupt anything.
                 NotificationManager.IMPORTANCE_LOW,
@@ -210,7 +210,7 @@ class DownloadService : android.app.Service() {
     }
 
     companion object {
-        private const val CHANNEL_ID = "downloads"
+        private const val CHANNEL_ID = "sonify_downloads"
         private const val NOTIFICATION_ID = 42
         private const val ACTION_STOP = "dev.nkosanamahungela.sonify.action.STOP_DOWNLOADS"
         private const val TAG = "SonifyDownloads"
