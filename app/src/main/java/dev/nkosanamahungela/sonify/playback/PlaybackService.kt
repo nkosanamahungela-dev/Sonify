@@ -404,6 +404,9 @@ class PlaybackService : MediaLibraryService() {
         // only thing being changed.
         setMediaNotificationProvider(
             androidx.media3.session.DefaultMediaNotificationProvider.Builder(this)
+                .setChannelId("sonify_playback")
+                .setChannelNameResourceId(dev.nkosanamahungela.sonify.R.string.playback_channel)
+                .setChannelDescriptionResourceId(dev.nkosanamahungela.sonify.R.string.playback_channel_description)
                 .build()
                 .apply { setSmallIcon(dev.nkosanamahungela.sonify.R.drawable.ic_notification) },
         )
