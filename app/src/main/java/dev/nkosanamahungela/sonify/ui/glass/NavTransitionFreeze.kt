@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

@@ -8,9 +8,9 @@
 // Kept as close to upstream as possible (package line and a few Material
 // swaps aside) so a later upstream fix can be diffed in; see LICENSE-backdrop.txt.
 
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
-import dev.lelonio.square.ui.glass.morph.liquidGlassIndicator
+import dev.nkosanamahungela.sonify.ui.glass.morph.liquidGlassIndicator
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -43,18 +43,18 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastCoerceIn
 import androidx.compose.ui.util.lerp
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.layerBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberCombinedBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberLayerBackdrop
-import dev.lelonio.square.ui.glass.backdrop.drawBackdrop
-import dev.lelonio.square.ui.glass.backdrop.effects.blur
-import dev.lelonio.square.ui.glass.backdrop.effects.lens
-import dev.lelonio.square.ui.glass.backdrop.highlight.Highlight
-import dev.lelonio.square.ui.glass.backdrop.shadow.InnerShadow
-import dev.lelonio.square.ui.glass.backdrop.shadow.Shadow
-import dev.lelonio.square.ui.glass.shapes.ContinuousCapsule
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.layerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberCombinedBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberLayerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.drawBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.blur
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.lens
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.highlight.Highlight
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.shadow.InnerShadow
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.shadow.Shadow
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -247,7 +247,7 @@ fun LiquidToggle(
                         // Upstream's resting thumb fades over the first 0.15
                         // of the press, as its glass comes in.
                         val resting = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-                            dev.lelonio.square.ui.glass.morph.indicatorRestingAlpha(progress)
+                            dev.nkosanamahungela.sonify.ui.glass.morph.indicatorRestingAlpha(progress)
                         } else {
                             1f - progress
                         }

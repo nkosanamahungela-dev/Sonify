@@ -13,7 +13,7 @@
 // the Backdrop catalog this button first came from (Apache-2.0, see
 // LICENSE-backdrop.txt).
 
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.LocalIndication
@@ -38,8 +38,8 @@ import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.shapes.ContinuousCapsule
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -230,7 +230,7 @@ fun LiquidButton(
                         // overrides this to full resolution where it runs.
                         backdropScale = 0.4f,
                         // The bar's rim, so a button beside it is cut from the same pane.
-                        highlightAlpha = dev.lelonio.square.ui.player.BarHighlightAlpha,
+                        highlightAlpha = dev.nkosanamahungela.sonify.ui.player.BarHighlightAlpha,
                         ownBackdrop = backdrop,
                         // Upstream's touch specular, on the rim nearest the finger.
                         touch = if (isInteractive) {

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.glass
+package dev.nkosanamahungela.sonify.ui.glass
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.Spring
@@ -17,13 +17,13 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.graphicsLayer
-import dev.lelonio.square.ui.glass.backdrop.drawBackdrop
-import dev.lelonio.square.ui.glass.backdrop.effects.vibrancy
-import dev.lelonio.square.ui.glass.backdrop.effects.blur
-import dev.lelonio.square.ui.glass.backdrop.effects.lens
-import dev.lelonio.square.ui.glass.backdrop.highlight.Highlight
-import dev.lelonio.square.ui.glass.backdrop.shadow.Shadow
-import dev.lelonio.square.ui.glass.shapes.ContinuousCapsule
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.drawBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.vibrancy
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.blur
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.lens
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.highlight.Highlight
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.shadow.Shadow
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.runtime.rememberCoroutineScope
@@ -244,7 +244,7 @@ fun FoldingTabs(
     padding: Dp = 4.dp,
     puckColor: androidx.compose.ui.graphics.Color,
     /** What the indicator refracts; null draws no indicator at all. */
-    backdrop: dev.lelonio.square.ui.glass.backdrop.Backdrop? = null,
+    backdrop: dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop? = null,
     /** How many tabs the capsule holds; the puck needs it before measuring. */
     tabCount: Int = 2,
     /** Called when the indicator is dragged onto another tab and let go. */
