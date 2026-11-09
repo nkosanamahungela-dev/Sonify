@@ -4239,7 +4239,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         // the home page should keep at the front.
         container.playlistOrder.record(playlist.uri)
         container.widgetPlaylists.record(playlist.uri, playlist.name, playlist.artworkUrl, container.activeBackend.id)
-        dev.nkosanamahungela.sonify.widget.SquareWidget.refresh(getApplication())
+        dev.nkosanamahungela.sonify.widget.SonifyWidget.refresh(getApplication())
 
         if (playlist.uri == LocalLibrary.CONTEXT_URI) {
             openLocalFiles(playlist)
@@ -6482,7 +6482,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 val changed = kotlinx.coroutines.withContext(Dispatchers.IO) {
                     container.widgetPlaylists.fill(order, ready.playlists + albums, container.activeBackend.id)
                 }
-                if (changed) dev.nkosanamahungela.sonify.widget.SquareWidget.refresh(getApplication())
+                if (changed) dev.nkosanamahungela.sonify.widget.SonifyWidget.refresh(getApplication())
             }
         }
     }
