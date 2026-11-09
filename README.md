@@ -10,11 +10,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/nkosanamahungela-dev/Sonify/releases/latest"><img src="https://img.shields.io/github/v/release/Lelonio/Sonify?label=release" alt="Latest release"></a>
+  <a href="https://github.com/nkosanamahungela-dev/Sonify/releases/latest"><img src="https://img.shields.io/github/v/release/nkosanamahungela-dev/Sonify?label=release" alt="Latest release"></a>
   <a href="https://github.com/nkosanamahungela-dev/Sonify/releases"><img src="https://img.shields.io/github/downloads/nkosanamahungela-dev/Sonify/total" alt="Downloads"></a>
   <img src="https://img.shields.io/badge/Android-8.0%2B-3DDC84" alt="Android 8.0 or later">
   <img src="https://img.shields.io/badge/platform-Android-3DDC84?logo=android&logoColor=white" alt="Android platform">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/Lelonio/Sonify" alt="Licence"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/nkosanamahungela-dev/Sonify" alt="Licence"></a>
 </p>
 
 <p align="center">
@@ -176,7 +176,7 @@ warranty of any kind; see the licence.
 - **Telegram community**: [join Sonify | Community](https://t.me/+-XDmbFwz7uBkMjc0) for questions, feedback, bug reports and feature requests.
 - **Release announcements**: [Square | Official](https://t.me/SquareAppOfficial) automatically shares new APKs and release notes from GitHub.
 - **Questions** (how something works, how to set it up): [Discussions, Q&A](https://github.com/nkosanamahungela-dev/Sonify/discussions/categories/q-a)
-- **Ideas and requests**: [Discussions, Ideas](https://github.com/Lelonio/Sonify/discussions/categories/ideas)
+- **Ideas and requests**: [Discussions, Ideas](https://github.com/nkosanamahungela-dev/Sonify/discussions/categories/ideas)
 - **Something broken**: [open an issue](https://github.com/nkosanamahungela-dev/Sonify/issues/new/choose). If the app closed or froze, attach a report from Settings → About → Save a report.
 
 The same two links are in the app, under Settings → About.
@@ -196,7 +196,7 @@ development on [Ko-fi](https://ko-fi.com/lelonio).
 | [NewPipeExtractor](https://github.com/TeamNewPipe/NewPipeExtractor) | GPL-3.0 | Anonymous YouTube Music search and stream URLs. |
 | [lossless.wtf](https://lossless.wtf) | n/a | Synced lyrics timed to the word, asked first on both sources. |
 | [LrcLib](https://lrclib.net) | n/a | Synced lyrics for the YouTube Music source, over its open API. |
-| [Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics) | AGPL-3.0 | The lyrics animation, ported to Compose by [@donutnotnut](https://github.com/donutnotnut) in [#50](https://github.com/Lelonio/Sonify/discussions/50). |
+| [Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics) | AGPL-3.0 | The lyrics animation, ported to Compose by [@donutnotnut](https://github.com/donutnotnut) in [#50](https://github.com/Lelonio/Square/discussions/50). |
 | [Bungee](https://github.com/kupix/bungee) | MPL-2.0 | Time stretching, fetched at build time. |
 | [AndroidLiquidGlass](https://github.com/Kyant0/AndroidLiquidGlass) | Apache-2.0 | The glass material; the catalog components are copied with their notice. |
 | [Phosphor Icons](https://phosphoricons.com) | MIT | Every icon in the app. |
