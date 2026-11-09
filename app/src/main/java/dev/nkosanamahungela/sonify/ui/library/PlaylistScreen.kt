@@ -1,6 +1,6 @@
-package dev.lelonio.square.ui.library
+package dev.nkosanamahungela.sonify.ui.library
 
-import dev.lelonio.square.ui.components.glassMenuTrigger
+import dev.nkosanamahungela.sonify.ui.components.glassMenuTrigger
 import androidx.compose.ui.text.withLink
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
@@ -22,11 +22,11 @@ import androidx.compose.ui.semantics.stateDescription
 import com.adamglin.phosphoricons.regular.SlidersHorizontal
 import com.adamglin.phosphoricons.regular.Sparkle
 import com.adamglin.phosphoricons.regular.Waveform
-import dev.lelonio.square.ui.components.MIX_RING_ROOM
-import dev.lelonio.square.ui.components.mixRing
+import dev.nkosanamahungela.sonify.ui.components.MIX_RING_ROOM
+import dev.nkosanamahungela.sonify.ui.components.mixRing
 import androidx.compose.foundation.layout.RowScope
-import dev.lelonio.square.ui.glass.liquidGlass
-import dev.lelonio.square.ui.player.GlassFilm
+import dev.nkosanamahungela.sonify.ui.glass.liquidGlass
+import dev.nkosanamahungela.sonify.ui.player.GlassFilm
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.border
@@ -93,7 +93,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import dev.lelonio.square.ui.components.BlurTransformation
+import dev.nkosanamahungela.sonify.ui.components.BlurTransformation
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
@@ -101,8 +101,8 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.runtime.mutableFloatStateOf
-import dev.lelonio.square.ui.player.GlassSurface
-import dev.lelonio.square.ui.components.MENU_WIDTH
+import dev.nkosanamahungela.sonify.ui.player.GlassSurface
+import dev.nkosanamahungela.sonify.ui.components.MENU_WIDTH
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.platform.LocalDensity
@@ -112,30 +112,30 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.foundation.layout.BoxScope
-import dev.lelonio.square.R
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.ui.MainViewModel
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.layerBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberCombinedBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberLayerBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberCombinedBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberBackdropFreeze
-import dev.lelonio.square.ui.components.Artwork
-import dev.lelonio.square.ui.components.CHOICE_MENU_WIDTH
-import dev.lelonio.square.ui.components.GlassChoiceMenu
-import dev.lelonio.square.ui.components.LazyScrollBar
-import dev.lelonio.square.ui.components.SwipeToQueue
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.glass.shapes.ContinuousCapsule
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.theme.InkDim
-import dev.lelonio.square.ui.theme.footToneFor
-import dev.lelonio.square.ui.theme.rememberArtworkColor
-import dev.lelonio.square.ui.theme.rememberArtworkFootColor
-import dev.lelonio.square.ui.theme.pageColorFor
-import dev.lelonio.square.ui.theme.pageColorForHex
-import dev.lelonio.square.ui.theme.softShadow
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.ui.MainViewModel
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.layerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberCombinedBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberLayerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberCombinedBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberBackdropFreeze
+import dev.nkosanamahungela.sonify.ui.components.Artwork
+import dev.nkosanamahungela.sonify.ui.components.CHOICE_MENU_WIDTH
+import dev.nkosanamahungela.sonify.ui.components.GlassChoiceMenu
+import dev.nkosanamahungela.sonify.ui.components.LazyScrollBar
+import dev.nkosanamahungela.sonify.ui.components.SwipeToQueue
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.ui.theme.footToneFor
+import dev.nkosanamahungela.sonify.ui.theme.rememberArtworkColor
+import dev.nkosanamahungela.sonify.ui.theme.rememberArtworkFootColor
+import dev.nkosanamahungela.sonify.ui.theme.pageColorFor
+import dev.nkosanamahungela.sonify.ui.theme.pageColorForHex
+import dev.nkosanamahungela.sonify.ui.theme.softShadow
 import kotlin.math.roundToInt
 import java.util.Locale
 import java.util.concurrent.TimeUnit
@@ -231,13 +231,13 @@ fun PlaylistScreen(
      * that far up.
      */
     onTrackMenu: (CatalogTrack) -> Unit,
-    onOpenItem: (dev.lelonio.square.data.SearchItem) -> Unit = {},
+    onOpenItem: (dev.nkosanamahungela.sonify.data.SearchItem) -> Unit = {},
     /** Follows or unfollows the artist this page is about. */
     onToggleFollow: () -> Unit = {},
     /** Keeps the record on the artist page's top card, or lets it go. */
     onToggleLatestSaved: () -> Unit = {},
     /** Whether this page is kept on the phone, and how far along that is. */
-    downloadState: dev.lelonio.square.data.OwnerState = dev.lelonio.square.data.OwnerState.None,
+    downloadState: dev.nkosanamahungela.sonify.data.OwnerState = dev.nkosanamahungela.sonify.data.OwnerState.None,
     onToggleDownload: () -> Unit = {},
     /** False where a download makes no sense: the local files shelf, YouTube. */
     canDownload: Boolean = false,
@@ -256,8 +256,8 @@ fun PlaylistScreen(
      * second while a playlist downloads and threading a new one through the
      * screen would recompose the whole list for one row's ring.
      */
-    trackDownload: (CatalogTrack) -> dev.lelonio.square.data.DownloadState = {
-        dev.lelonio.square.data.DownloadState.None
+    trackDownload: (CatalogTrack) -> dev.nkosanamahungela.sonify.data.DownloadState = {
+        dev.nkosanamahungela.sonify.data.DownloadState.None
     },
     /** Hands the page's own link to whoever wants it. */
     /**
@@ -338,10 +338,10 @@ fun PlaylistScreen(
     // throws away the only thing that made it a radio rather than a bag of
     // songs. So the stored preference does not reach it.
     val audioPermissionNeeded = state.tracks.any {
-        dev.lelonio.square.data.LocalLibrary.isSpotifyLocal(it.uri)
-    } && !dev.lelonio.square.data.LocalLibrary.granted(LocalContext.current)
+        dev.nkosanamahungela.sonify.data.LocalLibrary.isSpotifyLocal(it.uri)
+    } && !dev.nkosanamahungela.sonify.data.LocalLibrary.granted(LocalContext.current)
     val isStation = state.uri?.startsWith("spotify:station:") == true ||
-        dev.lelonio.square.backend.youtube.YouTubeBackend.isStation(state.uri)
+        dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.isStation(state.uri)
     var sort by remember(state.uri, storedSort, isStation) {
         mutableStateOf(
             if (isStation) {
@@ -475,7 +475,7 @@ fun PlaylistScreen(
             runCatching { Color(android.graphics.Color.parseColor("#$hex")) }.getOrNull()
         }
     }
-    val baseInk = dev.lelonio.square.ui.theme.inkOn(pageColor)
+    val baseInk = dev.nkosanamahungela.sonify.ui.theme.inkOn(pageColor)
     // What the glass carries, which is not what the page carries.
     //
     // The letters on this page belong to the record: a dark brown page keeps
@@ -504,7 +504,7 @@ fun PlaylistScreen(
     val listBackdropFreeze = rememberBackdropFreeze()
 
     var sortAnchor by remember { mutableStateOf(androidx.compose.ui.unit.IntRect.Zero) }
-    val sortTrigger = dev.lelonio.square.ui.components.rememberGlassMenuTrigger()
+    val sortTrigger = dev.nkosanamahungela.sonify.ui.components.rememberGlassMenuTrigger()
 
     val density = LocalDensity.current
     val listState = rememberLazyListState()
@@ -610,7 +610,7 @@ fun PlaylistScreen(
     // phone: a dark brown page in the system's light setting was drawing its
     // track titles in the light theme's near-black.
     androidx.compose.runtime.CompositionLocalProvider(
-        dev.lelonio.square.ui.theme.LocalInkOverride provides pageInk,
+        dev.nkosanamahungela.sonify.ui.theme.LocalInkOverride provides pageInk,
         androidx.compose.material3.LocalContentColor provides pageInk,
     ) {
     MaterialTheme(
@@ -731,7 +731,7 @@ fun PlaylistScreen(
             onToggleFollow = onToggleFollow,
             download = downloadState,
             onToggleDownload = {
-                val kept = downloadState !is dev.lelonio.square.data.OwnerState.None
+                val kept = downloadState !is dev.nkosanamahungela.sonify.data.OwnerState.None
                 if (kept) confirmingRemoval = true else onToggleDownload()
             },
             // Only where the reference puts one: a record or a list. An artist
@@ -744,7 +744,7 @@ fun PlaylistScreen(
                 emptyList()
             },
             onOpenArtist = { artist ->
-                artist.uri?.let { onOpenItem(dev.lelonio.square.data.SearchItem(it, artist.name, "", null)) }
+                artist.uri?.let { onOpenItem(dev.nkosanamahungela.sonify.data.SearchItem(it, artist.name, "", null)) }
             },
             year = state.tracks.firstOrNull()?.year.orEmpty()
                 .takeIf { state.kind == MainViewModel.DetailKind.ALBUM }
@@ -817,7 +817,7 @@ fun PlaylistScreen(
                             saved = state.latestSaved,
                             onOpen = {
                                 onOpenItem(
-                                    dev.lelonio.square.data.SearchItem(
+                                    dev.nkosanamahungela.sonify.data.SearchItem(
                                         uri = release.uri,
                                         title = release.title,
                                         subtitle = "",
@@ -889,7 +889,7 @@ fun PlaylistScreen(
                             val more = state.topSongsMoreUri
                             if (more != null) {
                                 onOpenItem(
-                                    dev.lelonio.square.data.SearchItem(
+                                    dev.nkosanamahungela.sonify.data.SearchItem(
                                         uri = more,
                                         title = state.name,
                                         subtitle = "",
@@ -916,7 +916,7 @@ fun PlaylistScreen(
                 // The songs' outline while they come, rather than a spinner
                 // and then the whole list in one frame.
                 state.loading -> items(TRACK_OUTLINES, key = { "track-outline-$it" }, contentType = { "skeleton" }) {
-                    dev.lelonio.square.ui.browse.SkeletonTrackRow(
+                    dev.nkosanamahungela.sonify.ui.browse.SkeletonTrackRow(
                         Modifier.animateItem(fadeInSpec = null, placementSpec = null, fadeOutSpec = tween(160)),
                     )
                 }
@@ -996,7 +996,7 @@ fun PlaylistScreen(
                                 onClick = { if (current) onTogglePlay() else onPlay(visible, index, asContext) },
                                 onMenu = { onTrackMenu(track) },
                                 showName = state.kind != MainViewModel.DetailKind.SHOW,
-                                unavailable = offline && trackDownload(track) != dev.lelonio.square.data.DownloadState.Done,
+                                unavailable = offline && trackDownload(track) != dev.nkosanamahungela.sonify.data.DownloadState.Done,
                             )
                         } else
                         TrackRow(
@@ -1036,12 +1036,12 @@ fun PlaylistScreen(
                             // else — they were never coming over the network.
                             // A local file the playlist names and this phone
                             // does not have is greyed out, as on Spotify.
-                            unavailable = (dev.lelonio.square.data.LocalLibrary.isSpotifyLocal(track.uri) &&
+                            unavailable = (dev.nkosanamahungela.sonify.data.LocalLibrary.isSpotifyLocal(track.uri) &&
                                 track.localFile == null) ||
                                 offline &&
                                 !track.uri.startsWith("local:") &&
                                 trackDownload(track) !=
-                                dev.lelonio.square.data.DownloadState.Done,
+                                dev.nkosanamahungela.sonify.data.DownloadState.Done,
                             mixAttributes = if (mixed) state.audioAttributes[track.uri] else null,
                         )
                     }
@@ -1208,7 +1208,7 @@ fun PlaylistScreen(
                                 // Named for whose it is, under their picture:
                                 // "Video" alone, on a blank page, said nothing.
                                 onOpenItem(
-                                    dev.lelonio.square.data.SearchItem(
+                                    dev.nkosanamahungela.sonify.data.SearchItem(
                                         uri = uri,
                                         title = "${state.name} · ${shelf.title}",
                                         subtitle = state.name,
@@ -1307,7 +1307,7 @@ fun PlaylistScreen(
         }
         }
 
-        dev.lelonio.square.ui.components.ConfirmSheet(
+        dev.nkosanamahungela.sonify.ui.components.ConfirmSheet(
             visible = confirmingRemoval,
             title = stringResource(R.string.remove_download),
             message = stringResource(R.string.remove_download_confirm, state.name),
@@ -1344,7 +1344,7 @@ fun PlaylistScreen(
         // foot of the same screen was white. Cleared here, they follow the
         // phone like the rest of the chrome: a white pane with dark icons.
         androidx.compose.runtime.CompositionLocalProvider(
-            dev.lelonio.square.ui.theme.LocalInkOverride provides null,
+            dev.nkosanamahungela.sonify.ui.theme.LocalInkOverride provides null,
         ) {
 
         // Share and everything else, in one capsule opposite the back button.
@@ -1359,7 +1359,7 @@ fun PlaylistScreen(
         // search opens. It used to be a row near the top of the list, which is
         // why opening it from halfway down the page appeared to do nothing.
         if (searchPresent) {
-            dev.lelonio.square.ui.components.ListSearchField(
+            dev.nkosanamahungela.sonify.ui.components.ListSearchField(
                 query = query,
                 onQuery = { query = it },
                 // The same glass as the capsule it replaces, refracting the
@@ -1519,7 +1519,7 @@ fun PlaylistScreen(
             onDismiss = { sortOpen = false },
         ) {
             TrackSort.entries.forEach { option ->
-                dev.lelonio.square.ui.components.GlassMenuItem(
+                dev.nkosanamahungela.sonify.ui.components.GlassMenuItem(
                     stringResource(option.label),
                     selected = option == sort,
                     onClick = {
@@ -1529,12 +1529,12 @@ fun PlaylistScreen(
                     },
                 )
             }
-            dev.lelonio.square.ui.components.GlassMenuDivider()
+            dev.nkosanamahungela.sonify.ui.components.GlassMenuDivider()
 
             // Deliberately leaves the menu open: the direction is the one choice
             // people flip back and forth to compare, and reopening for each flip
             // makes a sort feel heavy.
-            dev.lelonio.square.ui.components.GlassMenuItem(
+            dev.nkosanamahungela.sonify.ui.components.GlassMenuItem(
                 stringResource(R.string.sort_descending),
                 selected = descending,
                 onClick = {
@@ -1593,14 +1593,14 @@ private fun DetailHeader(
      * The artists the byline names, each a way to their page; empty where the
      * byline is not theirs, as under a playlist.
      */
-    bylineArtists: List<dev.lelonio.square.data.CatalogArtist> = emptyList(),
-    onOpenArtist: (dev.lelonio.square.data.CatalogArtist) -> Unit = {},
+    bylineArtists: List<dev.nkosanamahungela.sonify.data.CatalogArtist> = emptyList(),
+    onOpenArtist: (dev.nkosanamahungela.sonify.data.CatalogArtist) -> Unit = {},
     /** When it came out, where the source says. */
     year: String,
     /** When a playlist last changed, ISO-8601; null on everything else. */
     updatedAt: String?,
     /** Kept on the phone, being kept, or not; see the button beside play. */
-    download: dev.lelonio.square.data.OwnerState,
+    download: dev.nkosanamahungela.sonify.data.OwnerState,
     onToggleDownload: () -> Unit,
     canDownload: Boolean,
     backdrop: Backdrop,
@@ -2009,7 +2009,7 @@ private fun HeroArt(
     // The picture and its fade are the same everywhere the app shows a cover
     // large — here and in the player; see HeroBackdrop. What belongs to this
     // screen alone is the collapse, so that is all that is left here.
-    dev.lelonio.square.ui.components.HeroBackdrop(
+    dev.nkosanamahungela.sonify.ui.components.HeroBackdrop(
         artworkUrl = artworkUrl,
         title = name,
         pageColor = pageColor,
@@ -2476,9 +2476,9 @@ private fun GlassCapsule(
             .height(42.dp)
             .clip(shape)
             .liquidGlass(
-                config = dev.lelonio.square.ui.glass.LocalGlassEffectConfig.current,
+                config = dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig.current,
                 shape = shape,
-                blurRadiusDp = dev.lelonio.square.ui.glass.LocalGlassEffectConfig.current.blurRadius,
+                blurRadiusDp = dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig.current.blurRadius,
                 ownBackdrop = backdrop,
             )
             // The rim comes with the material now; this is the drawn edge that
@@ -2527,14 +2527,14 @@ private fun CapsuleAction(
  */
 @Composable
 private fun DownloadAction(
-    state: dev.lelonio.square.data.OwnerState,
+    state: dev.nkosanamahungela.sonify.data.OwnerState,
     backdrop: Backdrop,
     onClick: () -> Unit,
     tint: Color = Color.White,
 ) {
-    val kept = state is dev.lelonio.square.data.OwnerState.Complete ||
-        state is dev.lelonio.square.data.OwnerState.Partial
-    val running = state as? dev.lelonio.square.data.OwnerState.Running
+    val kept = state is dev.nkosanamahungela.sonify.data.OwnerState.Complete ||
+        state is dev.nkosanamahungela.sonify.data.OwnerState.Partial
+    val running = state as? dev.nkosanamahungela.sonify.data.OwnerState.Running
 
     Box(contentAlignment = Alignment.Center) {
         CircleAction(
@@ -2606,9 +2606,9 @@ private fun CircleAction(
 
 @Composable
 private fun AlbumStrip(
-    albums: List<dev.lelonio.square.data.SearchItem>,
+    albums: List<dev.nkosanamahungela.sonify.data.SearchItem>,
     title: String,
-    onOpen: (dev.lelonio.square.data.SearchItem) -> Unit,
+    onOpen: (dev.nkosanamahungela.sonify.data.SearchItem) -> Unit,
     /** The whole shelf, where the source has a page for it. */
     onMore: (() -> Unit)? = null,
 ) {
@@ -2717,7 +2717,7 @@ private fun StatPill(icon: androidx.compose.ui.graphics.vector.ImageVector, text
  */
 @Composable
 private fun VideoStrip(
-    shelf: dev.lelonio.square.data.ArtistShelf,
+    shelf: dev.nkosanamahungela.sonify.data.ArtistShelf,
     onPlay: (Int) -> Unit,
     onMore: (() -> Unit)?,
 ) {
@@ -2774,7 +2774,7 @@ private fun SectionHeader(
     /** Where the sort button is, for the menu drawn above the list. */
     onAnchor: (androidx.compose.ui.unit.IntRect) -> Unit,
     /** The sort button's handover to its menu; see GlassChoiceMenu. */
-    sortTrigger: dev.lelonio.square.ui.components.GlassMenuTrigger? = null,
+    sortTrigger: dev.nkosanamahungela.sonify.ui.components.GlassMenuTrigger? = null,
     /** What the sort button's glass reads. */
     backdrop: Backdrop? = null,
     /** Whether there is more of this section than the page is showing. */
@@ -2846,7 +2846,7 @@ private fun SectionHeader(
         // while the mix is on; see `mixed` where the list is built.
         if (mix != true && backdrop != null) {
             // Upstream's GlassPullDownButton, which the sort menu grows out of.
-            dev.lelonio.square.ui.components.GlassPullDownButton(
+            dev.nkosanamahungela.sonify.ui.components.GlassPullDownButton(
                 icon = PhosphorIcons.Bold.ArrowsDownUp,
                 semanticLabel = stringResource(R.string.sort),
                 onOpen = { onSortOpen(true) },
@@ -2921,12 +2921,12 @@ private fun inkTintedBy(color: Color, ink: Color): Color {
  * because a row full of empty placeholders would be worse than no marks.
  */
 @Composable
-private fun DownloadMark(state: dev.lelonio.square.data.DownloadState) {
-    val running = state as? dev.lelonio.square.data.DownloadState.Running
+private fun DownloadMark(state: dev.nkosanamahungela.sonify.data.DownloadState) {
+    val running = state as? dev.nkosanamahungela.sonify.data.DownloadState.Running
     // Queued deliberately draws nothing. A playlist of four hundred songs would
     // otherwise sprout four hundred marks the instant the button is pressed,
     // which says "all downloaded" a good ten minutes before it is true.
-    if (state !is dev.lelonio.square.data.DownloadState.Done && running == null) return
+    if (state !is dev.nkosanamahungela.sonify.data.DownloadState.Done && running == null) return
 
     val accent = MaterialTheme.colorScheme.primary
     Box(
@@ -2935,7 +2935,7 @@ private fun DownloadMark(state: dev.lelonio.square.data.DownloadState) {
             .size(14.dp),
         contentAlignment = Alignment.Center,
     ) {
-        if (state is dev.lelonio.square.data.DownloadState.Done) {
+        if (state is dev.nkosanamahungela.sonify.data.DownloadState.Done) {
             Icon(
                 PhosphorIcons.Fill.ArrowCircleDown,
                 contentDescription = stringResource(R.string.downloaded),
@@ -3004,8 +3004,8 @@ private fun TrackRow(
     /** How far into it the listener got, for an episode they started. */
     progress: Float? = null,
     /** Nothing is drawn until a download for this track exists; see below. */
-    download: dev.lelonio.square.data.DownloadState =
-        dev.lelonio.square.data.DownloadState.None,
+    download: dev.nkosanamahungela.sonify.data.DownloadState =
+        dev.nkosanamahungela.sonify.data.DownloadState.None,
     /**
      * Offline, and this one is not on the phone.
      *
@@ -3015,7 +3015,7 @@ private fun TrackRow(
      */
     unavailable: Boolean = false,
     /** Tempo and key, on a page playing as a Spotify Mix; see Mixes. */
-    mixAttributes: dev.lelonio.square.playback.Mixes.Attributes? = null,
+    mixAttributes: dev.nkosanamahungela.sonify.playback.Mixes.Attributes? = null,
 ) {
     val shape = RoundedCornerShape(14.dp)
     // Everything in the row fades together, artwork included, so it reads as
@@ -3149,8 +3149,8 @@ private fun TrackRow(
                 // never needs to be a target.
                 // A file on the phone, or one a Spotify playlist names: never
                 // downloaded, so it gets its own mark rather than the arrow.
-                if (dev.lelonio.square.data.LocalLibrary.isLocal(track.uri) ||
-                    dev.lelonio.square.data.LocalLibrary.isSpotifyLocal(track.uri)
+                if (dev.nkosanamahungela.sonify.data.LocalLibrary.isLocal(track.uri) ||
+                    dev.nkosanamahungela.sonify.data.LocalLibrary.isSpotifyLocal(track.uri)
                 ) {
                     Icon(
                         PhosphorIcons.Fill.FloppyDisk,
@@ -3166,7 +3166,7 @@ private fun TrackRow(
                 // The rating before the names, where every other client puts
                 // it, and only on the rows that carry one.
                 if (track.explicit) {
-                    dev.lelonio.square.ui.components.ExplicitMark(
+                    dev.nkosanamahungela.sonify.ui.components.ExplicitMark(
                         modifier = Modifier.padding(end = 6.dp),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -3219,16 +3219,16 @@ private fun TrackRow(
 private fun MixPill(
     on: Boolean,
     onClick: () -> Unit,
-    backdrop: dev.lelonio.square.ui.glass.backdrop.Backdrop?,
+    backdrop: dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop?,
 ) {
     val accent = MaterialTheme.colorScheme.primary
     // Upstream's GlassChip, its icon and label in the accent while it is on,
     // as the official app lights it; the app's page where nothing is handed.
-    dev.lelonio.square.ui.components.FilterChip(
+    dev.nkosanamahungela.sonify.ui.components.FilterChip(
         label = stringResource(R.string.mix),
         selected = on,
         onClick = onClick,
-        backdrop = backdrop ?: dev.lelonio.square.ui.glass.LocalAppBackdrop.current,
+        backdrop = backdrop ?: dev.nkosanamahungela.sonify.ui.glass.LocalAppBackdrop.current,
         icon = PhosphorIcons.Regular.SlidersHorizontal,
         ink = if (on) accent else Color.Unspecified,
         modifier = Modifier
@@ -3246,7 +3246,7 @@ private fun MixPill(
  * as the official app does.
  */
 @Composable
-private fun MixTag(attributes: dev.lelonio.square.playback.Mixes.Attributes) {
+private fun MixTag(attributes: dev.nkosanamahungela.sonify.playback.Mixes.Attributes) {
     Column(
         Modifier.padding(start = 8.dp, end = 2.dp),
         horizontalAlignment = Alignment.End,
@@ -3290,7 +3290,7 @@ private fun camelotColor(camelot: String): Color {
  * "Auto" where Spotify's own automatic transition applies.
  */
 @Composable
-private fun TransitionTag(transition: dev.lelonio.square.playback.Mixes.Transition?) {
+private fun TransitionTag(transition: dev.nkosanamahungela.sonify.playback.Mixes.Transition?) {
     val ink = MaterialTheme.colorScheme.onSurfaceVariant
     Row(
         Modifier
@@ -3632,8 +3632,8 @@ private fun FollowPill(following: Boolean, onClick: () -> Unit) {
     val shape = RoundedCornerShape(percent = 50)
     // Filled with the ink and lettered in whatever the ink is not: white on
     // black over a dark page, black on white over a light one.
-    val pillInk = dev.lelonio.square.ui.theme.Ink
-    val onPillInk = if (dev.lelonio.square.ui.theme.lightPage()) Color.White else Color.Black
+    val pillInk = dev.nkosanamahungela.sonify.ui.theme.Ink
+    val onPillInk = if (dev.nkosanamahungela.sonify.ui.theme.lightPage()) Color.White else Color.Black
     Row(
         Modifier
             .clip(shape)

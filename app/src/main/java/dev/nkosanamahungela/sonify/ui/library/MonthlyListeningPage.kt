@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.library
+package dev.nkosanamahungela.sonify.ui.library
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
@@ -45,18 +45,18 @@ import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.regular.ArrowLeft
 import com.adamglin.phosphoricons.regular.CaretLeft
 import com.adamglin.phosphoricons.regular.CaretRight
-import dev.lelonio.square.R
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.data.ListeningEvent
-import dev.lelonio.square.data.ListeningHistory
-import dev.lelonio.square.data.MonthlyListening
-import dev.lelonio.square.ui.components.Artwork
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.glass.shapes.ContinuousRoundedRectangle
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.data.ListeningEvent
+import dev.nkosanamahungela.sonify.data.ListeningHistory
+import dev.nkosanamahungela.sonify.data.MonthlyListening
+import dev.nkosanamahungela.sonify.ui.components.Artwork
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousRoundedRectangle
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
 import java.time.Instant
 import java.time.YearMonth
 import java.time.ZoneId

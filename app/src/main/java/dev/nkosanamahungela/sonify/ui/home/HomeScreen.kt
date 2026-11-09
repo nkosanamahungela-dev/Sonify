@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.home
+package dev.nkosanamahungela.sonify.ui.home
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
@@ -60,7 +60,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.unit.lerp
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.regular.ArrowsLeftRight
@@ -72,24 +72,24 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.material3.Icon
-import dev.lelonio.square.R
-import dev.lelonio.square.data.CatalogPlaylist
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.data.SearchItem
-import dev.lelonio.square.data.sortedByRecentlyOpened
-import dev.lelonio.square.ui.MainViewModel
-import dev.lelonio.square.ui.components.AppGlyph
-import dev.lelonio.square.ui.components.AppLockup
-import dev.lelonio.square.ui.components.Artwork
-import dev.lelonio.square.ui.components.SquareWordmark
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.CatalogPlaylist
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.data.SearchItem
+import dev.nkosanamahungela.sonify.data.sortedByRecentlyOpened
+import dev.nkosanamahungela.sonify.ui.MainViewModel
+import dev.nkosanamahungela.sonify.ui.components.AppGlyph
+import dev.nkosanamahungela.sonify.ui.components.AppLockup
+import dev.nkosanamahungela.sonify.ui.components.Artwork
+import dev.nkosanamahungela.sonify.ui.components.SquareWordmark
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.Constraints
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.player.GlassFilm
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.InkDim
-import dev.lelonio.square.ui.theme.softShadow
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.player.GlassFilm
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.ui.theme.softShadow
 import java.util.Calendar
 
 /**
@@ -105,10 +105,10 @@ import java.util.Calendar
  * TabContents.chipOf. There used to be a chip for the library and one for new
  * releases, which were two other tabs of this app said again on this one.
  */
-private enum class Feed(@StringRes val label: Int, val chip: dev.lelonio.square.data.TabContents.Chip?) {
+private enum class Feed(@StringRes val label: Int, val chip: dev.nkosanamahungela.sonify.data.TabContents.Chip?) {
     ALL(R.string.feed_all, null),
-    FOR_YOU(R.string.feed_for_you, dev.lelonio.square.data.TabContents.Chip.FOR_YOU),
-    ARTISTS(R.string.artists, dev.lelonio.square.data.TabContents.Chip.ARTISTS),
+    FOR_YOU(R.string.feed_for_you, dev.nkosanamahungela.sonify.data.TabContents.Chip.FOR_YOU),
+    ARTISTS(R.string.artists, dev.nkosanamahungela.sonify.data.TabContents.Chip.ARTISTS),
     /**
      * Spotify's own podcast page rather than a part of this one: its shows
      * and episodes come from a home of their own, asked for when the chip is.
@@ -146,9 +146,9 @@ fun HomeScreen(
     onOpenItem: (SearchItem) -> Unit,
     onOpenSettings: () -> Unit,
     /** Friend activity, for the faces beside the account picture. */
-    friends: List<dev.lelonio.square.data.FriendListen> = emptyList(),
+    friends: List<dev.nkosanamahungela.sonify.data.FriendListen> = emptyList(),
     onOpenFriends: () -> Unit = {},
-    /** The layer the glass on this page refracts; see the note in SquareApp. */
+    /** The layer the glass on this page refracts; see the note in SonifyApp. */
     backdrop: Backdrop,
     /**
      * True when the active source is YouTube Music.
@@ -164,7 +164,7 @@ fun HomeScreen(
     youtubeHome: MainViewModel.YouTubeHomeState = MainViewModel.YouTubeHomeState(),
     onPlayTrending: (List<CatalogTrack>, Int) -> Unit = { _, _ -> },
     /** One of YouTube's own filters above the page, or null to clear it. */
-    onPickYouTubeChip: (dev.lelonio.square.backend.HomeChip?) -> Unit = {},
+    onPickYouTubeChip: (dev.nkosanamahungela.sonify.backend.HomeChip?) -> Unit = {},
     /** Called from the bottom of the page: the next shelves, if there are any. */
     onLoadMoreYouTube: () -> Unit = {},
     /** Whether a Google account is signed in; the page suggests one otherwise. */
@@ -180,11 +180,11 @@ fun HomeScreen(
      * recognises as their home page, and unlike everything below them they
      * cannot be reconstructed from the account's playlists.
      */
-    shelves: List<dev.lelonio.square.data.HomeShelf> = emptyList(),
+    shelves: List<dev.nkosanamahungela.sonify.data.HomeShelf> = emptyList(),
     /** Spotify's shelves are on their way; their outline stands in until then. */
     shelvesLoading: Boolean = false,
     /** Spotify's podcast home, for the chip of it; asked for with [onWantPodcasts]. */
-    podcastShelves: List<dev.lelonio.square.data.HomeShelf> = emptyList(),
+    podcastShelves: List<dev.nkosanamahungela.sonify.data.HomeShelf> = emptyList(),
     podcastsLoading: Boolean = false,
     onWantPodcasts: () -> Unit = {},
     /** An episode tile: played, not opened. */
@@ -226,12 +226,12 @@ fun HomeScreen(
                 modifier = Modifier.padding(horizontal = 40.dp),
             )
             GlassAction(stringResource(R.string.log_in_with_spotify), backdrop, onLogIn)
-            dev.lelonio.square.ui.components.SignedOutOptions(onUseYouTube, onOpenSettings)
+            dev.nkosanamahungela.sonify.ui.components.SignedOutOptions(onUseYouTube, onOpenSettings)
         }
 
         MainViewModel.UiState.Connecting,
         MainViewModel.UiState.Loading,
-        -> dev.lelonio.square.ui.components.ConnectingState(backdrop, onGoOffline)
+        -> dev.nkosanamahungela.sonify.ui.components.ConnectingState(backdrop, onGoOffline)
 
         is MainViewModel.UiState.Failed -> Centered {
             Text(
@@ -257,7 +257,7 @@ fun HomeScreen(
             val chips = remember(shelves) {
                 listOf(Feed.ALL) + Feed.entries.filter { entry ->
                     entry.chip != null &&
-                        shelves.any { dev.lelonio.square.data.TabContents.chipOf(it) == entry.chip }
+                        shelves.any { dev.nkosanamahungela.sonify.data.TabContents.chipOf(it) == entry.chip }
                 } + listOfNotNull(Feed.PODCASTS.takeIf { shelves.isNotEmpty() })
             }
             val filter = chips.firstOrNull { it.name == filterName } ?: Feed.ALL
@@ -275,7 +275,7 @@ fun HomeScreen(
                 // this page: home is what the service put together for the
                 // listener, and a folder of files is not that.
                 state.playlists
-                    .filterNot { dev.lelonio.square.data.LocalLibrary.isLocalContext(it.uri) }
+                    .filterNot { dev.nkosanamahungela.sonify.data.LocalLibrary.isLocalContext(it.uri) }
                     .sortedByRecentlyOpened(playlistOrder)
             }
             val listState = rememberLazyListState()
@@ -288,7 +288,7 @@ fun HomeScreen(
             // untouched. Past the first item the header is simply fully
             // collapsed — asking for the exact offset of something scrolled far
             // off screen means measuring items that no longer exist.
-            val offline by dev.lelonio.square.playback.OfflineMode.active
+            val offline by dev.nkosanamahungela.sonify.playback.OfflineMode.active
                 .collectAsStateWithLifecycle()
 
             val collapse by remember {
@@ -405,7 +405,7 @@ fun HomeScreen(
                 // first visible item — snapped shut instead of easing.
                 if (offline) {
                     item(key = "offline") {
-                        dev.lelonio.square.ui.components.OfflineNotice(onRetry = onRetryOnline)
+                        dev.nkosanamahungela.sonify.ui.components.OfflineNotice(onRetry = onRetryOnline)
                     }
                 }
 
@@ -425,7 +425,7 @@ fun HomeScreen(
                     val visible = when (filter) {
                         Feed.ALL -> shelves
                         Feed.PODCASTS -> podcastShelves
-                        else -> shelves.filter { dev.lelonio.square.data.TabContents.chipOf(it) == filter.chip }
+                        else -> shelves.filter { dev.nkosanamahungela.sonify.data.TabContents.chipOf(it) == filter.chip }
                     }
                     // Their outline while they come, and a fade as they land
                     // rather than the rows appearing in one frame.
@@ -452,7 +452,7 @@ fun HomeScreen(
                             Box(Modifier.animateItem(fadeInSpec = tween(320), placementSpec = null, fadeOutSpec = null)) {
                                 Carousel(shelf.items, key = { it.uri }) { entry ->
                                     PlaylistTile(entry) {
-                                        if (dev.lelonio.square.data.SpotifyPodcasts.isEpisode(entry.uri)) {
+                                        if (dev.nkosanamahungela.sonify.data.SpotifyPodcasts.isEpisode(entry.uri)) {
                                             onPlayEpisode(entry, shelf.title)
                                         } else {
                                             onOpenPlaylist(entry)
@@ -646,7 +646,7 @@ private fun Header(
     chips: List<Feed> = Feed.entries.toList(),
     onOpenSettings: () -> Unit,
     /** Who the account follows and what they play; empty hides the control. */
-    friends: List<dev.lelonio.square.data.FriendListen> = emptyList(),
+    friends: List<dev.nkosanamahungela.sonify.data.FriendListen> = emptyList(),
     onOpenFriends: () -> Unit = {},
     /**
      * False on a page with no feed to filter.
@@ -672,7 +672,7 @@ private fun Header(
             // leaves no band when there is nothing scrolled under it.
             .background(
                 Brush.verticalGradient(
-                    0f to dev.lelonio.square.ui.theme.pageGround(),
+                    0f to dev.nkosanamahungela.sonify.ui.theme.pageGround(),
                     1f to Color.Transparent,
                 ),
             )
@@ -789,7 +789,7 @@ private fun Header(
                 FriendFaces(friends, onOpenFriends)
             }
 
-            dev.lelonio.square.ui.components.ProfilePicture(
+            dev.nkosanamahungela.sonify.ui.components.ProfilePicture(
                 url = avatarUrl,
                 name = name,
                 size = 46.dp,
@@ -823,7 +823,7 @@ private fun FilterRow(selected: Feed, chips: List<Feed>, backdrop: Backdrop, onS
         modifier = Modifier.padding(top = 18.dp, bottom = 6.dp),
     ) {
         items(chips, key = { it.name }) { entry ->
-            dev.lelonio.square.ui.components.FilterChip(
+            dev.nkosanamahungela.sonify.ui.components.FilterChip(
                 backdrop = backdrop,
                 label = stringResource(entry.label),
                 selected = entry == selected,
@@ -1266,10 +1266,10 @@ private fun QuickPickRow(track: CatalogTrack, onClick: () -> Unit) {
 /** The service's own filters, drawn as the app's own chips. */
 @Composable
 private fun ChipRow(
-    chips: List<dev.lelonio.square.backend.HomeChip>,
+    chips: List<dev.nkosanamahungela.sonify.backend.HomeChip>,
     selected: String?,
     backdrop: Backdrop,
-    onPick: (dev.lelonio.square.backend.HomeChip?) -> Unit,
+    onPick: (dev.nkosanamahungela.sonify.backend.HomeChip?) -> Unit,
 ) {
     LazyRow(
         contentPadding = PaddingValues(horizontal = 20.dp),
@@ -1278,7 +1278,7 @@ private fun ChipRow(
     ) {
         items(chips, key = { it.title }) { chip ->
             val isSelected = chip.title == selected
-            dev.lelonio.square.ui.components.FilterChip(
+            dev.nkosanamahungela.sonify.ui.components.FilterChip(
                 backdrop = backdrop,
                 label = chip.title,
                 selected = isSelected,
@@ -1327,7 +1327,7 @@ private fun YouTubeHome(
     onOpenPlaylist: (CatalogPlaylist) -> Unit,
     onOpenSettings: () -> Unit,
     onSwitchSource: () -> Unit,
-    onPickChip: (dev.lelonio.square.backend.HomeChip?) -> Unit,
+    onPickChip: (dev.nkosanamahungela.sonify.backend.HomeChip?) -> Unit,
     onLoadMore: () -> Unit,
     signedIn: Boolean,
     onSignIn: () -> Unit,
@@ -1416,7 +1416,7 @@ private fun YouTubeHome(
         // country's home rather than the listener's.
         if (!signedIn) {
             item(key = "sign-in") {
-                dev.lelonio.square.ui.components.SignInHint(
+                dev.nkosanamahungela.sonify.ui.components.SignInHint(
                     onSignIn = onSignIn,
                     modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 12.dp, bottom = 4.dp),
                 )
@@ -1523,7 +1523,7 @@ private fun YouTubeHome(
 @Composable
 fun SourceRowsPage(
     title: String,
-    rows: List<dev.lelonio.square.backend.HomeRow>,
+    rows: List<dev.nkosanamahungela.sonify.backend.HomeRow>,
     loading: Boolean,
     contentPadding: PaddingValues,
     onPlay: (List<CatalogTrack>, Int) -> Unit,
@@ -1677,7 +1677,7 @@ private const val LIBRARY_SIZE = 30
  */
 @Composable
 private fun FriendFaces(
-    friends: List<dev.lelonio.square.data.FriendListen>,
+    friends: List<dev.nkosanamahungela.sonify.data.FriendListen>,
     onClick: () -> Unit,
 ) {
     val shown = friends.take(3)

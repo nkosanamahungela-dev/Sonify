@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.library
+package dev.nkosanamahungela.sonify.ui.library
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -35,10 +35,10 @@ import com.adamglin.phosphoricons.bold.DotsThree
 import com.adamglin.phosphoricons.fill.CheckCircle
 import com.adamglin.phosphoricons.fill.Pause
 import com.adamglin.phosphoricons.fill.Play
-import dev.lelonio.square.R
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.ui.components.Artwork
-import dev.lelonio.square.ui.glass.pressable
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.ui.components.Artwork
+import dev.nkosanamahungela.sonify.ui.glass.pressable
 
 /**
  * One episode, as a card rather than a song's row.

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.onboarding
+package dev.nkosanamahungela.sonify.ui.onboarding
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,13 +33,13 @@ import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.fill.SpotifyLogo
 import com.adamglin.phosphoricons.fill.YoutubeLogo
 import com.adamglin.phosphoricons.regular.CaretRight
-import dev.lelonio.square.R
-import dev.lelonio.square.backend.BackendId
-import dev.lelonio.square.ui.components.AppGlyph
-import dev.lelonio.square.ui.components.SquareWordmark
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.backend.BackendId
+import dev.nkosanamahungela.sonify.ui.components.AppGlyph
+import dev.nkosanamahungela.sonify.ui.components.SquareWordmark
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
 
 /**
  * The first question a fresh install asks: where the music comes from.

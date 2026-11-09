@@ -1,8 +1,8 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.compose.foundation.background
-import dev.lelonio.square.ui.glass.backdrop.effects.blur
-import dev.lelonio.square.ui.glass.backdrop.drawBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.blur
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.drawBackdrop
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.slideInVertically
@@ -40,11 +40,11 @@ import com.adamglin.phosphoricons.Fill
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.fill.Heart
 import com.adamglin.phosphoricons.regular.Check
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.R
-import dev.lelonio.square.data.CatalogPlaylist
-import dev.lelonio.square.ui.MainViewModel
-import dev.lelonio.square.ui.components.Artwork
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.CatalogPlaylist
+import dev.nkosanamahungela.sonify.ui.MainViewModel
+import dev.nkosanamahungela.sonify.ui.components.Artwork
 
 /**
  * Which playlist the playing track should go into.
@@ -66,12 +66,12 @@ fun AddToPlaylistSheet(
     onDismiss: () -> Unit,
 ) {
     // Upstream's GlassSheet, over the whole app; see GlassSheetHost.
-    dev.lelonio.square.ui.components.GlassSheet(
+    dev.nkosanamahungela.sonify.ui.components.GlassSheet(
         visible = state.open,
         onDismiss = onDismiss,
         scrollable = false,
     ) {
-                dev.lelonio.square.ui.components.SheetTitle(stringResource(R.string.add_to_playlist))
+                dev.nkosanamahungela.sonify.ui.components.SheetTitle(stringResource(R.string.add_to_playlist))
                 Text(
                     // Says what is being added: the sheet can outlive the track
                     // that opened it, since playback carries on underneath.

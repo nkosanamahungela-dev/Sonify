@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.onboarding
+package dev.nkosanamahungela.sonify.ui.onboarding
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
@@ -42,14 +42,14 @@ import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.regular.ArrowLeft
 import com.adamglin.phosphoricons.regular.ArrowUpRight
-import dev.lelonio.square.R
-import dev.lelonio.square.data.AppLanguages
-import dev.lelonio.square.ui.MainViewModel
-import dev.lelonio.square.ui.components.AppGlyph
-import dev.lelonio.square.ui.components.FilterChip
-import dev.lelonio.square.ui.components.SquareWordmark
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.AppLanguages
+import dev.nkosanamahungela.sonify.ui.MainViewModel
+import dev.nkosanamahungela.sonify.ui.components.AppGlyph
+import dev.nkosanamahungela.sonify.ui.components.FilterChip
+import dev.nkosanamahungela.sonify.ui.components.SquareWordmark
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
 
 /**
  * What a new install has to be told before it can play anything.
@@ -168,7 +168,7 @@ private fun Welcome(language: String, onLanguage: (String) -> Unit) {
     // finish the tutorial first to find it would be the wrong way round.
     // Nothing glassy sits behind the onboarding pages, so the chips' glass
     // samples nothing and shows only its own film and rim.
-    LanguageChips(language, dev.lelonio.square.ui.glass.backdrop.backdrops.emptyBackdrop(), onLanguage)
+    LanguageChips(language, dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.emptyBackdrop(), onLanguage)
 }
 
 @Composable
@@ -333,7 +333,7 @@ private fun Done() {
  * task rather than as a choice already made for most people.
  */
 @Composable
-private fun LanguageChips(language: String, backdrop: dev.lelonio.square.ui.glass.backdrop.Backdrop, onLanguage: (String) -> Unit) {
+private fun LanguageChips(language: String, backdrop: dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop, onLanguage: (String) -> Unit) {
     Row(
         Modifier
             .padding(top = 24.dp)
@@ -370,7 +370,7 @@ internal fun openOrCopy(
     clipboard.setText(androidx.compose.ui.text.AnnotatedString(url))
     android.widget.Toast.makeText(
         context,
-        context.getString(dev.lelonio.square.R.string.link_copied_open_browser),
+        context.getString(dev.nkosanamahungela.sonify.R.string.link_copied_open_browser),
         android.widget.Toast.LENGTH_LONG,
     ).show()
 }

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.onboarding
+package dev.nkosanamahungela.sonify.ui.onboarding
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -41,11 +41,11 @@ import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.regular.Check
 import com.adamglin.phosphoricons.regular.Info
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.InkDim
-import dev.lelonio.square.ui.theme.lightPage
-import dev.lelonio.square.ui.theme.pageGround
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.ui.theme.lightPage
+import dev.nkosanamahungela.sonify.ui.theme.pageGround
 
 /*
  * What the setup is drawn with: the first question and the guide after it.

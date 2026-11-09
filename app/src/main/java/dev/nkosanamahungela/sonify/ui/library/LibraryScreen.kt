@@ -1,6 +1,6 @@
-package dev.lelonio.square.ui.library
+package dev.nkosanamahungela.sonify.ui.library
 
-import dev.lelonio.square.ui.components.glassMenuTrigger
+import dev.nkosanamahungela.sonify.ui.components.glassMenuTrigger
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.horizontalScroll
 import androidx.annotation.StringRes
@@ -56,31 +56,31 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.R
-import dev.lelonio.square.data.CatalogPlaylist
-import dev.lelonio.square.data.sortedByRecentlyOpened
-import dev.lelonio.square.data.withLocalFilesFirst
-import dev.lelonio.square.data.withLikedSecond
-import dev.lelonio.square.data.withPinnedFirst
-import dev.lelonio.square.ui.MainViewModel
-import dev.lelonio.square.ui.components.Artwork
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.player.GlassFilm
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.InkDim
-import dev.lelonio.square.ui.theme.softShadow
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.CatalogPlaylist
+import dev.nkosanamahungela.sonify.data.sortedByRecentlyOpened
+import dev.nkosanamahungela.sonify.data.withLocalFilesFirst
+import dev.nkosanamahungela.sonify.data.withLikedSecond
+import dev.nkosanamahungela.sonify.data.withPinnedFirst
+import dev.nkosanamahungela.sonify.ui.MainViewModel
+import dev.nkosanamahungela.sonify.ui.components.Artwork
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.player.GlassFilm
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.ui.theme.softShadow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.boundsInRoot
-import dev.lelonio.square.ui.components.CHOICE_MENU_WIDTH
-import dev.lelonio.square.ui.components.GlassChoiceMenu
-import dev.lelonio.square.ui.glass.backdrop.backdrops.layerBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberCombinedBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberLayerBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberBackdropFreeze
+import dev.nkosanamahungela.sonify.ui.components.CHOICE_MENU_WIDTH
+import dev.nkosanamahungela.sonify.ui.components.GlassChoiceMenu
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.layerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberCombinedBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberLayerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberBackdropFreeze
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Fill
 import com.adamglin.phosphoricons.fill.PushPin
@@ -146,8 +146,8 @@ fun LibraryScreen(
     /** Long press: rename and delete live in a sheet, like a track's actions. */
     onPlaylistMenu: (CatalogPlaylist) -> Unit = {},
     /** The artists the account follows; empty leaves the shelf out entirely. */
-    artists: List<dev.lelonio.square.data.SearchItem> = emptyList(),
-    onOpenArtist: (dev.lelonio.square.data.SearchItem) -> Unit = {},
+    artists: List<dev.nkosanamahungela.sonify.data.SearchItem> = emptyList(),
+    onOpenArtist: (dev.nkosanamahungela.sonify.data.SearchItem) -> Unit = {},
     /** The albums the account has saved; see MainViewModel.savedAlbums. */
     albums: List<CatalogPlaylist> = emptyList(),
     /** The podcasts the account follows; none leaves their chip out. */
@@ -163,7 +163,7 @@ fun LibraryScreen(
     /** Signed out of Spotify: the other source, and the settings; see SignedOutOptions. */
     onUseYouTube: () -> Unit = {},
     onOpenSettings: () -> Unit = {},
-    listeningEvents: List<dev.lelonio.square.data.ListeningEvent>? = null,
+    listeningEvents: List<dev.nkosanamahungela.sonify.data.ListeningEvent>? = null,
     /** Whether those were played from Spotify, rather than YouTube Music. */
     listeningFromSpotify: Boolean = true,
     backdrop: Backdrop,
@@ -173,8 +173,8 @@ fun LibraryScreen(
         // are one state reached from two tabs, and a plain title here made
         // them read as two different apps.
         MainViewModel.UiState.LoggedOut -> Centered {
-            dev.lelonio.square.ui.components.AppGlyph(64.dp)
-            dev.lelonio.square.ui.components.SquareWordmark(height = 28.dp)
+            dev.nkosanamahungela.sonify.ui.components.AppGlyph(64.dp)
+            dev.nkosanamahungela.sonify.ui.components.SquareWordmark(height = 28.dp)
             Text(
                 stringResource(R.string.unofficial_client),
                 style = MaterialTheme.typography.bodyMedium,
@@ -183,12 +183,12 @@ fun LibraryScreen(
                 modifier = Modifier.padding(horizontal = 40.dp),
             )
             GlassAction(stringResource(R.string.log_in_with_spotify), backdrop, onLogIn)
-            dev.lelonio.square.ui.components.SignedOutOptions(onUseYouTube, onOpenSettings)
+            dev.nkosanamahungela.sonify.ui.components.SignedOutOptions(onUseYouTube, onOpenSettings)
         }
 
         MainViewModel.UiState.Connecting,
         MainViewModel.UiState.Loading,
-        -> dev.lelonio.square.ui.components.ConnectingState(backdrop, onGoOffline)
+        -> dev.nkosanamahungela.sonify.ui.components.ConnectingState(backdrop, onGoOffline)
 
         is MainViewModel.UiState.Failed -> Centered {
             Text(
@@ -208,7 +208,7 @@ fun LibraryScreen(
             // left and written as they change; see LibraryViewStore.
             val appContext = LocalContext.current.applicationContext
             val view = remember(appContext) {
-                (appContext as dev.lelonio.square.SquareApplication).libraryView
+                (appContext as dev.nkosanamahungela.sonify.SonifyApplication).libraryView
             }
             var layout by remember { mutableStateOf(if (view.grid) Layout.GRID else Layout.LIST) }
             var order by remember {
@@ -231,7 +231,7 @@ fun LibraryScreen(
                 view.order = it.key
             }
             var sortAnchor by remember { mutableStateOf(androidx.compose.ui.unit.IntRect.Zero) }
-            val sortTrigger = dev.lelonio.square.ui.components.rememberGlassMenuTrigger()
+            val sortTrigger = dev.nkosanamahungela.sonify.ui.components.rememberGlassMenuTrigger()
 
             val artistItems = remember(artists) {
                 artists.map { artist ->
@@ -323,7 +323,7 @@ fun LibraryScreen(
                 // the header's buttons: upstream's GlassPullDownButton, which
                 // the sort menu grows out of. The order chosen is ticked in it.
                 val sortButton: @Composable (Modifier) -> Unit = { buttonModifier ->
-                    dev.lelonio.square.ui.components.GlassPullDownButton(
+                    dev.nkosanamahungela.sonify.ui.components.GlassPullDownButton(
                         icon = PhosphorIcons.Regular.ArrowsDownUp,
                         semanticLabel = stringResource(R.string.sort) + ": " + stringResource(order.label),
                         onOpen = { sortOpen = true },
@@ -390,7 +390,7 @@ fun LibraryScreen(
                             }
                         }
                         item(span = { GridItemSpan(maxLineSpan) }, key = "search") {
-                            dev.lelonio.square.ui.components.ListSearchField(
+                            dev.nkosanamahungela.sonify.ui.components.ListSearchField(
                                 query = query,
                                 onQuery = { query = it },
                                 placeholder = stringResource(R.string.search_library),
@@ -403,12 +403,12 @@ fun LibraryScreen(
                         // of the library. Nothing at all when there is a
                         // connection; see OfflineNotice.
                         item(span = { GridItemSpan(maxLineSpan) }, key = "offline") {
-                            dev.lelonio.square.ui.components.OfflineNotice(onRetry = onRetryOnline)
+                            dev.nkosanamahungela.sonify.ui.components.OfflineNotice(onRetry = onRetryOnline)
                         }
 
                         if (signInHint) {
                             item(span = { GridItemSpan(maxLineSpan) }, key = "sign-in") {
-                                dev.lelonio.square.ui.components.SignInHint(onSignIn = onSignIn)
+                                dev.nkosanamahungela.sonify.ui.components.SignInHint(onSignIn = onSignIn)
                             }
                         }
 
@@ -449,7 +449,7 @@ fun LibraryScreen(
                             item(key = "heading") { Box(Modifier.bleed(20.dp)) { heading() } }
                         }
                         item(key = "search") {
-                            dev.lelonio.square.ui.components.ListSearchField(
+                            dev.nkosanamahungela.sonify.ui.components.ListSearchField(
                                 query = query,
                                 onQuery = { query = it },
                                 placeholder = stringResource(R.string.search_library),
@@ -459,12 +459,12 @@ fun LibraryScreen(
                         }
 
                         item(key = "offline") {
-                            dev.lelonio.square.ui.components.OfflineNotice(onRetry = onRetryOnline)
+                            dev.nkosanamahungela.sonify.ui.components.OfflineNotice(onRetry = onRetryOnline)
                         }
 
                         if (signInHint) {
                             item(key = "sign-in") {
-                                dev.lelonio.square.ui.components.SignInHint(
+                                dev.nkosanamahungela.sonify.ui.components.SignInHint(
                                     onSignIn = onSignIn,
                                     modifier = Modifier.padding(horizontal = 20.dp, vertical = 6.dp),
                                 )
@@ -506,7 +506,7 @@ fun LibraryScreen(
                 width = 240.dp,
             ) {
                 Order.entries.forEach { entry ->
-                    dev.lelonio.square.ui.components.GlassMenuItem(
+                    dev.nkosanamahungela.sonify.ui.components.GlassMenuItem(
                         stringResource(entry.label),
                         selected = entry == order,
                         onClick = {
@@ -515,12 +515,12 @@ fun LibraryScreen(
                         },
                     )
                 }
-                dev.lelonio.square.ui.components.GlassMenuDivider()
+                dev.nkosanamahungela.sonify.ui.components.GlassMenuDivider()
 
                 // Deliberately leaves the menu open: the direction is the one
                 // choice people flip back and forth to compare, and reopening
                 // for each flip makes a sort feel heavy.
-                dev.lelonio.square.ui.components.GlassMenuItem(
+                dev.nkosanamahungela.sonify.ui.components.GlassMenuItem(
                     stringResource(R.string.sort_descending),
                     selected = descending,
                     onClick = {
@@ -546,9 +546,9 @@ fun LibraryScreen(
  */
 private fun open(
     item: CatalogPlaylist,
-    artists: List<dev.lelonio.square.data.SearchItem>,
+    artists: List<dev.nkosanamahungela.sonify.data.SearchItem>,
     onOpenPlaylist: (CatalogPlaylist) -> Unit,
-    onOpenArtist: (dev.lelonio.square.data.SearchItem) -> Unit,
+    onOpenArtist: (dev.nkosanamahungela.sonify.data.SearchItem) -> Unit,
 ) {
     val artist = artists.firstOrNull { it.uri == item.uri }
     if (artist != null) onOpenArtist(artist) else onOpenPlaylist(item)
@@ -602,17 +602,17 @@ private fun Header(
                         .height(44.dp),
                     contentAlignment = Alignment.CenterStart,
                 ) {
-                    dev.lelonio.square.ui.components.SquareTitle(
+                    dev.nkosanamahungela.sonify.ui.components.SquareTitle(
                         stringResource(R.string.library),
-                        height = dev.lelonio.square.ui.components.TITLE_HEIGHT,
-                        modifier = Modifier.offset(y = -dev.lelonio.square.ui.components.TITLE_HEIGHT * 0.15f),
+                        height = dev.nkosanamahungela.sonify.ui.components.TITLE_HEIGHT,
+                        modifier = Modifier.offset(y = -dev.nkosanamahungela.sonify.ui.components.TITLE_HEIGHT * 0.15f),
                     )
                 }
             }
 
             // Upstream's blend group: a pressed button swells into its
             // neighbour and the two melt like drops.
-            dev.lelonio.square.ui.glass.GlassBlendGroup(backdrop = backdrop) {
+            dev.nkosanamahungela.sonify.ui.glass.GlassBlendGroup(backdrop = backdrop) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                     if (onOpenRecap != null) {
                         LiquidButton(
@@ -688,7 +688,7 @@ private fun Header(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
             Filter.entries.filter { it != Filter.PODCASTS || hasPodcasts }.forEach { entry ->
-                dev.lelonio.square.ui.components.FilterChip(
+                dev.nkosanamahungela.sonify.ui.components.FilterChip(
                 backdrop = backdrop,
                     label = stringResource(entry.label),
                     selected = entry == filter,
@@ -825,8 +825,8 @@ private val SelectedFilm = Color.White.copy(alpha = 0.26f)
  */
 @Composable
 private fun ArtistShelf(
-    artists: List<dev.lelonio.square.data.SearchItem>,
-    onOpen: (dev.lelonio.square.data.SearchItem) -> Unit,
+    artists: List<dev.nkosanamahungela.sonify.data.SearchItem>,
+    onOpen: (dev.nkosanamahungela.sonify.data.SearchItem) -> Unit,
 ) {
     val uniqueArtists = remember(artists) { artists.distinctBy { it.uri } }
     Column(Modifier.padding(bottom = 18.dp)) {
