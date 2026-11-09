@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import android.graphics.Bitmap
 import coil.size.Size

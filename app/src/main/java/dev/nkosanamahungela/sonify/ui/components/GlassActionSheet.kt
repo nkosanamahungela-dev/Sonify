@@ -14,7 +14,7 @@
 // Upstream wraps each card in an AdaptiveLiquidGlassLayer with no glass shape
 // inside it, so what it draws is the card's own colour; so does this.
 
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.CubicBezierEasing
@@ -74,9 +74,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.glass.LocalGlassEffectConfig
-import dev.lelonio.square.ui.glass.liquidGlass
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig
+import dev.nkosanamahungela.sonify.ui.glass.liquidGlass
 
 /** Upstream's GlassActionSheetStyle. */
 enum class GlassActionSheetStyle { Default, Destructive, Cancel }
@@ -97,7 +97,7 @@ private val EaseInToLinear = CubicBezierEasing(0.67f, 0.03f, 0.65f, 0.09f)
 @Composable
 private fun Modifier.card(
     shape: RoundedCornerShape,
-    backdrop: dev.lelonio.square.ui.glass.backdrop.Backdrop?,
+    backdrop: dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop?,
     ink: ActionSheetInk,
 ): Modifier {
     val glass = if (backdrop != null) {
@@ -136,7 +136,7 @@ fun GlassActionSheet(
     showCancelButton: Boolean = true,
     actions: @Composable ColumnScope.() -> Unit,
 ) {
-    val ink = ActionSheetInk(light = dev.lelonio.square.ui.theme.LocalLightTheme.current)
+    val ink = ActionSheetInk(light = dev.nkosanamahungela.sonify.ui.theme.LocalLightTheme.current)
     // Kept so the exit has something to play: `visible` going false is the
     // start of the closing, not the end of it.
     val open = remember { androidx.compose.animation.core.MutableTransitionState(false) }

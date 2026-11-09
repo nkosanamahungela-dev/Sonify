@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -44,14 +44,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.backdrop.drawBackdrop
-import dev.lelonio.square.ui.glass.backdrop.effects.blur
-import dev.lelonio.square.R
-import dev.lelonio.square.data.FriendListen
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.player.GlassSurface
-import dev.lelonio.square.ui.theme.softShadow
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.drawBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.blur
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.FriendListen
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.player.GlassSurface
+import dev.nkosanamahungela.sonify.ui.theme.softShadow
 
 /**
  * Who the account follows, and what they were last heard playing.
@@ -78,8 +78,8 @@ fun BoxScope.FriendsPanel(
      * MainViewModel.addFriend.
      */
     onAddFriend: (String) -> Unit = {},
-    addState: dev.lelonio.square.ui.MainViewModel.AddFriend =
-        dev.lelonio.square.ui.MainViewModel.AddFriend.IDLE,
+    addState: dev.nkosanamahungela.sonify.ui.MainViewModel.AddFriend =
+        dev.nkosanamahungela.sonify.ui.MainViewModel.AddFriend.IDLE,
 ) {
     AnimatedVisibility(
         visible = visible,
@@ -173,11 +173,11 @@ fun BoxScope.FriendsPanel(
  */
 @Composable
 private fun AddFriendField(
-    state: dev.lelonio.square.ui.MainViewModel.AddFriend,
+    state: dev.nkosanamahungela.sonify.ui.MainViewModel.AddFriend,
     onAdd: (String) -> Unit,
 ) {
     var typed by remember { mutableStateOf("") }
-    val working = state == dev.lelonio.square.ui.MainViewModel.AddFriend.WORKING
+    val working = state == dev.nkosanamahungela.sonify.ui.MainViewModel.AddFriend.WORKING
 
     Column(Modifier.padding(start = 22.dp, end = 22.dp, top = 14.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -221,9 +221,9 @@ private fun AddFriendField(
         }
 
         val message = when (state) {
-            dev.lelonio.square.ui.MainViewModel.AddFriend.DONE -> R.string.add_friend_done
-            dev.lelonio.square.ui.MainViewModel.AddFriend.FAILED -> R.string.add_friend_failed
-            dev.lelonio.square.ui.MainViewModel.AddFriend.UNSUPPORTED ->
+            dev.nkosanamahungela.sonify.ui.MainViewModel.AddFriend.DONE -> R.string.add_friend_done
+            dev.nkosanamahungela.sonify.ui.MainViewModel.AddFriend.FAILED -> R.string.add_friend_failed
+            dev.nkosanamahungela.sonify.ui.MainViewModel.AddFriend.UNSUPPORTED ->
                 R.string.add_friend_unsupported
             else -> null
         }

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import android.content.Context
 import android.os.PowerManager
@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.Dp
 import coil.compose.AsyncImage
 import coil.imageLoader
 import coil.request.ImageRequest
-import dev.lelonio.square.ui.theme.warmArtworkColor
+import dev.nkosanamahungela.sonify.ui.theme.warmArtworkColor
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull

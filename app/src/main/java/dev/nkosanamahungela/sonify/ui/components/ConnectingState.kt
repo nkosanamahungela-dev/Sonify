@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -22,11 +22,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
 import kotlinx.coroutines.delay
 
 /**

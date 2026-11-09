@@ -1,7 +1,7 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.runtime.Composable
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
 
 /**
  * One question with two answers: upstream's GlassActionSheet, the answer

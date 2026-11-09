@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -53,9 +53,9 @@ import coil.compose.AsyncImage
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.regular.ImageSquare
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
 
 /**
  * A playlist's name, and where the source keeps them, a description, whether
@@ -77,7 +77,7 @@ fun CreatePlaylistDialog(
     onCreate: (name: String, description: String, public: Boolean, cover: Uri?) -> Unit,
     onDismiss: () -> Unit,
     /** What an existing playlist has now; null for a new one. */
-    initial: dev.lelonio.square.backend.PlaylistDetails? = null,
+    initial: dev.nkosanamahungela.sonify.backend.PlaylistDetails? = null,
     /** Waiting for [initial]: the fields are not shown half-filled. */
     loading: Boolean = false,
 ) {
@@ -204,11 +204,11 @@ fun CreatePlaylistDialog(
                             color = InkDim,
                         )
                     }
-                    dev.lelonio.square.ui.glass.LiquidToggle(
+                    dev.nkosanamahungela.sonify.ui.glass.LiquidToggle(
                         selected = { public },
                         onSelect = { if (!busy) public = it },
                         backdrop = LocalGlassSheetHost.current?.backdrop
-                            ?: dev.lelonio.square.ui.glass.LocalAppBackdrop.current,
+                            ?: dev.nkosanamahungela.sonify.ui.glass.LocalAppBackdrop.current,
                     )
                 }
             }

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
@@ -9,7 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import dev.lelonio.square.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.Ink
 import androidx.compose.animation.core.snap
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -88,7 +88,7 @@ fun Artwork(
     Box(modifier.clip(shape), contentAlignment = Alignment.Center) {
         if (url == DOWNLOADS_COVER) {
             DownloadsCover()
-        } else if (url == dev.lelonio.square.data.LocalLibrary.COVER) {
+        } else if (url == dev.nkosanamahungela.sonify.data.LocalLibrary.COVER) {
             LocalFilesCover()
         } else if (url != null) {
             // Offline the url is not something that can be fetched over network,
@@ -225,7 +225,7 @@ private fun LocalFilesCover() {
  */
 fun artSource(url: String): Any =
     if (!offlineOnly()) url
-    else dev.lelonio.square.download.DownloadExtras.fileOf(url, "art") ?: url
+    else dev.nkosanamahungela.sonify.download.DownloadExtras.fileOf(url, "art") ?: url
 
 /**
  * Whether only what is already here may be drawn.
@@ -234,7 +234,7 @@ fun artSource(url: String): Any =
  * app has been told it does not have — and on a metered one, somebody's data.
  */
 private fun offlineOnly(): Boolean =
-    dev.lelonio.square.playback.OfflineMode.active.value
+    dev.nkosanamahungela.sonify.playback.OfflineMode.active.value
 
 /**
  * Whether this picture is on the phone already.
@@ -249,7 +249,7 @@ private fun isOnThisPhone(url: String): Boolean =
     url.startsWith("file:") ||
         url.startsWith("/") ||
         url.startsWith("content:") ||
-        dev.lelonio.square.download.DownloadExtras.fileOf(url, "art") != null
+        dev.nkosanamahungela.sonify.download.DownloadExtras.fileOf(url, "art") != null
 
 /**
  * Requests a smaller print of a Spotify CDN image when a small decode target

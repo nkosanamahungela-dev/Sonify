@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -9,10 +9,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.lelonio.square.ui.glass.AnchorStretchSettings
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.theme.lightPage
+import dev.nkosanamahungela.sonify.ui.glass.AnchorStretchSettings
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.theme.lightPage
 
 /**
  * One of a row of filters: liquid_glass_widgets' GlassChip, MIT.

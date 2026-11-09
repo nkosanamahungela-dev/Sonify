@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.browse
+package dev.nkosanamahungela.sonify.ui.browse
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat

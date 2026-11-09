@@ -12,7 +12,7 @@
 // lays over itself so the glass can read the page under it; the button below
 // is its trigger, and the rows are upstream's menu items.
 
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -52,9 +52,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntRect
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.player.GlassInk
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.player.GlassInk
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.regular.Check
 

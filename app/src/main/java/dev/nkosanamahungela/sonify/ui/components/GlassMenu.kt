@@ -1,6 +1,6 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
-import dev.lelonio.square.ui.player.GlassInk
+import dev.nkosanamahungela.sonify.ui.player.GlassInk
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.animateFloat
@@ -13,9 +13,9 @@ import androidx.compose.ui.layout.layout
 import androidx.compose.ui.util.lerp
 import kotlin.math.roundToInt
 import kotlin.math.pow
-import dev.lelonio.square.ui.glass.morph.liquidGlassGroup
-import dev.lelonio.square.ui.glass.morph.LiquidGlassRenderer
-import dev.lelonio.square.ui.glass.toLiquidGlassSettings
+import dev.nkosanamahungela.sonify.ui.glass.morph.liquidGlassGroup
+import dev.nkosanamahungela.sonify.ui.glass.morph.LiquidGlassRenderer
+import dev.nkosanamahungela.sonify.ui.glass.toLiquidGlassSettings
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.Stable
@@ -28,11 +28,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import dev.lelonio.square.ui.glass.liquidGlass
-import dev.lelonio.square.ui.player.GlassSurface
-import dev.lelonio.square.ui.theme.softShadow
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.shapes.ContinuousCapsule
+import dev.nkosanamahungela.sonify.ui.glass.liquidGlass
+import dev.nkosanamahungela.sonify.ui.player.GlassSurface
+import dev.nkosanamahungela.sonify.ui.theme.softShadow
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.height
@@ -175,7 +175,7 @@ private val MenuSurfaceLight = Color(0xFFF6F6FA)
 
 /** The base a menu is built on, on whichever side of the app it opens. */
 private val MenuSurface: Color
-    @Composable get() = if (dev.lelonio.square.ui.theme.lightPage()) {
+    @Composable get() = if (dev.nkosanamahungela.sonify.ui.theme.lightPage()) {
         MenuSurfaceLight
     } else {
         MenuSurfaceDark
@@ -183,7 +183,7 @@ private val MenuSurface: Color
 
 /** The hairline every other surface in the app catches light with. */
 private val MenuEdge: Color
-    @Composable get() = if (dev.lelonio.square.ui.theme.lightPage()) {
+    @Composable get() = if (dev.nkosanamahungela.sonify.ui.theme.lightPage()) {
         Color.Black.copy(alpha = 0.12f)
     } else {
         Color.White.copy(alpha = 0.14f)
@@ -320,8 +320,8 @@ fun BoxScope.GlassChoiceMenu(
     // will cover, and an area that grew once the rows were measured read it
     // a second time, leaving the glass missing for the frames that took.
     var rowsHeight by remember { mutableIntStateOf(0) }
-    val capture = dev.lelonio.square.ui.glass.morph.rememberLiquidGlassCapture()
-    val morph = dev.lelonio.square.ui.glass.morph.rememberGlassMorphController(
+    val capture = dev.nkosanamahungela.sonify.ui.glass.morph.rememberLiquidGlassCapture()
+    val morph = dev.nkosanamahungela.sonify.ui.glass.morph.rememberGlassMorphController(
         visible && rowsHeight > 0 && capture.ready,
     )
     val showing by remember { derivedStateOf { morph.isShowing } }
@@ -404,7 +404,7 @@ fun BoxScope.GlassChoiceMenu(
         if (visible && !wasVisible[0]) capture.reset()
         wasVisible[0] = visible
     }
-    val darkPage = !dev.lelonio.square.ui.theme.lightPage()
+    val darkPage = !dev.nkosanamahungela.sonify.ui.theme.lightPage()
     Box(
         Modifier
             .align(Alignment.TopStart)
@@ -418,9 +418,9 @@ fun BoxScope.GlassChoiceMenu(
                 // inherits the theme's: this path reads a sharp and a blurred
                 // copy of the page and has no frost pass, so the frost's cloud
                 // is its blur, at the frost's own sigma.
-                settings = dev.lelonio.square.ui.glass.LocalGlassEffectConfig.current.let { config ->
+                settings = dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig.current.let { config ->
                     if (config.ios27) {
-                        dev.lelonio.square.ui.glass.ios27Settings(!darkPage, config).let {
+                        dev.nkosanamahungela.sonify.ui.glass.ios27Settings(!darkPage, config).let {
                             if (it.frost > 0f) it.copy(blur = maxOf(it.blur, it.frost), frost = 0f) else it
                         }
                     } else {
@@ -434,7 +434,7 @@ fun BoxScope.GlassChoiceMenu(
         // top right, scaled with the container and clipped to it, as
         // upstream's _buildBodyContent and GlassContainer do.
         androidx.compose.runtime.CompositionLocalProvider(
-            dev.lelonio.square.ui.theme.LocalInkOverride provides dev.lelonio.square.ui.theme.AppInk,
+            dev.nkosanamahungela.sonify.ui.theme.LocalInkOverride provides dev.nkosanamahungela.sonify.ui.theme.AppInk,
             LocalChoiceRowMorph provides { frame().rows },
         ) {
             Column(
@@ -519,7 +519,7 @@ private fun BoxScope.CompatibleGlassChoiceMenu(
         },
     ) {
         val shape = RoundedCornerShape(20.dp)
-        val config = dev.lelonio.square.ui.glass.LocalGlassEffectConfig.current
+        val config = dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig.current
         Box(
             Modifier
                 .width(CHOICE_MENU_WIDTH)
@@ -536,7 +536,7 @@ private fun BoxScope.CompatibleGlassChoiceMenu(
                 .clip(shape),
         ) {
             androidx.compose.runtime.CompositionLocalProvider(
-                dev.lelonio.square.ui.theme.LocalInkOverride provides dev.lelonio.square.ui.theme.AppInk,
+                dev.nkosanamahungela.sonify.ui.theme.LocalInkOverride provides dev.nkosanamahungela.sonify.ui.theme.AppInk,
             ) {
                 Column(Modifier.padding(vertical = 4.dp), content = content)
             }
@@ -554,7 +554,7 @@ private fun BoxScope.CompatibleGlassChoiceMenu(
  */
 @Stable
 class GlassMenuTrigger {
-    internal var morph by mutableStateOf<dev.lelonio.square.ui.glass.morph.GlassMorphController?>(null)
+    internal var morph by mutableStateOf<dev.nkosanamahungela.sonify.ui.glass.morph.GlassMorphController?>(null)
     internal var finalDx = 0f
     internal var finalDy = 0f
 }
@@ -588,7 +588,7 @@ internal val LocalChoiceRowMorph =
 
 /** One frame of the choice menu. All in logical pixels, in the glass area's own space. */
 private class ChoiceMenuFrame(
-    val glass: dev.lelonio.square.ui.glass.morph.LiquidGlassFrame,
+    val glass: dev.nkosanamahungela.sonify.ui.glass.morph.LiquidGlassFrame,
     val body: androidx.compose.ui.geometry.Rect,
     val radius: Float,
     val containerScale: Float,
@@ -598,7 +598,7 @@ private class ChoiceMenuFrame(
 
 /** Upstream's GlassMenu geometry for one frame (_buildMorphingOverlay). */
 private fun choiceMenuFrame(
-    morph: dev.lelonio.square.ui.glass.morph.GlassMorphController,
+    morph: dev.nkosanamahungela.sonify.ui.glass.morph.GlassMorphController,
     tx: Float,
     ty: Float,
     tw: Float,
@@ -631,7 +631,7 @@ private fun choiceMenuFrame(
     }
 
     val maxRadius = minOf(currentWidth, currentHeight) / 2f
-    val radiusT = dev.lelonio.square.ui.glass.morph.FlutterCurves.easeInExpo(state.sizeT.coerceIn(0f, 1f))
+    val radiusT = dev.nkosanamahungela.sonify.ui.glass.morph.FlutterCurves.easeInExpo(state.sizeT.coerceIn(0f, 1f))
     val currentRadius = if (closing) {
         if (isPremium) maxRadius else lerp(triggerRadius, CHOICE_MENU_RADIUS, radiusT)
     } else {
@@ -665,8 +665,8 @@ private fun choiceMenuFrame(
             val w = tw * state.anchorScale
             val h = th * state.anchorScale
             add(
-                dev.lelonio.square.ui.glass.morph.LiquidShape(
-                    type = dev.lelonio.square.ui.glass.morph.LiquidShapeType.RoundedRectangle,
+                dev.nkosanamahungela.sonify.ui.glass.morph.LiquidShape(
+                    type = dev.nkosanamahungela.sonify.ui.glass.morph.LiquidShapeType.RoundedRectangle,
                     bounds = androidx.compose.ui.geometry.Rect(cx - w / 2f, cy - h / 2f, cx + w / 2f, cy + h / 2f),
                     cornerRadius = triggerRadius,
                 ),
@@ -675,8 +675,8 @@ private fun choiceMenuFrame(
         // Blob B, the menu body; a sub-pixel body registers nothing.
         if (currentWidth >= 1f && currentHeight >= 1f) {
             add(
-                dev.lelonio.square.ui.glass.morph.LiquidShape(
-                    type = dev.lelonio.square.ui.glass.morph.LiquidShapeType.RoundedRectangle,
+                dev.nkosanamahungela.sonify.ui.glass.morph.LiquidShape(
+                    type = dev.nkosanamahungela.sonify.ui.glass.morph.LiquidShapeType.RoundedRectangle,
                     bounds = body,
                     cornerRadius = currentRadius,
                 ),
@@ -694,11 +694,11 @@ private fun choiceMenuFrame(
     val itemScale = lerp(
         0.7f,
         1f,
-        dev.lelonio.square.ui.glass.morph.FlutterCurves.easeOut(((clampedValue - 0.25f) / 0.75f).coerceIn(0f, 1f)),
+        dev.nkosanamahungela.sonify.ui.glass.morph.FlutterCurves.easeOut(((clampedValue - 0.25f) / 0.75f).coerceIn(0f, 1f)),
     )
 
     return ChoiceMenuFrame(
-        glass = dev.lelonio.square.ui.glass.morph.LiquidGlassFrame(
+        glass = dev.nkosanamahungela.sonify.ui.glass.morph.LiquidGlassFrame(
             shapes = shapes,
             blend = state.blend,
             opacity = overlayOpacity,
@@ -784,18 +784,18 @@ fun Modifier.menuSkin(shape: androidx.compose.ui.graphics.Shape): Modifier =
  */
 @Composable
 private fun choiceFilm(): Color =
-    if (dev.lelonio.square.ui.theme.lightPage()) Color(0xFFF6F6FA).copy(alpha = 0.9f)
+    if (dev.nkosanamahungela.sonify.ui.theme.lightPage()) Color(0xFFF6F6FA).copy(alpha = 0.9f)
     else Color(0xFF16161A).copy(alpha = 0.88f)
 
 @Composable
 private fun menuFilm(): Color {
-    val config = dev.lelonio.square.ui.glass.LocalGlassEffectConfig.current
+    val config = dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig.current
     val missing = (MENU_FLOOR_OPACITY - config.surfaceOpacity).coerceAtLeast(0f)
     // The listener's own tint where they set one, and the adaptive film
     // otherwise — the same rule the glass itself follows; see GlassEffect.
     val tint = if (config.surfaceTintColor.isSpecified) {
         config.surfaceTintColor
-    } else if (dev.lelonio.square.ui.theme.lightPage()) {
+    } else if (dev.nkosanamahungela.sonify.ui.theme.lightPage()) {
         Color(0xFFFAFAFA)
     } else {
         Color(0xFF23232A)
