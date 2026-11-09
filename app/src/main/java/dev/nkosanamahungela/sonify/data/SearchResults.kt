@@ -1,4 +1,4 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 /** Anything a search result can point at, flattened for the UI. */
 data class SearchItem(

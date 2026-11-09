@@ -1,10 +1,10 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 import android.content.res.Resources
 import android.util.Base64
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.MainViewModel.ArtistPage
-import dev.lelonio.square.ui.MainViewModel.ArtistRelease
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.MainViewModel.ArtistPage
+import dev.nkosanamahungela.sonify.ui.MainViewModel.ArtistRelease
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient

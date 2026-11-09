@@ -1,4 +1,4 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 import org.json.JSONObject
 
@@ -73,7 +73,7 @@ object SpotifyBrowse {
     private fun entry(item: JSONObject): CatalogPlaylist? {
         val uri = item.optString("uri")
         if (uri.isEmpty()) return null
-        if (uri == Catalog.DJ_URI && !dev.lelonio.square.backend.spotify.SpotifyDj.enabled) return null
+        if (uri == Catalog.DJ_URI && !dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.enabled) return null
         val data = item.optJSONObject("content")?.optJSONObject("data") ?: return null
 
         return when (data.optString("__typename")) {

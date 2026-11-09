@@ -1,4 +1,4 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 /**
  * Which tab each of Spotify's rows belongs to, so that nothing is shown twice.

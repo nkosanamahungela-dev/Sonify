@@ -1,4 +1,4 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 import org.json.JSONArray
 import org.json.JSONObject
@@ -106,7 +106,7 @@ object SpotifyHome {
         // no tracks to resolve, so opening it as a page only ever showed a
         // blank one. With the DJ on it is played as a session instead (see
         // SpotifyDj); off, it is kept out as before.
-        if (uri == Catalog.DJ_URI && !dev.lelonio.square.backend.spotify.SpotifyDj.enabled) return null
+        if (uri == Catalog.DJ_URI && !dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.enabled) return null
         val content = item.optJSONObject("content") ?: return null
         val data = content.optJSONObject("data") ?: return null
 

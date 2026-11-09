@@ -1,10 +1,10 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 /** Spotify's enhanced playlist context, rather than songs drawn from a track radio. */
 object SmartShuffle {
-    const val COMMAND = "dev.lelonio.square.SMART_SHUFFLE"
-    const val MODE = "dev.lelonio.square.SMART_SHUFFLE_ACTIVE"
-    const val RECOMMENDED = "dev.lelonio.square.SMART_RECOMMENDED"
+    const val COMMAND = "dev.nkosanamahungela.sonify.SMART_SHUFFLE"
+    const val MODE = "dev.nkosanamahungela.sonify.SMART_SHUFFLE_ACTIVE"
+    const val RECOMMENDED = "dev.nkosanamahungela.sonify.SMART_RECOMMENDED"
 
     suspend fun recommendations(context: String, excluded: Set<String>): List<CatalogTrack> {
         require(context.startsWith("spotify:playlist:") || context.startsWith("spotify:user:") && context.endsWith(":collection"))

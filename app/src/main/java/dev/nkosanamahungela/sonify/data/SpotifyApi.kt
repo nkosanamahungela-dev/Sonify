@@ -1,4 +1,4 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
