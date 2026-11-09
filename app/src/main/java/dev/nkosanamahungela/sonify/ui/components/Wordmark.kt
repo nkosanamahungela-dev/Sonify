@@ -155,22 +155,15 @@ fun AppPlate(
 }
 
 /**
- * The app's mark with no plate under it.
+ * The app's supplied full Sonify logo.
  *
- * The launcher icon is a tile: artwork on a coloured square, because that is
- * what a launcher draws. On a page of the app itself there is nothing for a
- * tile to sit on — it reads as a sticker of the icon rather than as the app's
- * own mark — so what is used is the wave alone, in the page's ink.
- *
- * Drawn from the same file the launcher art came from — see
- * `app/icon-src/wave-square.svg` — rather than from the stroked approximation
- * the themed launcher icon carries, which was a redrawing of it by hand and
- * showed at this size.
+ * The complete supplied Sonify logo is used here so the in-app mark matches
+ * the launcher, splash screen, and notification identity.
  */
 @Composable
 fun AppGlyph(size: Dp, modifier: Modifier = Modifier, tint: Color = Ink) {
     Icon(
-        painter = painterResource(R.drawable.ic_app_mark),
+        painter = painterResource(R.drawable.sonify_logo),
         contentDescription = null,
         tint = tint,
         modifier = modifier.size(size),
