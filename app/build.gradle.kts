@@ -132,7 +132,7 @@ android {
             // only view there is of a page that came back in the wrong shape.
             buildConfigField("boolean", "VERBOSE_LOG", "true")
             // The glass's switches from adb, to measure one against the other
-            // without a build each: see SquareApplication.
+            // without a build each: see SonifyApplication.
             buildConfigField("boolean", "GLASS_FLAGS", "true")
             // The real key when there is one: a build signed with a different
             // key than the copy already on the phone cannot replace it, and
@@ -165,7 +165,7 @@ android {
 
     buildFeatures {
         compose = true
-        // Off by default since AGP 8; SquareApplication reads BuildConfig.DEBUG.
+        // Off by default since AGP 8; SonifyApplication reads BuildConfig.DEBUG.
         buildConfig = true
     }
 

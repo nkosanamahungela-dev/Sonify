@@ -404,6 +404,8 @@ class PlaybackService : MediaLibraryService() {
         // only thing being changed.
         setMediaNotificationProvider(
             androidx.media3.session.DefaultMediaNotificationProvider.Builder(this)
+                .setChannelId("sonify_playback")
+                .setChannelName(dev.nkosanamahungela.sonify.R.string.playback_channel)
                 .build()
                 .apply { setSmallIcon(dev.nkosanamahungela.sonify.R.drawable.ic_notification) },
         )
@@ -1708,7 +1710,7 @@ class PlaybackService : MediaLibraryService() {
      *
      * Read once a second rather than from listener events: the player is
      * swapped whole when the source changes, and the widget only redraws when
-     * what it shows has actually changed; see SquareWidget.publish.
+     * what it shows has actually changed; see SonifyWidget.publish.
      */
     private fun startWidgetUpdates() {
         scope.launch {
@@ -1717,9 +1719,9 @@ class PlaybackService : MediaLibraryService() {
                 val metadata = item?.mediaMetadata
                 val title = metadata?.title?.toString()
                 if (!title.isNullOrBlank()) {
-                    dev.nkosanamahungela.sonify.widget.SquareWidget.publish(
+                    dev.nkosanamahungela.sonify.widget.SonifyWidget.publish(
                         this@PlaybackService,
-                        dev.nkosanamahungela.sonify.widget.SquareWidget.NowPlaying(
+                        dev.nkosanamahungela.sonify.widget.SonifyWidget.NowPlaying(
                             title = title,
                             artist = metadata.artist?.toString().orEmpty(),
                             artworkUri = metadata.artworkUri?.toString(),
@@ -2073,9 +2075,9 @@ class PlaybackService : MediaLibraryService() {
         // Nothing plays once the service is gone, whatever the widget last heard.
         runCatching {
             player.currentMediaItem?.mediaMetadata?.let { metadata ->
-                dev.nkosanamahungela.sonify.widget.SquareWidget.publish(
+                dev.nkosanamahungela.sonify.widget.SonifyWidget.publish(
                     this,
-                    dev.nkosanamahungela.sonify.widget.SquareWidget.NowPlaying(
+                    dev.nkosanamahungela.sonify.widget.SonifyWidget.NowPlaying(
                         title = metadata.title?.toString().orEmpty(),
                         artist = metadata.artist?.toString().orEmpty(),
                         artworkUri = metadata.artworkUri?.toString(),

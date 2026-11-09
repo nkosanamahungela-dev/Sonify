@@ -27,20 +27,16 @@ import dev.nkosanamahungela.sonify.ui.theme.Ink
 /**
  * The name, drawn rather than typeset.
  *
- * The icon is a square wave: one stroke width, right angles only, no curve
- * anywhere. No font shipped with Android says that — a bold sans still has
- * round bowls on S and Q and a diagonal on R — and pulling in a display face
- * for six letters costs more than the six letters do.
- *
- * So the letterforms are the same primitive as the icon: polylines on a 6×10
- * grid, orthogonal segments, square caps and joins. The Q's tail drops below
- * the baseline, which is the one thing that keeps it from reading as an O.
+ * The Sonify wordmark is drawn rather than typeset. Its six capital letters use
+ * the same compact, right-angled visual language as the app mark: polylines on
+ * a 6×10 grid, with square caps and joins. Drawing the letters keeps the
+ * branding consistent without shipping a separate display font.
  *
  * Sized by its height: the width follows from the grid, so callers give this a
  * height and let it measure itself.
  */
 @Composable
-fun SquareWordmark(
+fun SonifyWordmark(
     height: Dp,
     modifier: Modifier = Modifier,
     color: Color = Ink,
@@ -100,7 +96,7 @@ fun AppLockup(
             AppPlate(iconSize, plate)
         }
         Spacer(Modifier.width(iconSize * 0.32f))
-        SquareWordmark(nameHeight)
+        SonifyWordmark(nameHeight)
     }
 }
 
@@ -159,52 +155,43 @@ fun AppPlate(
 }
 
 /**
- * The app's mark with no plate under it.
+ * The app's supplied full Sonify logo.
  *
- * The launcher icon is a tile: artwork on a coloured square, because that is
- * what a launcher draws. On a page of the app itself there is nothing for a
- * tile to sit on — it reads as a sticker of the icon rather than as the app's
- * own mark — so what is used is the wave alone, in the page's ink.
- *
- * Drawn from the same file the launcher art came from — see
- * `app/icon-src/wave-square.svg` — rather than from the stroked approximation
- * the themed launcher icon carries, which was a redrawing of it by hand and
- * showed at this size.
+ * The complete supplied Sonify logo is used here so the in-app mark matches
+ * the launcher, splash screen, and notification identity.
  */
 @Composable
 fun AppGlyph(size: Dp, modifier: Modifier = Modifier, tint: Color = Ink) {
     Icon(
-        painter = painterResource(R.drawable.ic_app_mark),
+        painter = painterResource(R.drawable.sonify_logo),
         contentDescription = null,
         tint = tint,
         modifier = modifier.size(size),
     )
 }
 
-/** S Q U A R E, as polylines on the grid described in [SquareWordmark]. */
+/** S O N I F Y, as polylines on the grid described in [SonifyWordmark]. */
 private val GLYPHS: List<List<List<Pair<Float, Float>>>> = listOf(
     // S
     listOf(listOf(6f to 0f, 0f to 0f, 0f to 5f, 6f to 5f, 6f to 10f, 0f to 10f)),
-    // Q: a closed box with the tail dropped out of the bottom right.
+    // O
+    listOf(listOf(0f to 0f, 6f to 0f, 6f to 10f, 0f to 10f, 0f to 0f)),
+    // N
+    listOf(listOf(0f to 10f, 0f to 0f, 6f to 0f, 6f to 10f)),
+    // I
     listOf(
-        listOf(0f to 0f, 6f to 0f, 6f to 10f, 0f to 10f, 0f to 0f),
-        listOf(4f to 8f, 4f to 12f),
+        listOf(0f to 0f, 6f to 0f),
+        listOf(3f to 0f, 3f to 10f),
+        listOf(0f to 10f, 6f to 10f),
     ),
-    // U
-    listOf(listOf(0f to 0f, 0f to 10f, 6f to 10f, 6f to 0f)),
-    // A: the apex is a corner, not a point.
+    // F
     listOf(
-        listOf(0f to 10f, 0f to 0f, 6f to 0f, 6f to 10f),
-        listOf(0f to 6f, 6f to 6f),
-    ),
-    // R: the leg comes straight down instead of splaying.
-    listOf(
-        listOf(0f to 10f, 0f to 0f, 6f to 0f, 6f to 5f, 0f to 5f),
-        listOf(3f to 5f, 3f to 10f),
-    ),
-    // E
-    listOf(
-        listOf(6f to 0f, 0f to 0f, 0f to 10f, 6f to 10f),
+        listOf(6f to 0f, 0f to 0f, 0f to 10f),
         listOf(0f to 5f, 4f to 5f),
+    ),
+    // Y
+    listOf(
+        listOf(0f to 0f, 0f to 5f, 6f to 5f),
+        listOf(6f to 0f, 6f to 10f, 0f to 10f),
     ),
 )
