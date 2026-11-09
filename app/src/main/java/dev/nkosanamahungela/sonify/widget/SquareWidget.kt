@@ -1,4 +1,4 @@
-package dev.lelonio.square.widget
+package dev.nkosanamahungela.sonify.widget
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -18,11 +18,11 @@ import coil.imageLoader
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import com.google.common.util.concurrent.MoreExecutors
-import dev.lelonio.square.R
-import dev.lelonio.square.SquareApplication
-import dev.lelonio.square.playback.ACTION_OPEN_PLAYER
-import dev.lelonio.square.playback.PlaybackService
-import dev.lelonio.square.ui.MainActivity
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.SonifyApplication
+import dev.nkosanamahungela.sonify.playback.ACTION_OPEN_PLAYER
+import dev.nkosanamahungela.sonify.playback.PlaybackService
+import dev.nkosanamahungela.sonify.ui.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -99,13 +99,13 @@ open class SquareWidget : AppWidgetProvider() {
     )
 
     companion object {
-        private const val ACTION_PREVIOUS = "dev.lelonio.square.widget.PREVIOUS"
-        private const val ACTION_TOGGLE = "dev.lelonio.square.widget.TOGGLE"
-        private const val ACTION_NEXT = "dev.lelonio.square.widget.NEXT"
-        const val ACTION_OPEN_PLAYLIST = "dev.lelonio.square.widget.OPEN_PLAYLIST"
-        const val EXTRA_URI = "dev.lelonio.square.widget.URI"
-        const val EXTRA_NAME = "dev.lelonio.square.widget.NAME"
-        const val EXTRA_ARTWORK = "dev.lelonio.square.widget.ARTWORK"
+        private const val ACTION_PREVIOUS = "dev.nkosanamahungela.sonify.widget.PREVIOUS"
+        private const val ACTION_TOGGLE = "dev.nkosanamahungela.sonify.widget.TOGGLE"
+        private const val ACTION_NEXT = "dev.nkosanamahungela.sonify.widget.NEXT"
+        const val ACTION_OPEN_PLAYLIST = "dev.nkosanamahungela.sonify.widget.OPEN_PLAYLIST"
+        const val EXTRA_URI = "dev.nkosanamahungela.sonify.widget.URI"
+        const val EXTRA_NAME = "dev.nkosanamahungela.sonify.widget.NAME"
+        const val EXTRA_ARTWORK = "dev.nkosanamahungela.sonify.widget.ARTWORK"
 
         private const val PREFS = "square_widget"
         private const val PLAYLIST_SLOTS = 4
@@ -137,7 +137,7 @@ open class SquareWidget : AppWidgetProvider() {
             drawing?.cancel()
             drawing = scope.launch {
                 val now = stored(app)
-                val backend = (app as SquareApplication).preferences.backend.value
+                val backend = (app as SonifyApplication).preferences.backend.value
                 val playlists = app.widgetPlaylists.recent(backend).take(PLAYLIST_SLOTS)
                 val density = app.resources.displayMetrics.density
                 val cover = now?.artworkUri?.let { load(app, it, 512) }

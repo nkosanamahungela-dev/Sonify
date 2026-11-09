@@ -1,7 +1,7 @@
-package dev.lelonio.square.widget
+package dev.nkosanamahungela.sonify.widget
 
 import android.content.Context
-import dev.lelonio.square.backend.BackendId
+import dev.nkosanamahungela.sonify.backend.BackendId
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
@@ -35,7 +35,7 @@ class WidgetPlaylists(context: Context) {
      * library. Without it the widget started empty and only learned a playlist
      * when one was opened again. True when anything changed.
      */
-    fun fill(order: List<String>, known: List<dev.lelonio.square.data.CatalogPlaylist>, backend: BackendId): Boolean {
+    fun fill(order: List<String>, known: List<dev.nkosanamahungela.sonify.data.CatalogPlaylist>, backend: BackendId): Boolean {
         val byUri = known.associateBy { it.uri }
         val mine = recent(backend)
         val stored = mine.associateBy { it.uri }

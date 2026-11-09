@@ -1,11 +1,11 @@
-package dev.lelonio.square.ui.theme
+package dev.nkosanamahungela.sonify.ui.theme
 
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
-import dev.lelonio.square.R
+import dev.nkosanamahungela.sonify.R
 
 /** The weights the app sets; anything else is interpolated between them. */
 private val WEIGHTS = listOf(300, 400, 500, 600, 700, 800, 900)

@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.lyrics
+package dev.nkosanamahungela.sonify.backend.lyrics
 
 import org.junit.Assert.*
 import org.junit.Test

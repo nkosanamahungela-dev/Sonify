@@ -1,4 +1,4 @@
-package dev.lelonio.square.widget
+package dev.nkosanamahungela.sonify.widget
 
 import android.graphics.Bitmap
 import android.graphics.Canvas

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.theme
+package dev.nkosanamahungela.sonify.ui.theme
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
@@ -147,7 +147,7 @@ fun SquareTheme(
         // The listener's choice of face; see PreferencesStore.systemFont.
         val context = androidx.compose.ui.platform.LocalContext.current
         val systemFont by remember(context) {
-            (context.applicationContext as? dev.lelonio.square.SquareApplication)?.preferences?.systemFont
+            (context.applicationContext as? dev.nkosanamahungela.sonify.SonifyApplication)?.preferences?.systemFont
                 ?: kotlinx.coroutines.flow.MutableStateFlow(false)
         }.collectAsState()
         MaterialTheme(
@@ -310,14 +310,14 @@ private val SystemTypography = spotTypography(FontFamily.Default, tracking = 0.5
 fun ChosenTheme(content: @Composable () -> Unit) {
     val context = androidx.compose.ui.platform.LocalContext.current
     val mode by remember(context) {
-        (context.applicationContext as? dev.lelonio.square.SquareApplication)?.preferences?.themeMode
-            ?: kotlinx.coroutines.flow.MutableStateFlow(dev.lelonio.square.data.PreferencesStore.ThemeMode.SYSTEM)
+        (context.applicationContext as? dev.nkosanamahungela.sonify.SonifyApplication)?.preferences?.themeMode
+            ?: kotlinx.coroutines.flow.MutableStateFlow(dev.nkosanamahungela.sonify.data.PreferencesStore.ThemeMode.SYSTEM)
     }.collectAsState()
     val base = androidx.compose.ui.platform.LocalConfiguration.current
     val night = when (mode) {
-        dev.lelonio.square.data.PreferencesStore.ThemeMode.SYSTEM -> null
-        dev.lelonio.square.data.PreferencesStore.ThemeMode.LIGHT -> android.content.res.Configuration.UI_MODE_NIGHT_NO
-        dev.lelonio.square.data.PreferencesStore.ThemeMode.DARK -> android.content.res.Configuration.UI_MODE_NIGHT_YES
+        dev.nkosanamahungela.sonify.data.PreferencesStore.ThemeMode.SYSTEM -> null
+        dev.nkosanamahungela.sonify.data.PreferencesStore.ThemeMode.LIGHT -> android.content.res.Configuration.UI_MODE_NIGHT_NO
+        dev.nkosanamahungela.sonify.data.PreferencesStore.ThemeMode.DARK -> android.content.res.Configuration.UI_MODE_NIGHT_YES
     }
     val configuration = remember(base, night) {
         if (night == null) {

@@ -1,4 +1,4 @@
-package dev.lelonio.square.update
+package dev.nkosanamahungela.sonify.update
 
 import android.app.PendingIntent
 import android.content.Context
@@ -7,7 +7,7 @@ import android.content.pm.PackageInstaller
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import dev.lelonio.square.BuildConfig
+import dev.nkosanamahungela.sonify.BuildConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

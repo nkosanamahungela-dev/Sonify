@@ -1,4 +1,4 @@
-package dev.lelonio.square.update
+package dev.nkosanamahungela.sonify.update
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -8,8 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
-import dev.lelonio.square.R
-import dev.lelonio.square.SquareApplication
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.SonifyApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -48,7 +48,7 @@ class UpdateService : Service() {
         channel()
         startForeground(NOTIFICATION_ID, notification(version, null))
 
-        val updater = (applicationContext as SquareApplication).updater
+        val updater = (applicationContext as SonifyApplication).updater
         scope.launch {
             updater.fetchAndInstall(url, version, bytes) { progress ->
                 notify(version, progress)
