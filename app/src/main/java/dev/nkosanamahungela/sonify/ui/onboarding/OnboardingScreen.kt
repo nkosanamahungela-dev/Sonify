@@ -47,7 +47,7 @@ import dev.nkosanamahungela.sonify.data.AppLanguages
 import dev.nkosanamahungela.sonify.ui.MainViewModel
 import dev.nkosanamahungela.sonify.ui.components.AppGlyph
 import dev.nkosanamahungela.sonify.ui.components.FilterChip
-import dev.nkosanamahungela.sonify.ui.components.SquareWordmark
+import dev.nkosanamahungela.sonify.ui.components.SonifyWordmark
 import dev.nkosanamahungela.sonify.ui.theme.Ink
 import dev.nkosanamahungela.sonify.ui.theme.InkDim
 
@@ -158,7 +158,7 @@ private fun Welcome(language: String, onLanguage: (String) -> Unit) {
     Spacer(Modifier.height(20.dp))
     AppGlyph(64.dp)
     Spacer(Modifier.height(22.dp))
-    SquareWordmark(height = 28.dp)
+    SonifyWordmark(height = 28.dp)
     ProseText(stringResource(R.string.onboarding_welcome_1))
     Note(stringResource(R.string.onboarding_welcome_2))
     ProseText(stringResource(R.string.onboarding_welcome_3))
