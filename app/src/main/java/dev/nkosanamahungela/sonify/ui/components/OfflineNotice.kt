@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
@@ -32,9 +32,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.regular.CloudSlash
-import dev.lelonio.square.R
-import dev.lelonio.square.playback.OfflineMode
-import dev.lelonio.square.ui.glass.pressable
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.playback.OfflineMode
+import dev.nkosanamahungela.sonify.ui.glass.pressable
 
 /**
  * A line saying the app is offline, and why.

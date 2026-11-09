@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -18,9 +18,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.glass.LocalAppBackdrop
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.glass.LocalAppBackdrop
 
 /**
  * Asks for one line of text — a playlist's name, on the way in or on the way
@@ -72,7 +72,7 @@ internal fun SheetTitle(title: String) {
         title,
         fontSize = 17.sp,
         fontWeight = FontWeight.SemiBold,
-        color = if (dev.lelonio.square.ui.theme.LocalLightTheme.current) Color.Black else Color.White,
+        color = if (dev.nkosanamahungela.sonify.ui.theme.LocalLightTheme.current) Color.Black else Color.White,
         style = MaterialTheme.typography.titleMedium,
         textAlign = androidx.compose.ui.text.style.TextAlign.Center,
         modifier = Modifier.fillMaxWidth(),
@@ -89,7 +89,7 @@ internal fun SheetButtons(
     cancelLabel: String = stringResource(R.string.cancel),
     confirm: () -> Unit,
 ) {
-    val light = dev.lelonio.square.ui.theme.LocalLightTheme.current
+    val light = dev.nkosanamahungela.sonify.ui.theme.LocalLightTheme.current
     val ink = if (light) Color.Black else Color.White
     val accent = if (destructive) {
         if (light) Color(0xFFFF3B30) else Color(0xFFFF453A)

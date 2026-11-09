@@ -14,7 +14,7 @@
 // short of that it springs back over 250 ms. A finger on it swells it to 1.01,
 // with a selection click.
 
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
@@ -69,9 +69,9 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.ui.glass.LocalGlassEffectConfig
-import dev.lelonio.square.ui.glass.liquidGlass
-import dev.lelonio.square.ui.glass.shapes.ContinuousRoundedRectangle
+import dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig
+import dev.nkosanamahungela.sonify.ui.glass.liquidGlass
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousRoundedRectangle
 import kotlinx.coroutines.launch
 
 private const val SHEET_MS = 350
@@ -185,14 +185,14 @@ fun GlassSheet(
                             config = LocalGlassEffectConfig.current.copy(sheet = true),
                             shape = shape,
                             ownBackdrop = host?.backdrop
-                                ?: dev.lelonio.square.ui.glass.LocalAppBackdrop.current,
+                                ?: dev.nkosanamahungela.sonify.ui.glass.LocalAppBackdrop.current,
                         )
                         // Swallows the taps that would close the sheet.
                         .clickable(interactionSource = null, indication = null) {},
                 ) {
                     if (showDragIndicator) {
                         Spacer(Modifier.height(8.dp))
-                        val light = dev.lelonio.square.ui.theme.LocalLightTheme.current
+                        val light = dev.nkosanamahungela.sonify.ui.theme.LocalLightTheme.current
                         Box(
                             Modifier
                                 .align(Alignment.CenterHorizontally)

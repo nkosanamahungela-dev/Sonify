@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import kotlinx.coroutines.flow.collectLatest
 import androidx.compose.runtime.LaunchedEffect
@@ -139,7 +139,7 @@ fun HeroBackdrop(
     zoom: Float = 1f,
 ) {
     // Black over a dark page and white over a light one; see scrimColor.
-    val scrim = dev.lelonio.square.ui.theme.scrimColor()
+    val scrim = dev.nkosanamahungela.sonify.ui.theme.scrimColor()
     // What the moving cover is showing now, for the blur and the extension;
     // empty, and the still used, until it has shown something.
     val motion = remember(motionUrl) { MotionFrames() }
@@ -180,7 +180,7 @@ fun HeroBackdrop(
         // cover waited for the slowest: on a cold cache an Apple portrait took
         // three times as long to arrive as it needed to.
         val large = spotifyLargeUrl(artworkUrl)
-        val sharper = large != artworkUrl && !dev.lelonio.square.playback.OfflineMode.active.value
+        val sharper = large != artworkUrl && !dev.nkosanamahungela.sonify.playback.OfflineMode.active.value
         val sharp = if (sharper) loadArt(context, large, COVER_PX) else null
         val cover = sharp ?: loadArt(context, artworkUrl, COVER_PX)
         val loaded = if (sharp != null) large else artworkUrl

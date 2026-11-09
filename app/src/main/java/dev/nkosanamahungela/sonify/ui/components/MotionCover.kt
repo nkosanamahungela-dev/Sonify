@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -161,7 +161,7 @@ fun MotionCover(
             // leaving the screen left its video behind for a moment after
             // everything else had gone.
             val view = android.view.LayoutInflater.from(ctx)
-                .inflate(dev.lelonio.square.R.layout.motion_cover, null) as PlayerView
+                .inflate(dev.nkosanamahungela.sonify.R.layout.motion_cover, null) as PlayerView
             view.apply {
                 useController = false
                 // Filling the frame, cropping what does not fit: the header is

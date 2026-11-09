@@ -12,7 +12,7 @@
 // focus, where it is asked for. A press swells it to 1.03 and lights it
 // under the finger, as upstream's field does.
 
-package dev.lelonio.square.ui.components
+package dev.nkosanamahungela.sonify.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.CubicBezierEasing
@@ -70,15 +70,15 @@ import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.fill.XCircle
 import com.adamglin.phosphoricons.regular.MagnifyingGlass
 import com.adamglin.phosphoricons.regular.X
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.glass.LocalAppBackdrop
-import dev.lelonio.square.ui.glass.LocalGlassEffectConfig
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.glassGlowColor
-import dev.lelonio.square.ui.glass.isLightGlassPage
-import dev.lelonio.square.ui.glass.liquidGlass
-import dev.lelonio.square.ui.glass.rememberGlassPressState
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.glass.LocalAppBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.glassGlowColor
+import dev.nkosanamahungela.sonify.ui.glass.isLightGlassPage
+import dev.nkosanamahungela.sonify.ui.glass.liquidGlass
+import dev.nkosanamahungela.sonify.ui.glass.rememberGlassPressState
 
 /** Upstream's `Curves.easeOutCubic`. */
 private val EaseOutCubic = CubicBezierEasing(0.215f, 0.61f, 0.355f, 1f)
