@@ -1,4 +1,4 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
@@ -123,7 +123,7 @@ object AppleCatalog {
      * exception is an artist's drawn name; see artist.
      */
     private fun mayAsk(): Boolean =
-        !dev.lelonio.square.playback.OfflineMode.active.value && unmetered()
+        !dev.nkosanamahungela.sonify.playback.OfflineMode.active.value && unmetered()
 
     /** Wi-Fi or ethernet, or a connection that cannot be told apart from one. */
     private fun unmetered(): Boolean {
@@ -246,7 +246,7 @@ object AppleCatalog {
             return kept
         }
 
-        if (dev.lelonio.square.playback.OfflineMode.active.value) return null
+        if (dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) return null
 
         // On mobile data the page still gets the name drawn: one search and a
         // PNG of a few tens of kilobytes, against a photograph many times that.

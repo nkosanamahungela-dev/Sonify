@@ -1,6 +1,6 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
-import dev.lelonio.square.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
@@ -302,7 +302,7 @@ object Catalog {
     suspend fun playlists(): List<CatalogPlaylist> = withContext(Dispatchers.IO) {
         json.decodeFromString<List<CatalogPlaylist>>(NativeBridge.rootlist())
             // Kept out unless the DJ is on: played as a list, it has nothing in it.
-            .filterNot { it.uri == DJ_URI && !dev.lelonio.square.backend.spotify.SpotifyDj.enabled }
+            .filterNot { it.uri == DJ_URI && !dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.enabled }
     }
 
     /**

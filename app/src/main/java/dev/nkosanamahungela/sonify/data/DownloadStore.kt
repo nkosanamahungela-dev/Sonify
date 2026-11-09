@@ -1,4 +1,4 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
 import android.content.Context
 import kotlinx.coroutines.CoroutineScope
@@ -375,7 +375,7 @@ class DownloadStore(context: Context) {
         for (track in tracks) {
             if (!existingFiles.containsKey(track.uri)) {
                 val sidecar = runCatching {
-                    dev.lelonio.square.nativecore.NativeBridge.downloadState(track.uri)
+                    dev.nkosanamahungela.sonify.nativecore.NativeBridge.downloadState(track.uri)
                 }.getOrNull()
                 if (!sidecar.isNullOrBlank()) {
                     val rootObj = runCatching { JSONObject(sidecar) }.getOrNull()
@@ -590,7 +590,7 @@ class DownloadStore(context: Context) {
             root.mkdirs()
             // The extras live under the same root and go with it; this is only
             // to drop whatever the object is holding on to.
-            dev.lelonio.square.download.DownloadExtras.clear()
+            dev.nkosanamahungela.sonify.download.DownloadExtras.clear()
             save()
         }
     }
@@ -606,7 +606,7 @@ class DownloadStore(context: Context) {
      * the video for YouTube Music. See YouTubeDownloads.
      */
     private fun hasAudio(trackUri: String, record: FileRecord): Boolean =
-        if (trackUri.startsWith(dev.lelonio.square.backend.youtube.YouTubeBackend.TRACK_PREFIX)) {
+        if (trackUri.startsWith(dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.TRACK_PREFIX)) {
             File(File(root, YOUTUBE_DIR), "${record.trackId}.${record.format}").exists()
         } else {
             audioFile(record.trackId).exists()

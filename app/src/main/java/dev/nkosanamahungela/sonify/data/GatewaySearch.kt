@@ -1,6 +1,6 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
-import dev.lelonio.square.backend.SearchLabels
+import dev.nkosanamahungela.sonify.backend.SearchLabels
 import org.json.JSONArray
 import org.json.JSONObject
 

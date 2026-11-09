@@ -1,6 +1,6 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
-import dev.lelonio.square.auth.TokenStore
+import dev.nkosanamahungela.sonify.auth.TokenStore
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -37,7 +37,7 @@ object ApiFactory {
      *   and dispatcher this one should share. Null builds a stack of its own,
      *   which is what a test wants and what nothing else does: two independent
      *   pools to the same handful of hosts is two sets of sockets and two DNS
-     *   caches for no gain. See SquareApplication's `sharedHttpClient`.
+     *   caches for no gain. See SonifyApplication's `sharedHttpClient`.
      */
     fun create(
         tokens: TokenStore,

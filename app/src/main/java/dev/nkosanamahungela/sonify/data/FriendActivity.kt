@@ -1,6 +1,6 @@
-package dev.lelonio.square.data
+package dev.nkosanamahungela.sonify.data
 
-import dev.lelonio.square.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
