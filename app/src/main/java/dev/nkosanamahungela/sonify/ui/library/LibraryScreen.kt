@@ -1,5 +1,7 @@
 package dev.nkosanamahungela.sonify.ui.library
 
+import dev.nkosanamahungela.sonify.ui.components.SonifyWordmark
+
 import dev.nkosanamahungela.sonify.ui.components.glassMenuTrigger
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.horizontalScroll
@@ -174,7 +176,7 @@ fun LibraryScreen(
         // them read as two different apps.
         MainViewModel.UiState.LoggedOut -> Centered {
             dev.nkosanamahungela.sonify.ui.components.AppGlyph(64.dp)
-            dev.nkosanamahungela.sonify.ui.components.SquareWordmark(height = 28.dp)
+            dev.nkosanamahungela.sonify.ui.components.SonifyWordmark(height = 28.dp)
             Text(
                 stringResource(R.string.unofficial_client),
                 style = MaterialTheme.typography.bodyMedium,
