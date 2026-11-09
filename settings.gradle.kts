@@ -33,6 +33,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Spot"
+rootProject.name = "Sonify"
 include(":app")
 include(":innertube")
