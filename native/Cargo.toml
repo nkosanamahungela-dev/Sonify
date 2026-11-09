@@ -1,11 +1,11 @@
 [package]
-name = "squarecore"
+name = "sonifycore"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.81"
 
 [lib]
-name = "squarecore"
+name = "sonifycore"
 crate-type = ["cdylib"]
 
 [dependencies]

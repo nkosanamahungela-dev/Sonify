@@ -39,14 +39,14 @@ import kotlinx.coroutines.launch
  * widget added, resized or brought back after a restart draws the last song
  * without waiting for the music to start.
  */
-open class SquareWidget : AppWidgetProvider() {
+open class SonifyWidget : AppWidgetProvider() {
 
     /**
      * The same widget, listed again at two by two: the square the small
      * widgets of other phones are, which a launcher otherwise only reaches by
      * resizing the wide one down.
      */
-    class Tile : SquareWidget()
+    class Tile : SonifyWidget()
 
     override fun onUpdate(context: Context, manager: AppWidgetManager, ids: IntArray) = refresh(context)
 
@@ -107,7 +107,7 @@ open class SquareWidget : AppWidgetProvider() {
         const val EXTRA_NAME = "dev.nkosanamahungela.sonify.widget.NAME"
         const val EXTRA_ARTWORK = "dev.nkosanamahungela.sonify.widget.ARTWORK"
 
-        private const val PREFS = "square_widget"
+        private const val PREFS = "sonify_widget"
         private const val PLAYLIST_SLOTS = 4
 
         private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
@@ -131,7 +131,7 @@ open class SquareWidget : AppWidgetProvider() {
         fun refresh(context: Context) {
             val app = context.applicationContext
             val manager = AppWidgetManager.getInstance(app)
-            val ids = manager.getAppWidgetIds(ComponentName(app, SquareWidget::class.java)) +
+            val ids = manager.getAppWidgetIds(ComponentName(app, SonifyWidget::class.java)) +
                 manager.getAppWidgetIds(ComponentName(app, Tile::class.java))
             if (ids.isEmpty()) return
             drawing?.cancel()
@@ -309,7 +309,7 @@ open class SquareWidget : AppWidgetProvider() {
         private fun control(context: Context, action: String): PendingIntent =
             PendingIntent.getBroadcast(
                 context, action.hashCode(),
-                Intent(context, SquareWidget::class.java).setAction(action),
+                Intent(context, SonifyWidget::class.java).setAction(action),
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
             )
 

@@ -10,7 +10,7 @@
 # fetchBungee task in app/build.gradle.kts.
 
 cmake_minimum_required(VERSION 3.22)
-project(spotstretch CXX C)
+project(sonifystretch CXX C)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -31,18 +31,18 @@ target_compile_options(pffft PRIVATE -ffast-math -fno-finite-math-only -fno-exce
 
 file(GLOB BUNGEE_SOURCES ${BUNGEE_DIR}/src/*.cpp)
 
-add_library(spotstretch SHARED stretch.cpp ${BUNGEE_SOURCES})
+add_library(sonifystretch SHARED stretch.cpp ${BUNGEE_SOURCES})
 
-target_include_directories(spotstretch PRIVATE
+target_include_directories(sonifystretch PRIVATE
     ${BUNGEE_DIR}
     ${BUNGEE_DIR}/submodules
     ${BUNGEE_DIR}/submodules/eigen)
 
 # eigen_assert is redirected the same way Bungee's own build does it, so Eigen
 # failures surface through Bungee's assertion handler instead of calling abort.
-target_compile_definitions(spotstretch PRIVATE
+target_compile_definitions(sonifystretch PRIVATE
     BUNGEE_SELF_TEST=0
     eigen_assert=BUNGEE_ASSERT1
     BUNGEE_VERSION="${BUNGEE_VERSION}")
 
-target_link_libraries(spotstretch PRIVATE pffft log)
+target_link_libraries(sonifystretch PRIVATE pffft log)

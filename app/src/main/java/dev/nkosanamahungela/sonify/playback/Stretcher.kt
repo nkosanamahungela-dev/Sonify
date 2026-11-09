@@ -80,7 +80,7 @@ class Stretcher private constructor(
         private const val MIN_SPEED = 0.25f
 
         init {
-            System.loadLibrary("spotstretch")
+            System.loadLibrary("sonifystretch")
         }
 
         /** Returns null when the native stretcher cannot be created. */

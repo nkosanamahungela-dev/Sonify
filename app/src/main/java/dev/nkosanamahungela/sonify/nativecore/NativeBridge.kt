@@ -29,7 +29,7 @@ interface NativeEvents {
 object NativeBridge {
 
     init {
-        System.loadLibrary("squarecore")
+        System.loadLibrary("sonifycore")
     }
 
     /**
@@ -268,7 +268,7 @@ object NativeBridge {
 
     // --- The account's other devices ---
     //
-    // Square is a Connect device, and this is the other half of the same
+    // Sonify is a Connect device, and this is the other half of the same
     // protocol: what the official client does when it shows you a speaker
     // playing in another room and lets you press pause on it.
     //
@@ -472,13 +472,13 @@ object NativeBridge {
     /** Tempo and key of many tracks, as a JSON object keyed by URI; see catalog.rs. */
     fun tracksAudioAttributes(urisJson: String): String? =
         runCatching { nativeTracksAudioAttributes(urisJson) }
-            .onFailure { android.util.Log.w("SquareMix", "tempo and key unavailable: ${it.message}") }
+            .onFailure { android.util.Log.w("SonifyMix", "tempo and key unavailable: ${it.message}") }
             .getOrNull()
 
     /** What the automatic transitions of a few tracks are worked out from, keyed by URI; see catalog.rs. */
     fun tracksMixAnalysis(urisJson: String): String? =
         runCatching { nativeTracksMixAnalysis(urisJson) }
-            .onFailure { android.util.Log.w("SquareMix", "mix analysis unavailable: ${it.message}") }
+            .onFailure { android.util.Log.w("SonifyMix", "mix analysis unavailable: ${it.message}") }
             .getOrNull()
 
     /** The transition into the next song, `{from, outMs, fadeMs, to, inMs}`, or "" for none. */

@@ -197,7 +197,7 @@ class SonifyApplication : Application(), ImageLoaderFactory {
     /** Which playlists were opened most recently, for ordering the home page. */
     val playlistOrder: PlaylistOrderStore by lazy { PlaylistOrderStore(this) }
 
-    /** The playlists the home-screen widget offers; see SquareWidget. */
+    /** The playlists the home-screen widget offers; see SonifyWidget. */
     val widgetPlaylists: dev.nkosanamahungela.sonify.widget.WidgetPlaylists by lazy {
         dev.nkosanamahungela.sonify.widget.WidgetPlaylists(this)
     }
