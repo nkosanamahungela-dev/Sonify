@@ -424,11 +424,12 @@ fun HomeScreen(
                                 Spacer(Modifier.weight(1f))
                                 Text("Recently played", style = MaterialTheme.typography.labelSmall, color = InkDim)
                             }
-                            playlists.take(4).chunked(2).forEach { pair ->
+                            playlists.take(8).chunked(2).forEachIndexed { rowIndex, pair ->
                                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                                    pair.forEach { playlist ->
+                                    pair.forEachIndexed { columnIndex, playlist ->
                                         PlaylistShortcut(
                                             playlist = playlist,
+                                            index = rowIndex * 2 + columnIndex,
                                             modifier = Modifier.weight(1f),
                                             onClick = { onOpenPlaylist(playlist) },
                                         )
@@ -1015,16 +1016,26 @@ private fun ArtistTile(artist: SearchItem, onClick: () -> Unit) {
     }
 }
 
+private val SHORTCUT_COLORS = listOf(
+    Color(0xFF29213F),
+    Color(0xFF172B3D),
+    Color(0xFF202729),
+    Color(0xFF30232D),
+    Color(0xFF3B211F),
+    Color(0xFF292D1B),
+)
+
 @Composable
 private fun PlaylistShortcut(
     playlist: CatalogPlaylist,
+    index: Int = 0,
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {
     Row(
         modifier
             .clip(RoundedCornerShape(15.dp))
-            .background(Ink.copy(alpha = 0.075f))
+            .background(SHORTCUT_COLORS[index % SHORTCUT_COLORS.size])
             .pressable(onClick)
             .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -1032,9 +1043,9 @@ private fun PlaylistShortcut(
         Artwork(
             url = playlist.artworkUrl,
             title = playlist.name,
-            modifier = Modifier.size(46.dp),
+            modifier = Modifier.size(52.dp),
             corner = 10.dp,
-            decodeSize = 46.dp,
+            decodeSize = 52.dp,
         )
         Text(
             playlist.name,

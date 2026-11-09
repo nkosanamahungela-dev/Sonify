@@ -50,6 +50,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.setValue
 import dev.nkosanamahungela.sonify.ui.components.FriendsPanel
+import dev.nkosanamahungela.sonify.ui.components.LucideIcons
 import dev.nkosanamahungela.sonify.ui.components.SharedTrackCard
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -2767,7 +2768,7 @@ fun SonifyApp(
                             ) {
                                 BarTab(
                                     R.string.home,
-                                    PhosphorIcons.Fill.House,
+                                    LucideIcons.House,
                                     activeTab == Routes.HOME,
                                     tabAccent,
                                     barInk,
@@ -2777,7 +2778,7 @@ fun SonifyApp(
                                 }
                                 BarTab(
                                     R.string.tab_new,
-                                    PhosphorIcons.Fill.SquaresFour,
+                                    LucideIcons.Grid,
                                     activeTab == Routes.NEW,
                                     tabAccent,
                                     barInk,
@@ -2787,7 +2788,7 @@ fun SonifyApp(
                                 }
                                 BarTab(
                                     R.string.tab_radio,
-                                    PhosphorIcons.Fill.Broadcast,
+                                    LucideIcons.Radio,
                                     activeTab == Routes.RADIO,
                                     tabAccent,
                                     barInk,
@@ -2797,7 +2798,7 @@ fun SonifyApp(
                                 }
                                 BarTab(
                                     R.string.library,
-                                    PhosphorIcons.Fill.MusicNotes,
+                                    LucideIcons.Library,
                                     activeTab == Routes.LIBRARY,
                                     tabAccent,
                                     barInk,
@@ -2811,7 +2812,7 @@ fun SonifyApp(
                                     // magnifier reads as a blob at this size,
                                     // and it is the one glyph here whose shape
                                     // is the whole of its meaning.
-                                    PhosphorIcons.Bold.MagnifyingGlass,
+                                    LucideIcons.Search,
                                     activeTab == Routes.SEARCH,
                                     tabAccent,
                                     barInk,
@@ -2887,7 +2888,7 @@ fun SonifyApp(
                             },
                             icon = {
                                 Icon(
-                                    PhosphorIcons.Fill.House,
+                                    LucideIcons.House,
                                     contentDescription = stringResource(R.string.home),
                                     tint = if (activeTab == Routes.HOME) tabAccent else barInk,
                                     modifier = Modifier.size(TabIcon),
@@ -2920,7 +2921,7 @@ fun SonifyApp(
                             },
                             icon = {
                                 Icon(
-                                    PhosphorIcons.Fill.SquaresFour,
+                                    LucideIcons.Grid,
                                     contentDescription = stringResource(R.string.tab_new),
                                     tint = if (activeTab == Routes.NEW) tabAccent else barInk,
                                     modifier = Modifier.size(TabIcon),
@@ -2953,7 +2954,7 @@ fun SonifyApp(
                             },
                             icon = {
                                 Icon(
-                                    PhosphorIcons.Fill.Broadcast,
+                                    LucideIcons.Radio,
                                     contentDescription = stringResource(R.string.tab_radio),
                                     tint = if (activeTab == Routes.RADIO) tabAccent else barInk,
                                     modifier = Modifier.size(TabIcon),
@@ -2986,7 +2987,7 @@ fun SonifyApp(
                             },
                             icon = {
                                 Icon(
-                                    PhosphorIcons.Fill.MusicNotes,
+                                    LucideIcons.Library,
                                     contentDescription = stringResource(R.string.library),
                                     tint = if (activeTab == Routes.LIBRARY) tabAccent else barInk,
                                     modifier = Modifier.size(TabIcon),
@@ -3027,7 +3028,7 @@ fun SonifyApp(
                                     // reads as a blob at this size, and it is the
                                     // one glyph here whose shape is the whole of
                                     // its meaning.
-                                    PhosphorIcons.Bold.MagnifyingGlass,
+                                    LucideIcons.Search,
                                     contentDescription = stringResource(R.string.search),
                                     tint = if (activeTab == Routes.SEARCH) tabAccent else barInk,
                                     modifier = Modifier.size(TabIcon),
@@ -3060,7 +3061,7 @@ fun SonifyApp(
                                 key = SEARCH_CIRCLE,
                                 icon = {
                                     Icon(
-                                        PhosphorIcons.Bold.MagnifyingGlass,
+                                        LucideIcons.Search,
                                         contentDescription = stringResource(R.string.search),
                                         tint = barInk,
                                         modifier = Modifier.size(TabIcon),
@@ -4177,7 +4178,7 @@ private fun BottomBar(
         ) {
             BottomItem(
                 stringResource(R.string.home),
-                PhosphorIcons.Fill.House,
+                LucideIcons.House,
                 PhosphorIcons.Bold.House,
                 // Nothing is lit while the page on screen is not one of these
                 // two: search is a destination of its own, and leaving Home
@@ -4188,19 +4189,19 @@ private fun BottomBar(
             }
             BottomItem(
                 stringResource(R.string.tab_new),
-                PhosphorIcons.Fill.SquaresFour,
+                LucideIcons.Grid,
                 PhosphorIcons.Bold.SquaresFour,
                 routeIndex >= 0 && selected == 1,
             ) { onSelect(Routes.NEW) }
             BottomItem(
                 stringResource(R.string.tab_radio),
-                PhosphorIcons.Fill.Broadcast,
+                LucideIcons.Radio,
                 PhosphorIcons.Bold.Broadcast,
                 routeIndex >= 0 && selected == 2,
             ) { onSelect(Routes.RADIO) }
             BottomItem(
                 stringResource(R.string.library),
-                PhosphorIcons.Fill.MusicNotes,
+                LucideIcons.Library,
                 PhosphorIcons.Bold.MusicNotes,
                 routeIndex >= 0 && selected == 3,
             ) { onSelect(Routes.LIBRARY) }
@@ -4221,7 +4222,7 @@ private fun BottomBar(
             // reads as clearer glass than the bar it sits next to.
         ) {
             Icon(
-                imageVector = if (searching) PhosphorIcons.Fill.MagnifyingGlass else PhosphorIcons.Bold.MagnifyingGlass,
+                imageVector = if (searching) PhosphorIcons.Fill.MagnifyingGlass else LucideIcons.Search,
                 contentDescription = stringResource(R.string.search),
                 tint = Ink,
                 modifier = Modifier.size(24.dp),
