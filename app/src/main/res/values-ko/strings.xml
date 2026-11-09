@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Square</string>
+    <string name="app_name">Sonify</string>
     <string name="back">뒤로</string>
     <string name="close">닫기</string>
     <string name="skip">건너뛰기</string>
@@ -124,7 +124,7 @@
     <string name="add_failed">%1$s에 추가할 수 없습니다. 내 플레이리스트가 아니면 변경할 수 없습니다.</string>
     <string name="like_failed">좋아요 표시한 곡에 추가할 수 없습니다.</string>
     <string name="unlike_failed">좋아요 표시한 곡에서 삭제할 수 없습니다.</string>
-    <string name="permission_needed">Square에 필요한 권한이 없습니다. 설정에서 계정을 다시 연결하세요.</string>
+    <string name="permission_needed">Sonify에 필요한 권한이 없습니다. 설정에서 계정을 다시 연결하세요.</string>
     <string name="remove_failed">%1$s을(를) 변경할 수 없습니다. 잠시 후 다시 시도하세요.</string>
     <string name="play_on">재생할 기기</string>
     <string name="no_devices">사용 가능한 기기 없음</string>
@@ -220,14 +220,14 @@
     <string name="onboarding_step_of">%2$d단계 중 %1$d단계</string>
     <string name="onboarding_login_title">Spotify에 로그인</string>
     <string name="onboarding_login_1">브라우저에서 Spotify 페이지가 열립니다. 승인하면 이곳으로 돌아옵니다.</string>
-    <string name="onboarding_login_2">비밀번호는 Spotify 페이지에서만 입력합니다. Square는 절대 볼 수 없습니다.</string>
+    <string name="onboarding_login_2">비밀번호는 Spotify 페이지에서만 입력합니다. Sonify는 절대 볼 수 없습니다.</string>
     <string name="onboarding_login_done">로그인됨</string>
     <string name="onboarding_key_title">내 키 만들기</string>
     <string name="onboarding_key_intro">검색과 추천은 개인 키로 사용해야 하는 Spotify API를 거칩니다. 1분이면 되고, 무료이며, 카드도 필요 없습니다.</string>
     <string name="onboarding_open_dashboard">대시보드 열기</string>
     <string name="onboarding_step_login">같은 Spotify 계정으로 로그인하세요.</string>
     <string name="onboarding_step_create">오른쪽 위에서 «Create app»을 누르세요.</string>
-    <string name="onboarding_step_names">App name과 App description: 아무거나 괜찮습니다. 예: Square. Website: 비워 두세요.</string>
+    <string name="onboarding_step_names">App name과 App description: 아무거나 괜찮습니다. 예: Sonify. Website: 비워 두세요.</string>
     <string name="onboarding_step_redirect">Redirect URI: 아래 줄을 붙여넣고 «Add»를 누르세요. 입력란 아래 목록에 나타나는지 확인하세요. 나타나지 않으면 저장되지 않은 것입니다.</string>
     <string name="onboarding_step_api">«Which API/SDKs are you planning to use?» 아래에서 Web API를 체크하세요.</string>
     <string name="onboarding_step_terms">약관에 동의하고 «Save»를 누르세요.</string>
@@ -285,7 +285,7 @@
     <string name="quality_low">낮음</string>
     <string name="quality_auto_note">자동은 연결 상태 추정치에서 시작해 음악에 맞춰 조정합니다. 곡이 끊기거나 늦게 시작되면 한 단계 낮추고, 빠르게 시작된 곡이 몇 번 이어지면 다시 높입니다.</string>
     <string name="quality_restarts">변경하면 재생 중인 곡을 다시 불러옵니다.</string>
-    <string name="premium_required">Square는 Spotify Premium이 필요합니다. 무료 계정으로도 로그인할 수 있지만, Spotify는 이런 클라이언트로 스트리밍하지 않습니다.</string>
+    <string name="premium_required">Sonify는 Spotify Premium이 필요합니다. 무료 계정으로도 로그인할 수 있지만, Spotify는 이런 클라이언트로 스트리밍하지 않습니다.</string>
     <string name="new_playlist">새 플레이리스트</string>
     <string name="rename">이름 바꾸기</string>
     <string name="delete">삭제</string>
@@ -325,7 +325,7 @@
     <string name="settings_group_help_summary">커뮤니티, 토론 및 문제</string>
     <string name="settings_group_permissions_summary">앱이 Spotify에 요청하는 것</string>
     <string name="youtube_sign_in_required">이 노래는 YouTube Music에 로그인해야 재생할 수 있습니다</string>
-    <string name="youtube_signed_in_unplayable">YouTube는 이 노래를 로그인한 계정에만 제공하며, Square는 아직 읽을 수 없습니다</string>
+    <string name="youtube_signed_in_unplayable">YouTube는 이 노래를 로그인한 계정에만 제공하며, Sonify는 아직 읽을 수 없습니다</string>
     <string name="page_app_summary">언어, 바, 시스템, 링크</string>
     <string name="page_downloads">다운로드 및 저장공간</string>
     <string name="storage_cleanup">정리</string>
@@ -336,9 +336,9 @@
     <string name="storage_caches">앱 캐시</string>
     <string name="page_downloads_summary">휴대폰에 있는 것과 불러오는 것</string>
     <string name="keep_playing_on_close">앱을 닫아도 계속 재생</string>
-    <string name="keep_playing_on_close_note">최근 앱에서 Square를 밀어서 닫아도 음악이 계속 재생됩니다. 알림에서는 여전히 정지할 수 있습니다.</string>
+    <string name="keep_playing_on_close_note">최근 앱에서 Sonify를 밀어서 닫아도 음악이 계속 재생됩니다. 알림에서는 여전히 정지할 수 있습니다.</string>
     <string name="pause_for_other_apps">다른 앱이 재생하면 일시정지</string>
-    <string name="pause_for_other_apps_note">다른 앱이 소리를 가져가면 Square가 일시정지합니다. 음악이 저절로 멈춘다면 끄세요. 동영상이나 음성 메시지 위로도 계속 재생됩니다.</string>
+    <string name="pause_for_other_apps_note">다른 앱이 소리를 가져가면 Sonify가 일시정지합니다. 음악이 저절로 멈춘다면 끄세요. 동영상이나 음성 메시지 위로도 계속 재생됩니다.</string>
     <string name="sponsor_block">음악이 아닌 부분 건너뛰기</string>
     <string name="sponsor_block_note">뮤직비디오의 인트로, 촌극, 대화 부분으로, SponsorBlock 커뮤니티가 표시한 구간입니다. 동영상 ID만 전송됩니다.</string>
     <string name="page_app_bar">하단 바</string>
@@ -359,7 +359,7 @@
     <string name="effect_quality_light_note">휴대폰이 처리합니다. 오래된 기기에 부담이 적지만 어택이 거칠어집니다.</string>
     <string name="liked_songs">좋아요 표시한 곡</string>
     <string name="local_files">로컬 파일</string>
-    <string name="local_files_needs_permission">허용하면 Square가 이 휴대폰의 음악을 볼 수 있습니다.</string>
+    <string name="local_files_needs_permission">허용하면 Sonify가 이 휴대폰의 음악을 볼 수 있습니다.</string>
     <string name="local_files_allow">허용</string>
     <string name="pinned">고정됨</string>
     <string name="pin">맨 위에 고정</string>
@@ -409,7 +409,7 @@
     <string name="remove_download">다운로드 삭제</string>
     <string name="cancel_download">다운로드 취소</string>
     <string name="playback_refused">지금은 Spotify가 곡 재생을 허용하지 않습니다. 몇 분 후 다시 시도하세요. 계속 발생하면 로그아웃 후 다시 로그인하세요.</string>
-    <string name="playback_refused_account">Spotify는 이 계정이 Square 같은 앱에서 곡을 재생하는 것을 허용하지 않습니다. 앱에서 해결할 수 있는 문제가 아니며, 다른 Premium 계정은 작동할 수 있습니다.</string>
+    <string name="playback_refused_account">Spotify는 이 계정이 Sonify 같은 앱에서 곡을 재생하는 것을 허용하지 않습니다. 앱에서 해결할 수 있는 문제가 아니며, 다른 Premium 계정은 작동할 수 있습니다.</string>
     <string name="downloaded">다운로드됨</string>
     <string name="local_file">로컬 파일</string>
     <string name="downloading">다운로드 중</string>
@@ -523,7 +523,7 @@
     <string name="web_sdk_play_error">플레이어 연결 또는 재생에 실패했습니다. 테스트를 중지하고 다시 연결하세요.</string>
     <string name="web_sdk_failed">플레이어를 사용할 수 없음</string>
     <string name="web_sdk_recovery_title">Spotify 재생 켜기</string>
-    <string name="web_sdk_recovery_explainer">Spotify가 Square의 기본 플레이어에서 이 계정의 곡을 재생하지 않습니다. 대신 개발자 앱으로 로그인하여 Spotify 공식 웹 플레이어를 사용할 수 있습니다.</string>
+    <string name="web_sdk_recovery_explainer">Spotify가 Sonify의 기본 플레이어에서 이 계정의 곡을 재생하지 않습니다. 대신 개발자 앱으로 로그인하여 Spotify 공식 웹 플레이어를 사용할 수 있습니다.</string>
     <string name="web_sdk_enable">재생 사용</string>
     <string name="web_sdk_settings_title">대체 Spotify 재생</string>
     <string name="web_sdk_limits">이 플레이어에서는 크로스페이드, 오디오 효과, 노래방, 음질 설정, 다운로드를 사용할 수 없습니다.</string>
@@ -554,14 +554,14 @@
     <string name="connected_device_label">연결된 기기 표시</string>
     <string name="recap_title">이달의 음악</string>
     <string name="recap_plays">%1$d회 재생</string>
-    <string name="recap_minutes">Square에서 %1$d분</string>
+    <string name="recap_minutes">Sonify에서 %1$d분</string>
     <string name="recap_details">즐겨 들은 곡 보기</string>
     <string name="recap_hide">세부 정보 숨기기</string>
     <string name="recap_previous">이전 달</string>
     <string name="recap_next">다음 달</string>
     <string name="recap_tracks">가장 많이 재생한 곡</string>
     <string name="recap_artists">가장 많이 재생한 아티스트</string>
-    <string name="recap_partial">저장된 재생 기록과 최근 Spotify 기록이 포함됩니다. 이전 기록이나 동기화되지 않은 기록은 빠질 수 있습니다. 재생 시간은 Square에서만 측정됩니다.</string>
+    <string name="recap_partial">저장된 재생 기록과 최근 Spotify 기록이 포함됩니다. 이전 기록이나 동기화되지 않은 기록은 빠질 수 있습니다. 재생 시간은 Sonify에서만 측정됩니다.</string>
     <string name="smart_shuffle">스마트 셔플</string>
     <string name="smart_shuffle_unavailable">지금은 이 플레이리스트에서 스마트 셔플을 사용할 수 없습니다.</string>
     <string name="telegram_community">Telegram 커뮤니티</string>
@@ -580,12 +580,12 @@
     <string name="new_release_followed_tag">내 아티스트</string>
     <string name="recap_song_of_month">이달의 곡</string>
     <string name="recap_stat_plays">재생</string>
-    <string name="recap_stat_minutes">Square에서 들은 시간(분)</string>
+    <string name="recap_stat_minutes">Sonify에서 들은 시간(분)</string>
     <string name="recap_empty">이번 달에는 아직 재생 기록이 없습니다.</string>
-    <string name="recap_partial_youtube">Square에서 재생한 곡과, Square가 열려 있는 동안의 YouTube Music 기록이 포함됩니다. 다른 앱과 기기의 재생은 근사치입니다. YouTube는 시간 없이 날짜만 알려줍니다.</string>
+    <string name="recap_partial_youtube">Sonify에서 재생한 곡과, Sonify가 열려 있는 동안의 YouTube Music 기록이 포함됩니다. 다른 앱과 기기의 재생은 근사치입니다. YouTube는 시간 없이 날짜만 알려줍니다.</string>
     <string name="widget_description">지금 재생 중인 곡, 컨트롤, 최근 플레이리스트</string>
     <string name="widget_nothing_playing">재생 중인 곡 없음</string>
-    <string name="widget_open_app">Square 열기</string>
+    <string name="widget_open_app">Sonify 열기</string>
     <string name="animated_cover_source">소스</string>
     <string name="animated_cover_spotify">Spotify (Canvas)</string>
     <string name="animated_cover_apple">Apple Music</string>
@@ -623,7 +623,7 @@
     <string name="lyrics_uploaded_by">업로드</string>
     <string name="lyrics_made_by">제작</string>
     <string name="spicy_lyrics_title">Spicy Lyrics</string>
-    <string name="spicy_lyrics_note">선택 사항입니다. 내 키가 있으면 Spicy Lyrics에서도 가사를 가져오며, 음절 단위로 동기화된 경우가 많습니다. 키는 Spicy Lyrics의 Square 페이지에서 받을 수 있습니다.</string>
+    <string name="spicy_lyrics_note">선택 사항입니다. 내 키가 있으면 Spicy Lyrics에서도 가사를 가져오며, 음절 단위로 동기화된 경우가 많습니다. 키는 Spicy Lyrics의 Sonify 페이지에서 받을 수 있습니다.</string>
     <string name="spicy_lyrics_key">Spicy Lyrics 키</string>
     <string name="spicy_lyrics_get_key">키 받기</string>
     <string name="spicy_lyrics_remove">키 삭제</string>
@@ -640,7 +640,7 @@
     <string name="spotify_dj_talking">이야기 중</string>
     <string name="link_copied_open_browser">브라우저를 열 수 없습니다. 링크가 복사되었으니 브라우저에 붙여넣으세요.</string>
     <string name="youtube_signing_in">로그인 중…</string>
-    <string name="youtube_sign_in_private">비밀번호는 Google에만 전달됩니다. Square는 Google이 돌려주는 세션만 보관합니다.</string>
+    <string name="youtube_sign_in_private">비밀번호는 Google에만 전달됩니다. Sonify는 Google이 돌려주는 세션만 보관합니다.</string>
     <string name="equalizer">이퀄라이저</string>
     <string name="page_equalizer_summary">헤드폰마다 다른 커브</string>
     <string name="eq_speaker">휴대전화 스피커</string>
@@ -657,7 +657,7 @@
     <string name="eq_save_preset">프리셋으로 저장</string>
     <string name="eq_reset">초기화</string>
     <string name="eq_hint">밴드를 터치하고 드래그하세요</string>
-    <string name="eq_note">출력마다 고유한 커브를 유지합니다. 다른 헤드폰을 연결하면 Square가 그 커브로 바꿉니다. 부스트한 만큼 전체 음량을 낮춰 소리가 깨지지 않습니다.</string>
+    <string name="eq_note">출력마다 고유한 커브를 유지합니다. 다른 헤드폰을 연결하면 Sonify가 그 커브로 바꿉니다. 부스트한 만큼 전체 음량을 낮춰 소리가 깨지지 않습니다.</string>
     <string name="eq_flat">플랫</string>
     <string name="eq_bass_boost">저음 강조</string>
     <string name="eq_bass_reducer">저음 감소</string>
