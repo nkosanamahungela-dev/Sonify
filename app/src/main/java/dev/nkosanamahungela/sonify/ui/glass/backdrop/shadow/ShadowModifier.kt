@@ -7,7 +7,7 @@
  * scale for cheaper effect rendering. KMP expect/actual declarations were
  * merged into this single Android source set. Package renamed accordingly.
  */
-package dev.lelonio.square.ui.glass.backdrop.shadow
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.shadow
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.BlendMode
@@ -26,8 +26,8 @@ import androidx.compose.ui.node.requireGraphicsContext
 import androidx.compose.ui.platform.InspectorInfo
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.IntSize
-import dev.lelonio.square.ui.glass.backdrop.internal.ShapeProvider
-import dev.lelonio.square.ui.glass.backdrop.internal.blur
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.internal.ShapeProvider
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.internal.blur
 import kotlin.math.ceil
 
 internal class ShadowElement(

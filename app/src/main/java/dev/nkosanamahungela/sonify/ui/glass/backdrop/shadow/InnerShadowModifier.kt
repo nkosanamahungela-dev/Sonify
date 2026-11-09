@@ -7,7 +7,7 @@
  * scale for cheaper effect rendering. KMP expect/actual declarations were
  * merged into this single Android source set. Package renamed accordingly.
  */
-package dev.lelonio.square.ui.glass.backdrop.shadow
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.shadow
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.BlendMode
@@ -28,9 +28,9 @@ import androidx.compose.ui.node.invalidateDraw
 import androidx.compose.ui.node.requireGraphicsContext
 import androidx.compose.ui.platform.InspectorInfo
 import androidx.compose.ui.unit.Density
-import dev.lelonio.square.ui.glass.backdrop.internal.ShapeProvider
-import dev.lelonio.square.ui.glass.backdrop.internal.clipOutline
-import dev.lelonio.square.ui.glass.backdrop.isRenderEffectSupported
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.internal.ShapeProvider
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.internal.clipOutline
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.isRenderEffectSupported
 
 internal class InnerShadowElement(
     val shapeProvider: ShapeProvider,

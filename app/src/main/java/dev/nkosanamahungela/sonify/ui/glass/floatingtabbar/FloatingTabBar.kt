@@ -19,7 +19,7 @@
 
 @file:OptIn(ExperimentalSharedTransitionApi::class)
 
-package dev.lelonio.square.ui.glass.floatingtabbar
+package dev.nkosanamahungela.sonify.ui.glass.floatingtabbar
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.BoundsTransform

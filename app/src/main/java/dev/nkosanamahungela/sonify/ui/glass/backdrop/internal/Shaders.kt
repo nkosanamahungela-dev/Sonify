@@ -23,7 +23,7 @@
    limitations under the License.
  */
 
-package dev.lelonio.square.ui.glass.backdrop.internal
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.internal
 
 import org.intellij.lang.annotations.Language
 

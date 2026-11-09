@@ -7,7 +7,7 @@
  * scale for cheaper effect rendering. KMP expect/actual declarations were
  * merged into this single Android source set. Package renamed accordingly.
  */
-package dev.lelonio.square.ui.glass.backdrop.internal
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.internal
 
 import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Outline

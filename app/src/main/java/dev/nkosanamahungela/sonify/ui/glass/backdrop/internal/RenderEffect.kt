@@ -7,7 +7,7 @@
  * scale for cheaper effect rendering. KMP expect/actual declarations were
  * merged into this single Android source set. Package renamed accordingly.
  */
-package dev.lelonio.square.ui.glass.backdrop.internal
+package dev.nkosanamahungela.sonify.ui.glass.backdrop.internal
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -15,8 +15,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RenderEffect
 import androidx.compose.ui.graphics.asAndroidColorFilter
 import androidx.compose.ui.graphics.asComposeRenderEffect
-import dev.lelonio.square.ui.glass.backdrop.RuntimeShader
-import dev.lelonio.square.ui.glass.backdrop.asAndroidRuntimeShader
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.RuntimeShader
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.asAndroidRuntimeShader
 
 @RequiresApi(Build.VERSION_CODES.S)
 internal fun RenderEffect?.chain(other: RenderEffect): RenderEffect {
