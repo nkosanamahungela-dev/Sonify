@@ -1,6 +1,6 @@
-package dev.lelonio.square.backend.spotify
+package dev.nkosanamahungela.sonify.backend.spotify
 
-import dev.lelonio.square.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient

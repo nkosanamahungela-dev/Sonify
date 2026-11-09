@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.youtube
+package dev.nkosanamahungela.sonify.backend.youtube
 
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.toRequestBody

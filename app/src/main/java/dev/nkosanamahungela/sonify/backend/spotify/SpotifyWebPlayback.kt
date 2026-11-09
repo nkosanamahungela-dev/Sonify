@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.spotify
+package dev.nkosanamahungela.sonify.backend.spotify
 
 import android.content.Context
 import android.os.Looper
@@ -20,7 +20,7 @@ import androidx.media3.exoplayer.drm.FrameworkMediaDrm
 import androidx.media3.exoplayer.drm.HttpMediaDrmCallback
 import androidx.media3.exoplayer.drm.MediaDrmCallback
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
-import dev.lelonio.square.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -111,7 +111,7 @@ object SpotifyWebPlayback {
                     .setAudioProcessors(
                         arrayOf(
                             androidx.media3.exoplayer.audio.TeeAudioProcessor(meter),
-                            dev.lelonio.square.playback.EqualizerAudioProcessor(),
+                            dev.nkosanamahungela.sonify.playback.EqualizerAudioProcessor(),
                         ),
                     )
                     .build()

@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.spotify
+package dev.nkosanamahungela.sonify.backend.spotify
 
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 /**
  * Whether a Spotify track is being watched rather than listened to.
  *
- * Process-wide, like [dev.lelonio.square.backend.youtube.YouTubeVideoMode] and
+ * Process-wide, like [dev.nkosanamahungela.sonify.backend.youtube.YouTubeVideoMode] and
  * for the same reason: the button is in the player and the thing that has to
  * act on it is the playback service, and no session command carries "play the
  * video of this instead".

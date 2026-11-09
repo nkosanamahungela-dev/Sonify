@@ -1,7 +1,7 @@
-package dev.lelonio.square.backend.lyrics
+package dev.nkosanamahungela.sonify.backend.lyrics
 
-import dev.lelonio.square.data.LyricLine
-import dev.lelonio.square.data.Lyrics
+import dev.nkosanamahungela.sonify.data.LyricLine
+import dev.nkosanamahungela.sonify.data.Lyrics
 import java.net.URLEncoder
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Dispatchers

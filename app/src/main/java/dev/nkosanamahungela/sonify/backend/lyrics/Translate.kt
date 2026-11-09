@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.lyrics
+package dev.nkosanamahungela.sonify.backend.lyrics
 
 import java.net.URLEncoder
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +26,7 @@ object Translate {
     private val http = OkHttpClient()
 
     /**
-     * @param target a two-letter language, as [dev.lelonio.square.data.LanguageStore.language]
+     * @param target a two-letter language, as [dev.nkosanamahungela.sonify.data.LanguageStore.language]
      *   gives it.
      * @return one translation per line of [texts], in the same order, or null
      *   if the endpoint could not be reached at all. A line that came back

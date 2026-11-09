@@ -1,9 +1,9 @@
-package dev.lelonio.square.backend.lyrics
+package dev.nkosanamahungela.sonify.backend.lyrics
 
-import dev.lelonio.square.data.LyricLine
-import dev.lelonio.square.data.LyricWord
-import dev.lelonio.square.data.Lyrics
-import dev.lelonio.square.data.LyricsCredit
+import dev.nkosanamahungela.sonify.data.LyricLine
+import dev.nkosanamahungela.sonify.data.LyricWord
+import dev.nkosanamahungela.sonify.data.Lyrics
+import dev.nkosanamahungela.sonify.data.LyricsCredit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient

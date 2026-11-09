@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.spotify
+package dev.nkosanamahungela.sonify.backend.spotify
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

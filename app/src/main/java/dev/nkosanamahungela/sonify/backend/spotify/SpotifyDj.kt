@@ -1,10 +1,10 @@
-package dev.lelonio.square.backend.spotify
+package dev.nkosanamahungela.sonify.backend.spotify
 
 import android.content.Context
-import dev.lelonio.square.SquareApplication
-import dev.lelonio.square.data.Catalog
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.SonifyApplication
+import dev.nkosanamahungela.sonify.data.Catalog
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -142,7 +142,7 @@ object SpotifyDj {
     }
 
     private suspend fun session(context: Context, page: String = ""): List<CatalogTrack> {
-        val app = context.applicationContext as SquareApplication
+        val app = context.applicationContext as SonifyApplication
         val answer = JSONObject(
             NativeBridge.djSession(page, app.language.language(), app.pathfinderKeys.appVersion),
         )

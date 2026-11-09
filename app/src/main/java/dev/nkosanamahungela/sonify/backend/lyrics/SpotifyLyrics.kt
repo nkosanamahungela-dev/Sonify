@@ -1,8 +1,8 @@
-package dev.lelonio.square.backend.lyrics
+package dev.nkosanamahungela.sonify.backend.lyrics
 
-import dev.lelonio.square.data.Catalog
-import dev.lelonio.square.data.Lyrics
-import dev.lelonio.square.download.DownloadExtras
+import dev.nkosanamahungela.sonify.data.Catalog
+import dev.nkosanamahungela.sonify.data.Lyrics
+import dev.nkosanamahungela.sonify.download.DownloadExtras
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json

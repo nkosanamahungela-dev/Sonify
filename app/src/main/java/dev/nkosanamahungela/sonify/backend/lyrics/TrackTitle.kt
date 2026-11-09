@@ -1,4 +1,4 @@
-package dev.lelonio.square.backend.lyrics
+package dev.nkosanamahungela.sonify.backend.lyrics
 
 /**
  * Trims what upload titles carry and song titles do not.

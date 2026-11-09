@@ -1,9 +1,9 @@
-package dev.lelonio.square.backend.lyrics
+package dev.nkosanamahungela.sonify.backend.lyrics
 
 import android.util.Xml
-import dev.lelonio.square.data.LyricLine
-import dev.lelonio.square.data.LyricWord
-import dev.lelonio.square.data.Lyrics
+import dev.nkosanamahungela.sonify.data.LyricLine
+import dev.nkosanamahungela.sonify.data.LyricWord
+import dev.nkosanamahungela.sonify.data.Lyrics
 import java.io.StringReader
 import java.util.Locale
 import org.xmlpull.v1.XmlPullParser
