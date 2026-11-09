@@ -4,20 +4,20 @@
  * capsule/src/main/java/com/kyant/capsule/continuities/G2Continuity.kt
  *
  * Vendored so the shape ships as source with this app. Package renamed
- * accordingly (com.kyant.capsule -> dev.lelonio.square.ui.glass.shapes).
+ * accordingly (com.kyant.capsule -> dev.nkosanamahungela.sonify.ui.glass.shapes).
  */
-package dev.lelonio.square.ui.glass.shapes.continuities
+package dev.nkosanamahungela.sonify.ui.glass.shapes.continuities
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.util.fastCoerceAtLeast
 import androidx.compose.ui.util.fastCoerceIn
-import dev.lelonio.square.ui.glass.shapes.AdvancedContinuity
-import dev.lelonio.square.ui.glass.shapes.Continuity
-import dev.lelonio.square.ui.glass.shapes.core.Point
-import dev.lelonio.square.ui.glass.shapes.lerp
-import dev.lelonio.square.ui.glass.shapes.path.PathSegments
-import dev.lelonio.square.ui.glass.shapes.path.PathSegmentsBuilder
-import dev.lelonio.square.ui.glass.shapes.path.buildPathSegments
+import dev.nkosanamahungela.sonify.ui.glass.shapes.AdvancedContinuity
+import dev.nkosanamahungela.sonify.ui.glass.shapes.Continuity
+import dev.nkosanamahungela.sonify.ui.glass.shapes.core.Point
+import dev.nkosanamahungela.sonify.ui.glass.shapes.lerp
+import dev.nkosanamahungela.sonify.ui.glass.shapes.path.PathSegments
+import dev.nkosanamahungela.sonify.ui.glass.shapes.path.PathSegmentsBuilder
+import dev.nkosanamahungela.sonify.ui.glass.shapes.path.buildPathSegments
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.min

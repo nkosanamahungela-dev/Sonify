@@ -4,15 +4,15 @@
  * capsule/src/main/java/com/kyant/capsule/path/PathSegment.kt
  *
  * Vendored so the shape ships as source with this app. Package renamed
- * accordingly (com.kyant.capsule -> dev.lelonio.square.ui.glass.shapes).
+ * accordingly (com.kyant.capsule -> dev.nkosanamahungela.sonify.ui.glass.shapes).
  */
-package dev.lelonio.square.ui.glass.shapes.path
+package dev.nkosanamahungela.sonify.ui.glass.shapes.path
 
 import android.graphics.RectF
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.asAndroidPath
-import dev.lelonio.square.ui.glass.shapes.core.Point
+import dev.nkosanamahungela.sonify.ui.glass.shapes.core.Point
 import java.lang.Math.PI
 import kotlin.math.cos
 import kotlin.math.sin

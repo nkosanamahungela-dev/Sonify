@@ -4,13 +4,13 @@
  * capsule/src/main/java/com/kyant/capsule/core/Point.kt
  *
  * Vendored so the shape ships as source with this app. Package renamed
- * accordingly (com.kyant.capsule -> dev.lelonio.square.ui.glass.shapes).
+ * accordingly (com.kyant.capsule -> dev.nkosanamahungela.sonify.ui.glass.shapes).
  */
-package dev.lelonio.square.ui.glass.shapes.core
+package dev.nkosanamahungela.sonify.ui.glass.shapes.core
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
-import dev.lelonio.square.ui.glass.shapes.lerp
+import dev.nkosanamahungela.sonify.ui.glass.shapes.lerp
 import kotlin.math.sqrt
 
 @Immutable

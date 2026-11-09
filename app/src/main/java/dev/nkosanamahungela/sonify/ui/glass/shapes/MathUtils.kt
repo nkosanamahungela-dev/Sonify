@@ -4,9 +4,9 @@
  * capsule/src/main/java/com/kyant/capsule/MathUtils.kt
  *
  * Vendored so the shape ships as source with this app. Package renamed
- * accordingly (com.kyant.capsule -> dev.lelonio.square.ui.glass.shapes).
+ * accordingly (com.kyant.capsule -> dev.nkosanamahungela.sonify.ui.glass.shapes).
  */
-package dev.lelonio.square.ui.glass.shapes
+package dev.nkosanamahungela.sonify.ui.glass.shapes
 
 @Suppress("NOTHING_TO_INLINE")
 internal inline fun lerp(start: Double, stop: Double, fraction: Double): Double {

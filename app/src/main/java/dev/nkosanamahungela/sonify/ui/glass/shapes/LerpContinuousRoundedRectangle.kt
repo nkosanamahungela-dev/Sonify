@@ -6,7 +6,7 @@
  * Vendored so the shape ships as source with this app. Package renamed
  * accordingly, and the Absolute variant was dropped (unused).
  */
-package dev.lelonio.square.ui.glass.shapes
+package dev.nkosanamahungela.sonify.ui.glass.shapes
 
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.runtime.Immutable

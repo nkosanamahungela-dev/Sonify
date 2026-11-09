@@ -4,16 +4,16 @@
  * capsule/src/main/java/com/kyant/capsule/continuities/G2ContinuityProfile.kt
  *
  * Vendored so the shape ships as source with this app. Package renamed
- * accordingly (com.kyant.capsule -> dev.lelonio.square.ui.glass.shapes).
+ * accordingly (com.kyant.capsule -> dev.nkosanamahungela.sonify.ui.glass.shapes).
  */
-package dev.lelonio.square.ui.glass.shapes.continuities
+package dev.nkosanamahungela.sonify.ui.glass.shapes.continuities
 
 import androidx.annotation.FloatRange
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.util.fastCoerceAtLeast
-import dev.lelonio.square.ui.glass.shapes.core.CubicBezier
-import dev.lelonio.square.ui.glass.shapes.core.Point
-import dev.lelonio.square.ui.glass.shapes.lerp
+import dev.nkosanamahungela.sonify.ui.glass.shapes.core.CubicBezier
+import dev.nkosanamahungela.sonify.ui.glass.shapes.core.Point
+import dev.nkosanamahungela.sonify.ui.glass.shapes.lerp
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin

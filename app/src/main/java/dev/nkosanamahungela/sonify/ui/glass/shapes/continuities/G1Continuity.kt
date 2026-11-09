@@ -4,9 +4,9 @@
  * capsule/src/main/java/com/kyant/capsule/continuities/G1Continuity.kt
  *
  * Vendored so the shape ships as source with this app. Package renamed
- * accordingly (com.kyant.capsule -> dev.lelonio.square.ui.glass.shapes).
+ * accordingly (com.kyant.capsule -> dev.nkosanamahungela.sonify.ui.glass.shapes).
  */
-package dev.lelonio.square.ui.glass.shapes.continuities
+package dev.nkosanamahungela.sonify.ui.glass.shapes.continuities
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.geometry.CornerRadius
@@ -14,10 +14,10 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline
-import dev.lelonio.square.ui.glass.shapes.Continuity
-import dev.lelonio.square.ui.glass.shapes.core.Point
-import dev.lelonio.square.ui.glass.shapes.path.PathSegments
-import dev.lelonio.square.ui.glass.shapes.path.buildPathSegments
+import dev.nkosanamahungela.sonify.ui.glass.shapes.Continuity
+import dev.nkosanamahungela.sonify.ui.glass.shapes.core.Point
+import dev.nkosanamahungela.sonify.ui.glass.shapes.path.PathSegments
+import dev.nkosanamahungela.sonify.ui.glass.shapes.path.buildPathSegments
 import kotlin.math.PI
 
 @Immutable
