@@ -8,7 +8,7 @@
     values-it.
 -->
 <resources>
-    <string name="app_name">Square</string>
+    <string name="app_name">Sonify</string>
 
     <!-- Shared -->
     <string name="back">Back</string>
@@ -142,7 +142,7 @@
     <string name="add_failed">%1$s could not be added to. If the playlist is not yours, you cannot change it.</string>
     <string name="like_failed">Could not add to Liked Songs.</string>
     <string name="unlike_failed">Could not remove from Liked Songs.</string>
-    <string name="permission_needed">Square needs a permission it was not given. Reconnect the account in Settings.</string>
+    <string name="permission_needed">Sonify needs a permission it was not given. Reconnect the account in Settings.</string>
     <string name="remove_failed">%1$s could not be changed. Try again in a moment.</string>
 
     <!-- Player -->
@@ -248,14 +248,14 @@
     <string name="onboarding_step_of">Step %1$d of %2$d</string>
     <string name="onboarding_login_title">Log in to Spotify</string>
     <string name="onboarding_login_1">The browser opens on Spotify\'s page. You authorise, and it brings you back here.</string>
-    <string name="onboarding_login_2">You only ever type your password on Spotify\'s own page: Square never sees it.</string>
+    <string name="onboarding_login_2">You only ever type your password on Spotify\'s own page: Sonify never sees it.</string>
     <string name="onboarding_login_done">Logged in</string>
     <string name="onboarding_key_title">Create your key</string>
     <string name="onboarding_key_intro">Search and recommendations go through Spotify\'s API, which has to be used with a personal key. It takes a minute, it is free, and no card is needed.</string>
     <string name="onboarding_open_dashboard">Open the dashboard</string>
     <string name="onboarding_step_login">Log in with the same Spotify account.</string>
     <string name="onboarding_step_create">Top right, press «Create app».</string>
-    <string name="onboarding_step_names">App name and App description: anything you like, for instance Square. Website: leave it empty.</string>
+    <string name="onboarding_step_names">App name and App description: anything you like, for instance Sonify. Website: leave it empty.</string>
     <string name="onboarding_step_redirect">Redirect URI: paste the line below and press «Add». Check that it appears in the list under the field, or it is not saved.</string>
     <string name="onboarding_step_api">Under «Which API/SDKs are you planning to use?» tick Web API.</string>
     <string name="onboarding_step_terms">Accept the terms and press «Save».</string>
@@ -315,7 +315,7 @@
     <string name="quality_low">Low</string>
     <string name="quality_auto_note">Automatic starts from the connection\'s own estimate and then follows the music: a track that stalls or is slow to start drops it a step, and several quick ones in a row raise it again.</string>
     <string name="quality_restarts">Changing this reloads what is playing.</string>
-    <string name="premium_required">Square needs Spotify Premium. A free account can sign in, but Spotify does not stream to a client like this one.</string>
+    <string name="premium_required">Sonify needs Spotify Premium. A free account can sign in, but Spotify does not stream to a client like this one.</string>
     <string name="new_playlist">New playlist</string>
     <string name="rename">Rename</string>
     <string name="delete">Delete</string>
@@ -355,7 +355,7 @@
     <string name="settings_group_help_summary">Community, discussions and problems</string>
     <string name="settings_group_permissions_summary">What the app asks Spotify for</string>
     <string name="youtube_sign_in_required">This song plays only when signed in to YouTube Music</string>
-    <string name="youtube_signed_in_unplayable">YouTube plays this song only to signed-in accounts, and Square cannot read it yet</string>
+    <string name="youtube_signed_in_unplayable">YouTube plays this song only to signed-in accounts, and Sonify cannot read it yet</string>
     <string name="page_app_summary">Language, bar, system and links</string>
     <string name="page_downloads">Downloads and storage</string>
     <string name="storage_cleanup">Cleaning up</string>
@@ -366,9 +366,9 @@
     <string name="storage_caches">App caches</string>
     <string name="page_downloads_summary">What is on the phone, and what is fetched</string>
     <string name="keep_playing_on_close">Keep playing when the app is closed</string>
-    <string name="keep_playing_on_close_note">Swiping Square out of the recents leaves the music playing. The notification still stops it.</string>
+    <string name="keep_playing_on_close_note">Swiping Sonify out of the recents leaves the music playing. The notification still stops it.</string>
     <string name="pause_for_other_apps">Pause when another app plays</string>
-    <string name="pause_for_other_apps_note">If another app takes over the sound, Square pauses. Turn this off if the music keeps pausing on its own: it will play on, over videos and voice messages too.</string>
+    <string name="pause_for_other_apps_note">If another app takes over the sound, Sonify pauses. Turn this off if the music keeps pausing on its own: it will play on, over videos and voice messages too.</string>
     <string name="sponsor_block">Skip the non-music parts</string>
     <string name="sponsor_block_note">Intros, sketches and talking in music videos, as marked by SponsorBlock\'s community. Only the video id is sent.</string>
     <string name="page_app_bar">Bottom bar</string>
@@ -389,7 +389,7 @@
     <string name="effect_quality_light_note">The phone does the work. Kinder to older devices, rougher on attacks.</string>
     <string name="liked_songs">Liked Songs</string>
     <string name="local_files">Local files</string>
-    <string name="local_files_needs_permission">Square can see the music on this phone once you allow it.</string>
+    <string name="local_files_needs_permission">Sonify can see the music on this phone once you allow it.</string>
     <string name="local_files_allow">Allow</string>
     <string name="pinned">Pinned</string>
     <string name="pin">Pin to the top</string>
@@ -443,7 +443,7 @@
     <string name="remove_download">Remove download</string>
     <string name="cancel_download">Cancel download</string>
     <string name="playback_refused">Spotify isn\'t letting songs play right now. Try again in a few minutes. If it keeps happening, sign out and sign in again.</string>
-    <string name="playback_refused_account">Spotify doesn\'t let this account play songs in apps like Square. It isn\'t something the app can fix; another Premium account may work.</string>
+    <string name="playback_refused_account">Spotify doesn\'t let this account play songs in apps like Sonify. It isn\'t something the app can fix; another Premium account may work.</string>
     <string name="downloaded">Downloaded</string>
     <string name="local_file">Local file</string>
     <string name="downloading">Downloading</string>
@@ -538,7 +538,7 @@
     <string name="video_unavailable">The official video can\'t be played: showing the song\'s own video.</string>
     <string name="added_to_queue">Added to queue: %s</string>
     <string name="videos">Videos</string>
-    <string name="device_this_app" translatable="false">%1$s (Square)</string>
+    <string name="device_this_app" translatable="false">%1$s (Sonify)</string>
     <string name="web_playback_on">Spotify refuses this account the keys its songs need: playing them the way the web player does. Spotify Connect and downloads are not available this way.</string>
 
     <!-- Official Spotify SDK proof of concept. -->
@@ -568,7 +568,7 @@
     <string name="web_sdk_play_error">Player connection or playback failed. Stop the test and reconnect.</string>
     <string name="web_sdk_failed">Player unavailable</string>
     <string name="web_sdk_recovery_title">Turn on Spotify playback</string>
-    <string name="web_sdk_recovery_explainer">Spotify won’t play this account’s songs in Square’s usual player. Square can use Spotify’s official web player instead, signed in through your developer app.</string>
+    <string name="web_sdk_recovery_explainer">Spotify won’t play this account’s songs in Sonify’s usual player. Sonify can use Spotify’s official web player instead, signed in through your developer app.</string>
     <string name="web_sdk_enable">Enable playback</string>
     <string name="web_sdk_settings_title">Alternative Spotify playback</string>
     <string name="web_sdk_limits">With this player, crossfade, audio effects, karaoke, sound quality and downloads are not available.</string>
@@ -601,14 +601,14 @@
 
     <string name="recap_title">Your month in music</string>
     <string name="recap_plays">%1$d plays</string>
-    <string name="recap_minutes">%1$d minutes in Square</string>
+    <string name="recap_minutes">%1$d minutes in Sonify</string>
     <string name="recap_details">See your favourites</string>
     <string name="recap_hide">Hide details</string>
     <string name="recap_previous">Previous month</string>
     <string name="recap_next">Next month</string>
     <string name="recap_tracks">Most played songs</string>
     <string name="recap_artists">Most played artists</string>
-    <string name="recap_partial">Includes saved listens and recent Spotify history. Earlier or unsynced listens may be missing. Minutes are measured only in Square.</string>
+    <string name="recap_partial">Includes saved listens and recent Spotify history. Earlier or unsynced listens may be missing. Minutes are measured only in Sonify.</string>
     <string name="smart_shuffle">Smart Shuffle</string>
     <string name="smart_shuffle_unavailable">Smart Shuffle is not available for this playlist right now.</string>
     <string name="telegram_community">Telegram community</string>
@@ -631,12 +631,12 @@
     <string name="new_release_followed_tag">From your artists</string>
     <string name="recap_song_of_month">Song of the month</string>
     <string name="recap_stat_plays">plays</string>
-    <string name="recap_stat_minutes">minutes in Square</string>
+    <string name="recap_stat_minutes">minutes in Sonify</string>
     <string name="recap_empty">No listens this month yet.</string>
-    <string name="recap_partial_youtube">Includes what you play in Square and, while Square is open, your YouTube Music history. Plays from other apps and devices are approximate: YouTube does not say when, only the day.</string>
+    <string name="recap_partial_youtube">Includes what you play in Sonify and, while Sonify is open, your YouTube Music history. Plays from other apps and devices are approximate: YouTube does not say when, only the day.</string>
     <string name="widget_description">Now playing, its controls and your recent playlists</string>
     <string name="widget_nothing_playing">Nothing playing</string>
-    <string name="widget_open_app">Open Square</string>
+    <string name="widget_open_app">Open Sonify</string>
     <string name="animated_cover_source">Source</string>
     <string name="animated_cover_spotify">Spotify (Canvas)</string>
     <string name="animated_cover_apple">Apple Music</string>
@@ -665,7 +665,7 @@
     <string name="lyrics_uploaded_by">uploaded by</string>
     <string name="lyrics_made_by">made by</string>
     <string name="spicy_lyrics_title">Spicy Lyrics</string>
-    <string name="spicy_lyrics_note">Optional. With your own key, Spicy Lyrics is asked for lyrics too, often synced to the syllable. Get the key from Square\'s page on Spicy Lyrics.</string>
+    <string name="spicy_lyrics_note">Optional. With your own key, Spicy Lyrics is asked for lyrics too, often synced to the syllable. Get the key from Sonify\'s page on Spicy Lyrics.</string>
     <string name="spicy_lyrics_key">Spicy Lyrics key</string>
     <string name="spicy_lyrics_get_key">Get a key</string>
     <string name="spicy_lyrics_remove">Remove the key</string>
@@ -683,7 +683,7 @@
     <string name="spotify_dj_talking">is talking</string>
     <string name="link_copied_open_browser">Couldn\'t open the browser. The link is copied: paste it there.</string>
     <string name="youtube_signing_in">Signing in…</string>
-    <string name="youtube_sign_in_private">Your password goes only to Google. Square keeps the session Google gives back.</string>
+    <string name="youtube_sign_in_private">Your password goes only to Google. Sonify keeps the session Google gives back.</string>
     <string name="equalizer">Equalizer</string>
     <string name="page_equalizer_summary">A curve for each pair of headphones</string>
     <string name="eq_speaker">Phone speaker</string>
@@ -700,7 +700,7 @@
     <string name="eq_save_preset">Save as preset</string>
     <string name="eq_reset">Reset to flat</string>
     <string name="eq_hint">Touch and drag the bands</string>
-    <string name="eq_note">Each output keeps its own curve. When you connect other headphones, Square switches to theirs. Boosts lower the overall level by the same amount, so nothing clips.</string>
+    <string name="eq_note">Each output keeps its own curve. When you connect other headphones, Sonify switches to theirs. Boosts lower the overall level by the same amount, so nothing clips.</string>
     <string name="eq_flat">Flat</string>
     <string name="eq_bass_boost">Bass boost</string>
     <string name="eq_bass_reducer">Bass reducer</string>
