@@ -127,7 +127,7 @@
     <string name="add_failed">Impossible d\'ajouter à %1$s. Si la playlist n\'est pas la vôtre, vous ne pouvez pas la modifier.</string>
     <string name="like_failed">Impossible d\'ajouter aux titres likés.</string>
     <string name="unlike_failed">Impossible de retirer des titres likés.</string>
-    <string name="permission_needed">Square a besoin d\'une autorisation qu\'il n\'a pas. Reconnectez le compte dans les réglages.</string>
+    <string name="permission_needed">Sonify a besoin d\'une autorisation qu\'il n\'a pas. Reconnectez le compte dans les réglages.</string>
     <string name="remove_failed">Impossible de modifier %1$s. Réessayez dans un instant.</string>
 
     <string name="play_on">Lire sur</string>
@@ -228,14 +228,14 @@
     <string name="onboarding_step_of">Étape %1$d sur %2$d</string>
     <string name="onboarding_login_title">Connectez-vous à Spotify</string>
     <string name="onboarding_login_1">Le navigateur s\'ouvre sur la page de Spotify. Vous autorisez et vous revenez ici tout seul.</string>
-    <string name="onboarding_login_2">Le mot de passe ne s\'écrit que sur la page de Spotify : Square ne le voit pas.</string>
+    <string name="onboarding_login_2">Le mot de passe ne s\'écrit que sur la page de Spotify : Sonify ne le voit pas.</string>
     <string name="onboarding_login_done">Connexion effectuée</string>
     <string name="onboarding_key_title">Créez votre clé</string>
     <string name="onboarding_key_intro">La recherche et les recommandations passent par l\'API de Spotify, qui s\'utilise avec une clé personnelle. Cela prend une minute, c\'est gratuit et aucune carte n\'est demandée.</string>
     <string name="onboarding_open_dashboard">Ouvrir le tableau de bord</string>
     <string name="onboarding_step_login">Connectez-vous avec le même compte Spotify.</string>
     <string name="onboarding_step_create">En haut à droite, appuyez sur « Create app ».</string>
-    <string name="onboarding_step_names">App name et App description : ce que vous voulez, par exemple Square. Website : laissez vide.</string>
+    <string name="onboarding_step_names">App name et App description : ce que vous voulez, par exemple Sonify. Website : laissez vide.</string>
     <string name="onboarding_step_redirect">Redirect URI : collez la ligne ci-dessous et appuyez sur « Add ». Vérifiez qu\'elle apparaît dans la liste sous le champ, sinon elle n\'est pas enregistrée.</string>
     <string name="onboarding_step_api">À « Which API/SDKs are you planning to use? », cochez Web API.</string>
     <string name="onboarding_step_terms">Acceptez les conditions et appuyez sur « Save ».</string>
@@ -294,7 +294,7 @@
     <string name="quality_low">Basse</string>
     <string name="quality_auto_note">Automatique part de l\'estimation de la connexion puis suit la musique : un morceau qui se coupe ou qui tarde à démarrer la fait descendre d\'un cran, et plusieurs morceaux rapides la font remonter.</string>
     <string name="quality_restarts">La changer recharge le titre en cours.</string>
-    <string name="premium_required">Square demande Spotify Premium. Un compte gratuit peut se connecter, mais Spotify ne diffuse pas vers un client comme celui-ci.</string>
+    <string name="premium_required">Sonify demande Spotify Premium. Un compte gratuit peut se connecter, mais Spotify ne diffuse pas vers un client comme celui-ci.</string>
     <string name="new_playlist">Nouvelle playlist</string>
     <string name="rename">Renommer</string>
     <string name="delete">Supprimer</string>
@@ -334,7 +334,7 @@
     <string name="settings_group_help_summary">Communauté, discussions et problèmes</string>
     <string name="settings_group_permissions_summary">Ce que l’app demande à Spotify</string>
     <string name="youtube_sign_in_required">Ce titre ne peut être lu qu’en étant connecté à YouTube Music</string>
-    <string name="youtube_signed_in_unplayable">YouTube ne diffuse ce titre qu’aux comptes connectés, et Square ne peut pas encore le lire</string>
+    <string name="youtube_signed_in_unplayable">YouTube ne diffuse ce titre qu’aux comptes connectés, et Sonify ne peut pas encore le lire</string>
     <string name="page_app_summary">Langue, barre, système et liens</string>
     <string name="page_downloads">Téléchargements et stockage</string>
     <string name="storage_cleanup">Nettoyage</string>
@@ -345,9 +345,9 @@
     <string name="storage_caches">Caches de l\'appli</string>
     <string name="page_downloads_summary">Ce qui est sur le téléphone et ce qui est téléchargé</string>
     <string name="keep_playing_on_close">Continuer la lecture quand l\'appli est fermée</string>
-    <string name="keep_playing_on_close_note">Retirer Square des applis récentes laisse la musique jouer. La notification l\'arrête toujours.</string>
+    <string name="keep_playing_on_close_note">Retirer Sonify des applis récentes laisse la musique jouer. La notification l\'arrête toujours.</string>
     <string name="pause_for_other_apps">Mettre en pause quand une autre app joue</string>
-    <string name="pause_for_other_apps_note">Si une autre app prend le son, Square se met en pause. Désactivez-le si la musique s\'arrête toute seule : elle continuera, même par-dessus les vidéos et les messages vocaux.</string>
+    <string name="pause_for_other_apps_note">Si une autre app prend le son, Sonify se met en pause. Désactivez-le si la musique s\'arrête toute seule : elle continuera, même par-dessus les vidéos et les messages vocaux.</string>
     <string name="sponsor_block">Passer les parties non musicales</string>
     <string name="sponsor_block_note">Intros, sketchs et parties parlées des clips, signalés par la communauté SponsorBlock. Seul l\'identifiant de la vidéo est envoyé.</string>
     <string name="page_app_bar">Barre du bas</string>
@@ -368,7 +368,7 @@
     <string name="effect_quality_light_note">Le téléphone s’en charge. Plus douce pour les appareils anciens, plus rêche sur les attaques.</string>
     <string name="liked_songs">Titres likés</string>
     <string name="local_files">Fichiers locaux</string>
-    <string name="local_files_needs_permission">Square peut voir la musique de ce téléphone si vous l\'autorisez.</string>
+    <string name="local_files_needs_permission">Sonify peut voir la musique de ce téléphone si vous l\'autorisez.</string>
     <string name="local_files_allow">Autoriser</string>
     <string name="pinned">Épinglée</string>
     <string name="pin">Épingler en haut</string>
@@ -420,7 +420,7 @@
     <string name="remove_download">Retirer le téléchargement</string>
     <string name="cancel_download">Annuler le téléchargement</string>
     <string name="playback_refused">Spotify ne permet pas de lire des titres pour le moment. Réessaie dans quelques minutes. Si ça continue, déconnecte-toi puis reconnecte-toi.</string>
-    <string name="playback_refused_account">Spotify ne permet pas à ce compte de lire des titres dans des applis comme Square. Cela ne dépend pas de l\'appli ; un autre compte Premium peut fonctionner.</string>
+    <string name="playback_refused_account">Spotify ne permet pas à ce compte de lire des titres dans des applis comme Sonify. Cela ne dépend pas de l\'appli ; un autre compte Premium peut fonctionner.</string>
     <string name="downloaded">Téléchargé</string>
     <string name="local_file">Fichier local</string>
     <string name="downloading">Téléchargement</string>
@@ -537,14 +537,14 @@
 
     <string name="recap_title">Ton mois en musique</string>
     <string name="recap_plays">%1$d écoutes</string>
-    <string name="recap_minutes">%1$d minutes dans Square</string>
+    <string name="recap_minutes">%1$d minutes dans Sonify</string>
     <string name="recap_details">Voir tes favoris</string>
     <string name="recap_hide">Masquer les détails</string>
     <string name="recap_previous">Mois précédent</string>
     <string name="recap_next">Mois suivant</string>
     <string name="recap_tracks">Titres les plus écoutés</string>
     <string name="recap_artists">Artistes les plus écoutés</string>
-    <string name="recap_partial">Inclut les écoutes enregistrées et le récent historique Spotify. Certaines écoutes anciennes ou non synchronisées peuvent manquer. Les minutes sont mesurées uniquement dans Square.</string>
+    <string name="recap_partial">Inclut les écoutes enregistrées et le récent historique Spotify. Certaines écoutes anciennes ou non synchronisées peuvent manquer. Les minutes sont mesurées uniquement dans Sonify.</string>
     <string name="telegram_community">Communauté Telegram</string>
     <string name="login_in_progress">Connexion à Spotify en cours…</string>
     <string name="login_channel">Connexion</string>
@@ -565,12 +565,12 @@
     <string name="new_release_followed_tag">De tes artistes</string>
     <string name="recap_song_of_month">Titre du mois</string>
     <string name="recap_stat_plays">écoutes</string>
-    <string name="recap_stat_minutes">minutes dans Square</string>
+    <string name="recap_stat_minutes">minutes dans Sonify</string>
     <string name="recap_empty">Aucune écoute ce mois-ci pour l’instant.</string>
-    <string name="recap_partial_youtube">Comprend ce que tu écoutes dans Square et, tant que Square est ouverte, ton historique YouTube Music. Les écoutes depuis d’autres apps et appareils sont approximatives : YouTube ne donne pas l’heure, seulement le jour.</string>
+    <string name="recap_partial_youtube">Comprend ce que tu écoutes dans Sonify et, tant que Sonify est ouverte, ton historique YouTube Music. Les écoutes depuis d’autres apps et appareils sont approximatives : YouTube ne donne pas l’heure, seulement le jour.</string>
     <string name="widget_description">En cours de lecture, les commandes et tes playlists récentes</string>
     <string name="widget_nothing_playing">Rien en cours de lecture</string>
-    <string name="widget_open_app">Ouvrir Square</string>
+    <string name="widget_open_app">Ouvrir Sonify</string>
     <string name="animated_cover_source">Source</string>
     <string name="animated_cover_spotify">Spotify (Canvas)</string>
     <string name="animated_cover_apple">Apple Music</string>
@@ -599,7 +599,7 @@
     <string name="lyrics_uploaded_by">envoyées par</string>
     <string name="lyrics_made_by">réalisées par</string>
     <string name="spicy_lyrics_title">Spicy Lyrics</string>
-    <string name="spicy_lyrics_note">Facultatif. Avec ta propre clé, Spicy Lyrics est aussi consulté, souvent synchronisé à la syllabe. Obtiens la clé sur la page de Square chez Spicy Lyrics.</string>
+    <string name="spicy_lyrics_note">Facultatif. Avec ta propre clé, Spicy Lyrics est aussi consulté, souvent synchronisé à la syllabe. Obtiens la clé sur la page de Sonify chez Spicy Lyrics.</string>
     <string name="spicy_lyrics_key">Clé Spicy Lyrics</string>
     <string name="spicy_lyrics_get_key">Obtenir une clé</string>
     <string name="spicy_lyrics_remove">Supprimer la clé</string>
@@ -616,7 +616,7 @@
     <string name="spotify_dj_talking">parle</string>
     <string name="link_copied_open_browser">Impossible d\'ouvrir le navigateur. Le lien est copié : collez-le dedans.</string>
     <string name="youtube_signing_in">Connexion en cours…</string>
-    <string name="youtube_sign_in_private">Votre mot de passe va uniquement à Google. Square garde la session que Google renvoie.</string>
+    <string name="youtube_sign_in_private">Votre mot de passe va uniquement à Google. Sonify garde la session que Google renvoie.</string>
     <string name="equalizer">Égaliseur</string>
     <string name="page_equalizer_summary">Une courbe pour chaque casque</string>
     <string name="eq_speaker">Haut-parleur du téléphone</string>
@@ -633,7 +633,7 @@
     <string name="eq_save_preset">Enregistrer comme préréglage</string>
     <string name="eq_reset">Réinitialiser</string>
     <string name="eq_hint">Touchez et faites glisser les bandes</string>
-    <string name="eq_note">Chaque sortie garde sa propre courbe. Quand vous branchez un autre casque, Square passe à la sienne. Les hausses baissent le niveau général d’autant, pour que rien ne sature.</string>
+    <string name="eq_note">Chaque sortie garde sa propre courbe. Quand vous branchez un autre casque, Sonify passe à la sienne. Les hausses baissent le niveau général d’autant, pour que rien ne sature.</string>
     <string name="eq_flat">Plat</string>
     <string name="eq_bass_boost">Plus de basses</string>
     <string name="eq_bass_reducer">Moins de basses</string>

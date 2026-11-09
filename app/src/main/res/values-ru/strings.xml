@@ -4,7 +4,7 @@
     base the rest of the locales fall back to.
 -->
 <resources>
-    <string name="app_name">Square</string>
+    <string name="app_name">Sonify</string>
 
     <!-- Shared -->
     <string name="back">Назад</string>
@@ -138,7 +138,7 @@
     <string name="add_failed">Не удалось добавить в %1$s. Чужой плейлист изменить нельзя.</string>
     <string name="like_failed">Не удалось добавить в любимые треки.</string>
     <string name="unlike_failed">Не удалось убрать из любимых треков.</string>
-    <string name="permission_needed">Square не хватает разрешения. Подключите аккаунт заново в настройках.</string>
+    <string name="permission_needed">Sonify не хватает разрешения. Подключите аккаунт заново в настройках.</string>
     <string name="remove_failed">Не удалось изменить %1$s. Попробуйте ещё раз чуть позже.</string>
 
     <!-- Player -->
@@ -244,14 +244,14 @@
     <string name="onboarding_step_of">Шаг %1$d из %2$d</string>
     <string name="onboarding_login_title">Вход в Spotify</string>
     <string name="onboarding_login_1">Откроется браузер на странице Spotify. Вы подтверждаете доступ, и он вернёт вас сюда.</string>
-    <string name="onboarding_login_2">Пароль вы вводите только на странице самого Spotify: Square его не видит.</string>
+    <string name="onboarding_login_2">Пароль вы вводите только на странице самого Spotify: Sonify его не видит.</string>
     <string name="onboarding_login_done">Вход выполнен</string>
     <string name="onboarding_key_title">Создайте свой ключ</string>
     <string name="onboarding_key_intro">Поиск и рекомендации идут через API Spotify, которым нужно пользоваться с личным ключом. Это займёт минуту, бесплатно и без карты.</string>
     <string name="onboarding_open_dashboard">Открыть панель разработчика</string>
     <string name="onboarding_step_login">Войдите под тем же аккаунтом Spotify.</string>
     <string name="onboarding_step_create">Справа вверху нажмите «Create app».</string>
-    <string name="onboarding_step_names">App name и App description: что угодно, например Square. Website оставьте пустым.</string>
+    <string name="onboarding_step_names">App name и App description: что угодно, например Sonify. Website оставьте пустым.</string>
     <string name="onboarding_step_redirect">Redirect URI: вставьте строку ниже и нажмите «Add». Проверьте, что она появилась в списке под полем, иначе она не сохранена.</string>
     <string name="onboarding_step_api">В разделе «Which API/SDKs are you planning to use?» отметьте Web API.</string>
     <string name="onboarding_step_terms">Примите условия и нажмите «Save».</string>
@@ -311,7 +311,7 @@
     <string name="quality_low">Низкое</string>
     <string name="quality_auto_note">Автоматический режим начинает с оценки соединения, а дальше следит за музыкой: трек, который прерывается или долго начинается, понижает качество на ступень, а несколько быстрых подряд снова поднимают его.</string>
     <string name="quality_restarts">После изменения то, что играет, загрузится заново.</string>
-    <string name="premium_required">Square нужен Spotify Premium. С бесплатным аккаунтом можно войти, но Spotify не передаёт музыку такому клиенту.</string>
+    <string name="premium_required">Sonify нужен Spotify Premium. С бесплатным аккаунтом можно войти, но Spotify не передаёт музыку такому клиенту.</string>
     <string name="new_playlist">Новый плейлист</string>
     <string name="rename">Переименовать</string>
     <string name="delete">Удалить</string>
@@ -351,7 +351,7 @@
     <string name="settings_group_help_summary">Сообщество, обсуждения и проблемы</string>
     <string name="settings_group_permissions_summary">Что приложение запрашивает у Spotify</string>
     <string name="youtube_sign_in_required">Эту песню можно слушать, только войдя в YouTube Music</string>
-    <string name="youtube_signed_in_unplayable">YouTube отдаёт эту песню только вошедшим в аккаунт, а Square пока не может её прочитать</string>
+    <string name="youtube_signed_in_unplayable">YouTube отдаёт эту песню только вошедшим в аккаунт, а Sonify пока не может её прочитать</string>
     <string name="page_app_summary">Язык, панель, система и ссылки</string>
     <string name="page_downloads">Загрузки и память</string>
     <string name="storage_cleanup">Очистка</string>
@@ -362,9 +362,9 @@
     <string name="storage_caches">Кэш приложения</string>
     <string name="page_downloads_summary">Что лежит на телефоне и что скачивается</string>
     <string name="keep_playing_on_close">Продолжать играть при закрытии приложения</string>
-    <string name="keep_playing_on_close_note">Если убрать Square из недавних, музыка продолжит играть. Остановить можно из уведомления.</string>
+    <string name="keep_playing_on_close_note">Если убрать Sonify из недавних, музыка продолжит играть. Остановить можно из уведомления.</string>
     <string name="pause_for_other_apps">Пауза, когда играет другое приложение</string>
-    <string name="pause_for_other_apps_note">Если другое приложение забирает звук, Square ставит музыку на паузу. Выключите, если музыка сама останавливается: она продолжит играть, даже поверх видео и голосовых сообщений.</string>
+    <string name="pause_for_other_apps_note">Если другое приложение забирает звук, Sonify ставит музыку на паузу. Выключите, если музыка сама останавливается: она продолжит играть, даже поверх видео и голосовых сообщений.</string>
     <string name="sponsor_block">Пропускать немузыкальные части</string>
     <string name="sponsor_block_note">Вступления, сценки и разговоры в клипах, отмеченные сообществом SponsorBlock. Отправляется только id видео.</string>
     <string name="page_app_bar">Нижняя панель</string>
@@ -385,7 +385,7 @@
     <string name="effect_quality_light_note">Работу берёт на себя телефон. Бережнее к старым устройствам, грубее на резких звуках.</string>
     <string name="liked_songs">Любимые треки</string>
     <string name="local_files">Локальные файлы</string>
-    <string name="local_files_needs_permission">Square увидит музыку на этом телефоне, когда вы разрешите доступ.</string>
+    <string name="local_files_needs_permission">Sonify увидит музыку на этом телефоне, когда вы разрешите доступ.</string>
     <string name="local_files_allow">Разрешить</string>
     <string name="pinned">Закреплено</string>
     <string name="pin">Закрепить вверху</string>
@@ -437,7 +437,7 @@
     <string name="remove_download">Удалить загрузку</string>
     <string name="cancel_download">Отменить загрузку</string>
     <string name="playback_refused">Сейчас Spotify не даёт воспроизводить треки. Попробуйте ещё раз через несколько минут. Если не поможет, выйдите из аккаунта и войдите снова.</string>
-    <string name="playback_refused_account">Spotify не разрешает этому аккаунту воспроизводить треки в приложениях вроде Square. Приложение тут ни при чём; с другим аккаунтом Premium может работать.</string>
+    <string name="playback_refused_account">Spotify не разрешает этому аккаунту воспроизводить треки в приложениях вроде Sonify. Приложение тут ни при чём; с другим аккаунтом Premium может работать.</string>
     <string name="downloaded">Скачано</string>
     <string name="local_file">Локальный файл</string>
     <string name="downloading">Загрузка</string>
@@ -564,14 +564,14 @@
 
     <string name="recap_title">Ваш музыкальный месяц</string>
     <string name="recap_plays">%1$d прослушиваний</string>
-    <string name="recap_minutes">%1$d минут в Square</string>
+    <string name="recap_minutes">%1$d минут в Sonify</string>
     <string name="recap_details">Посмотреть любимое</string>
     <string name="recap_hide">Скрыть подробности</string>
     <string name="recap_previous">Предыдущий месяц</string>
     <string name="recap_next">Следующий месяц</string>
     <string name="recap_tracks">Любимые песни</string>
     <string name="recap_artists">Любимые исполнители</string>
-    <string name="recap_partial">Учитываются сохранённые прослушивания и недавняя история Spotify. Старые или несинхронизированные прослушивания могут отсутствовать. Минуты измеряются только в Square.</string>
+    <string name="recap_partial">Учитываются сохранённые прослушивания и недавняя история Spotify. Старые или несинхронизированные прослушивания могут отсутствовать. Минуты измеряются только в Sonify.</string>
     <string name="telegram_community">Сообщество Telegram</string>
     <string name="login_in_progress">Вход в Spotify…</string>
     <string name="login_channel">Вход</string>
@@ -594,12 +594,12 @@
     <string name="new_release_followed_tag">От ваших исполнителей</string>
     <string name="recap_song_of_month">Трек месяца</string>
     <string name="recap_stat_plays">прослушиваний</string>
-    <string name="recap_stat_minutes">минут в Square</string>
+    <string name="recap_stat_minutes">минут в Sonify</string>
     <string name="recap_empty">В этом месяце пока ничего не прослушано.</string>
-    <string name="recap_partial_youtube">Учитывается то, что вы слушаете в Square, и, пока Square открыт, история YouTube Music. Прослушивания в других приложениях и на других устройствах приблизительны: YouTube сообщает только день, а не время.</string>
+    <string name="recap_partial_youtube">Учитывается то, что вы слушаете в Sonify, и, пока Sonify открыт, история YouTube Music. Прослушивания в других приложениях и на других устройствах приблизительны: YouTube сообщает только день, а не время.</string>
     <string name="widget_description">Что играет, управление и ваши недавние плейлисты</string>
     <string name="widget_nothing_playing">Ничего не играет</string>
-    <string name="widget_open_app">Открыть Square</string>
+    <string name="widget_open_app">Открыть Sonify</string>
     <string name="animated_cover_source">Источник</string>
     <string name="animated_cover_spotify">Spotify (Canvas)</string>
     <string name="animated_cover_apple">Apple Music</string>
@@ -628,7 +628,7 @@
     <string name="lyrics_uploaded_by">загрузил</string>
     <string name="lyrics_made_by">создал</string>
     <string name="spicy_lyrics_title">Spicy Lyrics</string>
-    <string name="spicy_lyrics_note">Необязательно. С вашим ключом тексты будут запрашиваться и у Spicy Lyrics, часто с синхронизацией по слогам. Ключ можно получить на странице Square в Spicy Lyrics.</string>
+    <string name="spicy_lyrics_note">Необязательно. С вашим ключом тексты будут запрашиваться и у Spicy Lyrics, часто с синхронизацией по слогам. Ключ можно получить на странице Sonify в Spicy Lyrics.</string>
     <string name="spicy_lyrics_key">Ключ Spicy Lyrics</string>
     <string name="spicy_lyrics_get_key">Получить ключ</string>
     <string name="spicy_lyrics_remove">Удалить ключ</string>
@@ -645,7 +645,7 @@
     <string name="spotify_dj_talking">говорит</string>
     <string name="link_copied_open_browser">Не удалось открыть браузер. Ссылка скопирована: вставьте её туда.</string>
     <string name="youtube_signing_in">Выполняется вход…</string>
-    <string name="youtube_sign_in_private">Пароль получает только Google. Square хранит сессию, которую возвращает Google.</string>
+    <string name="youtube_sign_in_private">Пароль получает только Google. Sonify хранит сессию, которую возвращает Google.</string>
     <string name="equalizer">Эквалайзер</string>
     <string name="page_equalizer_summary">Своя кривая для каждых наушников</string>
     <string name="eq_speaker">Динамик телефона</string>
@@ -662,7 +662,7 @@
     <string name="eq_save_preset">Сохранить как пресет</string>
     <string name="eq_reset">Сбросить</string>
     <string name="eq_hint">Нажмите и перетащите полосы</string>
-    <string name="eq_note">У каждого выхода своя кривая. Когда вы подключаете другие наушники, Square переключается на их кривую. Усиление снижает общую громкость на ту же величину, чтобы ничего не искажалось.</string>
+    <string name="eq_note">У каждого выхода своя кривая. Когда вы подключаете другие наушники, Sonify переключается на их кривую. Усиление снижает общую громкость на ту же величину, чтобы ничего не искажалось.</string>
     <string name="eq_flat">Ровно</string>
     <string name="eq_bass_boost">Больше басов</string>
     <string name="eq_bass_reducer">Меньше басов</string>

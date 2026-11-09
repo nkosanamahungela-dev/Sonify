@@ -52,9 +52,9 @@ jobs:
             echo "::error::the signing secrets are not set"
             exit 1
           fi
-          echo "$KEYSTORE" | base64 --decode > "$RUNNER_TEMP/square-release.jks"
+          echo "$KEYSTORE" | base64 --decode > "$RUNNER_TEMP/sonify-release.jks"
           {
-            echo "storeFile=$RUNNER_TEMP/square-release.jks"
+            echo "storeFile=$RUNNER_TEMP/sonify-release.jks"
             echo "storePassword=$STORE_PASSWORD"
             echo "keyAlias=$KEY_ALIAS"
             echo "keyPassword=$KEY_PASSWORD"
@@ -87,7 +87,7 @@ jobs:
               echo "::error::$abi signed with ${digest:-nothing}, not the release key"
               exit 1
             fi
-            cp "$apk" "square-${{ steps.version.outputs.name }}-$abi.apk"
+            cp "$apk" "sonify-${{ steps.version.outputs.name }}-$abi.apk"
           done
 
       - name: Draft release
@@ -98,7 +98,7 @@ jobs:
         # the first APK it finds, every phone that has one of those is 64-bit,
         # and gh uploads several files at once in no fixed order.
         run: |
-          name="square-${{ steps.version.outputs.name }}"
+          name="sonify-${{ steps.version.outputs.name }}"
           if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
             gh release upload "$GITHUB_REF_NAME" "$name-arm64-v8a.apk" --clobber
           else
@@ -110,7 +110,7 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: github.ref_type != 'tag'
         with:
-          name: square-${{ steps.version.outputs.name }}-signed
-          path: square-${{ steps.version.outputs.name }}-*.apk
+          name: sonify-${{ steps.version.outputs.name }}-signed
+          path: sonify-${{ steps.version.outputs.name }}-*.apk
           retention-days: 7
           if-no-files-found: error

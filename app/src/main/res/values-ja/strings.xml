@@ -3,7 +3,7 @@
     アプリ内に表示する日本語テキスト。
 -->
 <resources>
-    <string name="app_name">Square</string>
+    <string name="app_name">Sonify</string>
 
     <!-- Shared -->
     <string name="back">戻る</string>
@@ -137,7 +137,7 @@
     <string name="add_failed">%1$sに追加できませんでした。自分が所有していないプレイリストは編集できません。</string>
     <string name="like_failed">「お気に入りの曲」に追加できませんでした。</string>
     <string name="unlike_failed">「お気に入りの曲」から削除できませんでした。</string>
-    <string name="permission_needed">Squareに必要な権限が許可されていません。設定からSpotifyアカウントを再接続してください。</string>
+    <string name="permission_needed">Sonifyに必要な権限が許可されていません。設定からSpotifyアカウントを再接続してください。</string>
     <string name="remove_failed">%1$sを変更できませんでした。しばらくしてから再試行してください。</string>
 
     <!-- Player -->
@@ -243,14 +243,14 @@
     <string name="onboarding_step_of">ステップ %1$d / %2$d</string>
     <string name="onboarding_login_title">Spotifyにログイン</string>
     <string name="onboarding_login_1">ブラウザでSpotifyのページが開きます。認証すると、このアプリに戻ります。</string>
-    <string name="onboarding_login_2">パスワードを入力するのはSpotify公式ページだけです。Squareがパスワードを見ることはありません。</string>
+    <string name="onboarding_login_2">パスワードを入力するのはSpotify公式ページだけです。Sonifyがパスワードを見ることはありません。</string>
     <string name="onboarding_login_done">ログイン済み</string>
     <string name="onboarding_key_title">APIキーを作成</string>
     <string name="onboarding_key_intro">検索とおすすめ機能にはSpotify APIを使います。個人用のキーが必要ですが、無料で1分ほどで作成でき、クレジットカードも不要です。</string>
     <string name="onboarding_open_dashboard">ダッシュボードを開く</string>
     <string name="onboarding_step_login">同じSpotifyアカウントでログインします。</string>
     <string name="onboarding_step_create">右上の「Create app」をタップします。</string>
-    <string name="onboarding_step_names">App nameとApp descriptionには好きな内容を入力します（例：Square）。Websiteは空欄のままにします。</string>
+    <string name="onboarding_step_names">App nameとApp descriptionには好きな内容を入力します（例：Sonify）。Websiteは空欄のままにします。</string>
     <string name="onboarding_step_redirect">Redirect URIに下の文字列を貼り付けて「Add」をタップします。入力欄の下の一覧に追加されたことを確認してください。一覧にない場合は保存されていません。</string>
     <string name="onboarding_step_api">「Which API/SDKs are you planning to use?」でWeb APIにチェックを入れます。</string>
     <string name="onboarding_step_terms">利用規約に同意して「Save」をタップします。</string>
@@ -310,7 +310,7 @@
     <string name="quality_low">低</string>
     <string name="quality_auto_note">自動では、まず接続状況から音質を決め、その後も再生状況に合わせて調整します。曲の再生が止まったり開始が遅れたりすると音質を下げ、再生が安定すると段階的に上げます。</string>
     <string name="quality_restarts">変更すると再生中の曲を読み込み直します。</string>
-    <string name="premium_required">SquareにはSpotify Premiumが必要です。無料アカウントでもログインできますが、Spotifyはこのようなクライアントへのストリーミングに対応していません。</string>
+    <string name="premium_required">SonifyにはSpotify Premiumが必要です。無料アカウントでもログインできますが、Spotifyはこのようなクライアントへのストリーミングに対応していません。</string>
     <string name="new_playlist">新しいプレイリスト</string>
     <string name="rename">名前を変更</string>
     <string name="delete">削除</string>
@@ -350,7 +350,7 @@
     <string name="settings_group_help_summary">コミュニティ、ディスカッション、問題</string>
     <string name="settings_group_permissions_summary">アプリが Spotify に求めるもの</string>
     <string name="youtube_sign_in_required">この曲は YouTube Music にログインしている場合のみ再生できます</string>
-    <string name="youtube_signed_in_unplayable">YouTube はこの曲をログイン中のアカウントにしか提供せず、Square はまだ読み込めません</string>
+    <string name="youtube_signed_in_unplayable">YouTube はこの曲をログイン中のアカウントにしか提供せず、Sonify はまだ読み込めません</string>
     <string name="page_app_summary">言語、下部バー、システム、リンク</string>
     <string name="page_downloads">ダウンロードとストレージ</string>
     <string name="storage_cleanup">クリーンアップ</string>
@@ -361,9 +361,9 @@
     <string name="storage_caches">アプリのキャッシュ</string>
     <string name="page_downloads_summary">端末に保存済みの項目と取得する項目</string>
     <string name="keep_playing_on_close">アプリを閉じても再生を続ける</string>
-    <string name="keep_playing_on_close_note">最近使ったアプリの画面でSquareをスワイプして終了しても、音楽の再生は続きます。通知から停止できます。</string>
+    <string name="keep_playing_on_close_note">最近使ったアプリの画面でSonifyをスワイプして終了しても、音楽の再生は続きます。通知から停止できます。</string>
     <string name="pause_for_other_apps">他のアプリの再生中は一時停止</string>
-    <string name="pause_for_other_apps_note">他のアプリが音声を使い始めると、Squareは一時停止します。音楽が勝手に止まる場合はオフにしてください。動画やボイスメッセージの上でも再生が続きます。</string>
+    <string name="pause_for_other_apps_note">他のアプリが音声を使い始めると、Sonifyは一時停止します。音楽が勝手に止まる場合はオフにしてください。動画やボイスメッセージの上でも再生が続きます。</string>
     <string name="sponsor_block">音楽以外の部分をスキップ</string>
     <string name="sponsor_block_note">SponsorBlockコミュニティが登録した、ミュージックビデオのイントロ、寸劇、トークをスキップします。送信されるのは動画IDのみです。</string>
     <string name="page_app_bar">下部バー</string>
@@ -384,7 +384,7 @@
     <string name="effect_quality_light_note">端末側で処理します。古い端末でも軽快ですが、音の立ち上がりは粗くなります。</string>
     <string name="liked_songs">お気に入りの曲</string>
     <string name="local_files">ローカルファイル</string>
-    <string name="local_files_needs_permission">許可すると、Squareからこの端末の音楽にアクセスできます。</string>
+    <string name="local_files_needs_permission">許可すると、Sonifyからこの端末の音楽にアクセスできます。</string>
     <string name="local_files_allow">許可</string>
     <string name="pinned">ピン留め済み</string>
     <string name="pin">上部にピン留め</string>
@@ -436,7 +436,7 @@
     <string name="remove_download">ダウンロードを削除</string>
     <string name="cancel_download">ダウンロードをキャンセル</string>
     <string name="playback_refused">現在Spotifyで曲を再生できません。数分後にもう一度お試しください。解決しない場合は、一度ログアウトしてから再ログインしてください。</string>
-    <string name="playback_refused_account">このアカウントではSquareのようなアプリで曲を再生できません。アプリ側では解決できませんが、別のPremiumアカウントなら再生できる場合があります。</string>
+    <string name="playback_refused_account">このアカウントではSonifyのようなアプリで曲を再生できません。アプリ側では解決できませんが、別のPremiumアカウントなら再生できる場合があります。</string>
     <string name="downloaded">ダウンロード済み</string>
     <string name="local_file">ローカルファイル</string>
     <string name="downloading">ダウンロード中</string>
@@ -529,7 +529,7 @@
     <string name="video_unavailable">公式動画を再生できません。この曲に紐づく動画を表示します。</string>
     <string name="added_to_queue">キューに追加しました：%s</string>
     <string name="videos">動画</string>
-    <string name="device_this_app" translatable="false">%1$s (Square)</string>
+    <string name="device_this_app" translatable="false">%1$s (Sonify)</string>
     <string name="web_playback_on">Spotifyがこのアカウントの通常の再生を許可しないため、Webプレーヤー方式で再生します。この方式ではSpotify Connectとダウンロードを利用できません。</string>
 
     <!-- Official Spotify SDK proof of concept. -->
@@ -559,7 +559,7 @@
     <string name="web_sdk_play_error">プレーヤーの接続または再生に失敗しました。テストを停止して再接続してください。</string>
     <string name="web_sdk_failed">プレーヤーを利用できません</string>
     <string name="web_sdk_recovery_title">Spotifyの再生を有効にする</string>
-    <string name="web_sdk_recovery_explainer">Spotifyはこのアカウントの曲をSquareの通常のプレーヤーで再生できません。開発者アプリからログインすると、Spotify公式Webプレーヤーで再生できます。</string>
+    <string name="web_sdk_recovery_explainer">Spotifyはこのアカウントの曲をSonifyの通常のプレーヤーで再生できません。開発者アプリからログインすると、Spotify公式Webプレーヤーで再生できます。</string>
     <string name="web_sdk_enable">再生を有効にする</string>
     <string name="web_sdk_settings_title">Spotifyの代替再生方法</string>
     <string name="web_sdk_limits">このプレーヤーでは、クロスフェード、オーディオエフェクト、カラオケ、音質設定、ダウンロードを利用できません。</string>
@@ -592,14 +592,14 @@
 
     <string name="recap_title">月間音楽まとめ</string>
     <string name="recap_plays">%1$d回再生</string>
-    <string name="recap_minutes">Squareで%1$d分再生</string>
+    <string name="recap_minutes">Sonifyで%1$d分再生</string>
     <string name="recap_details">詳細を見る</string>
     <string name="recap_hide">詳細を非表示</string>
     <string name="recap_previous">前の月</string>
     <string name="recap_next">次の月</string>
     <string name="recap_tracks">よく聴いた曲</string>
     <string name="recap_artists">よく聴いたアーティスト</string>
-    <string name="recap_partial">保存された再生履歴とSpotifyの最近の履歴を表示します。古い履歴や同期されていない再生は含まれない場合があります。再生時間はSquare内で聴いた時間のみです。</string>
+    <string name="recap_partial">保存された再生履歴とSpotifyの最近の履歴を表示します。古い履歴や同期されていない再生は含まれない場合があります。再生時間はSonify内で聴いた時間のみです。</string>
     <string name="smart_shuffle">スマートシャッフル</string>
     <string name="smart_shuffle_unavailable">現在、このプレイリストではスマートシャッフルを利用できません。</string>
     <string name="telegram_community">Telegramコミュニティ</string>
@@ -621,12 +621,12 @@
     <string name="new_release_followed_tag">フォロー中のアーティスト</string>
     <string name="recap_song_of_month">この月の1曲</string>
     <string name="recap_stat_plays">回再生</string>
-    <string name="recap_stat_minutes">Squareでの再生時間（分）</string>
+    <string name="recap_stat_minutes">Sonifyでの再生時間（分）</string>
     <string name="recap_empty">この月の再生履歴はまだありません。</string>
-    <string name="recap_partial_youtube">Squareでの再生履歴と、Squareを開いている間のYouTube Musicの履歴を表示します。他のアプリやデバイスでの再生回数は概算です。YouTubeでは時刻ではなく日付のみ記録されます。</string>
+    <string name="recap_partial_youtube">Sonifyでの再生履歴と、Sonifyを開いている間のYouTube Musicの履歴を表示します。他のアプリやデバイスでの再生回数は概算です。YouTubeでは時刻ではなく日付のみ記録されます。</string>
     <string name="widget_description">再生中の曲と操作ボタン、最近のプレイリスト</string>
     <string name="widget_nothing_playing">再生中の曲はありません</string>
-    <string name="widget_open_app">Squareを開く</string>
+    <string name="widget_open_app">Sonifyを開く</string>
     <string name="animated_cover_source">取得元</string>
     <string name="animated_cover_spotify">Spotify（Canvas）</string>
     <string name="animated_cover_apple">Apple Music</string>
@@ -655,7 +655,7 @@
     <string name="lyrics_uploaded_by">アップロード</string>
     <string name="lyrics_made_by">作成</string>
     <string name="spicy_lyrics_title">Spicy Lyrics</string>
-    <string name="spicy_lyrics_note">任意。自分のキーがあれば、Spicy Lyricsからも歌詞を取得します（音節単位で同期されていることが多いです）。キーはSpicy LyricsのSquareのページから取得できます。</string>
+    <string name="spicy_lyrics_note">任意。自分のキーがあれば、Spicy Lyricsからも歌詞を取得します（音節単位で同期されていることが多いです）。キーはSpicy LyricsのSonifyのページから取得できます。</string>
     <string name="spicy_lyrics_key">Spicy Lyricsのキー</string>
     <string name="spicy_lyrics_get_key">キーを取得</string>
     <string name="spicy_lyrics_remove">キーを削除</string>
@@ -672,7 +672,7 @@
     <string name="spotify_dj_talking">話しています</string>
     <string name="link_copied_open_browser">ブラウザを開けませんでした。リンクをコピーしたので、ブラウザに貼り付けてください。</string>
     <string name="youtube_signing_in">ログインしています…</string>
-    <string name="youtube_sign_in_private">パスワードは Google にのみ送られます。Square は Google から返されたセッションだけを保存します。</string>
+    <string name="youtube_sign_in_private">パスワードは Google にのみ送られます。Sonify は Google から返されたセッションだけを保存します。</string>
     <string name="equalizer">イコライザー</string>
     <string name="page_equalizer_summary">ヘッドホンごとのカーブ</string>
     <string name="eq_speaker">本体スピーカー</string>
@@ -689,7 +689,7 @@
     <string name="eq_save_preset">プリセットとして保存</string>
     <string name="eq_reset">リセット</string>
     <string name="eq_hint">バンドをタッチしてドラッグ</string>
-    <string name="eq_note">出力ごとに専用のカーブを保持します。別のヘッドホンを接続すると、Square はそのカーブに切り替えます。ブーストした分だけ全体の音量を下げるので、音割れしません。</string>
+    <string name="eq_note">出力ごとに専用のカーブを保持します。別のヘッドホンを接続すると、Sonify はそのカーブに切り替えます。ブーストした分だけ全体の音量を下げるので、音割れしません。</string>
     <string name="eq_flat">フラット</string>
     <string name="eq_bass_boost">低音強調</string>
     <string name="eq_bass_reducer">低音カット</string>

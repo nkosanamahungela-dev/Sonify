@@ -136,7 +136,7 @@
     <string name="add_failed">%1$s में नहीं जोड़ा जा सका। अगर प्लेलिस्ट आपकी नहीं है तो आप उसे बदल नहीं सकते।</string>
     <string name="like_failed">पसंद किए गए गानों में नहीं जोड़ा जा सका।</string>
     <string name="unlike_failed">पसंद किए गए गानों से नहीं हटाया जा सका।</string>
-    <string name="permission_needed">Square को एक अनुमति चाहिए जो उसे नहीं मिली। सेटिंग्स में खाता दोबारा जोड़ें।</string>
+    <string name="permission_needed">Sonify को एक अनुमति चाहिए जो उसे नहीं मिली। सेटिंग्स में खाता दोबारा जोड़ें।</string>
     <string name="remove_failed">%1$s को बदला नहीं जा सका। थोड़ी देर बाद फिर कोशिश करें।</string>
 
     <!-- Player -->
@@ -242,14 +242,14 @@
     <string name="onboarding_step_of">चरण %1$d / %2$d</string>
     <string name="onboarding_login_title">Spotify में लॉग इन करें</string>
     <string name="onboarding_login_1">ब्राउज़र Spotify के पेज पर खुलता है। आप अनुमति देते हैं और वह आपको यहाँ लौटा देता है।</string>
-    <string name="onboarding_login_2">पासवर्ड आप सिर्फ़ Spotify के अपने पेज पर लिखते हैं: Square उसे कभी नहीं देखता।</string>
+    <string name="onboarding_login_2">पासवर्ड आप सिर्फ़ Spotify के अपने पेज पर लिखते हैं: Sonify उसे कभी नहीं देखता।</string>
     <string name="onboarding_login_done">लॉग इन हो गया</string>
     <string name="onboarding_key_title">अपनी कुंजी बनाएँ</string>
     <string name="onboarding_key_intro">खोज और सुझाव Spotify के API से होकर जाते हैं, जिसे निजी कुंजी के साथ इस्तेमाल करना होता है। एक मिनट लगता है, मुफ़्त है, कार्ड की ज़रूरत नहीं।</string>
     <string name="onboarding_open_dashboard">डैशबोर्ड खोलें</string>
     <string name="onboarding_step_login">उसी Spotify खाते से लॉग इन करें।</string>
     <string name="onboarding_step_create">ऊपर दाईं ओर «Create app» दबाएँ।</string>
-    <string name="onboarding_step_names">App name और App description: जो चाहें, जैसे Square। Website: खाली छोड़ दें।</string>
+    <string name="onboarding_step_names">App name और App description: जो चाहें, जैसे Sonify। Website: खाली छोड़ दें।</string>
     <string name="onboarding_step_redirect">Redirect URI: नीचे दी गई पंक्ति चिपकाएँ और «Add» दबाएँ। देख लें कि वह फ़ील्ड के नीचे सूची में दिखे, वरना वह सहेजी नहीं जाती।</string>
     <string name="onboarding_step_api">«Which API/SDKs are you planning to use?» के नीचे Web API चुनें।</string>
     <string name="onboarding_step_terms">शर्तें स्वीकार करें और «Save» दबाएँ।</string>
@@ -309,7 +309,7 @@
     <string name="quality_low">कम</string>
     <string name="quality_auto_note">स्वचालित कनेक्शन के अनुमान से शुरू होता है और फिर संगीत का अनुसरण करता है: कोई गाना अटके या देर से शुरू हो तो एक कदम नीचे, और लगातार कई तेज़ गाने फिर से ऊपर।</string>
     <string name="quality_restarts">इसे बदलने पर जो चल रहा है वह फिर से लोड होता है।</string>
-    <string name="premium_required">Square को Spotify Premium चाहिए। मुफ़्त खाता लॉग इन तो कर सकता है, पर Spotify ऐसे क्लाइंट को स्ट्रीम नहीं देता।</string>
+    <string name="premium_required">Sonify को Spotify Premium चाहिए। मुफ़्त खाता लॉग इन तो कर सकता है, पर Spotify ऐसे क्लाइंट को स्ट्रीम नहीं देता।</string>
     <string name="new_playlist">नई प्लेलिस्ट</string>
     <string name="rename">नाम बदलें</string>
     <string name="delete">मिटाएँ</string>
@@ -349,7 +349,7 @@
     <string name="settings_group_help_summary">समुदाय, चर्चाएँ और समस्याएँ</string>
     <string name="settings_group_permissions_summary">ऐप Spotify से क्या माँगता है</string>
     <string name="youtube_sign_in_required">यह गाना सिर्फ़ YouTube Music में साइन इन करने पर चलता है</string>
-    <string name="youtube_signed_in_unplayable">YouTube यह गाना सिर्फ़ साइन इन किए खातों को देता है, और Square अभी इसे नहीं पढ़ पाता</string>
+    <string name="youtube_signed_in_unplayable">YouTube यह गाना सिर्फ़ साइन इन किए खातों को देता है, और Sonify अभी इसे नहीं पढ़ पाता</string>
     <string name="page_app_summary">भाषा, पट्टी, सिस्टम और लिंक</string>
     <string name="page_downloads">डाउनलोड और स्टोरेज</string>
     <string name="storage_cleanup">सफ़ाई</string>
@@ -360,9 +360,9 @@
     <string name="storage_caches">ऐप कैश</string>
     <string name="page_downloads_summary">फ़ोन में क्या है और क्या डाउनलोड होता है</string>
     <string name="keep_playing_on_close">ऐप बंद करने पर भी बजता रहे</string>
-    <string name="keep_playing_on_close_note">Square को हाल की ऐप्स से हटाने पर संगीत चलता रहता है। नोटिफिकेशन से बंद किया जा सकता है।</string>
+    <string name="keep_playing_on_close_note">Sonify को हाल की ऐप्स से हटाने पर संगीत चलता रहता है। नोटिफिकेशन से बंद किया जा सकता है।</string>
     <string name="pause_for_other_apps">दूसरा ऐप चलने पर रोकें</string>
-    <string name="pause_for_other_apps_note">अगर कोई दूसरा ऐप आवाज़ ले लेता है, तो Square रुक जाता है। अगर संगीत अपने आप रुकता है तो इसे बंद करें: यह चलता रहेगा, वीडियो और वॉइस मैसेज के ऊपर भी।</string>
+    <string name="pause_for_other_apps_note">अगर कोई दूसरा ऐप आवाज़ ले लेता है, तो Sonify रुक जाता है। अगर संगीत अपने आप रुकता है तो इसे बंद करें: यह चलता रहेगा, वीडियो और वॉइस मैसेज के ऊपर भी।</string>
     <string name="sponsor_block">बिना संगीत वाले हिस्से छोड़ें</string>
     <string name="sponsor_block_note">म्यूज़िक वीडियो के इंट्रो, स्किट और बातचीत, जिन्हें SponsorBlock समुदाय ने चिह्नित किया है। सिर्फ़ वीडियो id भेजी जाती है।</string>
     <string name="page_app_bar">नीचे की पट्टी</string>
@@ -383,7 +383,7 @@
     <string name="effect_quality_light_note">काम फ़ोन करता है। पुराने डिवाइस के लिए आसान, तेज़ आघातों पर थोड़ा खुरदरा।</string>
     <string name="liked_songs">पसंद किए गए गाने</string>
     <string name="local_files">स्थानीय फ़ाइलें</string>
-    <string name="local_files_needs_permission">अनुमति देने पर Square इस फ़ोन का संगीत देख सकता है।</string>
+    <string name="local_files_needs_permission">अनुमति देने पर Sonify इस फ़ोन का संगीत देख सकता है।</string>
     <string name="local_files_allow">अनुमति दें</string>
     <string name="pinned">पिन किया</string>
     <string name="pin">ऊपर पिन करें</string>
@@ -435,7 +435,7 @@
     <string name="remove_download">डाउनलोड हटाएँ</string>
     <string name="cancel_download">डाउनलोड रद्द करें</string>
     <string name="playback_refused">Spotify अभी गाने चलाने नहीं दे रहा है। कुछ मिनट बाद फिर कोशिश करें। अगर ऐसा होता रहे, तो साइन आउट करके फिर से साइन इन करें।</string>
-    <string name="playback_refused_account">Spotify इस खाते को Square जैसे ऐप में गाने चलाने नहीं देता। यह ऐप की वजह से नहीं है; किसी दूसरे Premium खाते से चल सकता है।</string>
+    <string name="playback_refused_account">Spotify इस खाते को Sonify जैसे ऐप में गाने चलाने नहीं देता। यह ऐप की वजह से नहीं है; किसी दूसरे Premium खाते से चल सकता है।</string>
     <string name="downloaded">डाउनलोड किया</string>
     <string name="local_file">स्थानीय फ़ाइल</string>
     <string name="downloading">डाउनलोड हो रहा है</string>
@@ -552,14 +552,14 @@
 
     <string name="recap_title">संगीत के साथ आपका महीना</string>
     <string name="recap_plays">%1$d बार सुना</string>
-    <string name="recap_minutes">Square में %1$d मिनट</string>
+    <string name="recap_minutes">Sonify में %1$d मिनट</string>
     <string name="recap_details">पसंदीदा देखें</string>
     <string name="recap_hide">विवरण छिपाएँ</string>
     <string name="recap_previous">पिछला महीना</string>
     <string name="recap_next">अगला महीना</string>
     <string name="recap_tracks">सबसे अधिक सुने गए गाने</string>
     <string name="recap_artists">सबसे अधिक सुने गए कलाकार</string>
-    <string name="recap_partial">सहेजी गई सुनने की गतिविधि और Spotify का हाल का इतिहास शामिल है। पुरानी या सिंक नहीं हुई गतिविधि छूट सकती है। मिनट केवल Square में मापे जाते हैं।</string>
+    <string name="recap_partial">सहेजी गई सुनने की गतिविधि और Spotify का हाल का इतिहास शामिल है। पुरानी या सिंक नहीं हुई गतिविधि छूट सकती है। मिनट केवल Sonify में मापे जाते हैं।</string>
     <string name="telegram_community">Telegram समुदाय</string>
     <string name="login_in_progress">Spotify में साइन इन हो रहा है…</string>
     <string name="login_channel">साइन इन</string>
@@ -580,12 +580,12 @@
     <string name="new_release_followed_tag">आपके कलाकारों से</string>
     <string name="recap_song_of_month">महीने का गाना</string>
     <string name="recap_stat_plays">बार सुना</string>
-    <string name="recap_stat_minutes">Square में मिनट</string>
+    <string name="recap_stat_minutes">Sonify में मिनट</string>
     <string name="recap_empty">इस महीने अभी तक कुछ नहीं सुना।</string>
-    <string name="recap_partial_youtube">इसमें Square में सुने गए गाने और, जब तक Square खुला है, आपका YouTube Music इतिहास शामिल है। दूसरे ऐप और डिवाइस पर सुने गए गाने अनुमानित हैं: YouTube समय नहीं, सिर्फ़ दिन बताता है।</string>
+    <string name="recap_partial_youtube">इसमें Sonify में सुने गए गाने और, जब तक Sonify खुला है, आपका YouTube Music इतिहास शामिल है। दूसरे ऐप और डिवाइस पर सुने गए गाने अनुमानित हैं: YouTube समय नहीं, सिर्फ़ दिन बताता है।</string>
     <string name="widget_description">अभी चल रहा गाना, उसके कंट्रोल और आपकी हाल की प्लेलिस्ट</string>
     <string name="widget_nothing_playing">कुछ नहीं चल रहा</string>
-    <string name="widget_open_app">Square खोलें</string>
+    <string name="widget_open_app">Sonify खोलें</string>
     <string name="animated_cover_source">स्रोत</string>
     <string name="animated_cover_spotify">Spotify (Canvas)</string>
     <string name="animated_cover_apple">Apple Music</string>
@@ -614,7 +614,7 @@
     <string name="lyrics_uploaded_by">अपलोड किया</string>
     <string name="lyrics_made_by">बनाया</string>
     <string name="spicy_lyrics_title">Spicy Lyrics</string>
-    <string name="spicy_lyrics_note">वैकल्पिक। अपनी कुंजी से Spicy Lyrics से भी बोल लिए जाते हैं, अक्सर अक्षर-स्तर पर सिंक। कुंजी Spicy Lyrics पर Square के पेज से लें।</string>
+    <string name="spicy_lyrics_note">वैकल्पिक। अपनी कुंजी से Spicy Lyrics से भी बोल लिए जाते हैं, अक्सर अक्षर-स्तर पर सिंक। कुंजी Spicy Lyrics पर Sonify के पेज से लें।</string>
     <string name="spicy_lyrics_key">Spicy Lyrics कुंजी</string>
     <string name="spicy_lyrics_get_key">कुंजी पाएँ</string>
     <string name="spicy_lyrics_remove">कुंजी हटाएँ</string>
@@ -631,7 +631,7 @@
     <string name="spotify_dj_talking">बोल रहा है</string>
     <string name="link_copied_open_browser">ब्राउज़र नहीं खुल सका। लिंक कॉपी हो गया है: उसे वहाँ पेस्ट करें।</string>
     <string name="youtube_signing_in">साइन इन हो रहा है…</string>
-    <string name="youtube_sign_in_private">आपका पासवर्ड सिर्फ़ Google को जाता है। Square वही सेशन रखता है जो Google लौटाता है।</string>
+    <string name="youtube_sign_in_private">आपका पासवर्ड सिर्फ़ Google को जाता है। Sonify वही सेशन रखता है जो Google लौटाता है।</string>
     <string name="equalizer">इक्वलाइज़र</string>
     <string name="page_equalizer_summary">हर हेडफ़ोन के लिए अलग कर्व</string>
     <string name="eq_speaker">फ़ोन का स्पीकर</string>
@@ -648,7 +648,7 @@
     <string name="eq_save_preset">प्रीसेट के रूप में सहेजें</string>
     <string name="eq_reset">रीसेट करें</string>
     <string name="eq_hint">बैंड को छूकर खींचें</string>
-    <string name="eq_note">हर आउटपुट का अपना कर्व होता है। दूसरे हेडफ़ोन जोड़ने पर Square उनका कर्व इस्तेमाल करता है। बूस्ट करने पर कुल आवाज़ उतनी ही कम हो जाती है, ताकि कुछ भी न फटे।</string>
+    <string name="eq_note">हर आउटपुट का अपना कर्व होता है। दूसरे हेडफ़ोन जोड़ने पर Sonify उनका कर्व इस्तेमाल करता है। बूस्ट करने पर कुल आवाज़ उतनी ही कम हो जाती है, ताकि कुछ भी न फटे।</string>
     <string name="eq_flat">फ़्लैट</string>
     <string name="eq_bass_boost">बास बढ़ाएँ</string>
     <string name="eq_bass_reducer">बास घटाएँ</string>

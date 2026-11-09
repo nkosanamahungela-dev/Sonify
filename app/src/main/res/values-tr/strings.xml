@@ -136,7 +136,7 @@
     <string name="add_failed">%1$s listesine eklenemedi. Liste senin değilse değiştiremezsin.</string>
     <string name="like_failed">Beğenilen Şarkılar\'a eklenemedi.</string>
     <string name="unlike_failed">Beğenilen Şarkılar\'dan çıkarılamadı.</string>
-    <string name="permission_needed">Square\'in verilmemiş bir izne ihtiyacı var. Hesabı ayarlardan yeniden bağlayın.</string>
+    <string name="permission_needed">Sonify\'in verilmemiş bir izne ihtiyacı var. Hesabı ayarlardan yeniden bağlayın.</string>
     <string name="remove_failed">%1$s değiştirilemedi. Birazdan tekrar dene.</string>
 
     <!-- Player -->
@@ -242,14 +242,14 @@
     <string name="onboarding_step_of">Adım %1$d / %2$d</string>
     <string name="onboarding_login_title">Spotify\'a giriş yap</string>
     <string name="onboarding_login_1">Tarayıcı Spotify\'ın sayfasında açılır. İzin verirsin ve buraya geri döner.</string>
-    <string name="onboarding_login_2">Şifreni yalnızca Spotify\'ın kendi sayfasına yazarsın: Square onu hiç görmez.</string>
+    <string name="onboarding_login_2">Şifreni yalnızca Spotify\'ın kendi sayfasına yazarsın: Sonify onu hiç görmez.</string>
     <string name="onboarding_login_done">Giriş yapıldı</string>
     <string name="onboarding_key_title">Anahtarını oluştur</string>
     <string name="onboarding_key_intro">Arama ve öneriler, kişisel bir anahtarla kullanılması gereken Spotify API\'sinden geçer. Bir dakika sürer, ücretsizdir ve kart gerekmez.</string>
     <string name="onboarding_open_dashboard">Paneli aç</string>
     <string name="onboarding_step_login">Aynı Spotify hesabıyla giriş yap.</string>
     <string name="onboarding_step_create">Sağ üstte «Create app»e bas.</string>
-    <string name="onboarding_step_names">App name ve App description: istediğin gibi, örneğin Square. Website: boş bırak.</string>
+    <string name="onboarding_step_names">App name ve App description: istediğin gibi, örneğin Sonify. Website: boş bırak.</string>
     <string name="onboarding_step_redirect">Redirect URI: aşağıdaki satırı yapıştır ve «Add»e bas. Alanın altındaki listede göründüğünü doğrula, yoksa kaydedilmez.</string>
     <string name="onboarding_step_api">«Which API/SDKs are you planning to use?» altında Web API\'yi işaretle.</string>
     <string name="onboarding_step_terms">Koşulları kabul et ve «Save»e bas.</string>
@@ -309,7 +309,7 @@
     <string name="quality_low">Düşük</string>
     <string name="quality_auto_note">Otomatik, bağlantının tahminiyle başlar ve sonra müziği izler: takılan ya da geç başlayan bir parça bir kademe düşürür, arka arkaya birkaç hızlı parça yeniden yükseltir.</string>
     <string name="quality_restarts">Bunu değiştirmek çalan parçayı yeniden yükler.</string>
-    <string name="premium_required">Square, Spotify Premium gerektirir. Ücretsiz hesap giriş yapabilir ama Spotify böyle bir istemciye yayın vermez.</string>
+    <string name="premium_required">Sonify, Spotify Premium gerektirir. Ücretsiz hesap giriş yapabilir ama Spotify böyle bir istemciye yayın vermez.</string>
     <string name="new_playlist">Yeni çalma listesi</string>
     <string name="rename">Yeniden adlandır</string>
     <string name="delete">Sil</string>
@@ -349,7 +349,7 @@
     <string name="settings_group_help_summary">Topluluk, tartışmalar ve sorunlar</string>
     <string name="settings_group_permissions_summary">Uygulamanın Spotify’dan istedikleri</string>
     <string name="youtube_sign_in_required">Bu şarkı yalnızca YouTube Music’te oturum açıkken çalar</string>
-    <string name="youtube_signed_in_unplayable">YouTube bu şarkıyı yalnızca oturum açmış hesaplara veriyor ve Square henüz okuyamıyor</string>
+    <string name="youtube_signed_in_unplayable">YouTube bu şarkıyı yalnızca oturum açmış hesaplara veriyor ve Sonify henüz okuyamıyor</string>
     <string name="page_app_summary">Dil, çubuk, sistem ve bağlantılar</string>
     <string name="page_downloads">İndirmeler ve depolama</string>
     <string name="storage_cleanup">Temizlik</string>
@@ -360,9 +360,9 @@
     <string name="storage_caches">Uygulama önbellekleri</string>
     <string name="page_downloads_summary">Telefonda ne var ve ne indiriliyor</string>
     <string name="keep_playing_on_close">Uygulama kapatılınca çalmaya devam et</string>
-    <string name="keep_playing_on_close_note">Square\'i son kullanılanlardan kaydırmak müziği çalar bırakır. Bildirimden yine durdurulur.</string>
+    <string name="keep_playing_on_close_note">Sonify\'i son kullanılanlardan kaydırmak müziği çalar bırakır. Bildirimden yine durdurulur.</string>
     <string name="pause_for_other_apps">Başka bir uygulama çalınca duraklat</string>
-    <string name="pause_for_other_apps_note">Başka bir uygulama sesi devralırsa Square duraklar. Müzik kendi kendine duruyorsa kapatın: videoların ve sesli mesajların üzerinde de çalmaya devam eder.</string>
+    <string name="pause_for_other_apps_note">Başka bir uygulama sesi devralırsa Sonify duraklar. Müzik kendi kendine duruyorsa kapatın: videoların ve sesli mesajların üzerinde de çalmaya devam eder.</string>
     <string name="sponsor_block">Müzik olmayan kısımları atla</string>
     <string name="sponsor_block_note">Klip içindeki girişler, skeçler ve konuşmalar, SponsorBlock topluluğunun işaretlediği gibi. Yalnızca video kimliği gönderilir.</string>
     <string name="page_app_bar">Alt çubuk</string>
@@ -383,7 +383,7 @@
     <string name="effect_quality_light_note">İşi telefon yapar. Eski cihazlara nazik, vuruşlarda daha kaba.</string>
     <string name="liked_songs">Beğenilen Şarkılar</string>
     <string name="local_files">Yerel dosyalar</string>
-    <string name="local_files_needs_permission">İzin verirsen Square bu telefondaki müziği görebilir.</string>
+    <string name="local_files_needs_permission">İzin verirsen Sonify bu telefondaki müziği görebilir.</string>
     <string name="local_files_allow">İzin ver</string>
     <string name="pinned">Sabitlendi</string>
     <string name="pin">Yukarı sabitle</string>
@@ -435,7 +435,7 @@
     <string name="remove_download">İndirmeyi kaldır</string>
     <string name="cancel_download">İndirmeyi iptal et</string>
     <string name="playback_refused">Spotify şu anda şarkı çalmaya izin vermiyor. Birkaç dakika sonra tekrar dene. Devam ederse çıkış yapıp yeniden giriş yap.</string>
-    <string name="playback_refused_account">Spotify bu hesabın Square gibi uygulamalarda şarkı çalmasına izin vermiyor. Bu uygulamadan kaynaklanmıyor; başka bir Premium hesapla çalışabilir.</string>
+    <string name="playback_refused_account">Spotify bu hesabın Sonify gibi uygulamalarda şarkı çalmasına izin vermiyor. Bu uygulamadan kaynaklanmıyor; başka bir Premium hesapla çalışabilir.</string>
     <string name="downloaded">İndirildi</string>
     <string name="local_file">Yerel dosya</string>
     <string name="downloading">İndiriliyor</string>
@@ -550,14 +550,14 @@
 
     <string name="recap_title">Müzikle geçen ayın</string>
     <string name="recap_plays">%1$d dinleme</string>
-    <string name="recap_minutes">Square içinde %1$d dakika</string>
+    <string name="recap_minutes">Sonify içinde %1$d dakika</string>
     <string name="recap_details">Favorilerini gör</string>
     <string name="recap_hide">Ayrıntıları gizle</string>
     <string name="recap_previous">Önceki ay</string>
     <string name="recap_next">Sonraki ay</string>
     <string name="recap_tracks">En çok dinlenen şarkılar</string>
     <string name="recap_artists">En çok dinlenen sanatçılar</string>
-    <string name="recap_partial">Kaydedilen dinlemeler ve yakın tarihli Spotify geçmişi dahildir. Eski veya eşitlenmemiş dinlemeler eksik olabilir. Dakikalar yalnızca Square içinde ölçülür.</string>
+    <string name="recap_partial">Kaydedilen dinlemeler ve yakın tarihli Spotify geçmişi dahildir. Eski veya eşitlenmemiş dinlemeler eksik olabilir. Dakikalar yalnızca Sonify içinde ölçülür.</string>
     <string name="telegram_community">Telegram topluluğu</string>
     <string name="login_in_progress">Spotify’da oturum açılıyor…</string>
     <string name="login_channel">Oturum açma</string>
@@ -578,12 +578,12 @@
     <string name="new_release_followed_tag">Sanatçılarından</string>
     <string name="recap_song_of_month">Ayın şarkısı</string>
     <string name="recap_stat_plays">dinleme</string>
-    <string name="recap_stat_minutes">Square’de dakika</string>
+    <string name="recap_stat_minutes">Sonify’de dakika</string>
     <string name="recap_empty">Bu ay henüz dinleme yok.</string>
-    <string name="recap_partial_youtube">Square’de dinlediklerini ve Square açıkken YouTube Music geçmişini içerir. Diğer uygulama ve cihazlardaki dinlemeler yaklaşıktır: YouTube saati değil, yalnızca günü verir.</string>
+    <string name="recap_partial_youtube">Sonify’de dinlediklerini ve Sonify açıkken YouTube Music geçmişini içerir. Diğer uygulama ve cihazlardaki dinlemeler yaklaşıktır: YouTube saati değil, yalnızca günü verir.</string>
     <string name="widget_description">Çalan şarkı, kontrolleri ve son çalma listelerin</string>
     <string name="widget_nothing_playing">Hiçbir şey çalmıyor</string>
-    <string name="widget_open_app">Square’i aç</string>
+    <string name="widget_open_app">Sonify’i aç</string>
     <string name="animated_cover_source">Kaynak</string>
     <string name="animated_cover_spotify">Spotify (Canvas)</string>
     <string name="animated_cover_apple">Apple Music</string>
@@ -612,7 +612,7 @@
     <string name="lyrics_uploaded_by">yükleyen</string>
     <string name="lyrics_made_by">hazırlayan</string>
     <string name="spicy_lyrics_title">Spicy Lyrics</string>
-    <string name="spicy_lyrics_note">İsteğe bağlı. Kendi anahtarınla Spicy Lyrics de sorgulanır, çoğu zaman hece hece senkronize. Anahtarı Spicy Lyrics üzerindeki Square sayfasından al.</string>
+    <string name="spicy_lyrics_note">İsteğe bağlı. Kendi anahtarınla Spicy Lyrics de sorgulanır, çoğu zaman hece hece senkronize. Anahtarı Spicy Lyrics üzerindeki Sonify sayfasından al.</string>
     <string name="spicy_lyrics_key">Spicy Lyrics anahtarı</string>
     <string name="spicy_lyrics_get_key">Anahtar al</string>
     <string name="spicy_lyrics_remove">Anahtarı kaldır</string>
@@ -629,7 +629,7 @@
     <string name="spotify_dj_talking">konuşuyor</string>
     <string name="link_copied_open_browser">Tarayıcı açılamadı. Bağlantı kopyalandı: oraya yapıştır.</string>
     <string name="youtube_signing_in">Giriş yapılıyor…</string>
-    <string name="youtube_sign_in_private">Şifren yalnızca Google\'a gider. Square, Google\'ın verdiği oturumu saklar.</string>
+    <string name="youtube_sign_in_private">Şifren yalnızca Google\'a gider. Sonify, Google\'ın verdiği oturumu saklar.</string>
     <string name="equalizer">Ekolayzer</string>
     <string name="page_equalizer_summary">Her kulaklık için ayrı eğri</string>
     <string name="eq_speaker">Telefon hoparlörü</string>
@@ -646,7 +646,7 @@
     <string name="eq_save_preset">Ön ayar olarak kaydet</string>
     <string name="eq_reset">Sıfırla</string>
     <string name="eq_hint">Bantlara dokunup sürükleyin</string>
-    <string name="eq_note">Her çıkışın kendi eğrisi vardır. Başka bir kulaklık bağladığınızda Square onunkine geçer. Yükseltmeler genel seviyeyi aynı miktarda düşürür, böylece hiçbir şey bozulmaz.</string>
+    <string name="eq_note">Her çıkışın kendi eğrisi vardır. Başka bir kulaklık bağladığınızda Sonify onunkine geçer. Yükseltmeler genel seviyeyi aynı miktarda düşürür, böylece hiçbir şey bozulmaz.</string>
     <string name="eq_flat">Düz</string>
     <string name="eq_bass_boost">Bas artırıcı</string>
     <string name="eq_bass_reducer">Bas azaltıcı</string>

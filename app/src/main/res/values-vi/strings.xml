@@ -6,7 +6,7 @@
     the "other" quantity, as Vietnamese has no plural form to distinguish.
 -->
 <resources>
-    <string name="app_name">Square</string>
+    <string name="app_name">Sonify</string>
 
     <!-- Shared -->
     <string name="back">Quay lại</string>
@@ -140,7 +140,7 @@
     <string name="add_failed">Không thể thêm bài vào %1$s. Bạn không thể chỉnh sửa danh sách phát của người khác.</string>
     <string name="like_failed">Không thể thêm vào Bài hát đã thích.</string>
     <string name="unlike_failed">Không thể xóa khỏi Bài hát đã thích.</string>
-    <string name="permission_needed">Square cần một quyền chưa được cấp. Hãy kết nối lại tài khoản trong Cài đặt.</string>
+    <string name="permission_needed">Sonify cần một quyền chưa được cấp. Hãy kết nối lại tài khoản trong Cài đặt.</string>
     <string name="remove_failed">Không thể thay đổi %1$s. Thử lại sau giây lát.</string>
 
     <!-- Player -->
@@ -246,14 +246,14 @@
     <string name="onboarding_step_of">Bước %1$d / %2$d</string>
     <string name="onboarding_login_title">Đăng nhập Spotify</string>
     <string name="onboarding_login_1">Trình duyệt sẽ mở trang của Spotify. Sau khi bạn cấp quyền, ứng dụng sẽ tự động đưa bạn quay lại đây.</string>
-    <string name="onboarding_login_2">Bạn chỉ nhập mật khẩu trên trang của chính Spotify: Square không bao giờ thấy nó.</string>
+    <string name="onboarding_login_2">Bạn chỉ nhập mật khẩu trên trang của chính Spotify: Sonify không bao giờ thấy nó.</string>
     <string name="onboarding_login_done">Đã đăng nhập</string>
     <string name="onboarding_key_title">Tạo khóa của riêng bạn</string>
     <string name="onboarding_key_intro">Tìm kiếm và gợi ý đi qua API của Spotify, và phải dùng bằng một khóa cá nhân. Chỉ mất một phút, miễn phí và không cần thẻ.</string>
     <string name="onboarding_open_dashboard">Mở bảng điều khiển</string>
     <string name="onboarding_step_login">Đăng nhập bằng đúng tài khoản Spotify đó.</string>
     <string name="onboarding_step_create">Ở góc trên bên phải, nhấn “Create app”.</string>
-    <string name="onboarding_step_names">Tên ứng dụng và Mô tả ứng dụng: điền gì cũng được, ví dụ Square. Website: để trống.</string>
+    <string name="onboarding_step_names">Tên ứng dụng và Mô tả ứng dụng: điền gì cũng được, ví dụ Sonify. Website: để trống.</string>
     <string name="onboarding_step_redirect">Redirect URI: dán dòng bên dưới rồi nhấn “Add”. Kiểm tra rằng nó đã hiện trong danh sách dưới ô nhập, nếu không là chưa được lưu.</string>
     <string name="onboarding_step_api">Ở mục “Which API/SDKs are you planning to use?”, tích vào Web API.</string>
     <string name="onboarding_step_terms">Đồng ý các điều khoản rồi nhấn “Save”.</string>
@@ -313,7 +313,7 @@
     <string name="quality_low">Thấp</string>
     <string name="quality_auto_note">Chế độ tự động ước lượng từ tốc độ mạng rồi tự điều chỉnh: nếu bài hát bị ngắt quãng hoặc tải chậm sẽ tự giảm một bậc, nếu nhiều bài phát mượt liên tiếp sẽ tự tăng trở lại.</string>
     <string name="quality_restarts">Thay đổi tùy chọn này sẽ tải lại bài đang phát.</string>
-    <string name="premium_required">Square yêu cầu tài khoản Spotify Premium. Tài khoản miễn phí vẫn đăng nhập được, nhưng Spotify không hỗ trợ phát nhạc qua các ứng dụng bên thứ ba như Square.</string>
+    <string name="premium_required">Sonify yêu cầu tài khoản Spotify Premium. Tài khoản miễn phí vẫn đăng nhập được, nhưng Spotify không hỗ trợ phát nhạc qua các ứng dụng bên thứ ba như Sonify.</string>
     <string name="new_playlist">Danh sách phát mới</string>
     <string name="rename">Đổi tên</string>
     <string name="delete">Xóa</string>
@@ -353,7 +353,7 @@
     <string name="settings_group_help_summary">Cộng đồng, thảo luận và sự cố</string>
     <string name="settings_group_permissions_summary">Các quyền ứng dụng yêu cầu từ Spotify</string>
     <string name="youtube_sign_in_required">Bài này chỉ phát được khi đã đăng nhập YouTube Music</string>
-    <string name="youtube_signed_in_unplayable">YouTube chỉ phát bài này cho tài khoản đã đăng nhập, và Square chưa đọc được nó</string>
+    <string name="youtube_signed_in_unplayable">YouTube chỉ phát bài này cho tài khoản đã đăng nhập, và Sonify chưa đọc được nó</string>
     <string name="page_app_summary">Ngôn ngữ, thanh dưới, hệ thống và liên kết</string>
     <string name="page_downloads">Tải xuống, bộ nhớ</string>
     <string name="storage_cleanup">Dọn dẹp</string>
@@ -364,9 +364,9 @@
     <string name="storage_caches">Bộ nhớ đệm của ứng dụng</string>
     <string name="page_downloads_summary">Những gì có trên máy và những gì đang được tải</string>
     <string name="keep_playing_on_close">Tiếp tục phát khi đóng ứng dụng</string>
-    <string name="keep_playing_on_close_note">Khi gạt Square khỏi danh sách ứng dụng gần đây, nhạc vẫn tiếp tục phát. Bạn vẫn có thể dừng nhạc từ thanh thông báo.</string>
+    <string name="keep_playing_on_close_note">Khi gạt Sonify khỏi danh sách ứng dụng gần đây, nhạc vẫn tiếp tục phát. Bạn vẫn có thể dừng nhạc từ thanh thông báo.</string>
     <string name="pause_for_other_apps">Tạm dừng khi ứng dụng khác phát</string>
-    <string name="pause_for_other_apps_note">Nếu một ứng dụng khác chiếm âm thanh, Square sẽ tạm dừng. Hãy tắt mục này nếu nhạc cứ tự dừng: nhạc sẽ tiếp tục phát, kể cả khi có video và tin nhắn thoại.</string>
+    <string name="pause_for_other_apps_note">Nếu một ứng dụng khác chiếm âm thanh, Sonify sẽ tạm dừng. Hãy tắt mục này nếu nhạc cứ tự dừng: nhạc sẽ tiếp tục phát, kể cả khi có video và tin nhắn thoại.</string>
     <string name="sponsor_block">Bỏ qua phần không phải nhạc</string>
     <string name="sponsor_block_note">Đoạn giới thiệu, tiểu phẩm và phần trò chuyện trong video ca nhạc, theo đánh dấu từ cộng đồng SponsorBlock. Chỉ ID video được gửi đi.</string>
     <string name="page_app_bar">Thanh dưới</string>
@@ -387,7 +387,7 @@
     <string name="effect_quality_light_note">Xử lý trực tiếp trên thiết bị. Tiết kiệm tài nguyên cho máy cũ, nhưng các đoạn chuyển âm nhanh (transients) sẽ kém chi tiết hơn.</string>
     <string name="liked_songs">Bài hát đã thích</string>
     <string name="local_files">Tệp trên máy</string>
-    <string name="local_files_needs_permission">Square xem được nhạc trên điện thoại này sau khi bạn cho phép.</string>
+    <string name="local_files_needs_permission">Sonify xem được nhạc trên điện thoại này sau khi bạn cho phép.</string>
     <string name="local_files_allow">Cho phép</string>
     <string name="pinned">Đã ghim</string>
     <string name="pin">Ghim lên đầu</string>
@@ -439,7 +439,7 @@
     <string name="remove_download">Xóa bản tải xuống</string>
     <string name="cancel_download">Hủy tải xuống</string>
     <string name="playback_refused">Spotify hiện không cho phép phát nhạc. Hãy thử lại sau vài phút. Nếu sự cố vẫn tiếp diễn, hãy đăng xuất rồi đăng nhập lại.</string>
-    <string name="playback_refused_account">Spotify không cho phép tài khoản này phát nhạc qua các ứng dụng như Square. Đây là giới hạn từ Spotify mà ứng dụng không thể can thiệp; bạn có thể thử một tài khoản Premium khác.</string>
+    <string name="playback_refused_account">Spotify không cho phép tài khoản này phát nhạc qua các ứng dụng như Sonify. Đây là giới hạn từ Spotify mà ứng dụng không thể can thiệp; bạn có thể thử một tài khoản Premium khác.</string>
     <string name="downloaded">Đã tải xuống</string>
     <string name="local_file">Tệp trên máy</string>
     <string name="downloading">Đang tải xuống</string>
@@ -532,7 +532,7 @@
     <string name="video_unavailable">Không thể phát video chính thức: đang phát video thay thế của bài hát.</string>
     <string name="added_to_queue">Đã thêm vào hàng đợi: %s</string>
     <string name="videos">Video</string>
-    <string name="device_this_app" translatable="false">%1$s (Square)</string>
+    <string name="device_this_app" translatable="false">%1$s (Sonify)</string>
     <string name="web_playback_on">Spotify từ chối cấp khóa giải mã cho tài khoản này: đang chuyển sang phát qua trình phát web. Chế độ này không hỗ trợ Spotify Connect và tải xuống.</string>
 
     <!-- Official Spotify SDK proof of concept. -->
@@ -562,7 +562,7 @@
     <string name="web_sdk_play_error">Kết nối trình phát hoặc việc phát nhạc gặp lỗi. Hãy dừng kiểm tra và kết nối lại.</string>
     <string name="web_sdk_failed">Trình phát không dùng được</string>
     <string name="web_sdk_recovery_title">Bật phát nhạc Spotify</string>
-    <string name="web_sdk_recovery_explainer">Spotify không cho phép phát bài hát của tài khoản này qua trình phát thông thường của Square. Square có thể dùng trình phát web chính thức của Spotify để thay thế, đăng nhập qua ứng dụng nhà phát triển của bạn.</string>
+    <string name="web_sdk_recovery_explainer">Spotify không cho phép phát bài hát của tài khoản này qua trình phát thông thường của Sonify. Sonify có thể dùng trình phát web chính thức của Spotify để thay thế, đăng nhập qua ứng dụng nhà phát triển của bạn.</string>
     <string name="web_sdk_enable">Bật phát nhạc</string>
     <string name="web_sdk_settings_title">Cách phát Spotify thay thế</string>
     <string name="web_sdk_limits">Với trình phát này, chuyển bài mượt, hiệu ứng âm thanh, karaoke, chất lượng âm thanh và tải xuống đều không có.</string>
@@ -595,14 +595,14 @@
 
     <string name="recap_title">Nhìn lại âm nhạc tháng này</string>
     <string name="recap_plays">%1$d lượt phát</string>
-    <string name="recap_minutes">%1$d phút trong Square</string>
+    <string name="recap_minutes">%1$d phút trong Sonify</string>
     <string name="recap_details">Xem bài yêu thích</string>
     <string name="recap_hide">Ẩn chi tiết</string>
     <string name="recap_previous">Tháng trước</string>
     <string name="recap_next">Tháng sau</string>
     <string name="recap_tracks">Bài hát phát nhiều nhất</string>
     <string name="recap_artists">Nghệ sĩ phát nhiều nhất</string>
-    <string name="recap_partial">Gồm những lượt nghe đã lưu và lịch sử Spotify gần đây. Những lượt nghe sớm hơn hoặc chưa đồng bộ có thể bị thiếu. Số phút chỉ tính trong Square.</string>
+    <string name="recap_partial">Gồm những lượt nghe đã lưu và lịch sử Spotify gần đây. Những lượt nghe sớm hơn hoặc chưa đồng bộ có thể bị thiếu. Số phút chỉ tính trong Sonify.</string>
     <string name="smart_shuffle">Trộn bài thông minh</string>
     <string name="smart_shuffle_unavailable">Hiện chưa dùng được Trộn bài thông minh cho danh sách phát này.</string>
     <string name="telegram_community">Cộng đồng Telegram</string>
@@ -624,12 +624,12 @@
     <string name="new_release_followed_tag">Từ nghệ sĩ của bạn</string>
     <string name="recap_song_of_month">Bài hát của tháng</string>
     <string name="recap_stat_plays">lượt phát</string>
-    <string name="recap_stat_minutes">phút trong Square</string>
+    <string name="recap_stat_minutes">phút trong Sonify</string>
     <string name="recap_empty">Tháng này chưa có lượt nghe nào.</string>
-    <string name="recap_partial_youtube">Bao gồm những gì bạn phát trong Square và lịch sử YouTube Music khi Square đang mở. Lượt phát từ các ứng dụng và thiết bị khác chỉ mang tính ước lượng do YouTube chỉ ghi nhận theo ngày chứ không lưu mốc thời gian cụ thể.</string>
+    <string name="recap_partial_youtube">Bao gồm những gì bạn phát trong Sonify và lịch sử YouTube Music khi Sonify đang mở. Lượt phát từ các ứng dụng và thiết bị khác chỉ mang tính ước lượng do YouTube chỉ ghi nhận theo ngày chứ không lưu mốc thời gian cụ thể.</string>
     <string name="widget_description">Bài đang phát, các nút điều khiển và danh sách phát gần đây của bạn</string>
     <string name="widget_nothing_playing">Không có gì đang phát</string>
-    <string name="widget_open_app">Mở Square</string>
+    <string name="widget_open_app">Mở Sonify</string>
     <string name="animated_cover_source">Nguồn</string>
     <string name="animated_cover_spotify">Spotify (Canvas)</string>
     <string name="animated_cover_apple">Apple Music</string>
@@ -658,7 +658,7 @@
     <string name="lyrics_uploaded_by">đăng bởi</string>
     <string name="lyrics_made_by">tạo bởi</string>
     <string name="spicy_lyrics_title">Spicy Lyrics</string>
-    <string name="spicy_lyrics_note">Không bắt buộc. Khi cấu hình khóa API riêng, ứng dụng có thể lấy thêm lời bài hát từ Spicy Lyrics, thường đồng bộ chuẩn xác tới từng âm tiết. Bạn có thể lấy khóa từ trang của Square trên Spicy Lyrics.</string>
+    <string name="spicy_lyrics_note">Không bắt buộc. Khi cấu hình khóa API riêng, ứng dụng có thể lấy thêm lời bài hát từ Spicy Lyrics, thường đồng bộ chuẩn xác tới từng âm tiết. Bạn có thể lấy khóa từ trang của Sonify trên Spicy Lyrics.</string>
     <string name="spicy_lyrics_key">Khóa Spicy Lyrics</string>
     <string name="spicy_lyrics_get_key">Lấy khóa</string>
     <string name="spicy_lyrics_remove">Xóa khóa</string>
@@ -676,7 +676,7 @@
     <string name="spotify_dj_talking">đang nói</string>
     <string name="link_copied_open_browser">Không mở được trình duyệt. Liên kết đã được sao chép: hãy dán vào đó.</string>
     <string name="youtube_signing_in">Đang đăng nhập…</string>
-    <string name="youtube_sign_in_private">Mật khẩu chỉ được gửi trực tiếp đến Google. Square chỉ lưu lại phiên đăng nhập do Google trả về.</string>
+    <string name="youtube_sign_in_private">Mật khẩu chỉ được gửi trực tiếp đến Google. Sonify chỉ lưu lại phiên đăng nhập do Google trả về.</string>
     <string name="equalizer">Bộ cân bằng</string>
     <string name="page_equalizer_summary">Đường cong EQ riêng cho từng tai nghe</string>
     <string name="eq_speaker">Loa điện thoại</string>
@@ -693,7 +693,7 @@
     <string name="eq_save_preset">Lưu thành cấu hình sẵn</string>
     <string name="eq_reset">Đặt lại đường phẳng (Flat)</string>
     <string name="eq_hint">Chạm và kéo các dải</string>
-    <string name="eq_note">Mỗi đầu ra âm thanh lưu một đường cong EQ riêng. Khi bạn cắm tai nghe khác, Square sẽ chuyển sang cấu hình tương ứng. Khi tăng các dải tần, mức âm lượng tổng sẽ tự động hạ tương ứng để tránh bị méo tiếng (clipping).</string>
+    <string name="eq_note">Mỗi đầu ra âm thanh lưu một đường cong EQ riêng. Khi bạn cắm tai nghe khác, Sonify sẽ chuyển sang cấu hình tương ứng. Khi tăng các dải tần, mức âm lượng tổng sẽ tự động hạ tương ứng để tránh bị méo tiếng (clipping).</string>
     <string name="eq_flat">Phẳng</string>
     <string name="eq_bass_boost">Tăng bass</string>
     <string name="eq_bass_reducer">Giảm bass</string>

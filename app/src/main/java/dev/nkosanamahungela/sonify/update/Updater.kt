@@ -24,7 +24,7 @@ import java.io.File
 /**
  * Updates the app from its own GitHub releases.
  *
- * Square cannot go on the Play Store — it re-implements a protocol whose terms
+ * Sonify cannot go on the Play Store — it re-implements a protocol whose terms
  * forbid it — so there is nothing to deliver an update but the app itself. The
  * releases page is already the distribution channel; this reads it.
  *
@@ -264,7 +264,7 @@ class Updater(context: Context) {
         )
         val sessionId = installer.createSession(params)
         installer.openSession(sessionId).use { session ->
-            session.openWrite("square", 0, apk.length()).use { output ->
+            session.openWrite("sonify", 0, apk.length()).use { output ->
                 apk.inputStream().use { it.copyTo(output) }
                 session.fsync(output)
             }
@@ -319,7 +319,7 @@ class Updater(context: Context) {
     companion object {
         private const val TAG = "Updater"
 
-        const val REPO = "Lelonio/Square"
+        const val REPO = "nkosanamahungela-dev/Sonify"
 
         /** Told apart from a network failure so the UI can offer the way out. */
         const val REASON_PERMISSION = "permission"
