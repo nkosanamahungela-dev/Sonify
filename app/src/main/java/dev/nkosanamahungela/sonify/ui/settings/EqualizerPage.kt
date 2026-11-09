@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.settings
+package dev.nkosanamahungela.sonify.ui.settings
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -53,14 +53,14 @@ import com.adamglin.phosphoricons.regular.Plus
 import com.adamglin.phosphoricons.regular.SpeakerHifi
 import com.adamglin.phosphoricons.regular.Usb
 import com.adamglin.phosphoricons.regular.X
-import dev.lelonio.square.R
-import dev.lelonio.square.playback.AudioRoute
-import dev.lelonio.square.playback.BuiltInEqPresets
-import dev.lelonio.square.playback.Equalizer
-import dev.lelonio.square.ui.components.NameDialog
-import dev.lelonio.square.ui.glass.shapes.ContinuousCapsule
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.playback.AudioRoute
+import dev.nkosanamahungela.sonify.playback.BuiltInEqPresets
+import dev.nkosanamahungela.sonify.playback.Equalizer
+import dev.nkosanamahungela.sonify.ui.components.NameDialog
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
 import kotlin.math.roundToInt
 
 /**

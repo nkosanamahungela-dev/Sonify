@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.settings
+package dev.nkosanamahungela.sonify.ui.settings
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -33,7 +33,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.graphics.toArgb
-import dev.lelonio.square.ui.theme.softShadow
+import dev.nkosanamahungela.sonify.ui.theme.softShadow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -76,22 +76,22 @@ import com.adamglin.phosphoricons.regular.MusicNotes
 import com.adamglin.phosphoricons.regular.CaretDown
 import com.adamglin.phosphoricons.regular.CaretUp
 import com.adamglin.phosphoricons.regular.Check
-import dev.lelonio.square.R
-import dev.lelonio.square.SquareApplication
-import dev.lelonio.square.data.GlassProfile
-import dev.lelonio.square.ui.glass.GlassEffectConfig
-import dev.lelonio.square.ui.glass.GlassStyle
-import dev.lelonio.square.ui.glass.LiquidSlider
-import dev.lelonio.square.ui.glass.LiquidToggle
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.layerBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberLayerBackdrop
-import dev.lelonio.square.ui.glass.liquidGlass
-import dev.lelonio.square.ui.glass.shapes.ContinuousCapsule
-import dev.lelonio.square.ui.glass.LENS_MAX_DP
-import dev.lelonio.square.ui.glass.isGlassSupported
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.SonifyApplication
+import dev.nkosanamahungela.sonify.data.GlassProfile
+import dev.nkosanamahungela.sonify.ui.glass.GlassEffectConfig
+import dev.nkosanamahungela.sonify.ui.glass.GlassStyle
+import dev.nkosanamahungela.sonify.ui.glass.LiquidSlider
+import dev.nkosanamahungela.sonify.ui.glass.LiquidToggle
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.layerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberLayerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.liquidGlass
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule
+import dev.nkosanamahungela.sonify.ui.glass.LENS_MAX_DP
+import dev.nkosanamahungela.sonify.ui.glass.isGlassSupported
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
 import kotlin.math.roundToInt
 
 /**
@@ -116,7 +116,7 @@ import kotlin.math.roundToInt
 @Composable
 fun GlassPage(backdrop: Backdrop, contentPadding: PaddingValues, header: @Composable () -> Unit) {
     val context = LocalContext.current
-    val store = remember(context) { (context.applicationContext as SquareApplication).glass }
+    val store = remember(context) { (context.applicationContext as SonifyApplication).glass }
     val profile by store.profile.collectAsStateWithLifecycle()
     val config by store.config.collectAsStateWithLifecycle()
     val liquid = config.style != GlassStyle.TRANSPARENT
@@ -864,7 +864,7 @@ internal val LocalSettingsAccent = androidx.compose.runtime.compositionLocalOf<C
 @Composable
 internal fun rememberSettingsAccent(): Color {
     val context = LocalContext.current
-    val store = remember(context) { (context.applicationContext as SquareApplication).glass }
+    val store = remember(context) { (context.applicationContext as SonifyApplication).glass }
     val config by store.config.collectAsStateWithLifecycle()
     val accent = MaterialTheme.colorScheme.primary
     if (config.tintHue < 0f) return accent

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.theme
+package dev.nkosanamahungela.sonify.ui.theme
 
 import android.content.Context
 import androidx.compose.runtime.Composable
@@ -18,7 +18,7 @@ import coil.request.ImageRequest
 import coil.request.SuccessResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import dev.lelonio.square.ui.components.canonicalArtworkKey
+import dev.nkosanamahungela.sonify.ui.components.canonicalArtworkKey
 
 /**
  * Where a page ends up once the artwork's colour has faded out of it.

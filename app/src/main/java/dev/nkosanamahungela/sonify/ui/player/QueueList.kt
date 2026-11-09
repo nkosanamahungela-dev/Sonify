@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
@@ -57,12 +57,12 @@ import com.adamglin.phosphoricons.regular.DotsSixVertical
 import com.adamglin.phosphoricons.regular.Sparkle
 import com.adamglin.phosphoricons.regular.Trash
 import com.adamglin.phosphoricons.regular.X
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.glass.pressable
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.glass.pressable
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 
-/** What the queue can do to the player; see SquareApp, which holds the player. */
+/** What the queue can do to the player; see SonifyApp, which holds the player. */
 class QueueActions(
     val onPlay: (Int) -> Unit,
     /** Player indices, in any order. */

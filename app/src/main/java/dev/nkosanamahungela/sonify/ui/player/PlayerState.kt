@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -8,7 +8,7 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.media3.common.Player
-import dev.lelonio.square.ui.EXTRA_CONTEXT_LABEL
+import dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_LABEL
 import kotlinx.coroutines.delay
 
 /**
@@ -82,7 +82,7 @@ data class PlaybackState(
      * Each credited artist separately, so a line naming two of them opens the
      * one that was pressed. Empty when the source gave only the joined names.
      */
-    val artists: List<dev.lelonio.square.data.CatalogArtist> = emptyList(),
+    val artists: List<dev.nkosanamahungela.sonify.data.CatalogArtist> = emptyList(),
     val contextUri: String? = null,
 )
 
@@ -98,7 +98,7 @@ data class PlaybackState(
  * skip button greyed out on a device that would have obeyed is worse than one
  * that occasionally does nothing.
  */
-fun dev.lelonio.square.data.RemotePlayback.asPlaybackState(on: String) = PlaybackState(
+fun dev.nkosanamahungela.sonify.data.RemotePlayback.asPlaybackState(on: String) = PlaybackState(
     hasItem = uri.isNotEmpty(),
     mediaId = uri,
     title = title,
@@ -135,7 +135,7 @@ fun dev.lelonio.square.data.RemotePlayback.asPlaybackState(on: String) = Playbac
  * only honest way to draw a moving bar is to move it.
  */
 @Composable
-fun rememberRemotePositionMs(remote: dev.lelonio.square.data.RemotePlayback?): State<Long> {
+fun rememberRemotePositionMs(remote: dev.nkosanamahungela.sonify.data.RemotePlayback?): State<Long> {
     val position = remember { mutableLongStateOf(0L) }
 
     LaunchedEffect(remote?.uri, remote?.positionMs, remote?.playing) {
@@ -206,7 +206,7 @@ fun rememberPlaybackState(
                 album = metadata.albumTitle?.toString().orEmpty(),
                 artworkUrl = metadata.artworkUri?.toString(),
                 explicit = metadata.extras
-                    ?.getBoolean(dev.lelonio.square.ui.EXTRA_EXPLICIT) == true,
+                    ?.getBoolean(dev.nkosanamahungela.sonify.ui.EXTRA_EXPLICIT) == true,
                 isPlaying = player.isPlaying,
                 wantsPlay = player.playWhenReady,
                 isBuffering = player.playbackState == Player.STATE_BUFFERING,
@@ -214,28 +214,28 @@ fun rememberPlaybackState(
                 hasNext = player.hasNextMediaItem(),
                 hasPrevious = player.hasPreviousMediaItem(),
                 shuffleEnabled = player.shuffleModeEnabled,
-                smartShuffle = player.shuffleModeEnabled && player.currentMediaItem?.mediaMetadata?.extras?.getBoolean(dev.lelonio.square.data.SmartShuffle.MODE) == true,
-                smartRecommended = player.currentMediaItem?.mediaMetadata?.extras?.getBoolean(dev.lelonio.square.data.SmartShuffle.RECOMMENDED) == true,
+                smartShuffle = player.shuffleModeEnabled && player.currentMediaItem?.mediaMetadata?.extras?.getBoolean(dev.nkosanamahungela.sonify.data.SmartShuffle.MODE) == true,
+                smartRecommended = player.currentMediaItem?.mediaMetadata?.extras?.getBoolean(dev.nkosanamahungela.sonify.data.SmartShuffle.RECOMMENDED) == true,
                 repeatMode = player.repeatMode,
                 speed = player.playbackParameters.speed,
                 pitch = player.playbackParameters.pitch,
                 source = metadata.extras?.getString(EXTRA_CONTEXT_LABEL).orEmpty(),
-                artistUri = metadata.extras?.getString(dev.lelonio.square.ui.EXTRA_ARTIST_URI),
-                albumUri = metadata.extras?.getString(dev.lelonio.square.ui.EXTRA_ALBUM_URI),
+                artistUri = metadata.extras?.getString(dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_URI),
+                albumUri = metadata.extras?.getString(dev.nkosanamahungela.sonify.ui.EXTRA_ALBUM_URI),
                 artists = run {
                     val names = metadata.extras
-                        ?.getStringArrayList(dev.lelonio.square.ui.EXTRA_ARTIST_NAMES)
+                        ?.getStringArrayList(dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_NAMES)
                     val uris = metadata.extras
-                        ?.getStringArrayList(dev.lelonio.square.ui.EXTRA_ARTIST_URIS)
+                        ?.getStringArrayList(dev.nkosanamahungela.sonify.ui.EXTRA_ARTIST_URIS)
                     if (names == null || uris == null) {
                         emptyList()
                     } else {
                         names.zip(uris) { name, uri ->
-                            dev.lelonio.square.data.CatalogArtist(name, uri)
+                            dev.nkosanamahungela.sonify.data.CatalogArtist(name, uri)
                         }
                     }
                 },
-                contextUri = metadata.extras?.getString(dev.lelonio.square.ui.EXTRA_CONTEXT_URI),
+                contextUri = metadata.extras?.getString(dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_URI),
             )
             if (next.hasItem) {
                 seenItem.value = true
@@ -312,9 +312,9 @@ fun rememberQueue(player: Player?): State<List<QueueEntry>> {
                     artist = metadata.artist?.toString().orEmpty(),
                     isCurrent = index == current,
                     played = index < current,
-                    recommended = metadata.extras?.getBoolean(dev.lelonio.square.data.SmartShuffle.RECOMMENDED) == true,
-                    queued = metadata.extras?.getBoolean(dev.lelonio.square.ui.EXTRA_PLAY_NEXT) == true,
-                    contextLabel = metadata.extras?.getString(dev.lelonio.square.ui.EXTRA_CONTEXT_LABEL).orEmpty(),
+                    recommended = metadata.extras?.getBoolean(dev.nkosanamahungela.sonify.data.SmartShuffle.RECOMMENDED) == true,
+                    queued = metadata.extras?.getBoolean(dev.nkosanamahungela.sonify.ui.EXTRA_PLAY_NEXT) == true,
+                    contextLabel = metadata.extras?.getString(dev.nkosanamahungela.sonify.ui.EXTRA_CONTEXT_LABEL).orEmpty(),
                 )
             }
         }

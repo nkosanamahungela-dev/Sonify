@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.settings
+package dev.nkosanamahungela.sonify.ui.settings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -41,7 +41,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import dev.lelonio.square.update.Updater
+import dev.nkosanamahungela.sonify.update.Updater
 import kotlinx.coroutines.launch
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -61,8 +61,8 @@ import com.adamglin.phosphoricons.regular.ShieldCheck
 import com.adamglin.phosphoricons.regular.GearSix
 import com.adamglin.phosphoricons.regular.Palette
 import com.adamglin.phosphoricons.regular.Translate
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.BuildConfig
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.BuildConfig
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.foundation.layout.heightIn
 import com.adamglin.phosphoricons.regular.UserCircle
@@ -73,7 +73,7 @@ import com.adamglin.phosphoricons.regular.SlidersHorizontal
 import com.adamglin.phosphoricons.regular.Info
 import com.adamglin.phosphoricons.regular.DownloadSimple
 import androidx.compose.ui.res.pluralStringResource
-import dev.lelonio.square.ui.glass.shapes.ContinuousCapsule
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.togetherWith
 import androidx.compose.animation.slideInHorizontally
@@ -107,18 +107,18 @@ import com.adamglin.phosphoricons.regular.HandHeart
 import com.adamglin.phosphoricons.regular.ChatsCircle
 import com.adamglin.phosphoricons.regular.TelegramLogo
 import com.adamglin.phosphoricons.regular.Bug
-import dev.lelonio.square.R
-import dev.lelonio.square.data.AppLanguages
-import dev.lelonio.square.backend.BackendId
-import dev.lelonio.square.data.CrossfadeSteps
-import dev.lelonio.square.data.EffectQuality
-import dev.lelonio.square.data.Quality
-import dev.lelonio.square.ui.MainViewModel
-import dev.lelonio.square.ui.components.Artwork
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.InkDim
-import dev.lelonio.square.ui.theme.softShadow
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.AppLanguages
+import dev.nkosanamahungela.sonify.backend.BackendId
+import dev.nkosanamahungela.sonify.data.CrossfadeSteps
+import dev.nkosanamahungela.sonify.data.EffectQuality
+import dev.nkosanamahungela.sonify.data.Quality
+import dev.nkosanamahungela.sonify.ui.MainViewModel
+import dev.nkosanamahungela.sonify.ui.components.Artwork
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.ui.theme.softShadow
 
 /**
  * Everything that is configuration rather than listening.
@@ -158,7 +158,7 @@ fun SettingsScreen(
     val ready = state as? MainViewModel.UiState.Ready
     val context = LocalContext.current
     val app = remember(context) {
-        context.applicationContext as dev.lelonio.square.SquareApplication
+        context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication
     }
     /**
      * Spotify's own settings are hidden while another source is playing.
@@ -172,7 +172,7 @@ fun SettingsScreen(
     val showSpotify = spotifyActive == BackendId.SPOTIFY
     // Spotify through the official SDK, which mixes its own audio: none of the
     // engine's crossfade, bitrate, effects or downloads reach it.
-    val sdkPlayback by dev.lelonio.square.playback.websdk.WebSdkRecovery.inUse.collectAsStateWithLifecycle()
+    val sdkPlayback by dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.inUse.collectAsStateWithLifecycle()
 
     /**
      * Which page is open, or null for the list of them.
@@ -226,7 +226,7 @@ fun SettingsScreen(
     }
 
     val updater = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).updater
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).updater
     }
     var pendingUpdate by remember { mutableStateOf<Updater.State.Available?>(null) }
     val installPermission = rememberLauncherForActivityResult(
@@ -348,7 +348,7 @@ fun SettingsScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
-                dev.lelonio.square.ui.components.ProfilePicture(
+                dev.nkosanamahungela.sonify.ui.components.ProfilePicture(
                     url = ready?.avatarUrl,
                     name = ready?.displayName,
                     size = 96.dp,
@@ -414,12 +414,12 @@ fun SettingsScreen(
         if (shown == SettingsPage.Playback) groupHeading(Group.SOUND, open = "sound" in openGroups) { toggleGroup("sound") }
 
         if (shown == SettingsPage.Playback && showSpotify &&
-            (dev.lelonio.square.backend.spotify.SpotifyWebPlayback.needed(context) ||
-                dev.lelonio.square.playback.websdk.WebSdkRecovery.isConfigured(context)) && "sound" in openGroups) groupItem("web-sdk-recovery", Group.SOUND) {
+            (dev.nkosanamahungela.sonify.backend.spotify.SpotifyWebPlayback.needed(context) ||
+                dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.isConfigured(context)) && "sound" in openGroups) groupItem("web-sdk-recovery", Group.SOUND) {
             Section(stringResource(R.string.web_sdk_settings_title)) {
                 ActionRow(stringResource(R.string.web_sdk_settings_open), destructive = false) {
                     context.startActivity(android.content.Intent(
-                        context, dev.lelonio.square.playback.websdk.WebSdkActivity::class.java,
+                        context, dev.nkosanamahungela.sonify.playback.websdk.WebSdkActivity::class.java,
                     ).putExtra("recovery", true))
                 }
                 if (sdkPlayback) Text(
@@ -484,7 +484,7 @@ fun SettingsScreen(
 
         if (shown == SettingsPage.Playback && "listening" in openGroups) groupItem("keep-playing", Group.LISTENING) {
             val prefs = remember(context) {
-                (context.applicationContext as dev.lelonio.square.SquareApplication).preferences
+                (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).preferences
             }
             val keepPlaying by prefs.keepPlayingOnClose.collectAsStateWithLifecycle()
             Section(stringResource(R.string.page_playback)) {
@@ -617,7 +617,7 @@ fun SettingsScreen(
                     icon = PhosphorIcons.Regular.Broom,
                 ) {
                     scope.launch {
-                        dev.lelonio.square.data.ContextCacheStore(context).clear()
+                        dev.nkosanamahungela.sonify.data.ContextCacheStore(context).clear()
                         clearedLists = true
                         android.widget.Toast.makeText(
                             context,
@@ -678,25 +678,25 @@ fun SettingsScreen(
         // Light or dark, whatever the phone is.
         if (shown == SettingsPage.App && "appearance" in openGroups) groupItem("theme", Group.APPEARANCE) {
             val store = remember(context) {
-                (context.applicationContext as dev.lelonio.square.SquareApplication).preferences
+                (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).preferences
             }
             val mode by store.themeMode.collectAsStateWithLifecycle()
             Section(stringResource(R.string.theme_title)) {
-                dev.lelonio.square.data.PreferencesStore.ThemeMode.entries.forEachIndexed { index, choice ->
+                dev.nkosanamahungela.sonify.data.PreferencesStore.ThemeMode.entries.forEachIndexed { index, choice ->
                     if (index > 0) RowDivider()
                     ChoiceRow(
                         label = stringResource(
                             when (choice) {
-                                dev.lelonio.square.data.PreferencesStore.ThemeMode.SYSTEM -> R.string.theme_system
-                                dev.lelonio.square.data.PreferencesStore.ThemeMode.LIGHT -> R.string.theme_light
-                                dev.lelonio.square.data.PreferencesStore.ThemeMode.DARK -> R.string.theme_dark
+                                dev.nkosanamahungela.sonify.data.PreferencesStore.ThemeMode.SYSTEM -> R.string.theme_system
+                                dev.nkosanamahungela.sonify.data.PreferencesStore.ThemeMode.LIGHT -> R.string.theme_light
+                                dev.nkosanamahungela.sonify.data.PreferencesStore.ThemeMode.DARK -> R.string.theme_dark
                             },
                         ),
                         selected = choice == mode,
                         icon = when (choice) {
-                            dev.lelonio.square.data.PreferencesStore.ThemeMode.SYSTEM -> PhosphorIcons.Regular.DeviceMobile
-                            dev.lelonio.square.data.PreferencesStore.ThemeMode.LIGHT -> PhosphorIcons.Regular.Sun
-                            dev.lelonio.square.data.PreferencesStore.ThemeMode.DARK -> PhosphorIcons.Regular.Moon
+                            dev.nkosanamahungela.sonify.data.PreferencesStore.ThemeMode.SYSTEM -> PhosphorIcons.Regular.DeviceMobile
+                            dev.nkosanamahungela.sonify.data.PreferencesStore.ThemeMode.LIGHT -> PhosphorIcons.Regular.Sun
+                            dev.nkosanamahungela.sonify.data.PreferencesStore.ThemeMode.DARK -> PhosphorIcons.Regular.Moon
                         },
                     ) { store.setThemeMode(choice) }
                 }
@@ -707,7 +707,7 @@ fun SettingsScreen(
         // page says what it is made of, this says how it acts.
         if (shown == SettingsPage.App && "appearance" in openGroups) groupItem("bar", Group.APPEARANCE) {
             val glass = remember(context) {
-                (context.applicationContext as dev.lelonio.square.SquareApplication).glass
+                (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).glass
             }
             val folds by glass.barFolds.collectAsStateWithLifecycle()
             Section(stringResource(R.string.page_app_bar)) {
@@ -727,7 +727,7 @@ fun SettingsScreen(
         // The face the app is set in: its own, or the phone's.
         if (shown == SettingsPage.App && "appearance" in openGroups) groupItem("font", Group.APPEARANCE) {
             val store = remember(context) {
-                (context.applicationContext as dev.lelonio.square.SquareApplication).preferences
+                (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).preferences
             }
             val systemFont by store.systemFont.collectAsStateWithLifecycle()
             Section(stringResource(R.string.font_title)) {
@@ -1070,7 +1070,7 @@ private fun SettingsIndex(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            dev.lelonio.square.ui.components.ProfilePicture(
+            dev.nkosanamahungela.sonify.ui.components.ProfilePicture(
                 url = avatarUrl,
                 name = name,
                 size = 56.dp,
@@ -1147,7 +1147,7 @@ private fun SettingsIndex(
 @Composable
 private fun StorageChart() {
     val context = LocalContext.current
-    val app = remember(context) { context.applicationContext as dev.lelonio.square.SquareApplication }
+    val app = remember(context) { context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication }
     val files by app.downloads.files.collectAsStateWithLifecycle()
 
     // Measured off the disk rather than from the index: a Canvas is video, and
@@ -1155,7 +1155,7 @@ private fun StorageChart() {
     val sizes by androidx.compose.runtime.produceState(Triple(0L, 0L, 0L), files.size) {
         value = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
             val audio = files.values.sumOf { it.bytes }
-            val extras = runCatching { dev.lelonio.square.download.DownloadExtras.bytes() }.getOrDefault(0L)
+            val extras = runCatching { dev.nkosanamahungela.sonify.download.DownloadExtras.bytes() }.getOrDefault(0L)
             val caches = runCatching {
                 context.cacheDir.walkBottomUp().filter { it.isFile }.sumOf { it.length() }
             }.getOrDefault(0L)
@@ -1345,7 +1345,7 @@ private fun PageRow(title: String, summary: String, onClick: () -> Unit) {
 private fun BackendSection() {
     val context = LocalContext.current
     val store = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).preferences
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).preferences
     }
     val chosen by store.backend.collectAsStateWithLifecycle()
 
@@ -1378,7 +1378,7 @@ private fun BackendSection() {
 private fun YouTubeAccountSection(onSignIn: () -> Unit, onChannelChange: () -> Unit) {
     val context = LocalContext.current
     val app = remember(context) {
-        context.applicationContext as dev.lelonio.square.SquareApplication
+        context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication
     }
     val backend by app.preferences.backend.collectAsStateWithLifecycle()
     if (backend != BackendId.YOUTUBE_MUSIC) return
@@ -1487,7 +1487,7 @@ private fun YouTubeAccountSection(onSignIn: () -> Unit, onChannelChange: () -> U
 private fun CanvasSection(backdrop: Backdrop) {
     val context = LocalContext.current
     val store = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).preferences
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).preferences
     }
     val enabled by store.canvasEnabled.collectAsStateWithLifecycle()
     val source by store.animatedCoverSource.collectAsStateWithLifecycle()
@@ -1504,13 +1504,13 @@ private fun CanvasSection(backdrop: Backdrop) {
     // Only with them on: off, nothing moves whichever it would have been.
     if (enabled) {
         Section(stringResource(R.string.animated_cover_source)) {
-            dev.lelonio.square.data.PreferencesStore.CoverSource.entries.forEachIndexed { index, choice ->
+            dev.nkosanamahungela.sonify.data.PreferencesStore.CoverSource.entries.forEachIndexed { index, choice ->
                 if (index > 0) RowDivider()
                 ChoiceRow(
                     label = stringResource(
                         when (choice) {
-                            dev.lelonio.square.data.PreferencesStore.CoverSource.SPOTIFY -> R.string.animated_cover_spotify
-                            dev.lelonio.square.data.PreferencesStore.CoverSource.APPLE_MUSIC -> R.string.animated_cover_apple
+                            dev.nkosanamahungela.sonify.data.PreferencesStore.CoverSource.SPOTIFY -> R.string.animated_cover_spotify
+                            dev.nkosanamahungela.sonify.data.PreferencesStore.CoverSource.APPLE_MUSIC -> R.string.animated_cover_apple
                         },
                     ),
                     selected = choice == source,
@@ -1524,7 +1524,7 @@ private fun CanvasSection(backdrop: Backdrop) {
 private fun AutoplaySection(backdrop: Backdrop) {
     val context = LocalContext.current
     val store = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).preferences
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).preferences
     }
     val enabled by store.autoplayInfinite.collectAsStateWithLifecycle()
 
@@ -1543,7 +1543,7 @@ private fun AutoplaySection(backdrop: Backdrop) {
 private fun EffectQualitySection() {
     val context = LocalContext.current
     val store = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).effectQuality
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).effectQuality
     }
     val chosen by store.quality.collectAsStateWithLifecycle()
 
@@ -1562,10 +1562,10 @@ private fun EffectQualitySection() {
 private fun CrossfadeSection(backdrop: Backdrop) {
     val context = LocalContext.current
     val store = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).crossfade
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).crossfade
     }
     val preferences = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).preferences
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).preferences
     }
     val chosen by store.seconds.collectAsStateWithLifecycle()
     val trimSilence by preferences.trimSilence.collectAsStateWithLifecycle()
@@ -1624,7 +1624,7 @@ private fun CrossfadeSection(backdrop: Backdrop) {
 private fun QualitySection() {
     val context = LocalContext.current
     val store = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).quality
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).quality
     }
     val chosen by store.quality.collectAsStateWithLifecycle()
 
@@ -1671,7 +1671,7 @@ private fun QualitySection() {
 private fun SpicyLyricsSection() {
     val context = LocalContext.current
     val store = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).preferences
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).preferences
     }
     val saved by store.spicyLyricsKey.collectAsStateWithLifecycle()
     var draft by remember(saved) { mutableStateOf(saved) }
@@ -1709,7 +1709,7 @@ private fun SpicyLyricsSection() {
             RowDivider()
         }
         ActionRow(stringResource(R.string.spicy_lyrics_get_key), destructive = false, icon = PhosphorIcons.Regular.ArrowUpRight) {
-            runCatching { uriHandler.openUri(dev.lelonio.square.backend.lyrics.SpicyLyrics.KEY_PAGE) }
+            runCatching { uriHandler.openUri(dev.nkosanamahungela.sonify.backend.lyrics.SpicyLyrics.KEY_PAGE) }
         }
     }
 }
@@ -1725,14 +1725,14 @@ private fun SpicyLyricsSection() {
 private fun PreferredLyricsSection(showSpotify: Boolean) {
     val context = LocalContext.current
     val store = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).preferences
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).preferences
     }
     val chosen by store.preferredLyricsSource.collectAsStateWithLifecycle()
     // Read so that entering or removing a Spicy Lyrics key changes the list.
     val spicyKey by store.spicyLyricsKey.collectAsStateWithLifecycle()
     val sources = remember(showSpotify, spicyKey) {
-        dev.lelonio.square.backend.lyrics.LyricsLibrary.sourcesFor(
-            if (showSpotify) "spotify:track:" else dev.lelonio.square.backend.youtube.YouTubeBackend.TRACK_PREFIX,
+        dev.nkosanamahungela.sonify.backend.lyrics.LyricsLibrary.sourcesFor(
+            if (showSpotify) "spotify:track:" else dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend.TRACK_PREFIX,
         )
     }
     val auto = stringResource(R.string.lyrics_preferred_auto)
@@ -1783,18 +1783,18 @@ private fun PreferredLyricsSection(showSpotify: Boolean) {
 private fun YouTubeQualitySection() {
     val context = LocalContext.current
     val store = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).preferences
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).preferences
     }
     val chosen by store.youtubeQuality.collectAsStateWithLifecycle()
     Section(stringResource(R.string.quality)) {
-        dev.lelonio.square.data.PreferencesStore.YouTubeQuality.entries.forEachIndexed { index, quality ->
+        dev.nkosanamahungela.sonify.data.PreferencesStore.YouTubeQuality.entries.forEachIndexed { index, quality ->
             if (index > 0) RowDivider()
             ChoiceRow(
                 label = stringResource(
                     when (quality) {
-                        dev.lelonio.square.data.PreferencesStore.YouTubeQuality.AUTO -> R.string.youtube_quality_auto
-                        dev.lelonio.square.data.PreferencesStore.YouTubeQuality.HIGH -> R.string.youtube_quality_high
-                        dev.lelonio.square.data.PreferencesStore.YouTubeQuality.LOW -> R.string.youtube_quality_low
+                        dev.nkosanamahungela.sonify.data.PreferencesStore.YouTubeQuality.AUTO -> R.string.youtube_quality_auto
+                        dev.nkosanamahungela.sonify.data.PreferencesStore.YouTubeQuality.HIGH -> R.string.youtube_quality_high
+                        dev.nkosanamahungela.sonify.data.PreferencesStore.YouTubeQuality.LOW -> R.string.youtube_quality_low
                     },
                 ),
                 selected = quality == chosen,
@@ -1822,7 +1822,7 @@ private fun YouTubeQualitySection() {
 private fun UpdateRow(onNeedsPermission: (Updater.State.Available) -> Unit) {
     val context = LocalContext.current
     val updater = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).updater
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).updater
     }
     val state by updater.state.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
@@ -1925,7 +1925,7 @@ private fun DownloadsSection(
 ) {
     val context = LocalContext.current
     val app = remember(context) {
-        context.applicationContext as dev.lelonio.square.SquareApplication
+        context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication
     }
     val store = app.downloads
     val settings = app.downloadSettings
@@ -1949,7 +1949,7 @@ private fun DownloadsSection(
         // is not a rounding error next to the music.
         val extrasBytes by androidx.compose.runtime.produceState(0L, files.size) {
             value = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
-                dev.lelonio.square.download.DownloadExtras.bytes()
+                dev.nkosanamahungela.sonify.download.DownloadExtras.bytes()
             }
         }
         InfoRow(
@@ -1974,7 +1974,7 @@ private fun DownloadsSection(
                 color = InkDim,
                 modifier = Modifier.padding(start = 18.dp, end = 18.dp, top = 14.dp),
             )
-            dev.lelonio.square.data.DownloadQuality.entries.forEach { entry ->
+            dev.nkosanamahungela.sonify.data.DownloadQuality.entries.forEach { entry ->
                 ChoiceRow(
                     label = stringResource(entry.label),
                     selected = entry == quality,
@@ -2005,22 +2005,22 @@ private fun DownloadsSection(
                         val tracks = app.likedStore.likedTracks.value
                         if (tracks.isNotEmpty()) {
                             val likedTracksList = tracks.map { uri ->
-                                store.trackOf(uri) ?: dev.lelonio.square.data.CatalogTrack(
+                                store.trackOf(uri) ?: dev.nkosanamahungela.sonify.data.CatalogTrack(
                                     uri = uri,
                                     name = "",
                                     artist = "",
                                 )
                             }
-                            store.setOwner(dev.lelonio.square.data.DownloadStore.LIKED, likedTracksList, label = null)
-                            dev.lelonio.square.download.DownloadService.start(app)
+                            store.setOwner(dev.nkosanamahungela.sonify.data.DownloadStore.LIKED, likedTracksList, label = null)
+                            dev.nkosanamahungela.sonify.download.DownloadService.start(app)
                         }
                     }
                 } else {
                     scope.launch {
-                        store.removeOwner(dev.lelonio.square.data.DownloadStore.LIKED)
+                        store.removeOwner(dev.nkosanamahungela.sonify.data.DownloadStore.LIKED)
                         store.pruneOrphans().forEach { orphanUri ->
-                            runCatching { dev.lelonio.square.download.YouTubeDownloads.forget(context, orphanUri) }
-                            dev.lelonio.square.download.DownloadExtras.forget(orphanUri)
+                            runCatching { dev.nkosanamahungela.sonify.download.YouTubeDownloads.forget(context, orphanUri) }
+                            dev.nkosanamahungela.sonify.download.DownloadExtras.forget(orphanUri)
                         }
                     }
                 }
@@ -2047,9 +2047,9 @@ private fun DownloadsSection(
             icon = PhosphorIcons.Regular.Image,
         ) {
             scope.launch {
-                (context.applicationContext as dev.lelonio.square.SquareApplication)
+                (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication)
                     .downloadQueue.refetchExtras()
-                dev.lelonio.square.download.DownloadService.start(context)
+                dev.nkosanamahungela.sonify.download.DownloadService.start(context)
                 android.widget.Toast.makeText(
                     context,
                     context.getString(R.string.download_refetch_started),
@@ -2061,7 +2061,7 @@ private fun DownloadsSection(
         // Only when there is something to say. A row reporting zero failures is
         // a row about nothing, on a screen that is already long.
         val givenUp = failures.count {
-            it.value.attempts >= dev.lelonio.square.data.DownloadStore.MAX_ATTEMPTS
+            it.value.attempts >= dev.nkosanamahungela.sonify.data.DownloadStore.MAX_ATTEMPTS
         }
         if (givenUp > 0) {
             RowDivider()
@@ -2076,7 +2076,7 @@ private fun DownloadsSection(
             ) {
                 scope.launch {
                     store.retryFailed()
-                    dev.lelonio.square.download.DownloadService.start(context)
+                    dev.nkosanamahungela.sonify.download.DownloadService.start(context)
                 }
             }
 
@@ -2343,7 +2343,7 @@ private fun ReportRows(name: String?, onSave: (java.io.File) -> Unit) {
         if (busy) return
         busy = true
         scope.launch {
-            runCatching { dev.lelonio.square.diagnostics.Report.build(context, listOfNotNull(name)) }
+            runCatching { dev.nkosanamahungela.sonify.diagnostics.Report.build(context, listOfNotNull(name)) }
                 .onSuccess(then)
                 .onFailure(::failed)
             busy = false
@@ -2358,7 +2358,7 @@ private fun ReportRows(name: String?, onSave: (java.io.File) -> Unit) {
         RowDivider()
         ActionRow(stringResource(R.string.send_report), destructive = false) {
             prepare { file ->
-                runCatching { dev.lelonio.square.diagnostics.Report.share(context, file) }.onFailure(::failed)
+                runCatching { dev.nkosanamahungela.sonify.diagnostics.Report.share(context, file) }.onFailure(::failed)
             }
         }
         Text(

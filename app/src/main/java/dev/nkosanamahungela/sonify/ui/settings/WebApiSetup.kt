@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.settings
+package dev.nkosanamahungela.sonify.ui.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,10 +19,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.MainViewModel
-import dev.lelonio.square.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.MainViewModel
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
 
 /**
  * One-time setup for the Web API.

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.search
+package dev.nkosanamahungela.sonify.ui.search
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
@@ -38,19 +38,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.R
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.data.SearchItem
-import dev.lelonio.square.ui.MainViewModel
-import dev.lelonio.square.ui.components.Artwork
-import dev.lelonio.square.ui.components.SwipeToQueue
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.player.GlassFilm
-import dev.lelonio.square.ui.settings.WebApiSetup
-import dev.lelonio.square.ui.theme.Ink
-import dev.lelonio.square.ui.theme.InkDim
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.data.SearchItem
+import dev.nkosanamahungela.sonify.ui.MainViewModel
+import dev.nkosanamahungela.sonify.ui.components.Artwork
+import dev.nkosanamahungela.sonify.ui.components.SwipeToQueue
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.player.GlassFilm
+import dev.nkosanamahungela.sonify.ui.settings.WebApiSetup
+import dev.nkosanamahungela.sonify.ui.theme.Ink
+import dev.nkosanamahungela.sonify.ui.theme.InkDim
 import androidx.compose.foundation.clickable
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
@@ -93,7 +93,7 @@ fun SearchScreen(
      * Shown in place of the prompt on an empty box, which is where a list of
      * things somebody already wanted belongs.
      */
-    history: List<dev.lelonio.square.data.SearchHistoryEntry>,
+    history: List<dev.nkosanamahungela.sonify.data.SearchHistoryEntry>,
     onClearHistory: () -> Unit,
     /** One of them out of the history, dragged off to the right. */
     onRemoveHistory: (String) -> Unit,
@@ -152,7 +152,7 @@ fun SearchScreen(
 
         // Its heading where every main tab's is; see TabHeader.
         item(contentType = "title") {
-            dev.lelonio.square.ui.components.TabHeader(
+            dev.nkosanamahungela.sonify.ui.components.TabHeader(
                 title = stringResource(R.string.search),
                 modifier = Modifier.padding(bottom = 8.dp),
             )
@@ -367,7 +367,7 @@ fun SearchScreen(
                         SwipeToQueue(onQueue = { onEnqueue(episode) }) {
                             ResultRow(
                                 title = episode.name,
-                                subtitle = dev.lelonio.square.ui.library.episodeLine(episode, showName = true),
+                                subtitle = dev.nkosanamahungela.sonify.ui.library.episodeLine(episode, showName = true),
                                 artworkUrl = episode.artworkUrl,
                                 highlighted = episode.uri == nowPlayingUri,
                                 round = false,
@@ -420,7 +420,7 @@ private fun KindRow(
             Kind.entries.filter { (it != Kind.VIDEOS || hasVideos) && (it != Kind.PODCASTS || hasPodcasts) },
             key = { it.name },
         ) { entry ->
-            dev.lelonio.square.ui.components.FilterChip(
+            dev.nkosanamahungela.sonify.ui.components.FilterChip(
                 backdrop = backdrop,
                 label = stringResource(entry.label),
                 selected = entry == selected,
