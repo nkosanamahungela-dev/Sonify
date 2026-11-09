@@ -22,7 +22,7 @@ import dev.nkosanamahungela.sonify.ui.theme.Ink
 
 /**
  * A title in the wordmark's letters: polylines on the same 6×10 grid, the
- * same stroke, square caps and joins, the same advance, as SquareWordmark
+ * same stroke, square caps and joins, the same advance, as SonifyWordmark
  * draws S, Q, U, A, R and E. Capitals only, as the wordmark is.
  *
  * [height] is the capitals' height, the wordmark's own measure. A title with
@@ -93,7 +93,7 @@ private fun l(vararg points: Pair<Float, Float>): List<Pair<Float, Float>> = poi
 private val ACCENT = l(2f to -2.5f, 4f to -2.5f)
 
 private val BASE: Map<Char, Glyph> = mapOf(
-    // The wordmark's six, as SquareWordmark draws them.
+    // The wordmark's six, as SonifyWordmark draws them.
     'S' to g(l(6f to 0f, 0f to 0f, 0f to 5f, 6f to 5f, 6f to 10f, 0f to 10f)),
     'Q' to g(l(0f to 0f, 6f to 0f, 6f to 10f, 0f to 10f, 0f to 0f), l(4f to 8f, 4f to 12f)),
     'U' to g(l(0f to 0f, 0f to 10f, 6f to 10f, 6f to 0f)),
