@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -39,13 +39,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.R
-import dev.lelonio.square.data.Lyrics
-import dev.lelonio.square.playback.EffectPreset
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.data.Lyrics
+import dev.nkosanamahungela.sonify.playback.EffectPreset
 import androidx.compose.foundation.layout.RowScope
-import dev.lelonio.square.ui.glass.LiquidBottomTab
-import dev.lelonio.square.ui.glass.LiquidBottomTabs
-import dev.lelonio.square.ui.glass.LiquidSlider
+import dev.nkosanamahungela.sonify.ui.glass.LiquidBottomTab
+import dev.nkosanamahungela.sonify.ui.glass.LiquidBottomTabs
+import dev.nkosanamahungela.sonify.ui.glass.LiquidSlider
 import kotlin.math.ln
 import kotlin.math.pow
 import kotlin.math.roundToInt
@@ -65,7 +65,7 @@ import com.adamglin.phosphoricons.fill.Info
 import com.adamglin.phosphoricons.regular.Info
 import com.adamglin.phosphoricons.regular.X
 import com.adamglin.phosphoricons.regular.Sparkle
-import dev.lelonio.square.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.glass.pressable
 
 /** Which panel is open below the transport controls. */
 enum class PlayerPanel {
@@ -110,7 +110,7 @@ fun PlayerPanelSection(
     onSavePreset: (String) -> Unit,
     onDeletePreset: (String) -> Unit,
     /** The layer the panel refracts; see the liquid-glass note in PlayerScreen. */
-    backdrop: dev.lelonio.square.ui.glass.backdrop.Backdrop,
+    backdrop: dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop,
     modifier: Modifier = Modifier,
     /** False on a phone held sideways, where the cover is beside the views already. */
     showCover: Boolean = true,
@@ -128,17 +128,17 @@ fun PlayerPanelSection(
         // the others, and a button for it beside the title was one more
         // control in a row that already had the radio and the heart.
         // Whether anything is being done to the sound right now.
-        val speed by dev.lelonio.square.playback.AudioEffects.speed
+        val speed by dev.nkosanamahungela.sonify.playback.AudioEffects.speed
             .collectAsStateWithLifecycle()
-        val pitch by dev.lelonio.square.playback.AudioEffects.pitch
+        val pitch by dev.nkosanamahungela.sonify.playback.AudioEffects.pitch
             .collectAsStateWithLifecycle()
-        val reverb by dev.lelonio.square.playback.AudioEffects.reverb
+        val reverb by dev.nkosanamahungela.sonify.playback.AudioEffects.reverb
             .collectAsStateWithLifecycle()
         val effectsOn = speed != 1f || pitch != 1f || reverb > 0f
-        val karaoke by dev.lelonio.square.playback.AudioEffects.karaoke
+        val karaoke by dev.nkosanamahungela.sonify.playback.AudioEffects.karaoke
             .collectAsStateWithLifecycle()
         // The official SDK mixes its own audio, so it has no effects to offer.
-        val sdkPlayback by dev.lelonio.square.playback.websdk.WebSdkRecovery.inUse
+        val sdkPlayback by dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.inUse
             .collectAsStateWithLifecycle()
         val karaokeOn = karaoke > 0f && !sdkPlayback
 
@@ -153,7 +153,7 @@ fun PlayerPanelSection(
         }
         val selected = views.indexOf(panel).coerceAtLeast(0)
         // Stable, or LiquidBottomTabs throws away the state it keys on this and
-        // the indicator stops animating; see the note in SquareApp.
+        // the indicator stops animating; see the note in SonifyApp.
         val selectedState = rememberUpdatedState(selected)
         val selectedTabIndex = remember { { selectedState.value } }
 
@@ -293,7 +293,7 @@ data class QueueEntry(
  * Speed and pitch are separate controls on purpose: resampling would move both
  * at once, and the whole point of asking for them separately is being able to
  * slow a track down without dropping it an octave. The platform's time
- * stretcher does the work — see [dev.lelonio.square.playback.AudioOutput].
+ * stretcher does the work — see [dev.nkosanamahungela.sonify.playback.AudioOutput].
  */
 @Composable
 internal fun EffectsPanel(
@@ -307,7 +307,7 @@ internal fun EffectsPanel(
     onApplyPreset: (EffectPreset) -> Unit,
     onSavePreset: (String) -> Unit,
     onDeletePreset: (String) -> Unit,
-    backdrop: dev.lelonio.square.ui.glass.backdrop.Backdrop,
+    backdrop: dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop,
 ) {
     var naming by remember { mutableStateOf(false) }
 
@@ -385,16 +385,16 @@ internal fun EffectsPanel(
  */
 @Composable
 private fun SleepTimerRow() {
-    val endsAt by dev.lelonio.square.playback.SleepTimer.endsAt.collectAsStateWithLifecycle()
-    val chosen by dev.lelonio.square.playback.SleepTimer.minutes.collectAsStateWithLifecycle()
-    val atTrackEnd by dev.lelonio.square.playback.SleepTimer.atTrackEnd.collectAsStateWithLifecycle()
+    val endsAt by dev.nkosanamahungela.sonify.playback.SleepTimer.endsAt.collectAsStateWithLifecycle()
+    val chosen by dev.nkosanamahungela.sonify.playback.SleepTimer.minutes.collectAsStateWithLifecycle()
+    val atTrackEnd by dev.nkosanamahungela.sonify.playback.SleepTimer.atTrackEnd.collectAsStateWithLifecycle()
 
     // Read once a second while something is running, and not at all otherwise:
     // a clock nobody set should cost nothing.
-    var left by remember { mutableStateOf(dev.lelonio.square.playback.SleepTimer.remaining()) }
+    var left by remember { mutableStateOf(dev.nkosanamahungela.sonify.playback.SleepTimer.remaining()) }
     LaunchedEffect(endsAt) {
         while (endsAt != null) {
-            left = dev.lelonio.square.playback.SleepTimer.remaining()
+            left = dev.nkosanamahungela.sonify.playback.SleepTimer.remaining()
             kotlinx.coroutines.delay(1_000)
         }
         left = null
@@ -417,19 +417,19 @@ private fun SleepTimerRow() {
         SleepChip(
             label = stringResource(R.string.off),
             selected = endsAt == null && !atTrackEnd,
-            onClick = { dev.lelonio.square.playback.SleepTimer.cancel() },
+            onClick = { dev.nkosanamahungela.sonify.playback.SleepTimer.cancel() },
         )
         SleepLengths.forEach { minutes ->
             SleepChip(
                 label = stringResource(R.string.sleep_timer_minutes, minutes),
                 selected = chosen == minutes,
-                onClick = { dev.lelonio.square.playback.SleepTimer.inMinutes(minutes) },
+                onClick = { dev.nkosanamahungela.sonify.playback.SleepTimer.inMinutes(minutes) },
             )
         }
         SleepChip(
             label = stringResource(R.string.sleep_timer_track_end),
             selected = atTrackEnd,
-            onClick = { dev.lelonio.square.playback.SleepTimer.atEndOfTrack() },
+            onClick = { dev.nkosanamahungela.sonify.playback.SleepTimer.atEndOfTrack() },
         )
     }
 
@@ -443,7 +443,7 @@ private fun SleepTimerRow() {
             } else {
                 stringResource(
                     R.string.sleep_timer_left,
-                    dev.lelonio.square.ui.library.formatDuration(running ?: 0L),
+                    dev.nkosanamahungela.sonify.ui.library.formatDuration(running ?: 0L),
                 )
             },
             style = MaterialTheme.typography.bodySmall,
@@ -577,7 +577,7 @@ private fun PresetRow(
 @Composable
 private fun SavePresetDialog(onDismiss: () -> Unit, onConfirm: (String) -> Unit) {
     // Upstream's GlassSheet with a field, as every question for a name is.
-    dev.lelonio.square.ui.components.NameDialog(
+    dev.nkosanamahungela.sonify.ui.components.NameDialog(
         title = stringResource(R.string.save_preset),
         initial = "",
         confirmLabel = stringResource(R.string.save),
@@ -630,7 +630,7 @@ private fun EffectSlider(
      * answer to "what am I choosing?" until it had already been chosen.
      */
     reading: (Float) -> String,
-    backdrop: dev.lelonio.square.ui.glass.backdrop.Backdrop,
+    backdrop: dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop,
     onChange: (Float) -> Unit,
     onReset: () -> Unit,
 ) {

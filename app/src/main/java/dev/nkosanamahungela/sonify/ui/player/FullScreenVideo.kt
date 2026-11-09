@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -31,8 +31,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import dev.lelonio.square.ui.glass.backdrop.backdrops.layerBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberLayerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.layerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberLayerBackdrop
 import androidx.media3.common.Player
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Fill
@@ -40,11 +40,11 @@ import com.adamglin.phosphoricons.fill.Pause
 import com.adamglin.phosphoricons.fill.Play
 import com.adamglin.phosphoricons.fill.SkipBack
 import com.adamglin.phosphoricons.fill.SkipForward
-import dev.lelonio.square.R
+import dev.nkosanamahungela.sonify.R
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.regular.CornersIn
 import com.adamglin.phosphoricons.regular.MusicNotes
-import dev.lelonio.square.ui.library.formatDuration
+import dev.nkosanamahungela.sonify.ui.library.formatDuration
 
 /**
  * The video, and nothing else, for a phone held on its side.

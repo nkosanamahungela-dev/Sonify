@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -32,14 +32,14 @@ import com.adamglin.phosphoricons.Fill
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.fill.MicrophoneStage
 import com.adamglin.phosphoricons.regular.MicrophoneStage
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.glass.LocalGlassEffectConfig
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.ui.input.pointer.positionChange
-import dev.lelonio.square.ui.glass.liquidGlass
-import dev.lelonio.square.ui.glass.shapes.ContinuousCapsule
+import dev.nkosanamahungela.sonify.ui.glass.liquidGlass
+import dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule
 
 /**
  * How much of the singing to take away.

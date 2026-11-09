@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
@@ -49,14 +49,14 @@ import com.adamglin.phosphoricons.regular.CaretDown
 import com.adamglin.phosphoricons.regular.Quotes
 import com.adamglin.phosphoricons.regular.Check
 import com.adamglin.phosphoricons.regular.X
-import dev.lelonio.square.R
-import dev.lelonio.square.backend.lyrics.LyricsLibrary
-import dev.lelonio.square.backend.lyrics.LyricsQuery
-import dev.lelonio.square.backend.lyrics.LyricsSource
-import dev.lelonio.square.data.Lyrics
-import dev.lelonio.square.data.PreferencesStore.LyricsStyle
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.pressable
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.backend.lyrics.LyricsLibrary
+import dev.nkosanamahungela.sonify.backend.lyrics.LyricsQuery
+import dev.nkosanamahungela.sonify.backend.lyrics.LyricsSource
+import dev.nkosanamahungela.sonify.data.Lyrics
+import dev.nkosanamahungela.sonify.data.PreferencesStore.LyricsStyle
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.pressable
 import kotlinx.coroutines.launch
 
 /**
@@ -317,7 +317,7 @@ private fun SourceRow(name: String, status: String?, selected: Boolean, enabled:
  * the person's page, as the source asks; the names only when it gives them.
  */
 @Composable
-fun LyricsCreditLine(credit: dev.lelonio.square.data.LyricsCredit, modifier: Modifier = Modifier) {
+fun LyricsCreditLine(credit: dev.nkosanamahungela.sonify.data.LyricsCredit, modifier: Modifier = Modifier) {
     val from = stringResource(R.string.lyrics_from, credit.provider)
     val uploadedBy = stringResource(R.string.lyrics_uploaded_by)
     val madeBy = stringResource(R.string.lyrics_made_by)

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -35,11 +35,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.components.Artwork
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.theme.softShadow
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.components.Artwork
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.theme.softShadow
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Fill
 import com.adamglin.phosphoricons.Regular
@@ -294,9 +294,9 @@ fun MiniPlayer(
  * on it is not text. It is the app's own ink, like everywhere else.
  */
 internal val MiniPlayerInk: Color
-    @Composable get() = dev.lelonio.square.ui.theme.Ink
+    @Composable get() = dev.nkosanamahungela.sonify.ui.theme.Ink
 internal val MiniPlayerInkDim: Color
-    @Composable get() = dev.lelonio.square.ui.theme.InkDim
+    @Composable get() = dev.nkosanamahungela.sonify.ui.theme.InkDim
 
 /**
  * The green everyone already reads as "this is coming out of something else".

@@ -7,7 +7,7 @@
  * AGPL-3.0, combined with the rest of Square (GPL-3.0) as section 13 of both
  * licences allows.
  */
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import android.graphics.RenderEffect
 import android.graphics.Shader
@@ -82,9 +82,9 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
-import dev.lelonio.square.data.LyricLine
-import dev.lelonio.square.data.LyricWord
-import dev.lelonio.square.data.Lyrics
+import dev.nkosanamahungela.sonify.data.LyricLine
+import dev.nkosanamahungela.sonify.data.LyricWord
+import dev.nkosanamahungela.sonify.data.Lyrics
 import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.exp

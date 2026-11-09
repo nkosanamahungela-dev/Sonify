@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.Animatable

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -10,8 +10,8 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.liquidGlass
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.liquidGlass
 
 /**
  * A pane of glass over [backdrop].
@@ -108,7 +108,7 @@ fun GlassSurface(
     // Only how thick it is, in other words. How far it blurs is a real
     // difference between a small pill and a panel covering half the screen; what
     // the material *is* is not.
-    val config = dev.lelonio.square.ui.glass.LocalGlassEffectConfig.current
+    val config = dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig.current
     // The refraction is part of that recipe now, and it is the reason this takes
     // a shape it can bend light along. Anything else keeps the film below.
     val blurDp = (config.blurRadius * blurScale).coerceAtLeast(minBlurDp)

@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
@@ -25,8 +25,8 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import dev.lelonio.square.ui.glass.LiquidSlider
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.LiquidSlider
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.math.abs
@@ -47,7 +47,7 @@ private const val SETTLE_CLOSE = 0.01f
 /**
  * The playback position, as a thin capsule.
  *
- * Not [dev.lelonio.square.ui.glass.LiquidSlider], and not the waveform this
+ * Not [dev.nkosanamahungela.sonify.ui.glass.LiquidSlider], and not the waveform this
  * replaced. The waveform looked good but invented its shape, and the reference
  * this screen follows uses a plain bar. The library's slider is the wrong tool
  * for a different reason: it reports every intermediate value, and each one here

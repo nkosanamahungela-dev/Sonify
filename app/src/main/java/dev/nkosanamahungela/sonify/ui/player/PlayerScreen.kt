@@ -1,6 +1,6 @@
-package dev.lelonio.square.ui.player
+package dev.nkosanamahungela.sonify.ui.player
 
-import dev.lelonio.square.ui.components.copyFrame
+import dev.nkosanamahungela.sonify.ui.components.copyFrame
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.togetherWith
@@ -55,7 +55,7 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import dev.lelonio.square.ui.components.mixRing
+import dev.nkosanamahungela.sonify.ui.components.mixRing
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.animation.animateColorAsState
@@ -105,22 +105,22 @@ import androidx.media3.common.util.UnstableApi
 import coil.compose.AsyncImage
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.withContext
-import dev.lelonio.square.backend.spotify.panelAt
+import dev.nkosanamahungela.sonify.backend.spotify.panelAt
 import androidx.core.graphics.scale
-import dev.lelonio.square.ui.glass.pressable
-import dev.lelonio.square.ui.glass.LocalGlassEffectConfig
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
-import dev.lelonio.square.ui.glass.liquidGlass
-import dev.lelonio.square.ui.glass.backdrop.backdrops.layerBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberCombinedBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberLayerBackdrop
-import dev.lelonio.square.R
-import dev.lelonio.square.ui.MainViewModel
-import dev.lelonio.square.ui.components.Artwork
-import dev.lelonio.square.ui.glass.GlassBlendGroup
-import dev.lelonio.square.ui.glass.LiquidButton
-import dev.lelonio.square.ui.library.formatDuration
-import dev.lelonio.square.ui.theme.softShadow
+import dev.nkosanamahungela.sonify.ui.glass.pressable
+import dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.liquidGlass
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.layerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberCombinedBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberLayerBackdrop
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.ui.MainViewModel
+import dev.nkosanamahungela.sonify.ui.components.Artwork
+import dev.nkosanamahungela.sonify.ui.glass.GlassBlendGroup
+import dev.nkosanamahungela.sonify.ui.glass.LiquidButton
+import dev.nkosanamahungela.sonify.ui.library.formatDuration
+import dev.nkosanamahungela.sonify.ui.theme.softShadow
 import com.adamglin.phosphoricons.regular.MonitorPlay
 import com.adamglin.phosphoricons.regular.Gauge
 import com.adamglin.phosphoricons.regular.MusicNotes
@@ -251,7 +251,7 @@ private fun NowReadingLine(
             Modifier.padding(start = 8.dp, end = 20.dp, top = 8.dp, bottom = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            dev.lelonio.square.ui.components.Artwork(
+            dev.nkosanamahungela.sonify.ui.components.Artwork(
                 url = state.artworkUrl,
                 title = state.title,
                 corner = 22.dp,
@@ -329,14 +329,14 @@ fun PlayerScreen(
     onToggleShuffle: () -> Unit,
     onCycleRepeat: () -> Unit,
     queue: List<QueueEntry>,
-    lyrics: dev.lelonio.square.data.Lyrics?,
+    lyrics: dev.nkosanamahungela.sonify.data.Lyrics?,
     lyricsLoading: Boolean,
     /** The song the lyrics are for, so the panel can ask every source about it. */
-    lyricsQuery: dev.lelonio.square.backend.lyrics.LyricsQuery? = null,
+    lyricsQuery: dev.nkosanamahungela.sonify.backend.lyrics.LyricsQuery? = null,
     /** Words picked from another source in the panel. */
-    onLyricsChosen: (dev.lelonio.square.data.Lyrics) -> Unit = {},
+    onLyricsChosen: (dev.nkosanamahungela.sonify.data.Lyrics) -> Unit = {},
     /** Who made the track, for the credits panel; null until it is asked for. */
-    credits: dev.lelonio.square.backend.spotify.SpotifyCredits.Credits?,
+    credits: dev.nkosanamahungela.sonify.backend.spotify.SpotifyCredits.Credits?,
     creditsLoading: Boolean,
     /** Asked for when the credits panel is opened, and not before. */
     onWantCredits: (String?) -> Unit,
@@ -352,8 +352,8 @@ fun PlayerScreen(
     onSpeed: (Float) -> Unit,
     onPitch: (Float) -> Unit,
     onReverb: (Float) -> Unit,
-    presets: List<dev.lelonio.square.playback.EffectPreset>,
-    onApplyPreset: (dev.lelonio.square.playback.EffectPreset) -> Unit,
+    presets: List<dev.nkosanamahungela.sonify.playback.EffectPreset>,
+    onApplyPreset: (dev.nkosanamahungela.sonify.playback.EffectPreset) -> Unit,
     onSavePreset: (String) -> Unit,
     onDeletePreset: (String) -> Unit,
     /**
@@ -363,7 +363,7 @@ fun PlayerScreen(
      */
     backdrop: Backdrop,
     /** The track's Canvas clip, or null when it has none. */
-    canvas: dev.lelonio.square.data.CanvasClip?,
+    canvas: dev.nkosanamahungela.sonify.data.CanvasClip?,
     /**
      * The tall picture the record carries, where the catalogue has one.
      *
@@ -405,7 +405,7 @@ fun PlayerScreen(
     sharedScope: androidx.compose.animation.SharedTransitionScope? = null,
     animatedScope: androidx.compose.animation.AnimatedVisibilityScope? = null,
     /** The Spotify Connect device list, and what to do with it. */
-    devices: dev.lelonio.square.ui.MainViewModel.DevicesState,
+    devices: dev.nkosanamahungela.sonify.ui.MainViewModel.DevicesState,
     onOpenDevices: () -> Unit,
     onCloseDevices: () -> Unit,
     onRefreshDevices: () -> Unit,
@@ -444,7 +444,7 @@ fun PlayerScreen(
     onRadio: (() -> Unit)? = null,
     /** The playlist picker's state, shown in the panel rather than as a sheet. */
     addToPlaylist: MainViewModel.AddToPlaylistState,
-    onPickPlaylist: (dev.lelonio.square.data.CatalogPlaylist) -> Unit,
+    onPickPlaylist: (dev.nkosanamahungela.sonify.data.CatalogPlaylist) -> Unit,
     /**
      * False when the source has no writable playlists.
      *
@@ -481,7 +481,7 @@ fun PlayerScreen(
 ) {
     var panel by remember { mutableStateOf(PlayerPanel.NONE) }
     // The official SDK mixes its own audio: no effects or karaoke reach it.
-    val sdkPlayback by dev.lelonio.square.playback.websdk.WebSdkRecovery.inUse.collectAsStateWithLifecycle()
+    val sdkPlayback by dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.inUse.collectAsStateWithLifecycle()
     LaunchedEffect(sdkPlayback) {
         if (sdkPlayback && panel == PlayerPanel.EFFECTS) panel = PlayerPanel.NONE
     }
@@ -671,7 +671,7 @@ fun PlayerScreen(
         if (canvas?.isVideo != true) clipReport.value(emptyList())
     }
 
-    val readPalette by dev.lelonio.square.ui.theme.rememberArtworkPalette(
+    val readPalette by dev.nkosanamahungela.sonify.ui.theme.rememberArtworkPalette(
         state.artworkUrl.takeIf { canvas == null },
     )
 
@@ -690,8 +690,8 @@ fun PlayerScreen(
     val auraColors = if (canvas == null && catalogAura.isNotEmpty()) catalogAura else readPalette
 
     // The tone the cover fades into, worked out the same way the pages do it.
-    val coverAccent by dev.lelonio.square.ui.theme.rememberArtworkColor(state.artworkUrl)
-    val coverTone = dev.lelonio.square.ui.theme.pageColorFor(coverAccent)
+    val coverAccent by dev.nkosanamahungela.sonify.ui.theme.rememberArtworkColor(state.artworkUrl)
+    val coverTone = dev.nkosanamahungela.sonify.ui.theme.pageColorFor(coverAccent)
 
     Box(
         Modifier
@@ -706,7 +706,7 @@ fun PlayerScreen(
             // record's extended artwork — and beside the sleeve it read as two
             // different covers at once.
             if (sideways) {
-                dev.lelonio.square.ui.components.Artwork(
+                dev.nkosanamahungela.sonify.ui.components.Artwork(
                     url = state.artworkUrl,
                     title = state.title,
                     modifier = Modifier
@@ -784,7 +784,7 @@ fun PlayerScreen(
                 // with no clip used to get moving light in those same colours
                 // and nothing of the picture itself — which was a stand-in for
                 // an image the app had all along.
-                dev.lelonio.square.ui.components.HeroBackdrop(
+                dev.nkosanamahungela.sonify.ui.components.HeroBackdrop(
                     artworkUrl = coverHeroUrl
                         ?: coverSquareUrl
                         ?: state.artworkUrl.takeIf { !coverPending },
@@ -852,7 +852,7 @@ fun PlayerScreen(
                     // where this one fades; enlarged until the two coincide.
                     // A square scan has none and is shown as it is.
                     zoom = if (coverHeroUrl != null) {
-                        dev.lelonio.square.ui.components.TALL_ART_ZOOM
+                        dev.nkosanamahungela.sonify.ui.components.TALL_ART_ZOOM
                     } else {
                         1f
                     },
@@ -1273,7 +1273,7 @@ fun PlayerScreen(
                             // remember why. It rides above the cover rather
                             // than beside the title, where the transport
                             // already has all the room it needs.
-                            val karaokeAmount by dev.lelonio.square.playback.AudioEffects.karaoke
+                            val karaokeAmount by dev.nkosanamahungela.sonify.playback.AudioEffects.karaoke
                                 .collectAsStateWithLifecycle()
                             // Not over the lyrics, where the karaoke's own
                             // control is on screen and the source's credit
@@ -1420,7 +1420,7 @@ fun PlayerScreen(
                                                 .clip(CircleShape)
                                                 .background(Color.Black.copy(alpha = 0.35f))
                                                 .pressable(onClick = {
-                                                    dev.lelonio.square.ui.player.lockVideoOrientation(context, landscape = true)
+                                                    dev.nkosanamahungela.sonify.ui.player.lockVideoOrientation(context, landscape = true)
                                                 }),
                                             contentAlignment = Alignment.Center,
                                         ) {
@@ -2071,7 +2071,7 @@ private const val AMBIENT_SAMPLE = 16
  */
 @Composable
 private fun PanelAmbient(player: Player, onAmbient: (AmbientEdges) -> Unit) {
-    val manifest by dev.lelonio.square.backend.spotify.SpotifyVideoMode.manifest
+    val manifest by dev.nkosanamahungela.sonify.backend.spotify.SpotifyVideoMode.manifest
         .collectAsStateWithLifecycle()
     val report by rememberUpdatedState(onAmbient)
     val http = remember { okhttp3.OkHttpClient() }
@@ -2424,7 +2424,7 @@ private fun TitleBlock(
             // about the song, and a line of its own would read as a warning.
             if (state.explicit) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    dev.lelonio.square.ui.components.ExplicitMark(color = GlassInk)
+                    dev.nkosanamahungela.sonify.ui.components.ExplicitMark(color = GlassInk)
                     Spacer(Modifier.width(6.dp))
                     ArtistLine(state, artist, onOpenArtist)
                 }
@@ -2577,7 +2577,7 @@ internal fun Controls(
 
             // Ringed while a playlist plays as a Spotify Mix, as the official
             // player's button is; see Mixes.playing.
-            val mixPlaying by dev.lelonio.square.playback.Mixes.playing.collectAsStateWithLifecycle()
+            val mixPlaying by dev.nkosanamahungela.sonify.playback.Mixes.playing.collectAsStateWithLifecycle()
             Box(Modifier.mixRing(mixPlaying)) {
             RoundGlassButton(backdrop = backdrop, size = 76.dp, onClick = onTogglePlay) {
                 // A ring around the icon while the track is still being fetched.
@@ -2661,7 +2661,7 @@ private fun KaraokeBadge(amount: Float, backdrop: Backdrop, onClick: () -> Unit)
     Row(
         Modifier
             .padding(top = 4.dp)
-            .clip(dev.lelonio.square.ui.glass.shapes.ContinuousCapsule())
+            .clip(dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule())
             // A way to the thing it is talking about: the lyrics, with the
             // control open. A label about a setting that cannot be reached from
             // where it is read is half a message.
@@ -2670,7 +2670,7 @@ private fun KaraokeBadge(amount: Float, backdrop: Backdrop, onClick: () -> Unit)
             // painted rectangle is the one thing that reads as pasted on.
             .liquidGlass(
                 config = LocalGlassEffectConfig.current,
-                shape = dev.lelonio.square.ui.glass.shapes.ContinuousCapsule(),
+                shape = dev.nkosanamahungela.sonify.ui.glass.shapes.ContinuousCapsule(),
                 ownBackdrop = backdrop,
                 highlightAlpha = BarHighlightAlpha,
             )
@@ -2780,9 +2780,9 @@ private fun ToggleIcon(
  * direction; see SquareTheme.
  */
 internal val GlassInk: Color
-    @Composable get() = dev.lelonio.square.ui.theme.Ink
+    @Composable get() = dev.nkosanamahungela.sonify.ui.theme.Ink
 internal val GlassInkDim: Color
-    @Composable get() = dev.lelonio.square.ui.theme.Ink.copy(alpha = 0.68f)
+    @Composable get() = dev.nkosanamahungela.sonify.ui.theme.Ink.copy(alpha = 0.68f)
 
 /**
  * The film every glass surface is tinted with.
@@ -2792,7 +2792,7 @@ internal val GlassInkDim: Color
  * player and the search button beside it.
  */
 internal val GlassFilm: Color
-    @Composable get() = if (dev.lelonio.square.ui.theme.lightPage()) {
+    @Composable get() = if (dev.nkosanamahungela.sonify.ui.theme.lightPage()) {
         // More of it on the light side: a twelfth of white over a pale page is
         // not a surface, and the controls have to sit on something.
         Color.White.copy(alpha = 0.45f)
@@ -2806,7 +2806,7 @@ internal val GlassFilm: Color
  * The same tint the glass recipe puts under light ink, at the same strength,
  * so the panes that draw their film themselves match the ones that get it from
  * [GlassEffect]. Everywhere else the film follows the phone's setting; the
- * player does not, see playerInk in SquareApp.
+ * player does not, see playerInk in SonifyApp.
  */
 internal val PlayerFilm = Color(0xFF23232A).copy(alpha = 0.5f)
 
@@ -2814,7 +2814,7 @@ internal val PlayerFilm = Color(0xFF23232A).copy(alpha = 0.5f)
  * The film the player's glass is made of while a record plays.
  *
  * Provided once, over the whole player, so the panes that draw their own film
- * stay the material of the ones that get it from [GlassEffect]; SquareApp
+ * stay the material of the ones that get it from [GlassEffect]; SonifyApp
  * hands the same colour to both.
  */
 internal val LocalPlayerFilm = androidx.compose.runtime.compositionLocalOf { PlayerFilm }
@@ -2847,10 +2847,10 @@ private const val FILM_VALUE = 0.24f
  */
 @Composable
 private fun LyricsStage(
-    lyrics: dev.lelonio.square.data.Lyrics?,
+    lyrics: dev.nkosanamahungela.sonify.data.Lyrics?,
     loading: Boolean,
-    query: dev.lelonio.square.backend.lyrics.LyricsQuery?,
-    onChosen: (dev.lelonio.square.data.Lyrics) -> Unit,
+    query: dev.nkosanamahungela.sonify.backend.lyrics.LyricsQuery?,
+    onChosen: (dev.nkosanamahungela.sonify.data.Lyrics) -> Unit,
     positionMs: State<Long>,
     isPlaying: Boolean,
     onSeek: (Long) -> Unit,
@@ -2866,7 +2866,7 @@ private fun LyricsStage(
 ) {
     val context = androidx.compose.ui.platform.LocalContext.current
     val preferences = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication).preferences
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication).preferences
     }
     val style by preferences.lyricsStyle.collectAsStateWithLifecycle()
     var optionsOpen by remember(query?.uri) { androidx.compose.runtime.mutableStateOf(false) }
@@ -2879,7 +2879,7 @@ private fun LyricsStage(
     // The language the app itself is read in, which is the one to translate
     // into — not the phone's, when the two have been made to differ on purpose.
     val target = remember(context) {
-        (context.applicationContext as dev.lelonio.square.SquareApplication)
+        (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication)
             .language
             .language()
     }
@@ -2899,7 +2899,7 @@ private fun LyricsStage(
         if (!translated || lyrics == null || hasOwn || machine != null) return@LaunchedEffect
         translating = true
         machine = runCatching {
-            dev.lelonio.square.backend.lyrics.Translate.lines(
+            dev.nkosanamahungela.sonify.backend.lyrics.Translate.lines(
                 lyrics.lines.map { it.text },
                 target,
             )
@@ -2950,7 +2950,7 @@ private fun LyricsStage(
                 color = GlassInkDim,
             )
 
-            style == dev.lelonio.square.data.PreferencesStore.LyricsStyle.CLASSIC -> CompositionLocalProvider(
+            style == dev.nkosanamahungela.sonify.data.PreferencesStore.LyricsStyle.CLASSIC -> CompositionLocalProvider(
                 LocalLayoutDirection provides songDirection,
             ) {
                 ClassicLyricsView(
@@ -3012,7 +3012,7 @@ private fun LyricsStage(
 
         // Beside the words rather than under them: a band across the panel took
         // the room the lyrics need, for a control touched once a song.
-        val karaoke by dev.lelonio.square.playback.AudioEffects.karaoke
+        val karaoke by dev.nkosanamahungela.sonify.playback.AudioEffects.karaoke
             .collectAsStateWithLifecycle()
         // Offered on every song with words. Where the document carries no
         // translation of its own the lines are put through a translator, so
@@ -3033,11 +3033,11 @@ private fun LyricsStage(
         }
 
         // Not over the official SDK, whose audio never passes through the effect.
-        val sdkPlayback by dev.lelonio.square.playback.websdk.WebSdkRecovery.inUse
+        val sdkPlayback by dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.inUse
             .collectAsStateWithLifecycle()
         if (!sdkPlayback && !optionsOpen) KaraokeDial(
             amount = karaoke,
-            onChange = dev.lelonio.square.playback.AudioEffects::setKaraoke,
+            onChange = dev.nkosanamahungela.sonify.playback.AudioEffects::setKaraoke,
             backdrop = backdrop,
             expandSignal = expandSignal,
             modifier = Modifier
@@ -3057,7 +3057,7 @@ private fun LyricsStage(
  */
 @Composable
 private fun SungLine(
-    lyrics: dev.lelonio.square.data.Lyrics,
+    lyrics: dev.nkosanamahungela.sonify.data.Lyrics,
     positionMs: State<Long>,
     modifier: Modifier = Modifier,
 ) {
@@ -3122,7 +3122,7 @@ private fun SongCard(
                 .clip(RoundedCornerShape(18.dp))
                 .clickable(onClick = onCover),
         ) {
-            dev.lelonio.square.ui.components.Artwork(
+            dev.nkosanamahungela.sonify.ui.components.Artwork(
                 url = state.artworkUrl,
                 title = state.title,
                 modifier = Modifier.fillMaxSize(),
