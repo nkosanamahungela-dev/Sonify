@@ -9,6 +9,9 @@
 -->
 <resources>
     <string name="app_name">Sonify</string>
+    <string name="playback_channel">Sonify music playback</string>
+    <string name="playback_channel_description">Playback controls and now playing information from Sonify.</string>
+    <string name="download_channel">Sonify downloads</string>
 
     <!-- Shared -->
     <string name="back">Back</string>
