@@ -28,7 +28,7 @@
 // - Not carried over: the frost passes and the platform-view modes, which the
 //   settings this app uses leave off (frost 0, fallback colour off).
 
-package dev.lelonio.square.ui.glass.morph
+package dev.nkosanamahungela.sonify.ui.glass.morph
 
 internal object LiquidGlassShader {
 

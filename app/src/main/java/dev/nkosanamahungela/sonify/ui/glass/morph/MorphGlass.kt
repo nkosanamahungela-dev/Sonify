@@ -7,7 +7,7 @@
 // liquid_glass_renderer, Copyright 2025 Tim Lehmann for whynotmake.it.
 // See LICENSE-liquid-glass.txt beside this file.
 
-package dev.lelonio.square.ui.glass.morph
+package dev.nkosanamahungela.sonify.ui.glass.morph
 
 import android.os.Build
 import androidx.compose.runtime.Composable
@@ -35,7 +35,7 @@ import androidx.compose.ui.graphics.rememberGraphicsLayer
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.IntSize
-import dev.lelonio.square.ui.glass.backdrop.Backdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
 import kotlin.math.cos
 import kotlin.math.sin
 

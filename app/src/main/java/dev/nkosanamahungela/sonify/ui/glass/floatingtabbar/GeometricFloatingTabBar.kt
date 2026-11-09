@@ -1,6 +1,6 @@
 @file:OptIn(androidx.compose.animation.ExperimentalSharedTransitionApi::class)
 
-package dev.lelonio.square.ui.glass.floatingtabbar
+package dev.nkosanamahungela.sonify.ui.glass.floatingtabbar
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.SharedTransitionScope
@@ -17,9 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
-import dev.lelonio.square.ui.glass.LocalLiquidBottomTabsSurfaceBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.rememberLayerBackdrop
-import dev.lelonio.square.ui.glass.backdrop.backdrops.layerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.LocalLiquidBottomTabsSurfaceBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.rememberLayerBackdrop
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.backdrops.layerBackdrop
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip

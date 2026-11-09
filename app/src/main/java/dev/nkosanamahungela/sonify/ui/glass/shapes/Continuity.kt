@@ -4,17 +4,17 @@
  * capsule/src/main/java/com/kyant/capsule/Continuity.kt
  *
  * Vendored so the shape ships as source with this app. Package renamed
- * accordingly (com.kyant.capsule -> dev.lelonio.square.ui.glass.shapes).
+ * accordingly (com.kyant.capsule -> dev.nkosanamahungela.sonify.ui.glass.shapes).
  */
-package dev.lelonio.square.ui.glass.shapes
+package dev.nkosanamahungela.sonify.ui.glass.shapes
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline
-import dev.lelonio.square.ui.glass.shapes.continuities.G2Continuity
-import dev.lelonio.square.ui.glass.shapes.path.PathSegments
-import dev.lelonio.square.ui.glass.shapes.path.toPath
+import dev.nkosanamahungela.sonify.ui.glass.shapes.continuities.G2Continuity
+import dev.nkosanamahungela.sonify.ui.glass.shapes.path.PathSegments
+import dev.nkosanamahungela.sonify.ui.glass.shapes.path.toPath
 
 @Immutable
 interface Continuity {

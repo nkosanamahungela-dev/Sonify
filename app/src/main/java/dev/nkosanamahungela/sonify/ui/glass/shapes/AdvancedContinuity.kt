@@ -4,19 +4,19 @@
  * capsule/src/main/java/com/kyant/capsule/AdvancedContinuity.kt
  *
  * Vendored so the shape ships as source with this app. Package renamed
- * accordingly (com.kyant.capsule -> dev.lelonio.square.ui.glass.shapes).
+ * accordingly (com.kyant.capsule -> dev.nkosanamahungela.sonify.ui.glass.shapes).
  */
-package dev.lelonio.square.ui.glass.shapes
+package dev.nkosanamahungela.sonify.ui.glass.shapes
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline
-import dev.lelonio.square.ui.glass.shapes.core.Point
-import dev.lelonio.square.ui.glass.shapes.path.PathSegments
-import dev.lelonio.square.ui.glass.shapes.path.buildCirclePathSegments
-import dev.lelonio.square.ui.glass.shapes.path.toPath
+import dev.nkosanamahungela.sonify.ui.glass.shapes.core.Point
+import dev.nkosanamahungela.sonify.ui.glass.shapes.path.PathSegments
+import dev.nkosanamahungela.sonify.ui.glass.shapes.path.buildCirclePathSegments
+import dev.nkosanamahungela.sonify.ui.glass.shapes.path.toPath
 
 @Immutable
 abstract class AdvancedContinuity : Continuity {

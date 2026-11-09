@@ -1,4 +1,4 @@
-package dev.lelonio.square.ui.glass.floatingtabbar
+package dev.nkosanamahungela.sonify.ui.glass.floatingtabbar
 
 import kotlin.math.roundToInt
 

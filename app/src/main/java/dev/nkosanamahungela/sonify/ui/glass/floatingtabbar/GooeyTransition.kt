@@ -9,14 +9,14 @@
  * instead of a flat crossfade. Built from primitives already vendored in
  * this app (see imports) rather than a new custom shader.
  */
-package dev.lelonio.square.ui.glass.floatingtabbar
+package dev.nkosanamahungela.sonify.ui.glass.floatingtabbar
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.RenderEffect
 import androidx.compose.ui.graphics.asComposeRenderEffect
 import androidx.compose.ui.graphics.graphicsLayer
-import dev.lelonio.square.ui.glass.backdrop.isRenderEffectSupported
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.isRenderEffectSupported
 
 // Alpha (0..255 scale, matching this app's other ColorMatrix usage in
 // backdrop/effects/ColorFilter.kt) snaps from 0 to 1 across a narrow band

@@ -8,7 +8,7 @@
  * variants were dropped — this app only uses the LTR-aware
  * ContinuousRoundedRectangle.
  */
-package dev.lelonio.square.ui.glass.shapes
+package dev.nkosanamahungela.sonify.ui.glass.shapes
 
 import androidx.annotation.FloatRange
 import androidx.annotation.IntRange

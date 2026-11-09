@@ -2,16 +2,16 @@
 // backdrop effect chain, for every surface that is drawn over a live page.
 // MIT; see LICENSE-liquid-glass.txt beside this file.
 
-package dev.lelonio.square.ui.glass.morph
+package dev.nkosanamahungela.sonify.ui.glass.morph
 
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.ui.util.fastCoerceAtMost
-import dev.lelonio.square.ui.glass.backdrop.BackdropEffectScope
-import dev.lelonio.square.ui.glass.backdrop.effects.effect
-import dev.lelonio.square.ui.glass.backdrop.internal.RuntimeShaderEffect
-import dev.lelonio.square.ui.glass.backdrop.isRuntimeShaderSupported
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.BackdropEffectScope
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.effects.effect
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.internal.RuntimeShaderEffect
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.isRuntimeShaderSupported
 import androidx.compose.ui.graphics.asComposeRenderEffect
-import dev.lelonio.square.ui.glass.backdrop.asAndroidRuntimeShader
+import dev.nkosanamahungela.sonify.ui.glass.backdrop.asAndroidRuntimeShader
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -274,7 +274,7 @@ private fun BackdropEffectScope.frostRows(
     } else {
         android.graphics.RenderEffect.createBlurEffect(radius, radius, weighted, android.graphics.Shader.TileMode.MIRROR)
     }
-    fun rows(shader: dev.lelonio.square.ui.glass.backdrop.RuntimeShader, inner: android.graphics.RenderEffect?): android.graphics.RenderEffect {
+    fun rows(shader: dev.nkosanamahungela.sonify.ui.glass.backdrop.RuntimeShader, inner: android.graphics.RenderEffect?): android.graphics.RenderEffect {
         val e = android.graphics.RenderEffect.createRuntimeShaderEffect(shader.asAndroidRuntimeShader(), "content")
         return if (inner == null) e else android.graphics.RenderEffect.createChainEffect(e, inner)
     }

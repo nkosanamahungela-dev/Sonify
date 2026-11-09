@@ -11,7 +11,7 @@
 // order of every step are upstream's; only the language changed. Where a
 // Flutter curve is named, its exact cubic is reproduced below.
 
-package dev.lelonio.square.ui.glass.morph
+package dev.nkosanamahungela.sonify.ui.glass.morph
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring
