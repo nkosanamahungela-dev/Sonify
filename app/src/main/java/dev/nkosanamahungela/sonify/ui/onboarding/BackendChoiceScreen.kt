@@ -36,7 +36,7 @@ import com.adamglin.phosphoricons.regular.CaretRight
 import dev.nkosanamahungela.sonify.R
 import dev.nkosanamahungela.sonify.backend.BackendId
 import dev.nkosanamahungela.sonify.ui.components.AppGlyph
-import dev.nkosanamahungela.sonify.ui.components.SquareWordmark
+import dev.nkosanamahungela.sonify.ui.components.SonifyWordmark
 import dev.nkosanamahungela.sonify.ui.glass.pressable
 import dev.nkosanamahungela.sonify.ui.theme.Ink
 import dev.nkosanamahungela.sonify.ui.theme.InkDim
@@ -76,7 +76,7 @@ fun BackendChoiceScreen(onChoose: (BackendId) -> Unit) {
                     Spacer(Modifier.height(8.dp))
                     AppGlyph(56.dp)
                     Spacer(Modifier.height(20.dp))
-                    SquareWordmark(height = 24.dp)
+                    SonifyWordmark(height = 24.dp)
                     StepHeader(stringResource(R.string.backend_choice_title))
                     ProseText(stringResource(R.string.backend_choice_subtitle))
                 }
