@@ -46,7 +46,7 @@ android {
     ndkVersion = ndkVersionForCargo
 
     defaultConfig {
-        applicationId = "dev.lelonio.square"
+        applicationId = "dev.nkosanamahungela.sonify"
         // cpal's Android host is AAudio, which the ndk crate gates at API 26.
         minSdk = 26
         targetSdk = 35
