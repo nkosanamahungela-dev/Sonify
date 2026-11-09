@@ -1,10 +1,10 @@
-package dev.lelonio.square.backend
+package dev.nkosanamahungela.sonify.backend
 
 import androidx.media3.common.Player
-import dev.lelonio.square.data.CatalogPlaylist
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.data.SearchItem
-import dev.lelonio.square.data.SearchResults
+import dev.nkosanamahungela.sonify.data.CatalogPlaylist
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.data.SearchItem
+import dev.nkosanamahungela.sonify.data.SearchResults
 import kotlinx.coroutines.flow.StateFlow
 
 /** Which backend supplies catalogue and playback. */
@@ -177,7 +177,7 @@ interface MusicBackend {
      * backend looks lyrics up by identity — the YouTube one matches on title,
      * artist and length against an outside database.
      */
-    suspend fun lyrics(uri: String, title: String, artist: String, durationMs: Long): dev.lelonio.square.data.Lyrics? = null
+    suspend fun lyrics(uri: String, title: String, artist: String, durationMs: Long): dev.nkosanamahungela.sonify.data.Lyrics? = null
 
     /**
      * Whether the account can be asked to make and change playlists.

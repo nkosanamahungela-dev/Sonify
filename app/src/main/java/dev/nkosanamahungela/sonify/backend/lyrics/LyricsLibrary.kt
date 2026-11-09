@@ -1,8 +1,8 @@
-package dev.lelonio.square.backend.lyrics
+package dev.nkosanamahungela.sonify.backend.lyrics
 
 import android.content.Context
-import dev.lelonio.square.data.Catalog
-import dev.lelonio.square.data.Lyrics
+import dev.nkosanamahungela.sonify.data.Catalog
+import dev.nkosanamahungela.sonify.data.Lyrics
 import java.io.File
 import java.security.MessageDigest
 import kotlinx.coroutines.Dispatchers
@@ -277,7 +277,7 @@ object LyricsLibrary {
                 // left as it was, it would be the one shown on the next play.
                 if (keptForGood(best)) withContext(Dispatchers.IO) {
                     runCatching {
-                        val download = dev.lelonio.square.download.DownloadExtras
+                        val download = dev.nkosanamahungela.sonify.download.DownloadExtras
                         if (download.lyrics(query.uri) != null) {
                             download.rememberLyrics(query.uri, json.encodeToString(Lyrics.serializer(), best))
                         }
@@ -307,7 +307,7 @@ object LyricsLibrary {
         cached(uri)?.takeIf { lines(it.lyrics) == text }?.let { keep(uri, named, it.chosen, query.title) }
         withContext(Dispatchers.IO) {
             runCatching {
-                val download = dev.lelonio.square.download.DownloadExtras
+                val download = dev.nkosanamahungela.sonify.download.DownloadExtras
                 if (download.lyrics(uri) != null && keptForGood(named)) {
                     download.rememberLyrics(uri, json.encodeToString(Lyrics.serializer(), named))
                 }
@@ -346,7 +346,7 @@ object LyricsLibrary {
         if (!keptForGood(lyrics)) return
         withContext(Dispatchers.IO) {
             runCatching {
-                dev.lelonio.square.download.DownloadExtras.rememberLyrics(uri, json.encodeToString(Lyrics.serializer(), lyrics))
+                dev.nkosanamahungela.sonify.download.DownloadExtras.rememberLyrics(uri, json.encodeToString(Lyrics.serializer(), lyrics))
             }
         }
     }

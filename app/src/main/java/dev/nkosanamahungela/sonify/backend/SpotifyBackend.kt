@@ -1,22 +1,22 @@
-package dev.lelonio.square.backend
+package dev.nkosanamahungela.sonify.backend
 
 import okhttp3.RequestBody.Companion.toRequestBody
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
-import dev.lelonio.square.SquareApplication
-import dev.lelonio.square.data.Catalog
-import dev.lelonio.square.data.CatalogPlaylist
-import dev.lelonio.square.data.CatalogTrack
-import dev.lelonio.square.data.PlaylistDetailsDto
-import dev.lelonio.square.data.SearchResults
-import dev.lelonio.square.data.toCatalogTrack
-import dev.lelonio.square.data.toResults
-import dev.lelonio.square.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.SonifyApplication
+import dev.nkosanamahungela.sonify.data.Catalog
+import dev.nkosanamahungela.sonify.data.CatalogPlaylist
+import dev.nkosanamahungela.sonify.data.CatalogTrack
+import dev.nkosanamahungela.sonify.data.PlaylistDetailsDto
+import dev.nkosanamahungela.sonify.data.SearchResults
+import dev.nkosanamahungela.sonify.data.toCatalogTrack
+import dev.nkosanamahungela.sonify.data.toResults
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import dev.lelonio.square.playback.AudioOutput
-import dev.lelonio.square.playback.LibrespotPlayer
-import dev.lelonio.square.playback.PlayQueue
+import dev.nkosanamahungela.sonify.playback.AudioOutput
+import dev.nkosanamahungela.sonify.playback.LibrespotPlayer
+import dev.nkosanamahungela.sonify.playback.PlayQueue
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,7 +31,7 @@ import kotlinx.coroutines.flow.asStateFlow
  * bitrate and a restart path for each, none of which a backend should own.
  */
 @UnstableApi
-class SpotifyBackend(private val container: SquareApplication) : MusicBackend {
+class SpotifyBackend(private val container: SonifyApplication) : MusicBackend {
 
     override val id = BackendId.SPOTIFY
 
@@ -81,7 +81,7 @@ class SpotifyBackend(private val container: SquareApplication) : MusicBackend {
      * What it does not offer is any promise of being there tomorrow: the query
      * is addressed by a hash Spotify retires whenever it rebuilds its web
      * client. So the registered application stays as the fallback, and a search
-     * only fails when both have nothing; see [dev.lelonio.square.data.Gateway].
+     * only fails when both have nothing; see [dev.nkosanamahungela.sonify.data.Gateway].
      */
     override suspend fun search(
         query: String,
@@ -90,7 +90,7 @@ class SpotifyBackend(private val container: SquareApplication) : MusicBackend {
     ): SearchResults {
         val term = query.trim()
         container.gateway.search(term, offset)
-            ?.let { dev.lelonio.square.data.GatewaySearch.parse(it, labels) }
+            ?.let { dev.nkosanamahungela.sonify.data.GatewaySearch.parse(it, labels) }
             ?.let {
                 searchNeedsSetup = false
                 return it
@@ -122,7 +122,7 @@ class SpotifyBackend(private val container: SquareApplication) : MusicBackend {
         if (uri.isEmpty()) return null
         return CatalogPlaylist(
             uri = uri,
-            name = container.getString(dev.lelonio.square.R.string.liked_songs),
+            name = container.getString(dev.nkosanamahungela.sonify.R.string.liked_songs),
             artworkUrl = LIKED_SONGS_COVER,
         )
     }
@@ -133,7 +133,7 @@ class SpotifyBackend(private val container: SquareApplication) : MusicBackend {
             listOfNotNull(liked) +
                 rootlist().filterNot {
                     it.uri == liked?.uri ||
-                        (it.uri == Catalog.DJ_URI && !dev.lelonio.square.backend.spotify.SpotifyDj.enabled) ||
+                        (it.uri == Catalog.DJ_URI && !dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.enabled) ||
                         it.uri.startsWith("spotify:station:")
                 }
         }
@@ -172,7 +172,7 @@ class SpotifyBackend(private val container: SquareApplication) : MusicBackend {
                 apiTracks
             } else {
                 val webTracks = runCatching {
-                    dev.lelonio.square.data.SpotifyWebArtist.fetch(id, container.sharedHttpClient, container.resources)?.tracks
+                    dev.nkosanamahungela.sonify.data.SpotifyWebArtist.fetch(id, container.sharedHttpClient, container.resources)?.tracks
                 }.getOrNull()?.takeIf { it.isNotEmpty() }
 
                 webTracks ?: Catalog.tracks(Catalog.contextTrackUris(uri).take(10))
@@ -198,7 +198,7 @@ class SpotifyBackend(private val container: SquareApplication) : MusicBackend {
         uri.endsWith(":collection") ->
             container.gateway.readAll { offset -> container.gateway.savedTracks(offset) } ?: run {
                 check(container.webApi.isReady) {
-                    container.getString(dev.lelonio.square.R.string.liked_songs_failed)
+                    container.getString(dev.nkosanamahungela.sonify.R.string.liked_songs_failed)
                 }
                 savedTracks()
             }
@@ -252,12 +252,12 @@ class SpotifyBackend(private val container: SquareApplication) : MusicBackend {
         title: String,
         artist: String,
         durationMs: Long,
-    ) = dev.lelonio.square.backend.lyrics.SpotifyLyrics.lyrics(
+    ) = dev.nkosanamahungela.sonify.backend.lyrics.SpotifyLyrics.lyrics(
         uri = uri,
         title = title,
         artist = artist,
         durationMs = durationMs,
-        allowNetwork = !dev.lelonio.square.playback.OfflineMode.active.value,
+        allowNetwork = !dev.nkosanamahungela.sonify.playback.OfflineMode.active.value,
     )
 
     /**
@@ -359,7 +359,7 @@ class SpotifyBackend(private val container: SquareApplication) : MusicBackend {
             audioOutput::fadeOutThen,
             audioOutput::fadeIn,
             dissolves = {
-                (host.context.applicationContext as? dev.lelonio.square.SquareApplication)
+                (host.context.applicationContext as? dev.nkosanamahungela.sonify.SonifyApplication)
                     ?.preferences?.skipFadeMs()?.let { it > 0 } ?: false
             },
             audioOutput::setPlaybackActive,

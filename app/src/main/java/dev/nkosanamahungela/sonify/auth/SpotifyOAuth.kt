@@ -1,4 +1,4 @@
-package dev.lelonio.square.auth
+package dev.nkosanamahungela.sonify.auth
 
 import android.content.Context
 import android.content.Intent
@@ -6,7 +6,7 @@ import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import dev.lelonio.square.R
+import dev.nkosanamahungela.sonify.R
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request

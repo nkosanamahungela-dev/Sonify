@@ -1,4 +1,4 @@
-package dev.lelonio.square
+package dev.nkosanamahungela.sonify
 
 import android.util.Log
 import androidx.profileinstaller.ProfileVerifier

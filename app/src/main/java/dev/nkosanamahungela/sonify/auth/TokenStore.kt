@@ -1,4 +1,4 @@
-package dev.lelonio.square.auth
+package dev.nkosanamahungela.sonify.auth
 
 import android.content.Context
 import android.content.SharedPreferences

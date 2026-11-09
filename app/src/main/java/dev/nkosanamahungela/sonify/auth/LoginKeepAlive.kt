@@ -1,4 +1,4 @@
-package dev.lelonio.square.auth
+package dev.nkosanamahungela.sonify.auth
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -9,7 +9,7 @@ import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.IBinder
-import dev.lelonio.square.R
+import dev.nkosanamahungela.sonify.R
 
 /**
  * Keeps the app awake while the listener signs in to Spotify in the browser.

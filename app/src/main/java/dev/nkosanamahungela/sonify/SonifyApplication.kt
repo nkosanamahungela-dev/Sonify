@@ -1,4 +1,4 @@
-package dev.lelonio.square
+package dev.nkosanamahungela.sonify
 
 import android.app.Application
 import coil.ImageLoader
@@ -6,17 +6,17 @@ import coil.ImageLoaderFactory
 import coil.disk.DiskCache
 import coil.memory.MemoryCache
 import com.metrolist.innertube.YouTube
-import dev.lelonio.square.auth.TokenStore
-import dev.lelonio.square.auth.WebApiAccount
-import dev.lelonio.square.data.ContextCacheStore
-import dev.lelonio.square.data.LanguageStore
-import dev.lelonio.square.data.PlaylistOrderStore
-import dev.lelonio.square.data.PreferencesStore
+import dev.nkosanamahungela.sonify.auth.TokenStore
+import dev.nkosanamahungela.sonify.auth.WebApiAccount
+import dev.nkosanamahungela.sonify.data.ContextCacheStore
+import dev.nkosanamahungela.sonify.data.LanguageStore
+import dev.nkosanamahungela.sonify.data.PlaylistOrderStore
+import dev.nkosanamahungela.sonify.data.PreferencesStore
 import kotlinx.coroutines.launch
-import dev.lelonio.square.data.RecentStore
-import dev.lelonio.square.playback.EffectPresetStore
-import dev.lelonio.square.data.ApiFactory
-import dev.lelonio.square.data.SpotifyApi
+import dev.nkosanamahungela.sonify.data.RecentStore
+import dev.nkosanamahungela.sonify.playback.EffectPresetStore
+import dev.nkosanamahungela.sonify.data.ApiFactory
+import dev.nkosanamahungela.sonify.data.SpotifyApi
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
@@ -28,14 +28,14 @@ import java.util.concurrent.TimeUnit
  * one thing that matters obvious: a single [TokenStore] instance, so token
  * refreshes really are serialised across the whole process.
  */
-class SquareApplication : Application(), ImageLoaderFactory {
+class SonifyApplication : Application(), ImageLoaderFactory {
 
     override fun onCreate() {
         super.onCreate()
         // First, so a crash anywhere below is written down; see Report.
-        dev.lelonio.square.diagnostics.Report.install(this)
+        dev.nkosanamahungela.sonify.diagnostics.Report.install(this)
         // Dev builds only: the glass's switches from adb, e.g.
-        //   adb shell am broadcast -a dev.lelonio.square.GLASS --ez frost false
+        //   adb shell am broadcast -a dev.nkosanamahungela.sonify.GLASS --ez frost false
         if (BuildConfig.GLASS_FLAGS) {
             androidx.core.content.ContextCompat.registerReceiver(
                 this,
@@ -46,20 +46,20 @@ class SquareApplication : Application(), ImageLoaderFactory {
                         // As a GPU that refuses the library's shader leaves it,
                         // until the app is started again.
                         if (intent.hasExtra("upstream") && !intent.getBooleanExtra("upstream", true)) {
-                            dev.lelonio.square.ui.glass.morph.LiquidGlassRenderer.unavailable(
+                            dev.nkosanamahungela.sonify.ui.glass.morph.LiquidGlassRenderer.unavailable(
                                 IllegalStateException("switched off from adb"),
                             )
                         }
                     }
                 },
-                android.content.IntentFilter("dev.lelonio.square.GLASS"),
+                android.content.IntentFilter("dev.nkosanamahungela.sonify.GLASS"),
                 androidx.core.content.ContextCompat.RECEIVER_EXPORTED,
             )
         }
         // Temporary, dev builds only; see WidevineProbe.
         // YouTube's language and country, before anything asks it for a page.
         language.applyToYouTube()
-        dev.lelonio.square.diagnostics.WidevineProbe.register(this)
+        dev.nkosanamahungela.sonify.diagnostics.WidevineProbe.register(this)
         // The vendored InnerTube module logs through Timber, and with nothing
         // planted every one of those lines went nowhere — which is why a
         // YouTube page that came back in an unexpected shape could only be
@@ -76,13 +76,13 @@ class SquareApplication : Application(), ImageLoaderFactory {
         // creation, which is late: the player screen and the media session both
         // exist by then and either can announce a default that would be saved
         // over what the listener had set.
-        dev.lelonio.square.playback.AudioEffects.load(this)
-        dev.lelonio.square.playback.Equalizer.load(this)
+        dev.nkosanamahungela.sonify.playback.AudioEffects.load(this)
+        dev.nkosanamahungela.sonify.playback.Equalizer.load(this)
 
         // Where the extras live, and which tracks are worth keeping them for.
         // Attached here rather than in the service: Catalog reaches for it on
         // any thread and long before anything has started playing.
-        dev.lelonio.square.download.DownloadExtras.attach(downloads.root, sharedHttpClient) {
+        dev.nkosanamahungela.sonify.download.DownloadExtras.attach(downloads.root, sharedHttpClient) {
             downloads.isDownloaded(it)
         }
 
@@ -90,9 +90,9 @@ class SquareApplication : Application(), ImageLoaderFactory {
         // write to it still works and simply asks again every time — which is
         // the difference between a page that opens on the right picture and one
         // that opens on Spotify's and changes it a second later.
-        dev.lelonio.square.data.AppleCatalog.attach(this)
-        dev.lelonio.square.data.LocalFileBindings.attach(this)
-        dev.lelonio.square.backend.lyrics.LyricsLibrary.attach(
+        dev.nkosanamahungela.sonify.data.AppleCatalog.attach(this)
+        dev.nkosanamahungela.sonify.data.LocalFileBindings.attach(this)
+        dev.nkosanamahungela.sonify.backend.lyrics.LyricsLibrary.attach(
             this,
             spicyKey = { preferences.spicyLyricsKey.value },
             preferred = { preferences.preferredLyricsSource.value },
@@ -105,13 +105,13 @@ class SquareApplication : Application(), ImageLoaderFactory {
         val offlineScope = kotlinx.coroutines.CoroutineScope(
             kotlinx.coroutines.SupervisorJob() + kotlinx.coroutines.Dispatchers.Default,
         )
-        dev.lelonio.square.playback.SessionKeeper.attach(offlineScope) {
-            preferences.backend.value == dev.lelonio.square.backend.BackendId.SPOTIFY && spotifySignedIn
+        dev.nkosanamahungela.sonify.playback.SessionKeeper.attach(offlineScope) {
+            preferences.backend.value == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY && spotifySignedIn
         }
-        dev.lelonio.square.playback.NetworkWatch(this, offlineScope).start()
+        dev.nkosanamahungela.sonify.playback.NetworkWatch(this, offlineScope).start()
         offlineScope.launch {
-            dev.lelonio.square.playback.OfflineMode.active.collect { offline ->
-                runCatching { dev.lelonio.square.nativecore.NativeBridge.setOfflineOnly(offline) }
+            dev.nkosanamahungela.sonify.playback.OfflineMode.active.collect { offline ->
+                runCatching { dev.nkosanamahungela.sonify.nativecore.NativeBridge.setOfflineOnly(offline) }
             }
         }
 
@@ -123,7 +123,7 @@ class SquareApplication : Application(), ImageLoaderFactory {
             kotlinx.coroutines.SupervisorJob() + kotlinx.coroutines.Dispatchers.Default,
         ).launch {
             downloadSettings.offlineMode.collect(
-                dev.lelonio.square.playback.OfflineMode::setManual,
+                dev.nkosanamahungela.sonify.playback.OfflineMode::setManual,
             )
         }
 
@@ -133,7 +133,7 @@ class SquareApplication : Application(), ImageLoaderFactory {
             kotlinx.coroutines.SupervisorJob() + kotlinx.coroutines.Dispatchers.Default,
         ).launch {
             preferences.backend.collect {
-                dev.lelonio.square.playback.websdk.WebSdkRecovery.refresh(this@SquareApplication)
+                dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.refresh(this@SonifyApplication)
             }
         }
 
@@ -141,7 +141,7 @@ class SquareApplication : Application(), ImageLoaderFactory {
         kotlinx.coroutines.CoroutineScope(
             kotlinx.coroutines.SupervisorJob() + kotlinx.coroutines.Dispatchers.Default,
         ).launch {
-            preferences.spotifyDj.collect { dev.lelonio.square.backend.spotify.SpotifyDj.enabled = it }
+            preferences.spotifyDj.collect { dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.enabled = it }
         }
 
         // Not a feature: a line in the log saying whether this install has been
@@ -160,18 +160,18 @@ class SquareApplication : Application(), ImageLoaderFactory {
      * a file, and two of these would write over each other. The audio it points
      * at belongs to the engine, which finds it without going through here.
      */
-    val downloads: dev.lelonio.square.data.DownloadStore by lazy {
-        dev.lelonio.square.data.DownloadStore(this)
+    val downloads: dev.nkosanamahungela.sonify.data.DownloadStore by lazy {
+        dev.nkosanamahungela.sonify.data.DownloadStore(this)
     }
 
     /** Download quality, Wi-Fi only, the offline switch. */
-    val downloadSettings: dev.lelonio.square.data.DownloadSettingsStore by lazy {
-        dev.lelonio.square.data.DownloadSettingsStore(this)
+    val downloadSettings: dev.nkosanamahungela.sonify.data.DownloadSettingsStore by lazy {
+        dev.nkosanamahungela.sonify.data.DownloadSettingsStore(this)
     }
 
     /** Works through what [downloads] says is still owed. */
-    val downloadQueue: dev.lelonio.square.download.DownloadQueue by lazy {
-        dev.lelonio.square.download.DownloadQueue(this, downloads, downloadSettings)
+    val downloadQueue: dev.nkosanamahungela.sonify.download.DownloadQueue by lazy {
+        dev.nkosanamahungela.sonify.download.DownloadQueue(this, downloads, downloadSettings)
     }
 
     /**
@@ -185,66 +185,66 @@ class SquareApplication : Application(), ImageLoaderFactory {
      */
     val spotifySignedIn: Boolean
         get() = tokenStore.isLoggedIn ||
-            dev.lelonio.square.auth.EngineCredentials.exist(this)
+            dev.nkosanamahungela.sonify.auth.EngineCredentials.exist(this)
     val recentStore: RecentStore by lazy { RecentStore(this) }
-    val listeningStore by lazy { dev.lelonio.square.data.ListeningStore(this) }
+    val listeningStore by lazy { dev.nkosanamahungela.sonify.data.ListeningStore(this) }
 
     /** Songs found by searching and then played; see [SearchHistoryStore]. */
-    val searchHistory: dev.lelonio.square.data.SearchHistoryStore by lazy {
-        dev.lelonio.square.data.SearchHistoryStore(this)
+    val searchHistory: dev.nkosanamahungela.sonify.data.SearchHistoryStore by lazy {
+        dev.nkosanamahungela.sonify.data.SearchHistoryStore(this)
     }
 
     /** Which playlists were opened most recently, for ordering the home page. */
     val playlistOrder: PlaylistOrderStore by lazy { PlaylistOrderStore(this) }
 
     /** The playlists the home-screen widget offers; see SquareWidget. */
-    val widgetPlaylists: dev.lelonio.square.widget.WidgetPlaylists by lazy {
-        dev.lelonio.square.widget.WidgetPlaylists(this)
+    val widgetPlaylists: dev.nkosanamahungela.sonify.widget.WidgetPlaylists by lazy {
+        dev.nkosanamahungela.sonify.widget.WidgetPlaylists(this)
     }
 
     /** Tracks the listener has liked ("Tus me gusta"). */
-    val likedStore: dev.lelonio.square.data.LikedStore by lazy {
-        dev.lelonio.square.data.LikedStore(this)
+    val likedStore: dev.nkosanamahungela.sonify.data.LikedStore by lazy {
+        dev.nkosanamahungela.sonify.data.LikedStore(this)
     }
 
     /** Playlists the listener keeps at the top of the library; this device's own. */
-    val pinnedPlaylists: dev.lelonio.square.data.PinnedPlaylistStore by lazy {
-        dev.lelonio.square.data.PinnedPlaylistStore(this)
+    val pinnedPlaylists: dev.nkosanamahungela.sonify.data.PinnedPlaylistStore by lazy {
+        dev.nkosanamahungela.sonify.data.PinnedPlaylistStore(this)
     }
     /** How the library was left looking: grid or list, and the sort. */
-    val libraryView: dev.lelonio.square.data.LibraryViewStore by lazy {
-        dev.lelonio.square.data.LibraryViewStore(this)
+    val libraryView: dev.nkosanamahungela.sonify.data.LibraryViewStore by lazy {
+        dev.nkosanamahungela.sonify.data.LibraryViewStore(this)
     }
     val preferences: PreferencesStore by lazy { PreferencesStore(this) }
 
     /** Which file the engine asks Spotify for. */
-    val quality: dev.lelonio.square.data.QualityStore by lazy {
-        dev.lelonio.square.data.QualityStore(this)
+    val quality: dev.nkosanamahungela.sonify.data.QualityStore by lazy {
+        dev.nkosanamahungela.sonify.data.QualityStore(this)
     }
 
     /** The identifiers Spotify's gateway wants; kept fresh from the repository. */
-    val pathfinderKeys: dev.lelonio.square.data.PathfinderKeys by lazy {
-        dev.lelonio.square.data.PathfinderKeys(this)
+    val pathfinderKeys: dev.nkosanamahungela.sonify.data.PathfinderKeys by lazy {
+        dev.nkosanamahungela.sonify.data.PathfinderKeys(this)
     }
 
-    /** Track lists from Spotify's own gateway; see [dev.lelonio.square.data.Gateway]. */
-    val gateway: dev.lelonio.square.data.Gateway by lazy {
-        dev.lelonio.square.data.Gateway(pathfinderKeys)
+    /** Track lists from Spotify's own gateway; see [dev.nkosanamahungela.sonify.data.Gateway]. */
+    val gateway: dev.nkosanamahungela.sonify.data.Gateway by lazy {
+        dev.nkosanamahungela.sonify.data.Gateway(pathfinderKeys)
     }
 
     /** Which stretcher works out speed and pitch. */
-    val effectQuality: dev.lelonio.square.data.EffectQualityStore by lazy {
-        dev.lelonio.square.data.EffectQualityStore(this)
+    val effectQuality: dev.nkosanamahungela.sonify.data.EffectQualityStore by lazy {
+        dev.nkosanamahungela.sonify.data.EffectQualityStore(this)
     }
 
     /** What the glass is made of, and how much of it the phone has to pay for. */
-    val glass: dev.lelonio.square.data.GlassStore by lazy {
-        dev.lelonio.square.data.GlassStore(this)
+    val glass: dev.nkosanamahungela.sonify.data.GlassStore by lazy {
+        dev.nkosanamahungela.sonify.data.GlassStore(this)
     }
 
     /** How long one track dissolves into the next. */
-    val crossfade: dev.lelonio.square.data.CrossfadeStore by lazy {
-        dev.lelonio.square.data.CrossfadeStore(this)
+    val crossfade: dev.nkosanamahungela.sonify.data.CrossfadeStore by lazy {
+        dev.nkosanamahungela.sonify.data.CrossfadeStore(this)
     }
 
     /** What language the app is read in, and what the engine asks Spotify for. */
@@ -258,7 +258,7 @@ class SquareApplication : Application(), ImageLoaderFactory {
      * are metered against a quota nobody else shares — see [WebApiAccount].
      */
     val webApi: WebApiAccount by lazy { WebApiAccount(this) }
-    internal val spotifySdkAccount by lazy { dev.lelonio.square.playback.websdk.WebSdkAccount(this) }
+    internal val spotifySdkAccount by lazy { dev.nkosanamahungela.sonify.playback.websdk.WebSdkAccount(this) }
 
     /**
      * Shared [OkHttpClient] providing a common connection pool, DNS cache, and dispatcher
@@ -310,7 +310,7 @@ class SquareApplication : Application(), ImageLoaderFactory {
         ApiFactory.create(
             tokens = webApi.tokens,
             fallbackTokens = tokenStore,
-            nativeToken = { dev.lelonio.square.nativecore.NativeBridge.accessToken() },
+            nativeToken = { dev.nkosanamahungela.sonify.nativecore.NativeBridge.accessToken() },
             baseClient = sharedHttpClient,
             countryProvider = { userCountry },
             debug = BuildConfig.DEBUG,
@@ -318,16 +318,16 @@ class SquareApplication : Application(), ImageLoaderFactory {
     }
 
     /** Checks the project's own releases; there is no store to do it. */
-    val updater: dev.lelonio.square.update.Updater by lazy {
-        dev.lelonio.square.update.Updater(this)
+    val updater: dev.nkosanamahungela.sonify.update.Updater by lazy {
+        dev.nkosanamahungela.sonify.update.Updater(this)
     }
 
     /** The user's saved speed / pitch / reverb combinations. */
     val effectPresets: EffectPresetStore by lazy { EffectPresetStore(this) }
 
     /** How far into each podcast episode the listener got; see EpisodeProgress. */
-    val episodeProgress: dev.lelonio.square.data.EpisodeProgress by lazy {
-        dev.lelonio.square.data.EpisodeProgress(this)
+    val episodeProgress: dev.nkosanamahungela.sonify.data.EpisodeProgress by lazy {
+        dev.nkosanamahungela.sonify.data.EpisodeProgress(this)
     }
 
     /**
@@ -337,21 +337,21 @@ class SquareApplication : Application(), ImageLoaderFactory {
      * into, and a second one would be a second sink for the same engine.
      */
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-    val spotifyBackend: dev.lelonio.square.backend.SpotifyBackend by lazy {
-        dev.lelonio.square.backend.SpotifyBackend(this)
+    val spotifyBackend: dev.nkosanamahungela.sonify.backend.SpotifyBackend by lazy {
+        dev.nkosanamahungela.sonify.backend.SpotifyBackend(this)
     }
 
     /** The Google session YouTube Music reads a personal library with. */
-    val youtubeAccount: dev.lelonio.square.backend.youtube.YouTubeAccount by lazy {
-        dev.lelonio.square.backend.youtube.YouTubeAccount(this)
+    val youtubeAccount: dev.nkosanamahungela.sonify.backend.youtube.YouTubeAccount by lazy {
+        dev.nkosanamahungela.sonify.backend.youtube.YouTubeAccount(this)
     }
 
-    /** YouTube Music; see [dev.lelonio.square.backend.youtube.YouTubeBackend]. */
+    /** YouTube Music; see [dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend]. */
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-    val youtubeBackend: dev.lelonio.square.backend.youtube.YouTubeBackend by lazy {
+    val youtubeBackend: dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend by lazy {
         // Songs already found for the videos in lists; see SongCounterparts.
-        dev.lelonio.square.backend.youtube.SongCounterparts.init(filesDir)
-        dev.lelonio.square.backend.youtube.YouTubeBackend(youtubeAccount)
+        dev.nkosanamahungela.sonify.backend.youtube.SongCounterparts.init(filesDir)
+        dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend(youtubeAccount)
     }
 
     /**
@@ -361,9 +361,9 @@ class SquareApplication : Application(), ImageLoaderFactory {
      * app is running, and a cached backend would keep answering as the old one.
      */
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-    val activeBackend: dev.lelonio.square.backend.MusicBackend
+    val activeBackend: dev.nkosanamahungela.sonify.backend.MusicBackend
         get() = when (preferences.backend.value) {
-            dev.lelonio.square.backend.BackendId.SPOTIFY -> spotifyBackend
-            dev.lelonio.square.backend.BackendId.YOUTUBE_MUSIC -> youtubeBackend
+            dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY -> spotifyBackend
+            dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC -> youtubeBackend
         }
 }
