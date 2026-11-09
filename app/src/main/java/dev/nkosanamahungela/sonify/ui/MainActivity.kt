@@ -251,13 +251,13 @@ class MainActivity : ComponentActivity() {
     private fun takeLink(intent: android.content.Intent) {
         // A playlist tapped on the home-screen widget, with what is needed to
         // show it before it has loaded.
-        if (intent.action == dev.nkosanamahungela.sonify.widget.SquareWidget.ACTION_OPEN_PLAYLIST) {
-            val uri = intent.getStringExtra(dev.nkosanamahungela.sonify.widget.SquareWidget.EXTRA_URI) ?: return
+        if (intent.action == dev.nkosanamahungela.sonify.widget.SonifyWidget.ACTION_OPEN_PLAYLIST) {
+            val uri = intent.getStringExtra(dev.nkosanamahungela.sonify.widget.SonifyWidget.EXTRA_URI) ?: return
             link = LinkRequest(
                 uri = uri,
                 n = (link?.n ?: 0) + 1,
-                name = intent.getStringExtra(dev.nkosanamahungela.sonify.widget.SquareWidget.EXTRA_NAME).orEmpty(),
-                artworkUrl = intent.getStringExtra(dev.nkosanamahungela.sonify.widget.SquareWidget.EXTRA_ARTWORK),
+                name = intent.getStringExtra(dev.nkosanamahungela.sonify.widget.SonifyWidget.EXTRA_NAME).orEmpty(),
+                artworkUrl = intent.getStringExtra(dev.nkosanamahungela.sonify.widget.SonifyWidget.EXTRA_ARTWORK),
                 fromWidget = true,
             )
             return
