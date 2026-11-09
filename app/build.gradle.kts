@@ -41,7 +41,7 @@ val keystoreProperties = Properties().apply {
 }
 
 android {
-    namespace = "dev.lelonio.square"
+    namespace = "dev.nkosanamahungela.sonify"
     compileSdk = 37
     ndkVersion = ndkVersionForCargo
 

@@ -6,28 +6,28 @@
 # adding a call across the boundary.
 
 # native fn declarations resolved against this class
--keepclasseswithmembernames class dev.lelonio.square.nativecore.NativeBridge {
+-keepclasseswithmembernames class dev.nkosanamahungela.sonify.nativecore.NativeBridge {
     native <methods>;
 }
 
 # called from the engine's event pump (native/src/engine.rs)
--keep class dev.lelonio.square.nativecore.NativeEvents { *; }
--keep class * implements dev.lelonio.square.nativecore.NativeEvents { *; }
+-keep class dev.nkosanamahungela.sonify.nativecore.NativeEvents { *; }
+-keep class * implements dev.nkosanamahungela.sonify.nativecore.NativeEvents { *; }
 
 # start / stop / write, called from the audio sink (native/src/sink.rs)
--keep class dev.lelonio.square.playback.AudioOutput { *; }
+-keep class dev.nkosanamahungela.sonify.playback.AudioOutput { *; }
 
 # kotlinx.serialization generates serializers reflectively from these.
 -keepattributes *Annotation*, InnerClasses
 -dontnote kotlinx.serialization.**
--keepclassmembers class dev.lelonio.square.data.** {
+-keepclassmembers class dev.nkosanamahungela.sonify.data.** {
     *** Companion;
     kotlinx.serialization.KSerializer serializer(...);
 }
 
 # Retrofit keeps generic signatures on its interface methods.
 -keepattributes Signature, RuntimeVisibleAnnotations
--keep,allowobfuscation interface dev.lelonio.square.data.SpotifyApi
+-keep,allowobfuscation interface dev.nkosanamahungela.sonify.data.SpotifyApi
 
 # NewPipeExtractor carries Rhino, which is a JavaScript engine written for the
 # JVM: it references java.beans, javax.script and jdk.dynalink, none of which
@@ -53,8 +53,8 @@
 
 # Resolved by name from app/src/main/cpp/stretch.cpp, whose JNI symbols embed
 # the fully qualified class name.
--keepclasseswithmembernames class dev.lelonio.square.playback.Stretcher { native <methods>; }
--keep class dev.lelonio.square.playback.Stretcher { *; }
+-keepclasseswithmembernames class dev.nkosanamahungela.sonify.playback.Stretcher { native <methods>; }
+-keep class dev.nkosanamahungela.sonify.playback.Stretcher { *; }
 
 # Preserve readable line numbers and stack traces in release builds
 -renamesourcefileattribute SourceFile
