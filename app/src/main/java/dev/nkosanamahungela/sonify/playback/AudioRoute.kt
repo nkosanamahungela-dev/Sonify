@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import android.content.Context
 import android.media.AudioAttributes

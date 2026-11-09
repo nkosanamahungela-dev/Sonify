@@ -1,14 +1,14 @@
-package dev.lelonio.square.download
+package dev.nkosanamahungela.sonify.download
 
-import dev.lelonio.square.backend.youtube.YouTubeBackend
+import dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
-import dev.lelonio.square.data.DownloadSettingsStore
-import dev.lelonio.square.data.DownloadStore
-import dev.lelonio.square.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.data.DownloadSettingsStore
+import dev.nkosanamahungela.sonify.data.DownloadStore
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -583,7 +583,7 @@ class DownloadQueue(
             // downloaded, and files a note when there are none. See
             // SpotifyLyrics.
             if (!DownloadExtras.asked("lyrics", trackUri)) {
-                dev.lelonio.square.backend.lyrics.SpotifyLyrics.lyrics(
+                dev.nkosanamahungela.sonify.backend.lyrics.SpotifyLyrics.lyrics(
                     uri = trackUri,
                     title = track?.name.orEmpty(),
                     artist = track?.artist.orEmpty(),
@@ -595,7 +595,7 @@ class DownloadQueue(
             // answer names a url that is nowhere and the player has no other
             // way to learn there is a clip at all.
             if (!DownloadExtras.asked("canvas", trackUri) || needsClip(trackUri)) {
-                val clip = dev.lelonio.square.data.Catalog.canvas(trackUri)
+                val clip = dev.nkosanamahungela.sonify.data.Catalog.canvas(trackUri)
                 if (clip == null) {
                     DownloadExtras.note("canvas", trackUri)
                 } else {
@@ -635,15 +635,15 @@ class DownloadQueue(
      * keep it, and it is the one extra whose absence costs a still picture
      * instead of a blank one.
      */
-    private suspend fun keepArt(trackUri: String, track: dev.lelonio.square.data.CatalogTrack?) {
+    private suspend fun keepArt(trackUri: String, track: dev.nkosanamahungela.sonify.data.CatalogTrack?) {
         val artist = track?.artist.orEmpty()
         if (artist.isBlank()) return
 
         val named = track?.album.orEmpty()
         val album = named.takeIf { it.isNotBlank() }
-            ?.let { dev.lelonio.square.data.AppleCatalog.album(it, artist) }
+            ?.let { dev.nkosanamahungela.sonify.data.AppleCatalog.album(it, artist) }
         val cover = album?.coverUrl
-            ?: dev.lelonio.square.data.AppleCatalog.song(track?.name.orEmpty(), artist, named)
+            ?: dev.nkosanamahungela.sonify.data.AppleCatalog.song(track?.name.orEmpty(), artist, named)
 
         listOfNotNull(album?.heroUrl, cover).forEach {
             DownloadExtras.keep(it, "art")
@@ -731,7 +731,7 @@ class DownloadQueue(
 
     /** Null when downloading may go ahead, otherwise what it is waiting for. */
     private fun allowed(): Waiting? {
-        if (dev.lelonio.square.playback.OfflineMode.active.value) return Waiting.NETWORK
+        if (dev.nkosanamahungela.sonify.playback.OfflineMode.active.value) return Waiting.NETWORK
         return when (_link.value) {
             Link.NONE -> Waiting.NETWORK
             Link.METERED -> if (settings.wifiOnly.value) Waiting.WIFI else null
@@ -742,7 +742,7 @@ class DownloadQueue(
     private suspend fun awaitAllowed() {
         // Suspend without polling: combine state flows and resume the
         // moment conditions permit downloading.
-        combine(_link, settings.wifiOnly, dev.lelonio.square.playback.OfflineMode.active) { link, wifiOnly, offline ->
+        combine(_link, settings.wifiOnly, dev.nkosanamahungela.sonify.playback.OfflineMode.active) { link, wifiOnly, offline ->
             if (offline) return@combine false
             when (link) {
                 Link.NONE     -> false

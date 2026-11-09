@@ -1,4 +1,4 @@
-package dev.lelonio.square.diagnostics
+package dev.nkosanamahungela.sonify.diagnostics
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -7,8 +7,8 @@ import android.content.IntentFilter
 import android.media.MediaDrm
 import android.util.Base64
 import androidx.core.content.ContextCompat
-import dev.lelonio.square.BuildConfig
-import dev.lelonio.square.nativecore.NativeBridge
+import dev.nkosanamahungela.sonify.BuildConfig
+import dev.nkosanamahungela.sonify.nativecore.NativeBridge
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -24,12 +24,12 @@ import java.math.BigInteger
  * Started from adb, runs on the phone so the account's token never leaves it,
  * and logs only what each step answered:
  *
- *     adb shell am broadcast -a dev.lelonio.square.PROBE_WIDEVINE \
- *         --es track 1mblCC44D31Yu2o3DhrvbJ -p dev.lelonio.square
+ *     adb shell am broadcast -a dev.nkosanamahungela.sonify.PROBE_WIDEVINE \
+ *         --es track 1mblCC44D31Yu2o3DhrvbJ -p dev.nkosanamahungela.sonify
  */
 object WidevineProbe {
 
-    private const val ACTION = "dev.lelonio.square.PROBE_WIDEVINE"
+    private const val ACTION = "dev.nkosanamahungela.sonify.PROBE_WIDEVINE"
     private const val TAG = "SquareProbe"
     private const val SPCLIENT = "https://spclient.wg.spotify.com"
     private val WIDEVINE = java.util.UUID.fromString("edef8ba9-79d6-4ace-a3c8-27dcd51d21ed")
@@ -57,7 +57,7 @@ object WidevineProbe {
                         val on = mode == "on"
                         context.getSharedPreferences("square_keys", Context.MODE_PRIVATE)
                             .edit().putBoolean("account_refused", on).apply()
-                        dev.lelonio.square.playback.websdk.WebSdkRecovery.refresh(context)
+                        dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.refresh(context)
                         log("web playback forced ${if (on) "on" else "off"}")
                         if (on) {
                             forceWeb()
@@ -74,7 +74,7 @@ object WidevineProbe {
     }
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-    private fun forceWeb() = dev.lelonio.square.backend.spotify.SpotifyWebPlayback.reportAccountRefused()
+    private fun forceWeb() = dev.nkosanamahungela.sonify.backend.spotify.SpotifyWebPlayback.reportAccountRefused()
 
     private fun log(message: String) { android.util.Log.i(TAG, message) }
 

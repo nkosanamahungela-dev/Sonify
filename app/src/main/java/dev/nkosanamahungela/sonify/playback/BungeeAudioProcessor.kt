@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import androidx.annotation.OptIn
 import androidx.media3.common.C

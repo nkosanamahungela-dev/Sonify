@@ -1,4 +1,4 @@
-package dev.lelonio.square.data.util
+package dev.nkosanamahungela.sonify.data.util
 
 sealed class SpotifyLink(val rawId: String) {
     abstract val uri: String

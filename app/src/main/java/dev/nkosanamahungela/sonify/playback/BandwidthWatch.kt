@@ -1,7 +1,7 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import android.util.Log
-import dev.lelonio.square.data.Quality
+import dev.nkosanamahungela.sonify.data.Quality
 
 /**
  * What the connection can actually carry, judged by listening rather than asking.

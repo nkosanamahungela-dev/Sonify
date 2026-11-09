@@ -1,4 +1,4 @@
-package dev.lelonio.square.diagnostics
+package dev.nkosanamahungela.sonify.diagnostics
 
 import android.app.ActivityManager
 import android.app.ApplicationExitInfo
@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.content.FileProvider
-import dev.lelonio.square.BuildConfig
+import dev.nkosanamahungela.sonify.BuildConfig
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date

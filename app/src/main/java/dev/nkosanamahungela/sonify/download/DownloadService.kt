@@ -1,4 +1,4 @@
-package dev.lelonio.square.download
+package dev.nkosanamahungela.sonify.download
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -11,9 +11,9 @@ import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
-import dev.lelonio.square.R
-import dev.lelonio.square.SquareApplication
-import dev.lelonio.square.playback.PlaybackService
+import dev.nkosanamahungela.sonify.R
+import dev.nkosanamahungela.sonify.SonifyApplication
+import dev.nkosanamahungela.sonify.playback.PlaybackService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -38,7 +38,7 @@ import kotlinx.coroutines.launch
  */
 class DownloadService : android.app.Service() {
 
-    private val container get() = application as SquareApplication
+    private val container get() = application as SonifyApplication
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private var watcher: Job? = null
     private var foreground = false
@@ -212,7 +212,7 @@ class DownloadService : android.app.Service() {
     companion object {
         private const val CHANNEL_ID = "downloads"
         private const val NOTIFICATION_ID = 42
-        private const val ACTION_STOP = "dev.lelonio.square.action.STOP_DOWNLOADS"
+        private const val ACTION_STOP = "dev.nkosanamahungela.sonify.action.STOP_DOWNLOADS"
         private const val TAG = "SquareDownloads"
 
         /**

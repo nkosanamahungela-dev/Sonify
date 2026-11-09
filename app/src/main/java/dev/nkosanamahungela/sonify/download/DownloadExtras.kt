@@ -1,4 +1,4 @@
-package dev.lelonio.square.download
+package dev.nkosanamahungela.sonify.download
 
 import kotlinx.coroutines.Dispatchers
 import org.json.JSONObject
@@ -19,7 +19,7 @@ import android.graphics.BitmapFactory
  * ### Where it plugs in
  *
  * Inside the one funnel each of these already goes through — the lyrics chain
- * in [dev.lelonio.square.backend.lyrics.SpotifyLyrics], the download queue for
+ * in [dev.nkosanamahungela.sonify.backend.lyrics.SpotifyLyrics], the download queue for
  * the pictures and the Canvas. A successful answer is written down on the way
  * past; offline the same call reads it back, so no screen grew an offline
  * branch of its own.
@@ -101,13 +101,13 @@ object DownloadExtras {
      * Null when either half is missing — a Canvas that was noted but never
      * fetched is not one that can be shown.
      */
-    fun localCanvas(trackUri: String): dev.lelonio.square.data.CanvasClip? {
+    fun localCanvas(trackUri: String): dev.nkosanamahungela.sonify.data.CanvasClip? {
         val raw = canvas(trackUri) ?: return null
         val answer = runCatching { JSONObject(raw) }.getOrNull() ?: return null
         val url = answer.optString("url").takeIf { it.isNotBlank() } ?: return null
         val video = answer.optBoolean("isVideo", true)
         val file = fileOf(url, if (video) "video" else "art") ?: return null
-        return dev.lelonio.square.data.CanvasClip(
+        return dev.nkosanamahungela.sonify.data.CanvasClip(
             url = android.net.Uri.fromFile(file).toString(),
             isVideo = video,
         )

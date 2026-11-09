@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import android.media.AudioAttributes
 import android.media.AudioFormat
@@ -294,7 +294,7 @@ class AudioOutput {
         playing = false
         if (voice) {
             voice = false
-            dev.lelonio.square.backend.spotify.SpotifyDj.setSpeaking(false)
+            dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.setSpeaking(false)
         }
         val output = synchronized(this) {
             track?.takeIf { it.state == AudioTrack.STATE_INITIALIZED }
@@ -605,7 +605,7 @@ class AudioOutput {
         if (discarding) return
         val output = synchronized(this) { ensureTrack(sampleRate, channels) } ?: return
         if (!voice) enterVoice(output)
-        dev.lelonio.square.backend.spotify.SpotifyDj.hear(data, sizeInBytes)
+        dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.hear(data, sizeInBytes)
         // The one thing the voice does go through: the curve is about the
         // headphones, not the music, and a voice on them needs it as much.
         equalizer.apply(data, sizeInBytes, channels, sampleRate)
@@ -632,7 +632,7 @@ class AudioOutput {
                 }
             }
         }
-        dev.lelonio.square.backend.spotify.SpotifyDj.setSpeaking(true)
+        dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.setSpeaking(true)
     }
 
     private fun leaveVoice() {
@@ -641,7 +641,7 @@ class AudioOutput {
             if (reverbAmount > 0f) applyReverb()
             if (lightEffects) applyPlatformRate()
         }
-        dev.lelonio.square.backend.spotify.SpotifyDj.setSpeaking(false)
+        dev.nkosanamahungela.sonify.backend.spotify.SpotifyDj.setSpeaking(false)
     }
 
     /** Takes the middle of the stage away; see [CentreExtractor]. */

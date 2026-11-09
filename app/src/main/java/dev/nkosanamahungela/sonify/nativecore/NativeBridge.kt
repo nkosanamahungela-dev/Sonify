@@ -1,4 +1,4 @@
-package dev.lelonio.square.nativecore
+package dev.nkosanamahungela.sonify.nativecore
 
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
@@ -263,7 +263,7 @@ object NativeBridge {
         // done trying, and a try that got nowhere is not offline by the
         // engine's own flag; read that way, a failed reconnection declared the
         // session back.
-        dev.lelonio.square.playback.OfflineMode.setNoSession(isOffline || !isConnected)
+        dev.nkosanamahungela.sonify.playback.OfflineMode.setNoSession(isOffline || !isConnected)
     }
 
     // --- The account's other devices ---

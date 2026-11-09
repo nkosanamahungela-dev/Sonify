@@ -1,9 +1,9 @@
-package dev.lelonio.square.download
+package dev.nkosanamahungela.sonify.download
 
 import android.content.Context
-import dev.lelonio.square.backend.youtube.YouTubeBackend
-import dev.lelonio.square.backend.youtube.YouTubeStreams
-import dev.lelonio.square.data.DownloadStore
+import dev.nkosanamahungela.sonify.backend.youtube.YouTubeBackend
+import dev.nkosanamahungela.sonify.backend.youtube.YouTubeStreams
+import dev.nkosanamahungela.sonify.data.DownloadStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -32,7 +32,7 @@ object YouTubeDownloads {
         if (YouTubeBackend.isSong(trackUri)) {
             remove(context, trackUri)
         } else {
-            dev.lelonio.square.nativecore.NativeBridge.removeDownload(trackUri)
+            dev.nkosanamahungela.sonify.nativecore.NativeBridge.removeDownload(trackUri)
         }
     }
 
@@ -41,7 +41,7 @@ object YouTubeDownloads {
         if (YouTubeBackend.isSong(trackUri)) {
             cancel(trackUri)
         } else {
-            dev.lelonio.square.nativecore.NativeBridge.cancelDownload(trackUri)
+            dev.nkosanamahungela.sonify.nativecore.NativeBridge.cancelDownload(trackUri)
         }
     }
 
@@ -114,9 +114,9 @@ object YouTubeDownloads {
                 ?: error("no audio for $id")
             Source(stream.content, stream.format?.suffix ?: "m4a", stream.averageBitrate.takeIf { it > 0 } ?: 0)
         } catch (error: Exception) {
-            if (!dev.lelonio.square.backend.youtube.SignedInStreams.needsAccount(error)) throw error
-            val url = dev.lelonio.square.backend.youtube.SignedInStreams.url(
-                context, id, dev.lelonio.square.backend.youtube.SignedInStreams.Kind.AUDIO, lowRate = false,
+            if (!dev.nkosanamahungela.sonify.backend.youtube.SignedInStreams.needsAccount(error)) throw error
+            val url = dev.nkosanamahungela.sonify.backend.youtube.SignedInStreams.url(
+                context, id, dev.nkosanamahungela.sonify.backend.youtube.SignedInStreams.Kind.AUDIO, lowRate = false,
             )
             Source(url, if ("mime=audio%2Fwebm" in url) "webm" else "m4a", 0)
         }

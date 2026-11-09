@@ -1,4 +1,4 @@
-package dev.lelonio.square.download
+package dev.nkosanamahungela.sonify.download
 
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.asSharedFlow
  * download events off the wire before the player ever sees them.
  *
  * An object rather than something injected, for the same reason
- * [dev.lelonio.square.data.RemoteConnect] is one: there is a single engine
+ * [dev.nkosanamahungela.sonify.data.RemoteConnect] is one: there is a single engine
  * behind it, and the listener it pushes into belongs to the player.
  */
 object DownloadEvents {

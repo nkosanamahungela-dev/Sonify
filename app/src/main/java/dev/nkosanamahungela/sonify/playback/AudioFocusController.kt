@@ -1,4 +1,4 @@
-package dev.lelonio.square.playback
+package dev.nkosanamahungela.sonify.playback
 
 import android.content.BroadcastReceiver
 import android.content.Context
