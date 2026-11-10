@@ -325,7 +325,7 @@ private fun androidx.compose.foundation.layout.RowScope.BarTab(
         Icon(
             icon,
             contentDescription = stringResource(label),
-            tint = if (selected) accent else ink,
+            tint = Color(0xFF1ED760),
             modifier = Modifier.size(TabIcon),
         )
         Text(
@@ -2739,6 +2739,12 @@ fun SonifyApp(
                             CompositionLocalProvider(
                                 dev.nkosanamahungela.sonify.ui.glass.LocalGlassEffectConfig provides barConfig,
                             ) {
+                            // Keep the existing glass tabs, but constrain their visible
+                            // capsule to a centred, compact Spotify-style dock.
+                            Box(
+                                modifier = tabsModifier.fillMaxWidth(),
+                                contentAlignment = Alignment.Center,
+                            ) {
                             LiquidBottomTabs(
                                 selectedTabIndex = selectedTabIndex,
                                 onTabSelected = { index ->
@@ -2764,12 +2770,12 @@ fun SonifyApp(
                                 // one of these four; search is a place of its
                                 // own.
                                 indicatorVisible = activeTab in tabRoutes,
-                                modifier = tabsModifier,
+                                modifier = Modifier.width(224.dp),
                                 drawContainer = !dev.nkosanamahungela.sonify.ui.glass.floatingtabbar.LocalGeometricFloatingTabBar.current,
                             ) {
                                 BarTab(
                                     R.string.home,
-                                    PhosphorIcons.Fill.House,
+                                    LucideIcons.House,
                                     activeTab == Routes.HOME,
                                     tabAccent,
                                     barInk,
@@ -2779,7 +2785,7 @@ fun SonifyApp(
                                 }
                                 BarTab(
                                     R.string.library,
-                                    PhosphorIcons.Regular.Books,
+                                    LucideIcons.Library,
                                     activeTab == Routes.LIBRARY,
                                     tabAccent,
                                     barInk,
@@ -2793,7 +2799,7 @@ fun SonifyApp(
                                     // magnifier reads as a blob at this size,
                                     // and it is the one glyph here whose shape
                                     // is the whole of its meaning.
-                                    PhosphorIcons.Regular.MagnifyingGlass,
+                                    LucideIcons.Search,
                                     activeTab == Routes.SEARCH,
                                     tabAccent,
                                     barInk,
@@ -2808,6 +2814,7 @@ fun SonifyApp(
                                     searchOpen = true
                                     navController.switchTab(Routes.SEARCH)
                                 }
+                            }
                             }
                             }
                         },
