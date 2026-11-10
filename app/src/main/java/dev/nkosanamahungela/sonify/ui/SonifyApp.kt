@@ -4074,9 +4074,15 @@ private fun BottomBar(
             containerColor = GlassFilm,
             indicatorVisible = routeIndex >= 0,
         ) {
-            BottomItem(stringResource(R.string.home), LucideIcons.House, LucideIcons.House, routeIndex >= 0 && selected == 0) { onSelect(Routes.HOME) }
-            BottomItem(stringResource(R.string.search), LucideIcons.Search, LucideIcons.Search, routeIndex >= 0 && selected == 1) { onSelect(Routes.SEARCH) }
-            BottomItem(stringResource(R.string.library), LucideIcons.Library, LucideIcons.Library, routeIndex >= 0 && selected == 2) { onSelect(Routes.LIBRARY) }
+            LiquidBottomTab(onClick = { onSelect(Routes.HOME) }) {
+                Icon(LucideIcons.House, contentDescription = stringResource(R.string.home), tint = Color(0xFF1ED760), modifier = Modifier.size(22.dp))
+            }
+            LiquidBottomTab(onClick = { onSelect(Routes.SEARCH) }) {
+                Icon(LucideIcons.Search, contentDescription = stringResource(R.string.search), tint = Color(0xFF1ED760), modifier = Modifier.size(22.dp))
+            }
+            LiquidBottomTab(onClick = { onSelect(Routes.LIBRARY) }) {
+                Icon(LucideIcons.Library, contentDescription = stringResource(R.string.library), tint = Color(0xFF1ED760), modifier = Modifier.size(22.dp))
+            }
         }
     }
 }
