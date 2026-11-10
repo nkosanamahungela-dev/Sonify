@@ -4049,149 +4049,35 @@ private fun BottomBar(
     backdrop: Backdrop,
     onSelect: (String) -> Unit,
 ) {
-    // Search sits outside the capsule as its own round button, the way the
-    // reference has it: it is a different kind of destination — you go there to
-    // do something and come back — and giving it the same weight as the places
-    // made all of them read as places.
-    val routes = remember {
-        listOf(Routes.HOME, Routes.NEW, Routes.RADIO, Routes.LIBRARY)
-    }
-
-    // The last tab that was actually on screen, held across screens that are not
-    // tabs at all — a playlist, the search page.
-    //
-    // Falling back to Home instead, which is what this did, navigated the user
-    // away: the bar reports every change of its selected index through
-    // `onTabSelected`, so opening a playlist from Library moved the index 1 -> 0
-    // and the bar promptly "selected" Home. That was the playlist opening and
-    // then bouncing back.
+    val routes = remember { listOf(Routes.HOME, Routes.SEARCH, Routes.LIBRARY) }
     var lastTab by remember { mutableStateOf(0) }
     val routeIndex = routes.indexOf(route)
     if (routeIndex >= 0 && routeIndex != lastTab) lastTab = routeIndex
     val selected = if (routeIndex >= 0) routeIndex else lastTab
-
-    // A *stable* lambda, deliberately. LiquidBottomTabs keys its internal state
-    // on this reference, so a fresh closure on every recomposition threw that
-    // state away and the indicator arrived at the new tab without ever
-    // animating — which is exactly the bug where tapping snapped and only
-    // dragging moved.
     val selectedState = rememberUpdatedState(selected)
     val selectedTabIndex = remember { { selectedState.value } }
 
-    Row(
-        Modifier
+    Box(
+        modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
             .padding(bottom = bottomInset + 8.dp, top = 4.dp),
-        verticalAlignment = Alignment.CenterVertically,
+        contentAlignment = Alignment.Center,
     ) {
-        Box(Modifier.weight(1f)) {
-            LiquidBottomTabs(
+        LiquidBottomTabs(
+            modifier = Modifier.width(224.dp),
             selectedTabIndex = selectedTabIndex,
             onTabSelected = { onSelect(routes[it]) },
             backdrop = backdrop,
             tabsCount = routes.size,
-            // Both upstream defaults are wrong here: the accent is a system blue
-            // that belongs to no part of this palette, and the container is a
-            // 40% fill that made the bar a solid slab beside the other glass.
-            accentColor = Ink,
+            accentColor = Color(0xFF1ED760),
             containerColor = GlassFilm,
             indicatorVisible = routeIndex >= 0,
         ) {
-            BottomItem(
-                stringResource(R.string.home),
-                PhosphorIcons.Fill.House,
-                PhosphorIcons.Bold.House,
-                // Nothing is lit while the page on screen is not one of these
-                // two: search is a destination of its own, and leaving Home
-                // filled behind it said the app was somewhere it was not.
-                routeIndex >= 0 && selected == 0,
-            ) {
-                onSelect(Routes.HOME)
-            }
-            BottomItem(
-                stringResource(R.string.tab_new),
-                LucideIcons.Grid,
-                PhosphorIcons.Bold.SquaresFour,
-                routeIndex >= 0 && selected == 1,
-            ) { onSelect(Routes.NEW) }
-            BottomItem(
-                stringResource(R.string.tab_radio),
-                LucideIcons.Radio,
-                PhosphorIcons.Bold.Broadcast,
-                routeIndex >= 0 && selected == 2,
-            ) { onSelect(Routes.RADIO) }
-            BottomItem(
-                stringResource(R.string.library),
-                PhosphorIcons.Regular.Books,
-                PhosphorIcons.Bold.MusicNotes,
-                routeIndex >= 0 && selected == 3,
-            ) { onSelect(Routes.LIBRARY) }
-            }
+            BottomItem(stringResource(R.string.home), LucideIcons.House, LucideIcons.House, routeIndex >= 0 && selected == 0) { onSelect(Routes.HOME) }
+            BottomItem(stringResource(R.string.search), LucideIcons.Search, LucideIcons.Search, routeIndex >= 0 && selected == 1) { onSelect(Routes.SEARCH) }
+            BottomItem(stringResource(R.string.library), LucideIcons.Library, LucideIcons.Library, routeIndex >= 0 && selected == 2) { onSelect(Routes.LIBRARY) }
         }
-
-        Spacer(Modifier.width(10.dp))
-
-        val searching = route == Routes.SEARCH
-        LiquidButton(
-            onClick = { onSelect(Routes.SEARCH) },
-            backdrop = backdrop,
-            tint = if (searching) MaterialTheme.colorScheme.primary else Color.Unspecified,
-            modifier = Modifier.size(64.dp),
-            contentHeight = 64.dp,
-            contentPadding = 0.dp,
-            // The same film the capsule beside it uses, or the round button
-            // reads as clearer glass than the bar it sits next to.
-        ) {
-            Icon(
-                imageVector = if (searching) PhosphorIcons.Fill.MagnifyingGlass else PhosphorIcons.Regular.MagnifyingGlass,
-                contentDescription = stringResource(R.string.search),
-                tint = Ink,
-                modifier = Modifier.size(24.dp),
-            )
-        }
-    }
-}
-
-/**
- * Selected tabs switch to the filled icon as well as to ink.
- *
- * Weight carries the selection, not just colour: the difference between a
- * filled and an outlined glyph survives at a glance and for anyone who cannot
- * separate the two tints.
- */
-@Composable
-private fun RowScope.BottomItem(
-    label: String,
-    filled: ImageVector,
-    outlined: ImageVector,
-    selected: Boolean,
-    onClick: () -> Unit,
-) {
-    // Fixed ink rather than the artwork accent. Tinting the label after the
-    // playing track put an arbitrary colour on the one control that has to stay
-    // readable, and some of those colours have almost no contrast against the
-    // glass.
-    val tint = if (selected) Ink else Ink.copy(alpha = 0.62f)
-    // `LiquidBottomTab` rather than a Column of our own, and this is not
-    // cosmetic: it takes an equal share of the row, and the sliding indicator is
-    // positioned as `index * (barWidth / tabsCount)`. A tab sized by its own
-    // padding leaves the two disagreeing — labels packed to the left with the
-    // indicator sitting under empty space.
-    LiquidBottomTab(onClick = onClick) {
-        Icon(
-            imageVector = if (selected) filled else outlined,
-            contentDescription = label,
-            tint = tint,
-            modifier = Modifier.size(23.dp),
-        )
-        Text(
-            label,
-            style = MaterialTheme.typography.bodySmall,
-            fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
-            color = tint,
-            modifier = Modifier.padding(top = 3.dp),
-        )
     }
 }
 
