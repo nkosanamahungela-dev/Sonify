@@ -63,6 +63,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.unit.lerp
 import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
 import com.adamglin.PhosphorIcons
+import com.adamglin.phosphoricons.Fill
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.fill.Heart
 import com.adamglin.phosphoricons.regular.ArrowsLeftRight
