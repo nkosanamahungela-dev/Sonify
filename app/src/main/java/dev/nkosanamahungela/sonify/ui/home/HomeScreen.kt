@@ -58,11 +58,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.unit.lerp
 import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
+import com.adamglin.phosphoricons.Fill
+import com.adamglin.phosphoricons.fill.Heart
 import com.adamglin.phosphoricons.regular.ArrowsLeftRight
 import com.adamglin.phosphoricons.regular.SpotifyLogo
 import com.adamglin.phosphoricons.regular.YoutubeLogo
@@ -334,7 +337,7 @@ fun HomeScreen(
                     topPadding = contentPadding.calculateTopPadding(),
                     onFilter = { filterName = it.name },
                     chips = chips,
-                    showFilters = chips.size > 1,
+                    showFilters = false,
                     onOpenSettings = onOpenSettings,
                     friends = friends,
                     onOpenFriends = onOpenFriends,
@@ -416,16 +419,15 @@ fun HomeScreen(
                         Column(
                             Modifier
                                 .fillMaxWidth()
-                                .padding(start = 20.dp, end = 20.dp, top = 12.dp),
-                            verticalArrangement = Arrangement.spacedBy(9.dp),
+                                .padding(start = 16.dp, end = 16.dp, top = 8.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp),
                         ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text("YOUR ROTATION", style = MaterialTheme.typography.labelLarge, color = InkDim)
-                                Spacer(Modifier.weight(1f))
-                                Text("Recently played", style = MaterialTheme.typography.labelSmall, color = InkDim)
+                            val quickAccess = remember(playlists) {
+                                listOf(CatalogPlaylist(uri = "spotify:collection", name = "Liked Songs")) +
+                                    playlists.take(7)
                             }
-                            playlists.take(8).chunked(2).forEachIndexed { rowIndex, pair ->
-                                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            quickAccess.chunked(2).forEachIndexed { rowIndex, pair ->
+                                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                                     pair.forEachIndexed { columnIndex, playlist ->
                                         PlaylistShortcut(
                                             playlist = playlist,
@@ -472,18 +474,17 @@ fun HomeScreen(
                     }
                     // Keyed by place as well as title: Spotify can send two rows
                     // with the same title, and a key used twice crashes the list.
-                    visible.forEachIndexed { index, shelf ->
+                    visible.take(2).forEachIndexed { index, shelf ->
+                        val homeTitle = if (index == 0) "It's New Music Friday!" else "Friday drops picked for you"
                         item(key = "shelf-heading-$index-${shelf.title}", contentType = "shelf") {
                             Box(Modifier.animateItem(fadeInSpec = tween(320), placementSpec = null, fadeOutSpec = null)) {
-                                // The first sits just under the chips, which
-                                // carry the header's margin already.
-                                Heading(shelf.title, top = if (index == 0) 12.dp else 30.dp)
+                                Heading(homeTitle, top = 24.dp)
                             }
                         }
                         item(key = "shelf-$index-${shelf.title}", contentType = "shelf") {
                             Box(Modifier.animateItem(fadeInSpec = tween(320), placementSpec = null, fadeOutSpec = null)) {
-                                Carousel(shelf.items, key = { it.uri }) { entry ->
-                                    PlaylistTile(entry) {
+                                HomeCarousel(shelf.items, key = { it.uri }) { entry ->
+                                    HomeShelfTile(entry) {
                                         if (dev.nkosanamahungela.sonify.data.SpotifyPodcasts.isEpisode(entry.uri)) {
                                             onPlayEpisode(entry, shelf.title)
                                         } else {
@@ -713,7 +714,7 @@ private fun Header(
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(start = 24.dp, end = 24.dp)
+                .padding(start = 16.dp, end = 16.dp)
                 // The top padding, as a layout pass: `padding()` takes a Dp,
                 // which would have to be computed while composing.
                 .layout { measurable, constraints ->
@@ -745,9 +746,9 @@ private fun Header(
                 ) {
                     Text(
                         "Home",
-                        style = MaterialTheme.typography.displaySmall,
+                        style = MaterialTheme.typography.displaySmall.copy(fontSize = 34.sp),
                         fontWeight = FontWeight.Bold,
-                        color = Ink,
+                        color = Color.White,
                     )
                 }
             }
@@ -973,28 +974,94 @@ private fun PlaylistShortcut(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {
+    val likedSongs = playlist.uri.endsWith(":collection")
+    val shape = RoundedCornerShape(12.dp)
     Row(
         modifier
-            .clip(RoundedCornerShape(15.dp))
-            .background(SHORTCUT_COLORS[index % SHORTCUT_COLORS.size])
-            .pressable(onClick)
-            .padding(8.dp),
+            .height(56.dp)
+            .clip(shape)
+            .background(if (likedSongs) Color(0xFF29213F) else SHORTCUT_COLORS[index % SHORTCUT_COLORS.size])
+            .pressable(onClick),
         verticalAlignment = Alignment.CenterVertically,
+    ) {
+        if (likedSongs) {
+            Box(
+                Modifier
+                    .size(56.dp)
+                    .background(Brush.linearGradient(listOf(Color(0xFF5A35D5), Color(0xFF8D6CFF), Color(0xFFB5C8FF)))),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(
+                    imageVector = PhosphorIcons.Fill.Heart,
+                    contentDescription = "Liked Songs",
+                    tint = Color.White,
+                    modifier = Modifier.size(22.dp),
+                )
+            }
+        } else {
+            Artwork(
+                url = playlist.artworkUrl,
+                title = playlist.name,
+                modifier = Modifier
+                    .size(56.dp)
+                    .clip(RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp)),
+                corner = 0.dp,
+                decodeSize = 56.dp,
+            )
+        }
+        Text(
+            playlist.name,
+            style = MaterialTheme.typography.labelLarge.copy(fontSize = 14.sp),
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier
+                .weight(1f)
+                .padding(horizontal = 10.dp),
+        )
+    }
+}
+
+@Composable
+private fun HomeCarousel(
+    items: List<CatalogPlaylist>,
+    key: (CatalogPlaylist) -> Any,
+    item: @Composable (CatalogPlaylist) -> Unit,
+) {
+    LazyRow(
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        modifier = Modifier.padding(top = 14.dp),
+    ) {
+        items(items, key = key) { item(it) }
+    }
+}
+
+@Composable
+private fun HomeShelfTile(playlist: CatalogPlaylist, onClick: () -> Unit) {
+    Column(
+        Modifier
+            .width(200.dp)
+            .pressable(onClick),
     ) {
         Artwork(
             url = playlist.artworkUrl,
             title = playlist.name,
-            modifier = Modifier.size(52.dp),
-            corner = 10.dp,
-            decodeSize = 52.dp,
+            modifier = Modifier
+                .size(200.dp)
+                .clip(RoundedCornerShape(8.dp)),
+            corner = 8.dp,
+            decodeSize = 200.dp,
         )
         Text(
-            playlist.name,
-            style = MaterialTheme.typography.labelLarge,
-            color = Ink,
+            listOfNotNull(playlist.name, playlist.subtitle?.takeIf { it.isNotBlank() })
+                .joinToString(" • "),
+            style = MaterialTheme.typography.bodySmall.copy(fontSize = 13.sp),
+            color = Color(0xFFA7A7A7),
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.padding(start = 9.dp),
+            modifier = Modifier.padding(top = 8.dp, start = 1.dp, end = 1.dp),
         )
     }
 }
@@ -1198,8 +1265,8 @@ private fun <T> Carousel(
 }
 
 @Composable
-private fun Heading(text: String, strapline: String? = null, top: androidx.compose.ui.unit.Dp = 30.dp) {
-    Column(Modifier.padding(start = 24.dp, end = 24.dp, top = top)) {
+private fun Heading(text: String, strapline: String? = null, top: androidx.compose.ui.unit.Dp = 24.dp) {
+    Column(Modifier.padding(start = 16.dp, end = 16.dp, top = top)) {
         // Above the title, smaller and quieter, the way the service writes it:
         // "MIX", "START RADIO FROM A SONG", an artist's name. It is most of
         // what tells two shelves with the same title apart.
@@ -1213,7 +1280,7 @@ private fun Heading(text: String, strapline: String? = null, top: androidx.compo
                 modifier = Modifier.padding(bottom = 2.dp),
             )
         }
-        Text(text, style = MaterialTheme.typography.headlineLarge)
+        Text(text, style = MaterialTheme.typography.headlineLarge.copy(fontSize = 22.sp), color = Color.White, fontWeight = FontWeight.Bold)
     }
 }
 
