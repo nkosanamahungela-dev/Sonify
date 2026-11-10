@@ -128,7 +128,7 @@ Use the app in accordance with Spotify's terms, developer policies and applicabl
 
 ## Credits and licences
 
-Sonify builds on open-source software and upstream work. See the repository's [LICENSE](LICENSE) file and the relevant source directories for licence notices and third-party attributions. Preserve those notices when redistributing or modifying the project.
+Sonify builds on open-source software and upstream work. The Spotify-inspired interface is being adapted from [Spotui](https://github.com/Spotui/Spotui) (GPL-3.0); its UI code is being integrated with Sonify's existing data, playback and authentication layers. The original Sonify Liquid Glass components are maintained separately and are not replaced by Spotui's navigation or player UI. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and the repository's [LICENSE](LICENSE) for attribution and licence details.
 
 ## Contributing
 
