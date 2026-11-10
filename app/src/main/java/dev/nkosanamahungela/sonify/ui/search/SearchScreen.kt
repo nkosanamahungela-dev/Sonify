@@ -1,6 +1,7 @@
 package dev.nkosanamahungela.sonify.ui.search
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,9 +31,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Stroke
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -170,12 +174,22 @@ fun SearchScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
-                Icon(
-                    imageVector = PhosphorIcons.Regular.MagnifyingGlass,
-                    contentDescription = null,
-                    tint = Color(0xFFB3B3B3),
-                    modifier = Modifier.size(20.dp),
-                )
+                Canvas(modifier = Modifier.size(20.dp)) {
+                    val stroke = 1.8.dp.toPx()
+                    drawCircle(
+                        color = Color(0xFFB3B3B3),
+                        radius = size.minDimension * 0.29f,
+                        center = Offset(size.width * 0.40f, size.height * 0.40f),
+                        style = Stroke(width = stroke),
+                    )
+                    drawLine(
+                        color = Color(0xFFB3B3B3),
+                        start = Offset(size.width * 0.62f, size.height * 0.62f),
+                        end = Offset(size.width * 0.88f, size.height * 0.88f),
+                        strokeWidth = stroke,
+                        cap = StrokeCap.Round,
+                    )
+                }
                 BasicTextField(
                     value = query,
                     onValueChange = onQuery,
@@ -196,13 +210,13 @@ fun SearchScreen(
                     },
                 )
                 if (query.isNotBlank()) {
-                    Icon(
-                        imageVector = PhosphorIcons.Regular.X,
-                        contentDescription = stringResource(R.string.clear),
-                        tint = Color(0xFFB3B3B3),
+                    Text(
+                        text = "×",
+                        color = Color(0xFFB3B3B3),
+                        style = MaterialTheme.typography.titleLarge,
                         modifier = Modifier
-                            .size(18.dp)
-                            .clickable { onQuery("") },
+                            .clickable { onQuery("") }
+                            .padding(horizontal = 2.dp),
                     )
                 }
             }
