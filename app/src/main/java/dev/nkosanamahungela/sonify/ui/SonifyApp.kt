@@ -50,7 +50,6 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.setValue
 import dev.nkosanamahungela.sonify.ui.components.FriendsPanel
-import dev.nkosanamahungela.sonify.ui.components.LucideIcons
 import dev.nkosanamahungela.sonify.ui.components.SharedTrackCard
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -65,6 +64,9 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
 import com.adamglin.phosphoricons.fill.XCircle
+import com.adamglin.phosphoricons.fill.House
+import com.adamglin.phosphoricons.regular.Books
+import com.adamglin.phosphoricons.regular.MagnifyingGlass
 import dev.nkosanamahungela.sonify.ui.glass.floatingtabbar.FloatingTabBar
 import dev.nkosanamahungela.sonify.ui.glass.floatingtabbar.sharedSearchTab
 import dev.nkosanamahungela.sonify.ui.glass.floatingtabbar.FloatingTabBarDefaults
@@ -2720,10 +2722,8 @@ fun SonifyApp(
                             val tabRoutes = remember {
                                 listOf(
                                     Routes.HOME,
-                                    Routes.NEW,
-                                    Routes.RADIO,
-                                    Routes.LIBRARY,
                                     Routes.SEARCH,
+                                    Routes.LIBRARY,
                                 )
                             }
                             val here = tabRoutes.indexOf(activeTab).coerceAtLeast(0)
@@ -2768,7 +2768,7 @@ fun SonifyApp(
                             ) {
                                 BarTab(
                                     R.string.home,
-                                    LucideIcons.House,
+                                    PhosphorIcons.Fill.House,
                                     activeTab == Routes.HOME,
                                     tabAccent,
                                     barInk,
@@ -2777,28 +2777,8 @@ fun SonifyApp(
                                     navController.switchTab(Routes.HOME)
                                 }
                                 BarTab(
-                                    R.string.tab_new,
-                                    LucideIcons.Grid,
-                                    activeTab == Routes.NEW,
-                                    tabAccent,
-                                    barInk,
-                                ) {
-                                    viewModel.clearPageHistory()
-                                    navController.switchTab(Routes.NEW)
-                                }
-                                BarTab(
-                                    R.string.tab_radio,
-                                    LucideIcons.Radio,
-                                    activeTab == Routes.RADIO,
-                                    tabAccent,
-                                    barInk,
-                                ) {
-                                    viewModel.clearPageHistory()
-                                    navController.switchTab(Routes.RADIO)
-                                }
-                                BarTab(
                                     R.string.library,
-                                    LucideIcons.Library,
+                                    PhosphorIcons.Regular.Books,
                                     activeTab == Routes.LIBRARY,
                                     tabAccent,
                                     barInk,
@@ -2812,7 +2792,7 @@ fun SonifyApp(
                                     // magnifier reads as a blob at this size,
                                     // and it is the one glyph here whose shape
                                     // is the whole of its meaning.
-                                    LucideIcons.Search,
+                                    PhosphorIcons.Regular.MagnifyingGlass,
                                     activeTab == Routes.SEARCH,
                                     tabAccent,
                                     barInk,
@@ -2897,72 +2877,6 @@ fun SonifyApp(
                             onClick = {
                                 viewModel.clearPageHistory()
                                 navController.switchTab(Routes.HOME)
-                            },
-                        )
-                        tab(
-                            key = Routes.NEW,
-                            title = {
-                                Text(
-                                    stringResource(R.string.tab_new),
-                                    fontSize = 9.sp,
-                                    lineHeight = 11.sp,
-                                    style = LocalTextStyle.current.copy(
-                                        platformStyle = androidx.compose.ui.text.PlatformTextStyle(
-                                            includeFontPadding = false,
-                                        ),
-                                        lineHeightStyle = androidx.compose.ui.text.style.LineHeightStyle(
-                                            alignment = androidx.compose.ui.text.style.LineHeightStyle.Alignment.Center,
-                                            trim = androidx.compose.ui.text.style.LineHeightStyle.Trim.Both,
-                                        ),
-                                    ),
-                                    fontWeight = FontWeight.Bold,
-                                    color = if (activeTab == Routes.NEW) tabAccent else barInk,
-                                )
-                            },
-                            icon = {
-                                Icon(
-                                    LucideIcons.Grid,
-                                    contentDescription = stringResource(R.string.tab_new),
-                                    tint = if (activeTab == Routes.NEW) tabAccent else barInk,
-                                    modifier = Modifier.size(TabIcon),
-                                )
-                            },
-                            onClick = {
-                                viewModel.clearPageHistory()
-                                navController.switchTab(Routes.NEW)
-                            },
-                        )
-                        tab(
-                            key = Routes.RADIO,
-                            title = {
-                                Text(
-                                    stringResource(R.string.tab_radio),
-                                    fontSize = 9.sp,
-                                    lineHeight = 11.sp,
-                                    style = LocalTextStyle.current.copy(
-                                        platformStyle = androidx.compose.ui.text.PlatformTextStyle(
-                                            includeFontPadding = false,
-                                        ),
-                                        lineHeightStyle = androidx.compose.ui.text.style.LineHeightStyle(
-                                            alignment = androidx.compose.ui.text.style.LineHeightStyle.Alignment.Center,
-                                            trim = androidx.compose.ui.text.style.LineHeightStyle.Trim.Both,
-                                        ),
-                                    ),
-                                    fontWeight = FontWeight.Bold,
-                                    color = if (activeTab == Routes.RADIO) tabAccent else barInk,
-                                )
-                            },
-                            icon = {
-                                Icon(
-                                    LucideIcons.Radio,
-                                    contentDescription = stringResource(R.string.tab_radio),
-                                    tint = if (activeTab == Routes.RADIO) tabAccent else barInk,
-                                    modifier = Modifier.size(TabIcon),
-                                )
-                            },
-                            onClick = {
-                                viewModel.clearPageHistory()
-                                navController.switchTab(Routes.RADIO)
                             },
                         )
                         tab(
