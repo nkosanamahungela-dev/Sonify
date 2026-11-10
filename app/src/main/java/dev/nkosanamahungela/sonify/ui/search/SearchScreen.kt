@@ -173,7 +173,7 @@ fun SearchScreen(
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 Icon(
-                    imageVector = PhosphorIcons.Bold.MagnifyingGlass,
+                    imageVector = MagnifyingGlass,
                     contentDescription = null,
                     tint = Color(0xFFB3B3B3),
                     modifier = Modifier.size(20.dp),
@@ -199,7 +199,7 @@ fun SearchScreen(
                 )
                 if (query.isNotBlank()) {
                     Icon(
-                        imageVector = PhosphorIcons.Bold.X,
+                        imageVector = X,
                         contentDescription = stringResource(R.string.clear),
                         tint = Color(0xFFB3B3B3),
                         modifier = Modifier
