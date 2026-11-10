@@ -54,8 +54,6 @@ import dev.nkosanamahungela.sonify.ui.theme.InkDim
 import androidx.compose.foundation.clickable
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
-import com.adamglin.phosphoricons.bold.MagnifyingGlass
-import com.adamglin.phosphoricons.bold.X
 import com.adamglin.phosphoricons.regular.DotsThree
 
 /** Which kind of result the page is showing. */
@@ -173,7 +171,7 @@ fun SearchScreen(
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 Icon(
-                    imageVector = MagnifyingGlass,
+                    imageVector = PhosphorIcons.Regular.MagnifyingGlass,
                     contentDescription = null,
                     tint = Color(0xFFB3B3B3),
                     modifier = Modifier.size(20.dp),
@@ -199,7 +197,7 @@ fun SearchScreen(
                 )
                 if (query.isNotBlank()) {
                     Icon(
-                        imageVector = X,
+                        imageVector = PhosphorIcons.Regular.X,
                         contentDescription = stringResource(R.string.clear),
                         tint = Color(0xFFB3B3B3),
                         modifier = Modifier
