@@ -158,6 +158,58 @@ fun SearchScreen(
             )
         }
 
+        // Spotui's search page keeps the query field at the top of the page.
+        // The search state and callback remain Sonify's, so this is a visual
+        // migration only and still searches the active Sonify backend.
+        stickyHeader {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(Color(0xFF242424))
+                    .padding(horizontal = 14.dp, vertical = 13.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Icon(
+                    imageVector = PhosphorIcons.Bold.MagnifyingGlass,
+                    contentDescription = null,
+                    tint = Color(0xFFB3B3B3),
+                    modifier = Modifier.size(20.dp),
+                )
+                BasicTextField(
+                    value = query,
+                    onValueChange = onQuery,
+                    singleLine = true,
+                    textStyle = MaterialTheme.typography.bodyLarge.copy(color = Color.White),
+                    modifier = Modifier.weight(1f),
+                    decorationBox = { innerTextField ->
+                        Box {
+                            if (query.isBlank()) {
+                                Text(
+                                    text = stringResource(R.string.search_prompt),
+                                    color = Color(0xFF888888),
+                                    style = MaterialTheme.typography.bodyLarge,
+                                )
+                            }
+                            innerTextField()
+                        }
+                    },
+                )
+                if (query.isNotBlank()) {
+                    Icon(
+                        imageVector = PhosphorIcons.Bold.X,
+                        contentDescription = stringResource(R.string.clear),
+                        tint = Color(0xFFB3B3B3),
+                        modifier = Modifier
+                            .size(18.dp)
+                            .clickable { onQuery("") },
+                    )
+                }
+            }
+        }
+
         if (!state.results.isEmpty && !state.loading) {
             item(contentType = "chips") {
                 // Videos only where the source has them: Spotify's search does not.
