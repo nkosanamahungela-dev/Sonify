@@ -2657,7 +2657,9 @@ fun SonifyApp(
                         selectedTabKey = if (activeTab == Routes.SEARCH) SEARCH_CIRCLE else activeTab,
                         scrollConnection = tabBarScroll,
                         modifier = Modifier
+                            .widthIn(max = 360.dp)
                             .fillMaxWidth()
+                            .align(Alignment.BottomCenter)
                             .padding(horizontal = barMargin)
                             .padding(bottom = navBar + 8.dp),
                         // Where the glass goes in. The library applies this after
@@ -2723,8 +2725,8 @@ fun SonifyApp(
                             val tabRoutes = remember {
                                 listOf(
                                     Routes.HOME,
-                                    Routes.SEARCH,
                                     Routes.LIBRARY,
+                                    Routes.SEARCH,
                                 )
                             }
                             val here = tabRoutes.indexOf(activeTab).coerceAtLeast(0)
