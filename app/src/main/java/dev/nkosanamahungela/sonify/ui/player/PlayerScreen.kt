@@ -479,6 +479,28 @@ fun PlayerScreen(
     /** Whether the sound is coming out of another of the account's devices. */
     onAnotherDevice: Boolean = false,
 ) {
+    SpotuiPlayerScreen(
+        state = state,
+        positionMs = positionMs,
+        onCollapse = onCollapse,
+        onTogglePlay = onTogglePlay,
+        onNext = onNext,
+        onPrevious = onPrevious,
+        onSeek = onSeek,
+        onToggleShuffle = onToggleShuffle,
+        onCycleRepeat = onCycleRepeat,
+        queue = queue,
+        queueActions = queueActions,
+        onOpenDevices = onOpenDevices,
+        onAddToPlaylist = onAddToPlaylist,
+        onOpenAlbum = onOpenAlbum,
+        onToggleLike = onToggleLike,
+        inLikedSongs = inLikedSongs,
+        connectAvailable = connectAvailable,
+        onAnotherDevice = onAnotherDevice,
+    )
+    return
+
     var panel by remember { mutableStateOf(PlayerPanel.NONE) }
     // The official SDK mixes its own audio: no effects or karaoke reach it.
     val sdkPlayback by dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.inUse.collectAsStateWithLifecycle()
