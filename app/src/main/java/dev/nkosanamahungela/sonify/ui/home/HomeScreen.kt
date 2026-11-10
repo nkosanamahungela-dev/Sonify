@@ -978,7 +978,7 @@ private fun PlaylistShortcut(
     val shape = RoundedCornerShape(12.dp)
     Row(
         modifier
-            .height(56.dp)
+            .height(48.dp)
             .clip(shape)
             .background(if (likedSongs) Color(0xFF29213F) else SHORTCUT_COLORS[index % SHORTCUT_COLORS.size])
             .pressable(onClick),
@@ -987,7 +987,7 @@ private fun PlaylistShortcut(
         if (likedSongs) {
             Box(
                 Modifier
-                    .size(56.dp)
+                    .size(48.dp)
                     .background(Brush.linearGradient(listOf(Color(0xFF5A35D5), Color(0xFF8D6CFF), Color(0xFFB5C8FF)))),
                 contentAlignment = Alignment.Center,
             ) {
@@ -1003,10 +1003,10 @@ private fun PlaylistShortcut(
                 url = playlist.artworkUrl,
                 title = playlist.name,
                 modifier = Modifier
-                    .size(56.dp)
-                    .clip(RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp)),
+                    .size(48.dp)
+                    .clip(RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp)),
                 corner = 0.dp,
-                decodeSize = 56.dp,
+                decodeSize = 48.dp,
             )
         }
         Text(
@@ -1042,17 +1042,17 @@ private fun HomeCarousel(
 private fun HomeShelfTile(playlist: CatalogPlaylist, onClick: () -> Unit) {
     Column(
         Modifier
-            .width(200.dp)
+            .width(150.dp)
             .pressable(onClick),
     ) {
         Artwork(
             url = playlist.artworkUrl,
             title = playlist.name,
             modifier = Modifier
-                .size(200.dp)
+                .size(150.dp)
                 .clip(RoundedCornerShape(8.dp)),
             corner = 8.dp,
-            decodeSize = 200.dp,
+            decodeSize = 150.dp,
         )
         Text(
             listOfNotNull(playlist.name, playlist.subtitle?.takeIf { it.isNotBlank() })
@@ -1073,14 +1073,14 @@ private fun PlaylistTile(playlist: CatalogPlaylist, onClick: () -> Unit) {
     val corner = if (playlist.isArtist) 76.dp else 20.dp
     Column(
         Modifier
-            .width(176.dp)
+            .width(150.dp)
             .pressable(onClick),
     ) {
         Artwork(
             url = playlist.artworkUrl,
             title = playlist.name,
             modifier = Modifier
-                .size(176.dp)
+                .size(150.dp)
                 .softShadow(RoundedCornerShape(corner), elevation = 18.dp),
             corner = corner,
         )
