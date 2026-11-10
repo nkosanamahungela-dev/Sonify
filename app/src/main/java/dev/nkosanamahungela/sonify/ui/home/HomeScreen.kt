@@ -64,7 +64,6 @@ import androidx.compose.ui.unit.lerp
 import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
-import com.adamglin.phosphoricons.Fill
 import com.adamglin.phosphoricons.fill.Heart
 import com.adamglin.phosphoricons.regular.ArrowsLeftRight
 import com.adamglin.phosphoricons.regular.SpotifyLogo
@@ -414,7 +413,7 @@ fun HomeScreen(
 
                 // A compact launchpad for the listener's own most-used
                 // playlists. It reuses the existing catalogue and open action.
-                if (filter == Feed.ALL && playlists.isNotEmpty()) {
+                if (filter == Feed.ALL) {
                     item(key = "home-shortcuts", contentType = "shortcuts") {
                         Column(
                             Modifier
