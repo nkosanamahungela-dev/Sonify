@@ -6070,6 +6070,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }.getOrNull()
     }
 
+    private suspend fun tracksForCurrentPlayer(tracks: List<CatalogTrack>): List<CatalogTrack> =
+        (container.activeBackend as? dev.nkosanamahungela.sonify.backend.SpotifyMetadataYouTubeBackend)
+            ?.toPlayable(tracks) ?: tracks
+
     private suspend fun loadArtist(uri: String, knownName: String = ""): ArtistPage = coroutineScope {
         val id = uri.substringAfterLast(':')
         val market = userCountry
@@ -6155,6 +6159,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     tracks = nativeTracks.take(5)
                 }
             }
+
+            tracks = tracksForCurrentPlayer(tracks)
 
             if (tracks.isNotEmpty() || releases.isNotEmpty() || artist != null) {
                 if (following != null) {
@@ -6261,7 +6267,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 if (it.uri == uri) it.copy(following = isFollowed) else it
             }
 
-            return@coroutineScope webArtist.copy(tracks = enrichedTracks.take(5))
+            return@coroutineScope webArtist.copy(
+                tracks = tracksForCurrentPlayer(enrichedTracks).take(5),
+            )
         }
 
         // Resolve artist name & metadata if knownName is empty
@@ -6287,10 +6295,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             }.getOrNull()
 
             if (searchRes != null && (searchRes.tracks.isNotEmpty() || searchRes.albums.isNotEmpty())) {
-                val matchedTracks = searchRes.tracks
-                    .filter { it.artists.any { a -> a.name.contains(searchName, ignoreCase = true) } }
-                    .ifEmpty { searchRes.tracks }
-                    .take(5)
+                val matchedTracks = tracksForCurrentPlayer(
+                    searchRes.tracks
+                        .filter { it.artists.any { a -> a.name.contains(searchName, ignoreCase = true) } }
+                        .ifEmpty { searchRes.tracks }
+                        .take(5),
+                )
 
                 val matchedAlbums = searchRes.albums
                 val isFollowed = _followedArtists.value.any { it.uri == uri }
@@ -6320,9 +6330,11 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }
 
         // Last resort: native contextTracks
-        val nativeTracks = runCatching {
-            Catalog.tracks(Catalog.contextTrackUris(uri).take(10))
-        }.getOrDefault(emptyList()).take(5)
+        val nativeTracks = tracksForCurrentPlayer(
+            runCatching {
+                Catalog.tracks(Catalog.contextTrackUris(uri).take(10))
+            }.getOrDefault(emptyList()).take(5),
+        )
 
         val isFollowed = _followedArtists.value.any { it.uri == uri }
         _playlist.value = _playlist.value.let {

@@ -109,13 +109,12 @@ class SpotifyMetadataYouTubeBackend(
         metadata.setFollowing(artistUri, follow)
 
     override fun owns(uri: String): Boolean =
-        uri.startsWith(YouTubeBackend.URI_SCHEME) ||
-            uri.startsWith("spotify:artist:") ||
-            uri.startsWith("spotify:album:") ||
-            uri.startsWith("spotify:playlist:") ||
-            uri.endsWith(":collection")
+        uri.startsWith(YouTubeBackend.URI_SCHEME) || uri.startsWith("spotify:")
 
     override fun createPlayer(host: PlaybackHost): Player = playback.createPlayer(host)
+
+    /** Converts Spotify artist-page tracks to ids the YouTube player can stream. */
+    suspend fun toPlayable(tracks: List<CatalogTrack>): List<CatalogTrack> = playable(tracks)
 
     private suspend fun playable(tracks: List<CatalogTrack>): List<CatalogTrack> =
         coroutineScope {
