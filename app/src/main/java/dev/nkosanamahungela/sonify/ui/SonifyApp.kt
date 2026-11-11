@@ -1812,6 +1812,7 @@ fun SonifyApp(
                                 onLoadMoreYouTube = viewModel::loadMoreYouTubeHome,
                                 youtubeSignedIn = youtubeAccountName != null,
                                 onYouTubeSignIn = { showYouTubeLogin = true },
+                                onSpotifyMetadataSignIn = { showSpotifyMetadataLogin = true },
                                 onSwitchSource = {
                                     preferences.setBackend(
                                         if (backend == dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY)
