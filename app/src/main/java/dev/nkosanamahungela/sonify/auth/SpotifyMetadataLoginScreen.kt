@@ -7,6 +7,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
@@ -84,10 +85,14 @@ fun SpotifyMetadataLoginScreen(onDone: (Boolean) -> Unit) {
         ) {
             Text("Spotify account", color = Color.White, style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.weight(1f))
-            Text("Close", color = Color.White.copy(alpha = 0.75f), modifier = Modifier
-                .background(Color.White.copy(alpha = 0.10f), CircleShape)
-                .padding(horizontal = 14.dp, vertical = 8.dp)
-                .then(Modifier))
+            Text(
+                "Close",
+                color = Color.White.copy(alpha = 0.75f),
+                modifier = Modifier
+                    .background(Color.White.copy(alpha = 0.10f), CircleShape)
+                    .clickable { webView?.stopLoading(); onDone(false) }
+                    .padding(horizontal = 14.dp, vertical = 8.dp),
+            )
         }
         if (busy) {
             Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
