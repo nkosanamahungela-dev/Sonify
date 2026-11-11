@@ -355,6 +355,20 @@ class SonifyApplication : Application(), ImageLoaderFactory {
     }
 
     /**
+     * YouTube playback with Spotify catalogue metadata. The YouTube engine
+     * remains responsible for streams and offline files; Spotify supplies
+     * every catalogue entity shown to the listener.
+     */
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    val spotifyMetadataYouTubeBackend: dev.nkosanamahungela.sonify.backend.SpotifyMetadataYouTubeBackend by lazy {
+        dev.nkosanamahungela.sonify.backend.SpotifyMetadataYouTubeBackend(
+            container = this,
+            metadata = spotifyBackend,
+            playback = youtubeBackend,
+        )
+    }
+
+    /**
      * Whichever of the two the user picked.
      *
      * Read afresh each time rather than held: the setting can change while the
@@ -364,6 +378,6 @@ class SonifyApplication : Application(), ImageLoaderFactory {
     val activeBackend: dev.nkosanamahungela.sonify.backend.MusicBackend
         get() = when (preferences.backend.value) {
             dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY -> spotifyBackend
-            dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC -> youtubeBackend
+            dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC -> spotifyMetadataYouTubeBackend
         }
 }
