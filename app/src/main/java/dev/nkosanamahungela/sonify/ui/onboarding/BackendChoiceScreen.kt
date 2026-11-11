@@ -31,7 +31,6 @@ import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Fill
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.fill.SpotifyLogo
-import com.adamglin.phosphoricons.fill.YoutubeLogo
 import com.adamglin.phosphoricons.regular.CaretRight
 import dev.nkosanamahungela.sonify.R
 import dev.nkosanamahungela.sonify.backend.BackendId
@@ -81,25 +80,17 @@ fun BackendChoiceScreen(onChoose: (BackendId) -> Unit) {
                     ProseText(stringResource(R.string.backend_choice_subtitle))
                 }
 
-                // A card each rather than a radio row: there is no "confirm".
-                // Tapping one is the answer, so each says what picking it means,
-                // and what it asks for, before it is picked.
+                // One source only: Spotify provides the catalogue, YouTube
+                // remains the stream resolver and offline download provider.
                 Column(
                     Modifier.padding(top = 32.dp, bottom = 16.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     SourceCard(
                         logo = PhosphorIcons.Fill.SpotifyLogo,
-                        title = stringResource(R.string.backend_spotify),
-                        description = stringResource(R.string.backend_choice_spotify_note),
-                        needs = stringResource(R.string.backend_choice_spotify_needs),
-                        onClick = { onChoose(BackendId.SPOTIFY) },
-                    )
-                    SourceCard(
-                        logo = PhosphorIcons.Fill.YoutubeLogo,
-                        title = stringResource(R.string.backend_youtube),
-                        description = stringResource(R.string.backend_choice_youtube_note),
-                        needs = stringResource(R.string.backend_choice_youtube_needs),
+                        title = "Spotify metadata + YouTube playback",
+                        description = "Spotify powers search, artwork, albums, artists and playlists. YouTube handles playback and downloads.",
+                        needs = "Spotify catalogue access is built in; YouTube sign-in remains optional.",
                         onClick = { onChoose(BackendId.YOUTUBE_MUSIC) },
                     )
                 }
