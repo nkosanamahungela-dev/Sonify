@@ -5,6 +5,9 @@ import android.graphics.Bitmap
 import android.webkit.CookieManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceError
+import android.webkit.WebChromeClient
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,6 +40,8 @@ fun SpotifyMetadataLoginScreen(onDone: (Boolean) -> Unit) {
     var busy by remember { mutableStateOf(false) }
     var webView by remember { mutableStateOf<WebView?>(null) }
     var finished by remember { mutableStateOf(false) }
+    var pageLoading by remember { mutableStateOf(true) }
+    var pageError by remember { mutableStateOf<String?>(null) }
 
     fun finish() {
         if (finished || busy) return
@@ -91,15 +96,28 @@ fun SpotifyMetadataLoginScreen(onDone: (Boolean) -> Unit) {
                     .padding(horizontal = 14.dp, vertical = 8.dp),
             )
         }
-        if (busy) {
+        if (busy || pageLoading) {
             Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
                 CircularProgressIndicator(modifier = Modifier.size(18.dp), color = Color(0xFF1ED760), strokeWidth = 2.dp)
-                Text(status, color = Color.White, modifier = Modifier.padding(start = 10.dp))
+                Text(if (busy) status else "Loading Spotify sign-in…", color = Color.White, modifier = Modifier.padding(start = 10.dp))
             }
         } else {
             Text(status, color = Color.White.copy(alpha = 0.8f), modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
         }
-        error?.let { Text(it, color = Color(0xFFFF6B6B), modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) }
+        (error ?: pageError)?.let { message ->
+            Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
+                Text(message, color = Color(0xFFFF8A80))
+                Text(
+                    "Tap to reload Spotify sign-in",
+                    color = Color(0xFF1ED760),
+                    modifier = Modifier.clickable {
+                        pageError = null
+                        pageLoading = true
+                        webView?.loadUrl("https://accounts.spotify.com/en/login?continue=https%3A%2F%2Fopen.spotify.com%2F")
+                    }.padding(top = 8.dp),
+                )
+            }
+        }
         AndroidView(
             modifier = Modifier.weight(1f).fillMaxWidth().padding(horizontal = 8.dp, vertical = 8.dp),
             factory = { ctx ->
@@ -109,11 +127,44 @@ fun SpotifyMetadataLoginScreen(onDone: (Boolean) -> Unit) {
                     settings.javaScriptEnabled = true
                     settings.domStorageEnabled = true
                     settings.databaseEnabled = true
+                    settings.loadsImagesAutomatically = true
                     CookieManager.getInstance().setAcceptThirdPartyCookies(this, true)
+                    setBackgroundColor(android.graphics.Color.WHITE)
+                    webChromeClient = WebChromeClient()
                     webViewClient = object : WebViewClient() {
-                        override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) { }
+                        override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                            pageLoading = true
+                            pageError = null
+                        }
+
+                        override fun onPageFinished(view: WebView?, url: String?) {
+                            pageLoading = false
+                        }
+
+                        override fun onReceivedError(
+                            view: WebView?,
+                            request: WebResourceRequest?,
+                            error: WebResourceError?,
+                        ) {
+                            if (request?.isForMainFrame == true) {
+                                pageLoading = false
+                                pageError = error?.description?.toString()
+                                    ?: "Spotify sign-in page could not be loaded."
+                            }
+                        }
+
+                        override fun onReceivedHttpError(
+                            view: WebView?,
+                            request: WebResourceRequest?,
+                            response: android.webkit.WebResourceResponse?,
+                        ) {
+                            if (request?.isForMainFrame == true && (response?.statusCode ?: 200) >= 400) {
+                                pageLoading = false
+                                pageError = "Spotify returned HTTP ${response?.statusCode}. Try reloading."
+                            }
+                        }
                     }
-                    loadUrl("https://accounts.spotify.com/login?continue=https%3A%2F%2Fopen.spotify.com%2F")
+                    loadUrl("https://accounts.spotify.com/en/login?continue=https%3A%2F%2Fopen.spotify.com%2F")
                 }
             },
         )
