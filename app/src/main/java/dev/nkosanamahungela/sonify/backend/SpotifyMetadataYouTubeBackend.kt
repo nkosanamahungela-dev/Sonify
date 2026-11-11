@@ -186,7 +186,7 @@ class SpotifyMetadataYouTubeBackend(
                 val songs = YouTube.search(
                     "${track.name} ${track.artist}",
                     YouTube.SearchFilter.FILTER_SONG,
-                ).getOrDefault(emptyList()).filterIsInstance<SongItem>()
+                ).map { it.items }.getOrDefault(emptyList()).filterIsInstance<SongItem>()
 
                 val wantedTitle = normalize(track.name)
                 val wantedArtist = normalize(track.artist.substringBefore(','))
