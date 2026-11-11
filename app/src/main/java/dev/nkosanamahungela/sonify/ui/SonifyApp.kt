@@ -822,6 +822,24 @@ fun SonifyApp(
     /** Spotify web-player session for catalogue metadata (separate from audio-engine OAuth). */
     var showSpotifyMetadataLogin by remember { mutableStateOf(false) }
 
+    // Ask for the catalogue account once after the user chooses the hybrid
+    // source. They can dismiss it and connect later from Settings > Account.
+    var metadataLoginPrompted by rememberSaveable { mutableStateOf(false) }
+    val metadataSessionConnected = remember(context) {
+        dev.nkosanamahungela.sonify.auth.SpotifyMetadataSession.isConnected(context)
+    }
+    LaunchedEffect(backendChosen, backend, metadataSessionConnected) {
+        if (
+            backendChosen &&
+            backend == dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC &&
+            !metadataSessionConnected &&
+            !metadataLoginPrompted
+        ) {
+            metadataLoginPrompted = true
+            showSpotifyMetadataLogin = true
+        }
+    }
+
     // The open track menu, if any. Held here because the menu is drawn above
     // everything the app puts over its screens.
     var trackMenu by remember { mutableStateOf<TrackMenuRequest?>(null) }
