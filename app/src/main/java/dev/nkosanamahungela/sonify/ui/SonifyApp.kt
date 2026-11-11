@@ -819,6 +819,9 @@ fun SonifyApp(
     /** The Google sign-in web view, opened from the settings. */
     var showYouTubeLogin by remember { mutableStateOf(false) }
 
+    /** Spotify web-player session for catalogue metadata (separate from audio-engine OAuth). */
+    var showSpotifyMetadataLogin by remember { mutableStateOf(false) }
+
     // The open track menu, if any. Held here because the menu is drawn above
     // everything the app puts over its screens.
     var trackMenu by remember { mutableStateOf<TrackMenuRequest?>(null) }
@@ -3965,6 +3968,27 @@ fun SonifyApp(
                 // Over everything, like the tutorial: it is Google's own sign-in
                 // page and half-covering it would be the wrong thing to do with
                 // a page someone is typing a password into.
+                if (showSpotifyMetadataLogin) {
+                    Box(
+                        Modifier
+                            .fillMaxSize()
+                            .background(androidx.compose.ui.graphics.Color(0xFF101012)),
+                    ) {
+                        dev.nkosanamahungela.sonify.auth.SpotifyMetadataLoginScreen(
+                            onDone = { connected ->
+                                showSpotifyMetadataLogin = false
+                                if (!connected) {
+                                    android.widget.Toast.makeText(
+                                        context,
+                                        "Spotify metadata login was cancelled",
+                                        android.widget.Toast.LENGTH_SHORT,
+                                    ).show()
+                                }
+                            },
+                        )
+                    }
+                }
+
                 if (showYouTubeLogin) {
                     val account = remember(context) {
                         (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication)
@@ -3988,7 +4012,14 @@ fun SonifyApp(
                 }
 
                 if (!backendChosen) {
-                    BackendChoiceScreen(onChoose = preferences::setBackend)
+                    BackendChoiceScreen(
+                        onChoose = { selected ->
+                            preferences.setBackend(selected)
+                            if (!dev.nkosanamahungela.sonify.auth.SpotifyMetadataSession.isConnected(context)) {
+                                showSpotifyMetadataLogin = true
+                            }
+                        },
+                    )
                 } else if (
                     // Every step of it is Spotify's setup — the Premium
                     // account, the login, the registered application — so on
