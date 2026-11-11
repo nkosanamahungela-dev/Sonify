@@ -62,9 +62,65 @@ class SpotifyMetadataYouTubeBackend(
     }
 
     override suspend fun playlists(): List<CatalogPlaylist> = metadata.playlists()
-    override suspend fun savedAlbums(): List<CatalogPlaylist> = metadata.savedAlbums()
-    override suspend fun followedArtists(): List<SearchItem> = metadata.followedArtists()
+
+    /** Spotify's saved albums, through the user's registered Web API session. */
+    override suspend fun savedAlbums(): List<CatalogPlaylist> {
+        if (!container.webApi.isReady) return emptyList()
+        val loaded = mutableListOf<CatalogPlaylist>()
+        var offset = 0
+        while (true) {
+            val page = container.api.savedAlbums(limit = 50, offset = offset)
+            loaded += page.items.mapNotNull { saved ->
+                val album = saved.album
+                val uri = album.uri ?: return@mapNotNull null
+                CatalogPlaylist(
+                    uri = uri,
+                    name = album.name,
+                    artworkUrl = album.images.firstOrNull()?.url,
+                )
+            }
+            offset += page.items.size
+            if (page.items.isEmpty() || offset >= page.total) return loaded
+        }
+    }
+
+    /** Spotify's followed artists, cursor-paged until the account's list ends. */
+    override suspend fun followedArtists(): List<SearchItem> {
+        if (!container.webApi.isReady) return emptyList()
+        val loaded = mutableListOf<SearchItem>()
+        var after: String? = null
+        do {
+            val page = container.api.followedArtists(after = after).artists
+            loaded += page.items.mapNotNull { artist ->
+                val uri = artist.uri ?: return@mapNotNull null
+                SearchItem(
+                    uri = uri,
+                    title = artist.name,
+                    subtitle = "Artist",
+                    artworkUrl = artist.images.firstOrNull()?.url,
+                )
+            }
+            after = page.cursors?.after
+        } while (after != null)
+        return loaded
+    }
+
     override suspend fun savedShows(): List<CatalogPlaylist> = metadata.savedShows()
+
+    /** Spotify's new releases, not YouTube Music's release feed. */
+    override suspend fun newRows(): List<HomeRow> {
+        if (!container.webApi.isReady) return emptyList()
+        val albums = container.api.newReleases(limit = 20).albums?.items.orEmpty()
+            .mapNotNull { album ->
+                val uri = album.uri ?: return@mapNotNull null
+                CatalogPlaylist(
+                    uri = uri,
+                    name = album.name,
+                    artworkUrl = album.images.firstOrNull()?.url,
+                )
+            }
+        return if (albums.isEmpty()) emptyList() else listOf(HomeRow("New releases", items = albums))
+    }
     override suspend fun newEpisodes(): List<CatalogTrack> = playable(metadata.newEpisodes())
 
     /** Spotify's personalised home feed, parsed from the same gateway as Spotify search. */
