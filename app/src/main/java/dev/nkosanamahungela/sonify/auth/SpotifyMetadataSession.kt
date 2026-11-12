@@ -44,6 +44,26 @@ object SpotifyMetadataSession {
     fun isConnected(context: Context): Boolean =
         prefs(context).getString(COOKIE, null).orEmpty().isNotBlank()
 
+    /**
+     * Returns a usable web-player token, refreshing it from the encrypted
+     * session cookie before expiry. This is the token the catalogue gateway
+     * must use; the audio engine has a separate credential.
+     */
+    suspend fun accessToken(context: Context): String = withContext(Dispatchers.IO) {
+        val store = prefs(context)
+        val token = store.getString(ACCESS, null).orEmpty()
+        val expiry = store.getLong(EXPIRES, 0L)
+        if (token.isNotBlank() && expiry > System.currentTimeMillis() + 60_000L) {
+            return@withContext token
+        }
+        val cookie = store.getString(COOKIE, null).orEmpty()
+        require(cookie.isNotBlank()) { "Connect your Spotify account to load catalogue metadata." }
+        connect(context, cookie)
+        prefs(context).getString(ACCESS, null)
+            ?.takeIf(String::isNotBlank)
+            ?: error("Spotify did not return a catalogue access token.")
+    }
+
     fun clear(context: Context) {
         prefs(context).edit().clear().commit()
     }

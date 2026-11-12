@@ -229,7 +229,13 @@ class SonifyApplication : Application(), ImageLoaderFactory {
 
     /** Track lists from Spotify's own gateway; see [dev.nkosanamahungela.sonify.data.Gateway]. */
     val gateway: dev.nkosanamahungela.sonify.data.Gateway by lazy {
-        dev.nkosanamahungela.sonify.data.Gateway(pathfinderKeys)
+        dev.nkosanamahungela.sonify.data.Gateway(pathfinderKeys) {
+            if (dev.nkosanamahungela.sonify.auth.SpotifyMetadataSession.isConnected(this)) {
+                dev.nkosanamahungela.sonify.auth.SpotifyMetadataSession.accessToken(this)
+            } else {
+                null
+            }
+        }
     }
 
     /** Which stretcher works out speed and pitch. */
