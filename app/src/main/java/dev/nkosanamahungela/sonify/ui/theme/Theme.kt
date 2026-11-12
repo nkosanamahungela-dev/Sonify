@@ -158,7 +158,7 @@ fun SquareTheme(
     }
 }
 
-private val DarkBase = Color(0xFF0D0E11)
+private val DarkBase = Color(0xFF121212)
 private val LightBase = Color(0xFFF1F2F6)
 
 /**
@@ -207,7 +207,7 @@ val InkDim: Color
  * anything near it makes the app read as a clone no matter how the rest is laid
  * out.
  */
-private val DefaultAccent = Color(0xFF1ED760)
+private val DefaultAccent = Color(0xFF1DB954)
 
 /** Brighten until the colour reads against a near-black background. */
 private fun Color.liftFor(background: Color): Color {

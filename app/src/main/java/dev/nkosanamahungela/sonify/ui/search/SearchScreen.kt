@@ -106,7 +106,7 @@ private fun SpotuiBrowseAll(onCategoryClick: (String) -> Unit) {
                             .height(96.dp)
                             .clip(RoundedCornerShape(8.dp))
                             .background(color)
-                            .clickable { onCategoryClick(query) }
+                            .pressable(onClick = { onCategoryClick(query) }, pressedScale = 0.965f)
                             .padding(12.dp),
                     ) {
                         Text(
