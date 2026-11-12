@@ -8,6 +8,7 @@ import android.webkit.WebViewClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceError
 import android.webkit.WebChromeClient
+import android.webkit.WebSettings
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -128,6 +129,10 @@ fun SpotifyMetadataLoginScreen(onDone: (Boolean) -> Unit) {
                     settings.domStorageEnabled = true
                     settings.databaseEnabled = true
                     settings.loadsImagesAutomatically = true
+                    settings.loadWithOverviewMode = true
+                    settings.useWideViewPort = true
+                    settings.mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
+                    settings.javaScriptCanOpenWindowsAutomatically = true
                     CookieManager.getInstance().setAcceptThirdPartyCookies(this, true)
                     setBackgroundColor(android.graphics.Color.WHITE)
                     webChromeClient = WebChromeClient()
@@ -139,6 +144,7 @@ fun SpotifyMetadataLoginScreen(onDone: (Boolean) -> Unit) {
 
                         override fun onPageFinished(view: WebView?, url: String?) {
                             pageLoading = false
+                            view?.let(::fixSpotifyLoginLayout)
                         }
 
                         override fun onReceivedError(
@@ -167,6 +173,33 @@ fun SpotifyMetadataLoginScreen(onDone: (Boolean) -> Unit) {
                     loadUrl("https://accounts.spotify.com/en/login?continue=https%3A%2F%2Fopen.spotify.com%2F")
                 }
             },
+        )
+    }
+}
+
+/**
+ * Spotify's responsive login page can calculate its main content at only
+ * ~48px high inside Android WebView. Give the document and main element the
+ * actual viewport height so the login form is visible instead of a blank panel.
+ */
+private fun fixSpotifyLoginLayout(webView: WebView) {
+    webView.post {
+        val viewportHeight = webView.height.coerceAtLeast(1)
+        webView.evaluateJavascript(
+            """
+            (function() {
+              var style = document.getElementById('sonify-login-layout-fix');
+              if (!style) {
+                style = document.createElement('style');
+                style.id = 'sonify-login-layout-fix';
+                document.head.appendChild(style);
+              }
+              style.textContent =
+                'html,body,#__next{height:${viewportHeight}px!important;min-height:${viewportHeight}px!important;}' +
+                'main{height:${viewportHeight}px!important;min-height:${viewportHeight}px!important;max-height:none!important;position:relative!important;overflow:auto!important;}';
+            })();
+            """.trimIndent(),
+            null,
         )
     }
 }
