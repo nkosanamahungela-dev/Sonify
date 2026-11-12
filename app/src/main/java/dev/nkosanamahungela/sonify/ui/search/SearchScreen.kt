@@ -57,7 +57,6 @@ import dev.nkosanamahungela.sonify.ui.player.GlassFilm
 import dev.nkosanamahungela.sonify.ui.settings.WebApiSetup
 import dev.nkosanamahungela.sonify.ui.theme.Ink
 import dev.nkosanamahungela.sonify.ui.theme.InkDim
-import androidx.compose.foundation.clickable
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.regular.DotsThree
@@ -279,7 +278,7 @@ fun SearchScreen(
                         color = Color(0xFF333333),
                         style = MaterialTheme.typography.titleLarge,
                         modifier = Modifier
-                            .clickable { onQuery("") }
+                            .pressable(onClick = { onQuery("") })
                             .padding(horizontal = 2.dp),
                     )
                 }

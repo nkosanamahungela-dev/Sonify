@@ -1,7 +1,7 @@
 package dev.nkosanamahungela.sonify.ui.settings
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import dev.nkosanamahungela.sonify.ui.glass.pressable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -832,7 +832,7 @@ fun SettingsScreen(
                 Row(
                     Modifier
                         .fillMaxWidth()
-                        .clickable { uriHandler.openUri(GITHUB_URL) }
+                        .pressable(onClick = { uriHandler.openUri(GITHUB_URL) })
                         .padding(horizontal = 18.dp, vertical = 16.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -873,7 +873,7 @@ fun SettingsScreen(
                 Row(
                     Modifier
                         .fillMaxWidth()
-                        .clickable { uriHandler.openUri(KOFI_URL) }
+                        .pressable(onClick = { uriHandler.openUri(KOFI_URL) })
                         .padding(horizontal = 18.dp, vertical = 16.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -1082,7 +1082,7 @@ private fun SettingsIndex(
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(24.dp))
                 .background(Ink.copy(alpha = 0.07f))
-                .clickable { onOpen(SettingsPage.Account) }
+                .pressable(onClick = { onOpen(SettingsPage.Account) })
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -1288,7 +1288,7 @@ private fun Tile(
             .heightIn(min = 132.dp)
             .clip(RoundedCornerShape(24.dp))
             .background(Ink.copy(alpha = 0.07f))
-            .clickable(onClick = onClick)
+            .pressable(onClick = onClick)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
@@ -1316,7 +1316,7 @@ private fun PageRow(title: String, summary: String, onClick: () -> Unit) {
     Row(
         Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick)
+            .pressable(onClick = onClick)
             .padding(horizontal = 18.dp, vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -1758,7 +1758,7 @@ private fun PreferredLyricsSection(showSpotify: Boolean) {
         Row(
             Modifier
                 .fillMaxWidth()
-                .clickable { open = !open }
+                .pressable(onClick = { open = !open })
                 .padding(horizontal = 18.dp, vertical = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -1863,9 +1863,9 @@ private fun UpdateRow(onNeedsPermission: (Updater.State.Available) -> Unit) {
     Row(
         Modifier
             .fillMaxWidth()
-            .clickable(enabled = !busy) {
+            .pressable(enabled = !busy, onClick = {
                 scope.launch { updater.checkAndInstall()?.let(onNeedsPermission) }
-            }
+            })
             .padding(horizontal = 18.dp, vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -1901,7 +1901,7 @@ private fun Licences() {
         Row(
             Modifier
                 .fillMaxWidth()
-                .clickable { open = !open }
+                .pressable(onClick = { open = !open })
                 .padding(horizontal = 18.dp, vertical = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -2130,7 +2130,7 @@ private fun DownloadSwitch(
     Row(
         Modifier
             .fillMaxWidth()
-            .clickable { onChange(!checked) }
+            .pressable(onClick = { onChange(!checked) })
             .padding(start = 18.dp, end = 12.dp, top = 12.dp, bottom = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -2223,7 +2223,7 @@ private fun LazyListScope.groupHeading(group: Group, open: Boolean, onToggle: ()
                 .padding(start = GROUP_MARGIN, end = GROUP_MARGIN, top = 6.dp, bottom = gap)
                 .clip(RoundedCornerShape(GROUP_CORNER, GROUP_CORNER, lower, lower))
                 .background(groupPanel())
-                .clickable(onClick = onToggle)
+                .pressable(onClick = onToggle)
                 .padding(start = 18.dp, end = 20.dp, top = 16.dp, bottom = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(14.dp),
@@ -2397,7 +2397,7 @@ private fun ActionRow(
         Row(
             Modifier
                 .fillMaxWidth()
-                .clickable(onClick = onClick)
+                .pressable(onClick = onClick)
                 .padding(horizontal = 18.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -2420,7 +2420,7 @@ private fun ActionRow(
         color = if (destructive) MaterialTheme.colorScheme.error else Ink,
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick)
+            .pressable(onClick = onClick)
             .padding(horizontal = 18.dp, vertical = 16.dp),
     )
 }
@@ -2436,7 +2436,7 @@ private fun ChoiceRow(
     Row(
         Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick)
+            .pressable(onClick = onClick)
             .padding(horizontal = 18.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),

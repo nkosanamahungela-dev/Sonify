@@ -3142,7 +3142,7 @@ private fun SongCard(
                 .aspectRatio(1f)
                 .softShadow(RoundedCornerShape(18.dp), elevation = 20.dp)
                 .clip(RoundedCornerShape(18.dp))
-                .clickable(onClick = onCover),
+                .pressable(onClick = onCover),
         ) {
             dev.nkosanamahungela.sonify.ui.components.Artwork(
                 url = state.artworkUrl,
@@ -3221,7 +3221,7 @@ private fun CardButton(
             .size(size)
             .clip(CircleShape)
             .background(Color.Black.copy(alpha = 0.35f))
-            .clickable(enabled = enabled, onClick = onClick),
+            .pressable(enabled = enabled, onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
         Icon(

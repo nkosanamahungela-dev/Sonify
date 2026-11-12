@@ -1,7 +1,6 @@
 package dev.nkosanamahungela.sonify.ui.home
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.aspectRatio
@@ -704,7 +703,7 @@ private fun Header(
                 Column(
                     modifier = Modifier
                         .padding(top = 0.dp)
-                        .clickable(onClick = onSwitchSource)
+                        .pressable(onClick = onSwitchSource)
                         .graphicsLayer {
                             val scale = 1f - 0.12f * collapse()
                             scaleX = scale

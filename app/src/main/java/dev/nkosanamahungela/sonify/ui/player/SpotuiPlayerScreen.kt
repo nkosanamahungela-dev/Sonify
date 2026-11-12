@@ -1,7 +1,7 @@
 package dev.nkosanamahungela.sonify.ui.player
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import dev.nkosanamahungela.sonify.ui.glass.pressable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -128,7 +128,7 @@ internal fun SpotuiPlayerScreen(
                         PhosphorIcons.Regular.CaretDown,
                         contentDescription = "Close player",
                         tint = Color.White,
-                        modifier = Modifier.size(26.dp).clickable(onClick = onCollapse),
+                        modifier = Modifier.size(26.dp).pressable(onClick = onCollapse),
                     )
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text("PLAYING FROM", color = Color(0xFFB3B3B3), fontSize = 10.sp, fontWeight = FontWeight.Bold)
@@ -145,7 +145,7 @@ internal fun SpotuiPlayerScreen(
                         PhosphorIcons.Regular.Plus,
                         contentDescription = "Add to playlist",
                         tint = Color.White,
-                        modifier = Modifier.size(24.dp).clickable(onClick = onAddToPlaylist),
+                        modifier = Modifier.size(24.dp).pressable(onClick = onAddToPlaylist),
                     )
                 }
             }
@@ -182,7 +182,7 @@ internal fun SpotuiPlayerScreen(
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             modifier = Modifier.padding(top = 4.dp).then(
-                                if (onOpenAlbum != null) Modifier.clickable(onClick = onOpenAlbum) else Modifier,
+                                if (onOpenAlbum != null) Modifier.pressable(onClick = onOpenAlbum) else Modifier,
                             ),
                         )
                     }
@@ -190,7 +190,7 @@ internal fun SpotuiPlayerScreen(
                         if (inLikedSongs) PhosphorIcons.Fill.Heart else PhosphorIcons.Regular.Heart,
                         contentDescription = if (inLikedSongs) "Liked" else "Like",
                         tint = if (inLikedSongs) Color(0xFF1ED760) else Color.White,
-                        modifier = Modifier.size(26.dp).clickable { onToggleLike?.invoke() },
+                        modifier = Modifier.size(26.dp).pressable(onClick = { onToggleLike?.invoke() }),
                     )
                 }
             }
@@ -230,17 +230,17 @@ internal fun SpotuiPlayerScreen(
                         PhosphorIcons.Regular.Shuffle,
                         contentDescription = "Shuffle",
                         tint = if (state.shuffleEnabled) Color(0xFF1ED760) else Color.White,
-                        modifier = Modifier.size(23.dp).clickable(onClick = onToggleShuffle),
+                        modifier = Modifier.size(23.dp).pressable(onClick = onToggleShuffle),
                     )
                     androidx.compose.material3.Icon(
                         PhosphorIcons.Fill.SkipBack,
                         contentDescription = "Previous",
                         tint = if (state.hasPrevious) Color.White else Color.Gray,
-                        modifier = Modifier.size(30.dp).clickable(enabled = state.hasPrevious, onClick = onPrevious),
+                        modifier = Modifier.size(30.dp).pressable(enabled = state.hasPrevious, onClick = onPrevious),
                     )
                     Box(
                         Modifier.size(64.dp).clip(CircleShape).background(Color.White)
-                            .clickable(onClick = onTogglePlay),
+                            .pressable(onClick = onTogglePlay),
                         contentAlignment = Alignment.Center,
                     ) {
                         if (state.isBuffering) {
@@ -258,13 +258,13 @@ internal fun SpotuiPlayerScreen(
                         PhosphorIcons.Fill.SkipForward,
                         contentDescription = "Next",
                         tint = if (state.hasNext) Color.White else Color.Gray,
-                        modifier = Modifier.size(30.dp).clickable(enabled = state.hasNext, onClick = onNext),
+                        modifier = Modifier.size(30.dp).pressable(enabled = state.hasNext, onClick = onNext),
                     )
                     androidx.compose.material3.Icon(
                         PhosphorIcons.Regular.Repeat,
                         contentDescription = "Repeat",
                         tint = if (state.repeatMode != Player.REPEAT_MODE_OFF) Color(0xFF1ED760) else Color.White,
-                        modifier = Modifier.size(23.dp).clickable(onClick = onCycleRepeat),
+                        modifier = Modifier.size(23.dp).pressable(onClick = onCycleRepeat),
                     )
                 }
             }
@@ -277,7 +277,7 @@ internal fun SpotuiPlayerScreen(
                     if (connectAvailable) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.clickable(onClick = onOpenDevices),
+                            modifier = Modifier.pressable(onClick = onOpenDevices),
                         ) {
                             androidx.compose.material3.Icon(
                                 PhosphorIcons.Regular.Devices,
