@@ -1,10 +1,8 @@
 package dev.nkosanamahungela.sonify.ui.glass
 
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
@@ -62,7 +60,13 @@ fun Modifier.pressable(
         interaction.interactions.collect { event ->
             when (event) {
                 is PressInteraction.Press -> if (enabled) {
-                    scale.animateTo(pressedScale, tween(90, easing = FastOutSlowInEasing))
+                    scale.animateTo(
+                        pressedScale,
+                        spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessMedium,
+                        ),
+                    )
                 }
 
                 is PressInteraction.Release, is PressInteraction.Cancel -> {
