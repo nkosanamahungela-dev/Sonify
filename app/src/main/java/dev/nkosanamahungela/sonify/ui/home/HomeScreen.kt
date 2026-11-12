@@ -906,12 +906,12 @@ private fun PlaylistShortcut(
     onClick: () -> Unit,
 ) {
     val likedSongs = playlist.uri.endsWith(":collection")
-    val shape = RoundedCornerShape(12.dp)
+    val shape = RoundedCornerShape(4.dp)
     Row(
         modifier
             .height(48.dp)
             .clip(shape)
-            .background(if (likedSongs) Color(0xFF29213F) else SHORTCUT_COLORS[index % SHORTCUT_COLORS.size])
+            .background(Color(0xFF2A2A2A))
             .pressable(onClick),
         verticalAlignment = Alignment.CenterVertically,
     ) {

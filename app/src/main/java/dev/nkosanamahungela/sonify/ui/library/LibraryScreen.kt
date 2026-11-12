@@ -586,30 +586,22 @@ private fun Header(
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(start = 24.dp, end = 20.dp, top = 18.dp),
-            verticalAlignment = Alignment.Bottom,
+                .padding(start = 20.dp, end = 20.dp, top = 14.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Column(Modifier.weight(1f)) {
-                // Counting whatever the chips are showing, and saying so: the
-                // same number labelled "playlists" under the albums chip is a
-                // line that contradicts the screen it sits on.
+                Text(
+                    "Your Library",
+                    style = MaterialTheme.typography.headlineMedium.copy(fontSize = 30.sp),
+                    fontWeight = FontWeight.Bold,
+                    color = Ink,
+                )
                 Text(
                     stringResource(filter.count, count),
-                    style = MaterialTheme.typography.labelLarge,
+                    style = MaterialTheme.typography.bodySmall,
                     color = InkDim,
+                    modifier = Modifier.padding(top = 2.dp),
                 )
-                Box(
-                    Modifier
-                        .padding(top = 10.dp)
-                        .height(44.dp),
-                    contentAlignment = Alignment.CenterStart,
-                ) {
-                    dev.nkosanamahungela.sonify.ui.components.SquareTitle(
-                        stringResource(R.string.library),
-                        height = dev.nkosanamahungela.sonify.ui.components.TITLE_HEIGHT,
-                        modifier = Modifier.offset(y = -dev.nkosanamahungela.sonify.ui.components.TITLE_HEIGHT * 0.15f),
-                    )
-                }
             }
 
             // Upstream's blend group: a pressed button swells into its
