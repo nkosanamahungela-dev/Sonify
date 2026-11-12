@@ -337,7 +337,7 @@ fun HomeScreen(
                     topPadding = contentPadding.calculateTopPadding(),
                     onFilter = { filterName = it.name },
                     chips = chips,
-                    showFilters = false,
+                    showFilters = true,
                     onOpenSettings = onOpenSettings,
                     friends = friends,
                     onOpenFriends = onOpenFriends,
@@ -412,37 +412,6 @@ fun HomeScreen(
                     }
                 }
 
-                // A compact launchpad for the listener's own most-used
-                // playlists. It reuses the existing catalogue and open action.
-                if (filter == Feed.ALL) {
-                    item(key = "home-shortcuts", contentType = "shortcuts") {
-                        Column(
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(start = 16.dp, end = 16.dp, top = 8.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp),
-                        ) {
-                            val quickAccess = remember(playlists) {
-                                listOf(CatalogPlaylist(uri = "spotify:collection", name = "Liked Songs")) +
-                                    playlists.take(7)
-                            }
-                            quickAccess.chunked(2).forEachIndexed { rowIndex, pair ->
-                                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                                    pair.forEachIndexed { columnIndex, playlist ->
-                                        PlaylistShortcut(
-                                            playlist = playlist,
-                                            index = rowIndex * 2 + columnIndex,
-                                            modifier = Modifier.weight(1f),
-                                            onClick = { onOpenPlaylist(playlist) },
-                                        )
-                                    }
-                                    if (pair.size == 1) Spacer(Modifier.weight(1f))
-                                }
-                            }
-                        }
-                    }
-                }
-
                 // Spotify's own shelves come first, because they are what the
                 // listener recognises as their home and the only rows here that
                 // this app could not have built itself. What the account has
@@ -474,11 +443,10 @@ fun HomeScreen(
                     }
                     // Keyed by place as well as title: Spotify can send two rows
                     // with the same title, and a key used twice crashes the list.
-                    visible.take(2).forEachIndexed { index, shelf ->
-                        val homeTitle = if (index == 0) "It's New Music Friday!" else "Friday drops picked for you"
+                    visible.forEachIndexed { index, shelf ->
                         item(key = "shelf-heading-$index-${shelf.title}", contentType = "shelf") {
                             Box(Modifier.animateItem(fadeInSpec = tween(320), placementSpec = null, fadeOutSpec = null)) {
-                                Heading(homeTitle, top = 24.dp)
+                                Heading(shelf.title, top = 24.dp)
                             }
                         }
                         item(key = "shelf-$index-${shelf.title}", contentType = "shelf") {
