@@ -681,80 +681,44 @@ private fun Header(
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp)
-                // The top padding, as a layout pass: `padding()` takes a Dp,
-                // which would have to be computed while composing.
-                .layout { measurable, constraints ->
-                    val top = lerp(18.dp, 2.dp, collapse()).roundToPx()
-                    val placeable = measurable.measure(constraints)
-                    layout(placeable.width, placeable.height + top) {
-                        placeable.place(0, top)
-                    }
-                },
+                .padding(horizontal = 16.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Column(Modifier.weight(1f)) {
-                // Tap the Home title to switch between music sources.
-                // The app's own name, at the size the account name used to be.
-                // It is what the page is, and unlike the account it is worth
-                // reading at a glance; it shrinks a little as the header
-                // collapses rather than leaving, because a bar with nothing in
-                // it says nothing about where you are.
-                Column(
-                    modifier = Modifier
-                        .padding(top = 0.dp)
-                        .pressable(onClick = onSwitchSource)
-                        .graphicsLayer {
-                            val scale = 1f - 0.12f * collapse()
-                            scaleX = scale
-                            scaleY = scale
-                            transformOrigin = TransformOrigin(0f, 0.5f)
-                        },
-                ) {
-                    Text(
-                        "Home",
-                        style = MaterialTheme.typography.displaySmall.copy(fontSize = 34.sp),
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                    )
-                }
-            }
+            // Spotifusion's home starts with the account avatar, not a large
+            // app-name banner. Keep the source switch as its own recognisable
+            // action so the Spotify / YouTube backend toggle is still one tap.
+            dev.nkosanamahungela.sonify.ui.components.ProfilePicture(
+                url = avatarUrl,
+                name = name,
+                size = 36.dp,
+                modifier = Modifier
+                    .size(36.dp)
+                    .clip(CircleShape)
+                    .pressable(onOpenSettings, pressedScale = 0.90f),
+                decodeSize = 46.dp,
+            )
 
-            // Falls back to the generated cover keyed on the name, which is what
-            // every other missing image in the app gets rather than a grey
-            // circle.
-            // The way into the settings. They have no tab of their own — see
-            // SettingsScreen — and the account picture is where anyone looks for
-            // them anyway.
-            // The people the account follows, as a huddle of faces.
-            //
-            // Beside the account's own picture because that is what it is about
-            // — who is listening — and because a list nobody has asked for does
-            // not deserve a tab. Absent rather than empty when nobody is
-            // playing: a control that opens onto nothing is worse than no
-            // control.
             if (friends.isNotEmpty()) {
                 FriendFaces(friends, onOpenFriends)
             }
 
-            dev.nkosanamahungela.sonify.ui.components.ProfilePicture(
-                url = avatarUrl,
-                name = name,
-                size = 46.dp,
-                modifier = Modifier
-                    .padding(start = 14.dp)
-                    // Measured from the scroll rather than sized in
-                    // composition; see the note on `collapse`.
-                    .layout { measurable, _ ->
-                        val side = lerp(46.dp, 36.dp, collapse()).roundToPx()
-                        val placeable = measurable.measure(Constraints.fixed(side, side))
-                        layout(side, side) { placeable.place(0, 0) }
-                    }
+            Spacer(Modifier.weight(1f))
+
+            Box(
+                Modifier
+                    .size(38.dp)
                     .clip(CircleShape)
-                    .pressable(onOpenSettings, pressedScale = 0.90f)
-                    .softShadow(CircleShape, elevation = 10.dp),
-                decodeSize = 46.dp,
-            )
+                    .pressable(onClick = onSwitchSource),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(
+                    serviceIcon,
+                    contentDescription = stringResource(service),
+                    tint = Ink,
+                    modifier = Modifier.size(22.dp),
+                )
+            }
         }
 
         // The chips carry the header's bottom margin with them; without them
@@ -768,7 +732,7 @@ private fun FilterRow(selected: Feed, chips: List<Feed>, backdrop: Backdrop, onS
     LazyRow(
         contentPadding = PaddingValues(horizontal = 20.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.padding(top = 18.dp, bottom = 6.dp),
+        modifier = Modifier.padding(top = 8.dp, bottom = 6.dp),
     ) {
         items(chips, key = { it.name }) { entry ->
             dev.nkosanamahungela.sonify.ui.components.FilterChip(
