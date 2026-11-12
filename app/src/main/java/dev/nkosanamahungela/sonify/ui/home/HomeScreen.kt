@@ -1048,7 +1048,7 @@ private fun PlaylistTile(playlist: CatalogPlaylist, onClick: () -> Unit) {
             title = playlist.name,
             modifier = Modifier
                 .size(150.dp)
-                .softShadow(RoundedCornerShape(corner), elevation = 18.dp),
+                .clip(RoundedCornerShape(corner)),
             corner = corner,
         )
         Text(
@@ -1087,8 +1087,8 @@ private fun TrackTile(track: CatalogTrack, onClick: () -> Unit) {
             title = track.name,
             modifier = Modifier
                 .size(128.dp)
-                .softShadow(RoundedCornerShape(18.dp), elevation = 14.dp),
-            corner = 18.dp,
+                .clip(RoundedCornerShape(8.dp)),
+            corner = 8.dp,
             decodeSize = 128.dp,
         )
         Text(

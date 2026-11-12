@@ -719,8 +719,8 @@ private fun GridTile(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
-                .softShadow(RoundedCornerShape(20.dp), elevation = 18.dp, spot = 0.4f),
-            corner = 20.dp,
+                .clip(RoundedCornerShape(8.dp)),
+            corner = 8.dp,
             decodeSize = 220.dp,
         )
         Row(
@@ -748,10 +748,10 @@ private fun ListRow(
     Row(
         Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(8.dp))
             .pressable(
                 onClick,
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(8.dp),
                 pressedScale = 0.98f,
                 onLongClick = onLongClick,
             )
@@ -763,8 +763,8 @@ private fun ListRow(
             title = playlist.name,
             modifier = Modifier
                 .size(52.dp)
-                .softShadow(RoundedCornerShape(14.dp), elevation = 10.dp),
-            corner = 14.dp,
+                .clip(RoundedCornerShape(6.dp)),
+            corner = 6.dp,
             decodeSize = 52.dp,
         )
         Text(

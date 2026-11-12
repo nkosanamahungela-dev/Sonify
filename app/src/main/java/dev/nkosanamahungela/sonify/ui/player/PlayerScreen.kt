@@ -2376,13 +2376,8 @@ private fun Cover(
                 modifier = Modifier
                     .fillMaxSize()
                     .sharedArtwork(sharedScope, animatedScope)
-                    .softShadow(
-                        RoundedCornerShape(26.dp),
-                        elevation = (10 + 30 * playingLift).dp,
-                        ambient = 0.10f + 0.10f * playingLift,
-                        spot = 0.20f + 0.25f * playingLift,
-                    ),
-                corner = 26.dp,
+                    .clip(RoundedCornerShape(8.dp)),
+                corner = 8.dp,
             )
         }
     }
