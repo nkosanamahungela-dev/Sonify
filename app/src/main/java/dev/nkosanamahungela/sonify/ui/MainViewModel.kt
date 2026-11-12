@@ -2494,6 +2494,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             loadSavedAlbums()
             loadFollowedArtists()
             loadSavedShows()
+            // The hybrid backend uses Spotify for catalogue metadata. Load its
+            // personalised Spotify home after the separate metadata session is
+            // connected; YouTube remains only the playback resolver.
+            if (dev.nkosanamahungela.sonify.auth.SpotifyMetadataSession.isConnected(container)) {
+                loadHomeShelves()
+            }
             return@launch
         }
 
@@ -3386,7 +3392,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         dev.nkosanamahungela.sonify.playback.OfflineMode.active,
         container.preferences.backend,
     ) { settled, offline, backend ->
-        !settled && !offline && backend == BackendId.SPOTIFY && container.spotifySignedIn
+        val spotifyCatalogueReady = when (backend) {
+            BackendId.SPOTIFY -> container.spotifySignedIn
+            BackendId.YOUTUBE_MUSIC ->
+                dev.nkosanamahungela.sonify.auth.SpotifyMetadataSession.isConnected(container)
+        }
+        !settled && !offline && spotifyCatalogueReady
     }.stateIn(viewModelScope, SharingStarted.Eagerly, container.spotifySignedIn)
 
     private suspend fun loadHomeShelvesTries() {
@@ -3413,20 +3424,28 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     private suspend fun fetchHomeShelves(): List<HomeShelf> {
-        val keys = container.pathfinderKeys
-        keys.refresh()
+        val backend = container.activeBackend.id
         return withContext(Dispatchers.IO) {
             runCatching {
-                SpotifyHome.parse(
+                val response = if (backend == BackendId.YOUTUBE_MUSIC) {
+                    // In hybrid mode this is Spotify's authenticated web-player
+                    // home query. Do not ask the YouTube playback backend for
+                    // catalogue shelves.
+                    container.gateway.homeFacet("")
+                        ?: error("Spotify did not return a home feed. Check the metadata session.")
+                } else {
+                    val keys = container.pathfinderKeys
+                    keys.refresh()
                     NativeBridge.homeFeed(
                         java.util.TimeZone.getDefault().id,
                         java.util.Locale.getDefault().language,
                         keys.home,
                         keys.appVersion,
-                    ),
-                )
+                    )
+                }
+                SpotifyHome.parse(response)
             }
-                .onFailure { android.util.Log.i(TAG, "no personalised home: ${describe(it)}") }
+                .onFailure { android.util.Log.i(TAG, "no personalised Spotify home: ${describe(it)}", it) }
                 .getOrDefault(emptyList())
         }
     }

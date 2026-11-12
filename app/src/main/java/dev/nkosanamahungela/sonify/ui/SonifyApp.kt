@@ -1783,7 +1783,8 @@ fun SonifyApp(
                                 },
                                 backdrop = artBackdrop,
                                 youtubeMode =
-                                    backend == dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC,
+                                    backend == dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC &&
+                                        !dev.nkosanamahungela.sonify.auth.SpotifyMetadataSession.isConnected(context),
                                 onRetryOnline = viewModel::retryOnline,
                                 youtubeHome = youtubeHome,
                                 shelves = homeShelves,
@@ -3978,7 +3979,12 @@ fun SonifyApp(
                         dev.nkosanamahungela.sonify.auth.SpotifyMetadataLoginScreen(
                             onDone = { connected ->
                                 showSpotifyMetadataLogin = false
-                                if (!connected) {
+                                if (connected) {
+                                    // Re-read the account library and Spotify's
+                                    // personalised home without clearing the
+                                    // encrypted session or reinstalling the app.
+                                    viewModel.refresh(restart = true)
+                                } else {
                                     android.widget.Toast.makeText(
                                         context,
                                         "Spotify metadata login was cancelled",
