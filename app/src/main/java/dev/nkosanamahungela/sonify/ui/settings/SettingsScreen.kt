@@ -1073,33 +1073,27 @@ private fun SettingsIndex(
     avatarUrl: String?,
     onOpen: (SettingsPage) -> Unit,
 ) {
+    // Spotifusion's settings are a single, quiet list: one icon, one title,
+    // one short explanation. The old two-column tiles made the page feel like
+    // a launcher rather than the settings screen of a music app.
     Column(
-        Modifier.padding(horizontal = 20.dp, vertical = 10.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 20.dp),
     ) {
         Row(
             Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(24.dp))
-                .background(Ink.copy(alpha = 0.07f))
                 .pressable(onClick = { onOpen(SettingsPage.Account) })
-                .padding(16.dp),
+                .padding(horizontal = 20.dp, vertical = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             dev.nkosanamahungela.sonify.ui.components.ProfilePicture(
                 url = avatarUrl,
                 name = name,
-                size = 56.dp,
-                modifier = Modifier
-                    .size(56.dp)
-                    .softShadow(CircleShape, elevation = 10.dp),
-                decodeSize = 56.dp,
+                size = 48.dp,
+                modifier = Modifier.size(48.dp),
+                decodeSize = 48.dp,
             )
-            Column(
-                Modifier
-                    .weight(1f)
-                    .padding(start = 14.dp),
-            ) {
+            Column(Modifier.weight(1f).padding(start = 14.dp)) {
                 Text(
                     name ?: stringResource(R.string.not_connected),
                     style = MaterialTheme.typography.titleMedium,
@@ -1121,34 +1115,89 @@ private fun SettingsIndex(
                 modifier = Modifier.size(18.dp),
             )
         }
+        IndexDivider()
 
-        // Six places, and a seventh tile that is not a place: it leaves the app
-        // for the Ko-fi page. Last, and in the same shape as the rest, because
-        // it is an offer rather than a setting — asking louder than that would
-        // be asking on a screen somebody opened to change something.
-        val uriHandler = LocalUriHandler.current
-        val pages = SettingsPage.entries.filter { it != SettingsPage.Account }
-        val rows = pages.chunked(2)
-        rows.forEachIndexed { index, pair ->
-            val last = index == rows.lastIndex
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                pair.forEach { page -> PageTile(page, Modifier.weight(1f)) { onOpen(page) } }
-                // The support tile fills the gap a row of one would leave, and
-                // makes its own row when the pages divide evenly.
-                if (last && pair.size == 1) {
-                    SupportTile(Modifier.weight(1f)) { uriHandler.openUri(KOFI_URL) }
+        SettingsPage.entries.filter { it != SettingsPage.Account }.forEach { page ->
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .pressable(onClick = { onOpen(page) })
+                    .padding(horizontal = 22.dp, vertical = 15.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                Icon(
+                    page.icon,
+                    contentDescription = null,
+                    tint = Ink,
+                    modifier = Modifier.size(23.dp),
+                )
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        stringResource(page.title),
+                        style = MaterialTheme.typography.titleSmall,
+                    )
+                    Text(
+                        stringResource(page.summary),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = InkDim,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
                 }
+                Icon(
+                    PhosphorIcons.Regular.CaretRight,
+                    contentDescription = null,
+                    tint = InkDim,
+                    modifier = Modifier.size(17.dp),
+                )
             }
-            if (last && pair.size == 2) {
-                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    SupportTile(Modifier.weight(1f)) { uriHandler.openUri(KOFI_URL) }
-                    Spacer(Modifier.weight(1f))
-                }
-            }
+            IndexDivider()
         }
 
+        val uriHandler = LocalUriHandler.current
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .pressable(onClick = { uriHandler.openUri(KOFI_URL) })
+                .padding(horizontal = 22.dp, vertical = 15.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            Icon(
+                PhosphorIcons.Regular.HandHeart,
+                contentDescription = null,
+                tint = Ink,
+                modifier = Modifier.size(23.dp),
+            )
+            Column(Modifier.weight(1f)) {
+                Text(stringResource(R.string.support_development), style = MaterialTheme.typography.titleSmall)
+                Text(
+                    KOFI_URL.removePrefix("https://"),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = InkDim,
+                )
+            }
+            Icon(
+                PhosphorIcons.Regular.ArrowUpRight,
+                contentDescription = null,
+                tint = InkDim,
+                modifier = Modifier.size(17.dp),
+            )
+        }
         IndexFooter()
     }
+}
+
+@Composable
+private fun IndexDivider() {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .padding(start = 60.dp, end = 20.dp)
+            .height(1.dp)
+            .background(Ink.copy(alpha = 0.08f)),
+    )
 }
 
 /**
