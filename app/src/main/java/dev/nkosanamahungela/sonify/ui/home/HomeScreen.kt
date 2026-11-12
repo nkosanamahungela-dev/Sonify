@@ -337,7 +337,7 @@ fun HomeScreen(
                     topPadding = contentPadding.calculateTopPadding(),
                     onFilter = { filterName = it.name },
                     chips = chips,
-                    showFilters = false,
+                    showFilters = true,
                     onOpenSettings = onOpenSettings,
                     friends = friends,
                     onOpenFriends = onOpenFriends,
@@ -412,37 +412,6 @@ fun HomeScreen(
                     }
                 }
 
-                // A compact launchpad for the listener's own most-used
-                // playlists. It reuses the existing catalogue and open action.
-                if (filter == Feed.ALL) {
-                    item(key = "home-shortcuts", contentType = "shortcuts") {
-                        Column(
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(start = 16.dp, end = 16.dp, top = 8.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp),
-                        ) {
-                            val quickAccess = remember(playlists) {
-                                listOf(CatalogPlaylist(uri = "spotify:collection", name = "Liked Songs")) +
-                                    playlists.take(7)
-                            }
-                            quickAccess.chunked(2).forEachIndexed { rowIndex, pair ->
-                                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                                    pair.forEachIndexed { columnIndex, playlist ->
-                                        PlaylistShortcut(
-                                            playlist = playlist,
-                                            index = rowIndex * 2 + columnIndex,
-                                            modifier = Modifier.weight(1f),
-                                            onClick = { onOpenPlaylist(playlist) },
-                                        )
-                                    }
-                                    if (pair.size == 1) Spacer(Modifier.weight(1f))
-                                }
-                            }
-                        }
-                    }
-                }
-
                 // Spotify's own shelves come first, because they are what the
                 // listener recognises as their home and the only rows here that
                 // this app could not have built itself. What the account has
@@ -474,11 +443,10 @@ fun HomeScreen(
                     }
                     // Keyed by place as well as title: Spotify can send two rows
                     // with the same title, and a key used twice crashes the list.
-                    visible.take(2).forEachIndexed { index, shelf ->
-                        val homeTitle = if (index == 0) "It's New Music Friday!" else "Friday drops picked for you"
+                    visible.forEachIndexed { index, shelf ->
                         item(key = "shelf-heading-$index-${shelf.title}", contentType = "shelf") {
                             Box(Modifier.animateItem(fadeInSpec = tween(320), placementSpec = null, fadeOutSpec = null)) {
-                                Heading(homeTitle, top = 24.dp)
+                                Heading(shelf.title, top = 24.dp)
                             }
                         }
                         item(key = "shelf-$index-${shelf.title}", contentType = "shelf") {
@@ -978,7 +946,7 @@ private fun PlaylistShortcut(
     val shape = RoundedCornerShape(12.dp)
     Row(
         modifier
-            .height(56.dp)
+            .height(48.dp)
             .clip(shape)
             .background(if (likedSongs) Color(0xFF29213F) else SHORTCUT_COLORS[index % SHORTCUT_COLORS.size])
             .pressable(onClick),
@@ -987,7 +955,7 @@ private fun PlaylistShortcut(
         if (likedSongs) {
             Box(
                 Modifier
-                    .size(56.dp)
+                    .size(48.dp)
                     .background(Brush.linearGradient(listOf(Color(0xFF5A35D5), Color(0xFF8D6CFF), Color(0xFFB5C8FF)))),
                 contentAlignment = Alignment.Center,
             ) {
@@ -1003,10 +971,10 @@ private fun PlaylistShortcut(
                 url = playlist.artworkUrl,
                 title = playlist.name,
                 modifier = Modifier
-                    .size(56.dp)
-                    .clip(RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp)),
+                    .size(48.dp)
+                    .clip(RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp)),
                 corner = 0.dp,
-                decodeSize = 56.dp,
+                decodeSize = 48.dp,
             )
         }
         Text(
@@ -1042,17 +1010,17 @@ private fun HomeCarousel(
 private fun HomeShelfTile(playlist: CatalogPlaylist, onClick: () -> Unit) {
     Column(
         Modifier
-            .width(200.dp)
+            .width(150.dp)
             .pressable(onClick),
     ) {
         Artwork(
             url = playlist.artworkUrl,
             title = playlist.name,
             modifier = Modifier
-                .size(200.dp)
+                .size(150.dp)
                 .clip(RoundedCornerShape(8.dp)),
             corner = 8.dp,
-            decodeSize = 200.dp,
+            decodeSize = 150.dp,
         )
         Text(
             listOfNotNull(playlist.name, playlist.subtitle?.takeIf { it.isNotBlank() })
@@ -1073,14 +1041,14 @@ private fun PlaylistTile(playlist: CatalogPlaylist, onClick: () -> Unit) {
     val corner = if (playlist.isArtist) 76.dp else 20.dp
     Column(
         Modifier
-            .width(176.dp)
+            .width(150.dp)
             .pressable(onClick),
     ) {
         Artwork(
             url = playlist.artworkUrl,
             title = playlist.name,
             modifier = Modifier
-                .size(176.dp)
+                .size(150.dp)
                 .softShadow(RoundedCornerShape(corner), elevation = 18.dp),
             corner = corner,
         )

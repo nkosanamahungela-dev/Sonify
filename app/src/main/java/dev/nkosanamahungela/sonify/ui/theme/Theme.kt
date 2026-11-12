@@ -207,7 +207,7 @@ val InkDim: Color
  * anything near it makes the app read as a clone no matter how the rest is laid
  * out.
  */
-private val DefaultAccent = Color(0xFF7C5CE6)
+private val DefaultAccent = Color(0xFF1ED760)
 
 /** Brighten until the colour reads against a near-black background. */
 private fun Color.liftFor(background: Color): Color {

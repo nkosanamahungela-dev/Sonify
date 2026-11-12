@@ -819,6 +819,9 @@ fun SonifyApp(
     /** The Google sign-in web view, opened from the settings. */
     var showYouTubeLogin by remember { mutableStateOf(false) }
 
+    /** Spotify web-player session for catalogue metadata (separate from audio-engine OAuth). */
+    var showSpotifyMetadataLogin by remember { mutableStateOf(false) }
+
     // The open track menu, if any. Held here because the menu is drawn above
     // everything the app puts over its screens.
     var trackMenu by remember { mutableStateOf<TrackMenuRequest?>(null) }
@@ -1780,7 +1783,8 @@ fun SonifyApp(
                                 },
                                 backdrop = artBackdrop,
                                 youtubeMode =
-                                    backend == dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC,
+                                    backend == dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC &&
+                                        !dev.nkosanamahungela.sonify.auth.SpotifyMetadataSession.isConnected(context),
                                 onRetryOnline = viewModel::retryOnline,
                                 youtubeHome = youtubeHome,
                                 shelves = homeShelves,
@@ -2087,6 +2091,7 @@ fun SonifyApp(
                                 onLanguage = setLanguage,
                                 onBack = { navController.popBackStack() },
                                 onYouTubeSignIn = { showYouTubeLogin = true },
+                                onSpotifyMetadataSignIn = { showSpotifyMetadataLogin = true },
                                 onYouTubeChannelChange = {
                                     // A different channel is a different
                                     // library and a different home: both were
@@ -2657,7 +2662,9 @@ fun SonifyApp(
                         selectedTabKey = if (activeTab == Routes.SEARCH) SEARCH_CIRCLE else activeTab,
                         scrollConnection = tabBarScroll,
                         modifier = Modifier
+                            .widthIn(max = 360.dp)
                             .fillMaxWidth()
+                            .align(Alignment.BottomCenter)
                             .padding(horizontal = barMargin)
                             .padding(bottom = navBar + 8.dp),
                         // Where the glass goes in. The library applies this after
@@ -2723,8 +2730,8 @@ fun SonifyApp(
                             val tabRoutes = remember {
                                 listOf(
                                     Routes.HOME,
-                                    Routes.SEARCH,
                                     Routes.LIBRARY,
+                                    Routes.SEARCH,
                                 )
                             }
                             val here = tabRoutes.indexOf(activeTab).coerceAtLeast(0)
@@ -3963,6 +3970,32 @@ fun SonifyApp(
                 // Over everything, like the tutorial: it is Google's own sign-in
                 // page and half-covering it would be the wrong thing to do with
                 // a page someone is typing a password into.
+                if (showSpotifyMetadataLogin) {
+                    Box(
+                        Modifier
+                            .fillMaxSize()
+                            .background(androidx.compose.ui.graphics.Color(0xFF101012)),
+                    ) {
+                        dev.nkosanamahungela.sonify.auth.SpotifyMetadataLoginScreen(
+                            onDone = { connected ->
+                                showSpotifyMetadataLogin = false
+                                if (connected) {
+                                    // Re-read the account library and Spotify's
+                                    // personalised home without clearing the
+                                    // encrypted session or reinstalling the app.
+                                    viewModel.refresh(restart = true)
+                                } else {
+                                    android.widget.Toast.makeText(
+                                        context,
+                                        "Spotify metadata login was cancelled",
+                                        android.widget.Toast.LENGTH_SHORT,
+                                    ).show()
+                                }
+                            },
+                        )
+                    }
+                }
+
                 if (showYouTubeLogin) {
                     val account = remember(context) {
                         (context.applicationContext as dev.nkosanamahungela.sonify.SonifyApplication)
@@ -3986,7 +4019,14 @@ fun SonifyApp(
                 }
 
                 if (!backendChosen) {
-                    BackendChoiceScreen(onChoose = preferences::setBackend)
+                    BackendChoiceScreen(
+                        onChoose = { selected ->
+                            preferences.setBackend(selected)
+                            if (!dev.nkosanamahungela.sonify.auth.SpotifyMetadataSession.isConnected(context)) {
+                                showSpotifyMetadataLogin = true
+                            }
+                        },
+                    )
                 } else if (
                     // Every step of it is Spotify's setup — the Premium
                     // account, the login, the registered application — so on
@@ -4074,9 +4114,15 @@ private fun BottomBar(
             containerColor = GlassFilm,
             indicatorVisible = routeIndex >= 0,
         ) {
-            BottomItem(stringResource(R.string.home), LucideIcons.House, LucideIcons.House, routeIndex >= 0 && selected == 0) { onSelect(Routes.HOME) }
-            BottomItem(stringResource(R.string.search), LucideIcons.Search, LucideIcons.Search, routeIndex >= 0 && selected == 1) { onSelect(Routes.SEARCH) }
-            BottomItem(stringResource(R.string.library), LucideIcons.Library, LucideIcons.Library, routeIndex >= 0 && selected == 2) { onSelect(Routes.LIBRARY) }
+            LiquidBottomTab(onClick = { onSelect(Routes.HOME) }) {
+                Icon(LucideIcons.House, contentDescription = stringResource(R.string.home), tint = Color(0xFF1ED760), modifier = Modifier.size(22.dp))
+            }
+            LiquidBottomTab(onClick = { onSelect(Routes.SEARCH) }) {
+                Icon(LucideIcons.Search, contentDescription = stringResource(R.string.search), tint = Color(0xFF1ED760), modifier = Modifier.size(22.dp))
+            }
+            LiquidBottomTab(onClick = { onSelect(Routes.LIBRARY) }) {
+                Icon(LucideIcons.Library, contentDescription = stringResource(R.string.library), tint = Color(0xFF1ED760), modifier = Modifier.size(22.dp))
+            }
         }
     }
 }

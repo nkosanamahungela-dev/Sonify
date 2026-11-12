@@ -337,18 +337,22 @@ class PreferencesStore(context: Context) {
         prefs.edit().putBoolean(KEY_PLAYER_OPEN, value).apply()
     }
 
+    // Sonify always uses Spotify for catalogue metadata and YouTube for streams.
+    // Keep the legacy enum value for compatibility with stored settings/UI state.
     private val _backend = MutableStateFlow(
-        runCatching { dev.nkosanamahungela.sonify.backend.BackendId.valueOf(prefs.getString(KEY_BACKEND, null) ?: "") }
-            .getOrDefault(dev.nkosanamahungela.sonify.backend.BackendId.SPOTIFY),
+        dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC,
     )
 
     /** Which [dev.nkosanamahungela.sonify.backend.MusicBackend] the app plays through. */
     val backend: StateFlow<dev.nkosanamahungela.sonify.backend.BackendId> = _backend.asStateFlow()
 
     fun setBackend(value: dev.nkosanamahungela.sonify.backend.BackendId) {
-        _backend.value = value
+        // The former YouTube Music catalogue is retired. The hybrid backend
+        // keeps YouTube playback/downloads while Spotify supplies every listing.
+        val selected = dev.nkosanamahungela.sonify.backend.BackendId.YOUTUBE_MUSIC
+        _backend.value = selected
         _backendChosen.value = true
-        prefs.edit().putString(KEY_BACKEND, value.name).apply()
+        prefs.edit().putString(KEY_BACKEND, selected.name).apply()
     }
 
     private val _backendChosen = MutableStateFlow(prefs.contains(KEY_BACKEND))

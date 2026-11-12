@@ -1,6 +1,7 @@
 package dev.nkosanamahungela.sonify.ui.search
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,14 +31,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
 import dev.nkosanamahungela.sonify.R
 import dev.nkosanamahungela.sonify.data.CatalogTrack
@@ -54,9 +60,69 @@ import dev.nkosanamahungela.sonify.ui.theme.InkDim
 import androidx.compose.foundation.clickable
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
-import com.adamglin.phosphoricons.bold.MagnifyingGlass
-import com.adamglin.phosphoricons.bold.X
 import com.adamglin.phosphoricons.regular.DotsThree
+
+
+/** Spotui's two-column Browse all screen, backed by Sonify's existing search. */
+@Composable
+private fun SpotuiBrowseAll(onCategoryClick: (String) -> Unit) {
+    val categories = listOf(
+        Triple("Music", Color(0xFFDC148C), "Top hits"),
+        Triple("Podcasts", Color(0xFF1E3264), "Podcast"),
+        Triple("Made For You", Color(0xFF8768A8), "Discover weekly"),
+        Triple("New Releases", Color(0xFFE8115B), "New releases"),
+        Triple("Pop", Color(0xFF8D67AB), "Pop"),
+        Triple("Hip-Hop", Color(0xFF477D95), "Hip hop"),
+        Triple("Rock", Color(0xFFE61E32), "Rock"),
+        Triple("Latin", Color(0xFFE1118C), "Latin"),
+        Triple("Country", Color(0xFFD84000), "Country"),
+        Triple("R&B", Color(0xFFBA5D07), "R&B"),
+        Triple("K-Pop", Color(0xFF148A08), "K-pop"),
+        Triple("Indie", Color(0xFF608108), "Indie"),
+        Triple("Dance/Electronic", Color(0xFF056952), "Electronic dance"),
+        Triple("Metal", Color(0xFF777777), "Metal"),
+        Triple("Chill", Color(0xFF1E3264), "Chill"),
+        Triple("Charts", Color(0xFF8C1932), "Top charts"),
+        Triple("Workout", Color(0xFF777777), "Workout"),
+        Triple("Jazz", Color(0xFF503750), "Jazz"),
+    )
+    Column(Modifier.fillMaxWidth()) {
+        Text(
+            text = "Browse all",
+            color = Color.White,
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(16.dp, 12.dp, 16.dp, 8.dp),
+        )
+        categories.chunked(2).forEach { rowItems ->
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 4.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                rowItems.forEach { (name, color, query) ->
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(96.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(color)
+                            .clickable { onCategoryClick(query) }
+                            .padding(12.dp),
+                    ) {
+                        Text(
+                            text = name,
+                            color = Color.White,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 2,
+                        )
+                    }
+                }
+                if (rowItems.size == 1) Box(Modifier.weight(1f))
+            }
+        }
+    }
+}
 
 /** Which kind of result the page is showing. */
 private enum class Kind(@StringRes val label: Int) {
@@ -158,6 +224,68 @@ fun SearchScreen(
             )
         }
 
+        // Spotui's search page keeps the query field at the top of the page.
+        // The search state and callback remain Sonify's, so this is a visual
+        // migration only and still searches the active Sonify backend.
+        stickyHeader {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(Color.White)
+                    .padding(horizontal = 14.dp, vertical = 13.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Canvas(modifier = Modifier.size(20.dp)) {
+                    val stroke = 1.8.dp.toPx()
+                    drawCircle(
+                        color = Color(0xFF333333),
+                        radius = size.minDimension * 0.29f,
+                        center = Offset(size.width * 0.40f, size.height * 0.40f),
+                        style = Stroke(width = stroke),
+                    )
+                    drawLine(
+                        color = Color(0xFF333333),
+                        start = Offset(size.width * 0.62f, size.height * 0.62f),
+                        end = Offset(size.width * 0.88f, size.height * 0.88f),
+                        strokeWidth = stroke,
+                        cap = StrokeCap.Round,
+                    )
+                }
+                BasicTextField(
+                    value = query,
+                    onValueChange = onQuery,
+                    singleLine = true,
+                    textStyle = MaterialTheme.typography.bodyLarge.copy(color = Color.Black),
+                    modifier = Modifier.weight(1f),
+                    decorationBox = { innerTextField ->
+                        Box {
+                            if (query.isBlank()) {
+                                Text(
+                                    text = stringResource(R.string.search_prompt),
+                                    color = Color(0xFF666666),
+                                    style = MaterialTheme.typography.bodyLarge,
+                                )
+                            }
+                            innerTextField()
+                        }
+                    },
+                )
+                if (query.isNotBlank()) {
+                    Text(
+                        text = "×",
+                        color = Color(0xFF333333),
+                        style = MaterialTheme.typography.titleLarge,
+                        modifier = Modifier
+                            .clickable { onQuery("") }
+                            .padding(horizontal = 2.dp),
+                    )
+                }
+            }
+        }
+
         if (!state.results.isEmpty && !state.loading) {
             item(contentType = "chips") {
                 // Videos only where the source has them: Spotify's search does not.
@@ -190,8 +318,8 @@ fun SearchScreen(
                 StatusBox { Message(state.error) }
             }
 
-            state.query.isBlank() && history.isEmpty() -> item(contentType = "status") {
-                StatusBox { Message(stringResource(R.string.search_prompt)) }
+            state.query.isBlank() && history.isEmpty() -> item(contentType = "browse-all") {
+                SpotuiBrowseAll { query -> onQuery(query) }
             }
 
             state.query.isBlank() -> {

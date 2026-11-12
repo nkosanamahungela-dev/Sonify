@@ -152,6 +152,7 @@ fun SettingsScreen(
     onBack: () -> Unit,
     /** Opens the Google sign-in web view; see YouTubeLoginScreen. */
     onYouTubeSignIn: () -> Unit = {},
+    onSpotifyMetadataSignIn: () -> Unit = {},
     /** After switching channel: the library and the home belong to the new one. */
     onYouTubeChannelChange: () -> Unit = {},
 ) {
@@ -408,6 +409,21 @@ fun SettingsScreen(
                 }
             }
         }
+
+        if (shown == SettingsPage.Account && !showSpotify) groupHeading(Group.SETUP, open = "setup" in openGroups) { toggleGroup("setup") }
+        if (shown == SettingsPage.Account && !showSpotify && "setup" in openGroups) groupItem("spotify-metadata", Group.SETUP) {
+            Section("Spotify catalogue") {
+                val connected = dev.nkosanamahungela.sonify.auth.SpotifyMetadataSession.isConnected(context)
+                InfoRow("Spotify metadata", if (connected) "Connected" else "Not connected")
+                RowDivider()
+                ActionRow(
+                    if (connected) "Reconnect Spotify account" else "Connect Spotify account",
+                    destructive = false,
+                    onClick = onSpotifyMetadataSignIn,
+                )
+            }
+        }
+        if (shown == SettingsPage.Account && !showSpotify && "setup" in openGroups) groupEnd(Group.SETUP)
 
         if (shown == SettingsPage.Account && showSpotify && "setup" in openGroups) groupEnd(Group.SETUP)
 

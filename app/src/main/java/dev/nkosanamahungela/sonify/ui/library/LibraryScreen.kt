@@ -373,7 +373,7 @@ fun LibraryScreen(
                         state = gridState,
                         // As many as fit: two on a phone held upright, five or six on its side,
                         // where two filled the screen with a pair of tiles taller than it.
-                        columns = GridCells.Adaptive(minSize = 150.dp),
+                        columns = GridCells.Fixed(3),
                         contentPadding = listPadding,
                         horizontalArrangement = Arrangement.spacedBy(14.dp),
                         verticalArrangement = Arrangement.spacedBy(18.dp),

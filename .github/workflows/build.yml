@@ -1,12 +1,11 @@
 name: Build
 
-# Every push to master and every pull request gets an APK, so a change can be
-# tried on a phone without building it by hand. No signing secrets here: with
-# no keystore the build signs with the debug key, and GitHub does not hand
-# secrets to pull requests from forks anyway.
+# Every build uses the same private beta keystore. Without it Android
+# refuses in-place updates because each hosted runner has a different debug key.
+# Add the SONIFY_* signing values as repository Actions secrets before building.
 on:
   push:
-    branches: [master]
+    branches: [master, spotui-ui-migration]
   pull_request:
   workflow_dispatch:
 
@@ -25,6 +24,26 @@ jobs:
       - uses: actions/checkout@v7
 
       - uses: ./.github/actions/setup
+
+      - name: Configure persistent beta signing
+        env:
+          KEYSTORE_BASE64: ${{ secrets.SONIFY_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.SONIFY_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.SONIFY_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.SONIFY_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          test -n "$KEYSTORE_BASE64" || { echo "::error::Add SONIFY_KEYSTORE_BASE64 in repository Actions secrets"; exit 1; }
+          test -n "$STORE_PASSWORD" || { echo "::error::Add SONIFY_STORE_PASSWORD in repository Actions secrets"; exit 1; }
+          test -n "$KEY_ALIAS" || { echo "::error::Add SONIFY_KEY_ALIAS in repository Actions secrets"; exit 1; }
+          test -n "$KEY_PASSWORD" || { echo "::error::Add SONIFY_KEY_PASSWORD in repository Actions secrets"; exit 1; }
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > sonify-test-signing.p12
+          {
+            echo "storeFile=sonify-test-signing.p12"
+            echo "storePassword=$STORE_PASSWORD"
+            echo "keyAlias=$KEY_ALIAS"
+            echo "keyPassword=$KEY_PASSWORD"
+          } > keystore.properties
 
       - name: Build
         run: ./gradlew :app:assembleDev --stacktrace
