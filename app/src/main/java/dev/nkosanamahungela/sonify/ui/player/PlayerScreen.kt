@@ -479,6 +479,28 @@ fun PlayerScreen(
     /** Whether the sound is coming out of another of the account's devices. */
     onAnotherDevice: Boolean = false,
 ) {
+    SpotuiPlayerScreen(
+        state = state,
+        positionMs = positionMs,
+        onCollapse = onCollapse,
+        onTogglePlay = onTogglePlay,
+        onNext = onNext,
+        onPrevious = onPrevious,
+        onSeek = onSeek,
+        onToggleShuffle = onToggleShuffle,
+        onCycleRepeat = onCycleRepeat,
+        queue = queue,
+        queueActions = queueActions,
+        onOpenDevices = onOpenDevices,
+        onAddToPlaylist = onAddToPlaylist,
+        onOpenAlbum = onOpenAlbum,
+        onToggleLike = onToggleLike,
+        inLikedSongs = inLikedSongs,
+        connectAvailable = connectAvailable,
+        onAnotherDevice = onAnotherDevice,
+    )
+    return
+
     var panel by remember { mutableStateOf(PlayerPanel.NONE) }
     // The official SDK mixes its own audio: no effects or karaoke reach it.
     val sdkPlayback by dev.nkosanamahungela.sonify.playback.websdk.WebSdkRecovery.inUse.collectAsStateWithLifecycle()
@@ -2354,13 +2376,8 @@ private fun Cover(
                 modifier = Modifier
                     .fillMaxSize()
                     .sharedArtwork(sharedScope, animatedScope)
-                    .softShadow(
-                        RoundedCornerShape(26.dp),
-                        elevation = (10 + 30 * playingLift).dp,
-                        ambient = 0.10f + 0.10f * playingLift,
-                        spot = 0.20f + 0.25f * playingLift,
-                    ),
-                corner = 26.dp,
+                    .clip(RoundedCornerShape(8.dp)),
+                corner = 8.dp,
             )
         }
     }
@@ -3120,7 +3137,7 @@ private fun SongCard(
                 .aspectRatio(1f)
                 .softShadow(RoundedCornerShape(18.dp), elevation = 20.dp)
                 .clip(RoundedCornerShape(18.dp))
-                .clickable(onClick = onCover),
+                .pressable(onClick = onCover),
         ) {
             dev.nkosanamahungela.sonify.ui.components.Artwork(
                 url = state.artworkUrl,
@@ -3199,7 +3216,7 @@ private fun CardButton(
             .size(size)
             .clip(CircleShape)
             .background(Color.Black.copy(alpha = 0.35f))
-            .clickable(enabled = enabled, onClick = onClick),
+            .pressable(enabled = enabled, onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
         Icon(

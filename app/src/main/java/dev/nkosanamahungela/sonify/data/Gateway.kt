@@ -3,6 +3,10 @@ package dev.nkosanamahungela.sonify.data
 import dev.nkosanamahungela.sonify.nativecore.NativeBridge
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 
 /**
  * Track lists read from Spotify's own GraphQL gateway.
@@ -20,7 +24,10 @@ import kotlinx.coroutines.withContext
  * [PathfinderKeys] for how the hashes are kept current, and
  * native/src/pathfinder.rs for the request itself.
  */
-class Gateway(private val keys: PathfinderKeys) {
+class Gateway(
+    private val keys: PathfinderKeys,
+    private val metadataToken: (suspend () -> String?)? = null,
+) {
 
     /** One page of the account's saved tracks; see [SavedTracks]. */
     suspend fun savedTracks(offset: Int): GatewayPage? = SavedTracks.parse(
@@ -350,13 +357,54 @@ class Gateway(private val keys: PathfinderKeys) {
 
     private suspend fun query(operation: String, hash: String, variables: String): String =
         withContext(Dispatchers.IO) {
-            NativeBridge.gatewayQuery(
-                operation,
-                hash,
-                variables,
-                java.util.Locale.getDefault().language,
-                keys.appVersion,
-            )
+            val token = metadataToken?.invoke()
+            if (token.isNullOrBlank()) {
+                NativeBridge.gatewayQuery(
+                    operation,
+                    hash,
+                    variables,
+                    java.util.Locale.getDefault().language,
+                    keys.appVersion,
+                )
+            } else {
+                val body = JSONObject()
+                    .put("operationName", operation)
+                    .put("variables", JSONObject(variables))
+                    .put(
+                        "extensions",
+                        JSONObject().put(
+                            "persistedQuery",
+                            JSONObject().put("version", 1).put("sha256Hash", hash),
+                        ),
+                    )
+                    .toString()
+                val request = Request.Builder()
+                    .url("https://api-partner.spotify.com/pathfinder/v2/query")
+                    .header("Authorization", "Bearer $token")
+                    .header("User-Agent", "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/131.0.0.0 Mobile Safari/537.36")
+                    .header("app-platform", "WebPlayer")
+                    .header("Origin", "https://open.spotify.com")
+                    .header("Referer", "https://open.spotify.com/")
+                    .header("Accept", "application/json")
+                    .post(body.toRequestBody("application/json; charset=utf-8".toMediaType()))
+                    .build()
+                val client = okhttp3.OkHttpClient.Builder()
+                    .connectTimeout(15, java.util.concurrent.TimeUnit.SECONDS)
+                    .readTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+                    .build()
+                client.newCall(request).execute().use { response ->
+                    val responseBody = response.body?.string().orEmpty()
+                    check(response.isSuccessful) {
+                        "Spotify catalogue request failed (HTTP ${response.code}): ${responseBody.take(180)}"
+                    }
+                    val json = JSONObject(responseBody)
+                    check(!json.has("errors")) {
+                        json.optJSONArray("errors")?.optJSONObject(0)?.optString("message")
+                            ?: "Spotify catalogue returned an error."
+                    }
+                    responseBody
+                }
+            }
         }
 
     private companion object {

@@ -1,7 +1,6 @@
 package dev.nkosanamahungela.sonify.ui.home
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.aspectRatio
@@ -337,7 +336,7 @@ fun HomeScreen(
                     topPadding = contentPadding.calculateTopPadding(),
                     onFilter = { filterName = it.name },
                     chips = chips,
-                    showFilters = false,
+                    showFilters = true,
                     onOpenSettings = onOpenSettings,
                     friends = friends,
                     onOpenFriends = onOpenFriends,
@@ -412,37 +411,6 @@ fun HomeScreen(
                     }
                 }
 
-                // A compact launchpad for the listener's own most-used
-                // playlists. It reuses the existing catalogue and open action.
-                if (filter == Feed.ALL) {
-                    item(key = "home-shortcuts", contentType = "shortcuts") {
-                        Column(
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(start = 16.dp, end = 16.dp, top = 8.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp),
-                        ) {
-                            val quickAccess = remember(playlists) {
-                                listOf(CatalogPlaylist(uri = "spotify:collection", name = "Liked Songs")) +
-                                    playlists.take(7)
-                            }
-                            quickAccess.chunked(2).forEachIndexed { rowIndex, pair ->
-                                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                                    pair.forEachIndexed { columnIndex, playlist ->
-                                        PlaylistShortcut(
-                                            playlist = playlist,
-                                            index = rowIndex * 2 + columnIndex,
-                                            modifier = Modifier.weight(1f),
-                                            onClick = { onOpenPlaylist(playlist) },
-                                        )
-                                    }
-                                    if (pair.size == 1) Spacer(Modifier.weight(1f))
-                                }
-                            }
-                        }
-                    }
-                }
-
                 // Spotify's own shelves come first, because they are what the
                 // listener recognises as their home and the only rows here that
                 // this app could not have built itself. What the account has
@@ -474,11 +442,10 @@ fun HomeScreen(
                     }
                     // Keyed by place as well as title: Spotify can send two rows
                     // with the same title, and a key used twice crashes the list.
-                    visible.take(2).forEachIndexed { index, shelf ->
-                        val homeTitle = if (index == 0) "It's New Music Friday!" else "Friday drops picked for you"
+                    visible.forEachIndexed { index, shelf ->
                         item(key = "shelf-heading-$index-${shelf.title}", contentType = "shelf") {
                             Box(Modifier.animateItem(fadeInSpec = tween(320), placementSpec = null, fadeOutSpec = null)) {
-                                Heading(homeTitle, top = 24.dp)
+                                Heading(shelf.title, top = 24.dp)
                             }
                         }
                         item(key = "shelf-$index-${shelf.title}", contentType = "shelf") {
@@ -714,80 +681,44 @@ private fun Header(
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp)
-                // The top padding, as a layout pass: `padding()` takes a Dp,
-                // which would have to be computed while composing.
-                .layout { measurable, constraints ->
-                    val top = lerp(18.dp, 2.dp, collapse()).roundToPx()
-                    val placeable = measurable.measure(constraints)
-                    layout(placeable.width, placeable.height + top) {
-                        placeable.place(0, top)
-                    }
-                },
+                .padding(horizontal = 16.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Column(Modifier.weight(1f)) {
-                // Tap the Home title to switch between music sources.
-                // The app's own name, at the size the account name used to be.
-                // It is what the page is, and unlike the account it is worth
-                // reading at a glance; it shrinks a little as the header
-                // collapses rather than leaving, because a bar with nothing in
-                // it says nothing about where you are.
-                Column(
-                    modifier = Modifier
-                        .padding(top = 0.dp)
-                        .clickable(onClick = onSwitchSource)
-                        .graphicsLayer {
-                            val scale = 1f - 0.12f * collapse()
-                            scaleX = scale
-                            scaleY = scale
-                            transformOrigin = TransformOrigin(0f, 0.5f)
-                        },
-                ) {
-                    Text(
-                        "Home",
-                        style = MaterialTheme.typography.displaySmall.copy(fontSize = 34.sp),
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                    )
-                }
-            }
+            // Spotifusion's home starts with the account avatar, not a large
+            // app-name banner. Keep the source switch as its own recognisable
+            // action so the Spotify / YouTube backend toggle is still one tap.
+            dev.nkosanamahungela.sonify.ui.components.ProfilePicture(
+                url = avatarUrl,
+                name = name,
+                size = 36.dp,
+                modifier = Modifier
+                    .size(36.dp)
+                    .clip(CircleShape)
+                    .pressable(onOpenSettings, pressedScale = 0.90f),
+                decodeSize = 46.dp,
+            )
 
-            // Falls back to the generated cover keyed on the name, which is what
-            // every other missing image in the app gets rather than a grey
-            // circle.
-            // The way into the settings. They have no tab of their own — see
-            // SettingsScreen — and the account picture is where anyone looks for
-            // them anyway.
-            // The people the account follows, as a huddle of faces.
-            //
-            // Beside the account's own picture because that is what it is about
-            // — who is listening — and because a list nobody has asked for does
-            // not deserve a tab. Absent rather than empty when nobody is
-            // playing: a control that opens onto nothing is worse than no
-            // control.
             if (friends.isNotEmpty()) {
                 FriendFaces(friends, onOpenFriends)
             }
 
-            dev.nkosanamahungela.sonify.ui.components.ProfilePicture(
-                url = avatarUrl,
-                name = name,
-                size = 46.dp,
-                modifier = Modifier
-                    .padding(start = 14.dp)
-                    // Measured from the scroll rather than sized in
-                    // composition; see the note on `collapse`.
-                    .layout { measurable, _ ->
-                        val side = lerp(46.dp, 36.dp, collapse()).roundToPx()
-                        val placeable = measurable.measure(Constraints.fixed(side, side))
-                        layout(side, side) { placeable.place(0, 0) }
-                    }
+            Spacer(Modifier.weight(1f))
+
+            Box(
+                Modifier
+                    .size(38.dp)
                     .clip(CircleShape)
-                    .pressable(onOpenSettings, pressedScale = 0.90f)
-                    .softShadow(CircleShape, elevation = 10.dp),
-                decodeSize = 46.dp,
-            )
+                    .pressable(onClick = onSwitchSource),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(
+                    serviceIcon,
+                    contentDescription = stringResource(service),
+                    tint = Ink,
+                    modifier = Modifier.size(22.dp),
+                )
+            }
         }
 
         // The chips carry the header's bottom margin with them; without them
@@ -801,7 +732,7 @@ private fun FilterRow(selected: Feed, chips: List<Feed>, backdrop: Backdrop, onS
     LazyRow(
         contentPadding = PaddingValues(horizontal = 20.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.padding(top = 18.dp, bottom = 6.dp),
+        modifier = Modifier.padding(top = 8.dp, bottom = 6.dp),
     ) {
         items(chips, key = { it.name }) { entry ->
             dev.nkosanamahungela.sonify.ui.components.FilterChip(
@@ -975,19 +906,19 @@ private fun PlaylistShortcut(
     onClick: () -> Unit,
 ) {
     val likedSongs = playlist.uri.endsWith(":collection")
-    val shape = RoundedCornerShape(12.dp)
+    val shape = RoundedCornerShape(4.dp)
     Row(
         modifier
-            .height(56.dp)
+            .height(48.dp)
             .clip(shape)
-            .background(if (likedSongs) Color(0xFF29213F) else SHORTCUT_COLORS[index % SHORTCUT_COLORS.size])
+            .background(Color(0xFF2A2A2A))
             .pressable(onClick),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (likedSongs) {
             Box(
                 Modifier
-                    .size(56.dp)
+                    .size(48.dp)
                     .background(Brush.linearGradient(listOf(Color(0xFF5A35D5), Color(0xFF8D6CFF), Color(0xFFB5C8FF)))),
                 contentAlignment = Alignment.Center,
             ) {
@@ -1003,10 +934,10 @@ private fun PlaylistShortcut(
                 url = playlist.artworkUrl,
                 title = playlist.name,
                 modifier = Modifier
-                    .size(56.dp)
-                    .clip(RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp)),
+                    .size(48.dp)
+                    .clip(RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp)),
                 corner = 0.dp,
-                decodeSize = 56.dp,
+                decodeSize = 48.dp,
             )
         }
         Text(
@@ -1042,17 +973,17 @@ private fun HomeCarousel(
 private fun HomeShelfTile(playlist: CatalogPlaylist, onClick: () -> Unit) {
     Column(
         Modifier
-            .width(200.dp)
+            .width(150.dp)
             .pressable(onClick),
     ) {
         Artwork(
             url = playlist.artworkUrl,
             title = playlist.name,
             modifier = Modifier
-                .size(200.dp)
+                .size(150.dp)
                 .clip(RoundedCornerShape(8.dp)),
             corner = 8.dp,
-            decodeSize = 200.dp,
+            decodeSize = 150.dp,
         )
         Text(
             listOfNotNull(playlist.name, playlist.subtitle?.takeIf { it.isNotBlank() })
@@ -1073,15 +1004,15 @@ private fun PlaylistTile(playlist: CatalogPlaylist, onClick: () -> Unit) {
     val corner = if (playlist.isArtist) 76.dp else 20.dp
     Column(
         Modifier
-            .width(176.dp)
+            .width(150.dp)
             .pressable(onClick),
     ) {
         Artwork(
             url = playlist.artworkUrl,
             title = playlist.name,
             modifier = Modifier
-                .size(176.dp)
-                .softShadow(RoundedCornerShape(corner), elevation = 18.dp),
+                .size(150.dp)
+                .clip(RoundedCornerShape(corner)),
             corner = corner,
         )
         Text(
@@ -1120,8 +1051,8 @@ private fun TrackTile(track: CatalogTrack, onClick: () -> Unit) {
             title = track.name,
             modifier = Modifier
                 .size(128.dp)
-                .softShadow(RoundedCornerShape(18.dp), elevation = 14.dp),
-            corner = 18.dp,
+                .clip(RoundedCornerShape(8.dp)),
+            corner = 8.dp,
             decodeSize = 128.dp,
         )
         Text(

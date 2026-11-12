@@ -1,7 +1,7 @@
 package dev.nkosanamahungela.sonify.ui.settings
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import dev.nkosanamahungela.sonify.ui.glass.pressable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -152,6 +152,7 @@ fun SettingsScreen(
     onBack: () -> Unit,
     /** Opens the Google sign-in web view; see YouTubeLoginScreen. */
     onYouTubeSignIn: () -> Unit = {},
+    onSpotifyMetadataSignIn: () -> Unit = {},
     /** After switching channel: the library and the home belong to the new one. */
     onYouTubeChannelChange: () -> Unit = {},
 ) {
@@ -408,6 +409,21 @@ fun SettingsScreen(
                 }
             }
         }
+
+        if (shown == SettingsPage.Account && !showSpotify) groupHeading(Group.SETUP, open = "setup" in openGroups) { toggleGroup("setup") }
+        if (shown == SettingsPage.Account && !showSpotify && "setup" in openGroups) groupItem("spotify-metadata", Group.SETUP) {
+            Section("Spotify catalogue") {
+                val connected = dev.nkosanamahungela.sonify.auth.SpotifyMetadataSession.isConnected(context)
+                InfoRow("Spotify metadata", if (connected) "Connected" else "Not connected")
+                RowDivider()
+                ActionRow(
+                    if (connected) "Reconnect Spotify account" else "Connect Spotify account",
+                    destructive = false,
+                    onClick = onSpotifyMetadataSignIn,
+                )
+            }
+        }
+        if (shown == SettingsPage.Account && !showSpotify && "setup" in openGroups) groupEnd(Group.SETUP)
 
         if (shown == SettingsPage.Account && showSpotify && "setup" in openGroups) groupEnd(Group.SETUP)
 
@@ -816,7 +832,7 @@ fun SettingsScreen(
                 Row(
                     Modifier
                         .fillMaxWidth()
-                        .clickable { uriHandler.openUri(GITHUB_URL) }
+                        .pressable(onClick = { uriHandler.openUri(GITHUB_URL) })
                         .padding(horizontal = 18.dp, vertical = 16.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -857,7 +873,7 @@ fun SettingsScreen(
                 Row(
                     Modifier
                         .fillMaxWidth()
-                        .clickable { uriHandler.openUri(KOFI_URL) }
+                        .pressable(onClick = { uriHandler.openUri(KOFI_URL) })
                         .padding(horizontal = 18.dp, vertical = 16.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -1057,33 +1073,27 @@ private fun SettingsIndex(
     avatarUrl: String?,
     onOpen: (SettingsPage) -> Unit,
 ) {
+    // Spotifusion's settings are a single, quiet list: one icon, one title,
+    // one short explanation. The old two-column tiles made the page feel like
+    // a launcher rather than the settings screen of a music app.
     Column(
-        Modifier.padding(horizontal = 20.dp, vertical = 10.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 20.dp),
     ) {
         Row(
             Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(24.dp))
-                .background(Ink.copy(alpha = 0.07f))
-                .clickable { onOpen(SettingsPage.Account) }
-                .padding(16.dp),
+                .pressable(onClick = { onOpen(SettingsPage.Account) })
+                .padding(horizontal = 20.dp, vertical = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             dev.nkosanamahungela.sonify.ui.components.ProfilePicture(
                 url = avatarUrl,
                 name = name,
-                size = 56.dp,
-                modifier = Modifier
-                    .size(56.dp)
-                    .softShadow(CircleShape, elevation = 10.dp),
-                decodeSize = 56.dp,
+                size = 48.dp,
+                modifier = Modifier.size(48.dp),
+                decodeSize = 48.dp,
             )
-            Column(
-                Modifier
-                    .weight(1f)
-                    .padding(start = 14.dp),
-            ) {
+            Column(Modifier.weight(1f).padding(start = 14.dp)) {
                 Text(
                     name ?: stringResource(R.string.not_connected),
                     style = MaterialTheme.typography.titleMedium,
@@ -1105,34 +1115,89 @@ private fun SettingsIndex(
                 modifier = Modifier.size(18.dp),
             )
         }
+        IndexDivider()
 
-        // Six places, and a seventh tile that is not a place: it leaves the app
-        // for the Ko-fi page. Last, and in the same shape as the rest, because
-        // it is an offer rather than a setting — asking louder than that would
-        // be asking on a screen somebody opened to change something.
-        val uriHandler = LocalUriHandler.current
-        val pages = SettingsPage.entries.filter { it != SettingsPage.Account }
-        val rows = pages.chunked(2)
-        rows.forEachIndexed { index, pair ->
-            val last = index == rows.lastIndex
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                pair.forEach { page -> PageTile(page, Modifier.weight(1f)) { onOpen(page) } }
-                // The support tile fills the gap a row of one would leave, and
-                // makes its own row when the pages divide evenly.
-                if (last && pair.size == 1) {
-                    SupportTile(Modifier.weight(1f)) { uriHandler.openUri(KOFI_URL) }
+        SettingsPage.entries.filter { it != SettingsPage.Account }.forEach { page ->
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .pressable(onClick = { onOpen(page) })
+                    .padding(horizontal = 22.dp, vertical = 15.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                Icon(
+                    page.icon,
+                    contentDescription = null,
+                    tint = Ink,
+                    modifier = Modifier.size(23.dp),
+                )
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        stringResource(page.title),
+                        style = MaterialTheme.typography.titleSmall,
+                    )
+                    Text(
+                        stringResource(page.summary),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = InkDim,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
                 }
+                Icon(
+                    PhosphorIcons.Regular.CaretRight,
+                    contentDescription = null,
+                    tint = InkDim,
+                    modifier = Modifier.size(17.dp),
+                )
             }
-            if (last && pair.size == 2) {
-                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    SupportTile(Modifier.weight(1f)) { uriHandler.openUri(KOFI_URL) }
-                    Spacer(Modifier.weight(1f))
-                }
-            }
+            IndexDivider()
         }
 
+        val uriHandler = LocalUriHandler.current
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .pressable(onClick = { uriHandler.openUri(KOFI_URL) })
+                .padding(horizontal = 22.dp, vertical = 15.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            Icon(
+                PhosphorIcons.Regular.HandHeart,
+                contentDescription = null,
+                tint = Ink,
+                modifier = Modifier.size(23.dp),
+            )
+            Column(Modifier.weight(1f)) {
+                Text(stringResource(R.string.support_development), style = MaterialTheme.typography.titleSmall)
+                Text(
+                    KOFI_URL.removePrefix("https://"),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = InkDim,
+                )
+            }
+            Icon(
+                PhosphorIcons.Regular.ArrowUpRight,
+                contentDescription = null,
+                tint = InkDim,
+                modifier = Modifier.size(17.dp),
+            )
+        }
         IndexFooter()
     }
+}
+
+@Composable
+private fun IndexDivider() {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .padding(start = 60.dp, end = 20.dp)
+            .height(1.dp)
+            .background(Ink.copy(alpha = 0.08f)),
+    )
 }
 
 /**
@@ -1272,7 +1337,7 @@ private fun Tile(
             .heightIn(min = 132.dp)
             .clip(RoundedCornerShape(24.dp))
             .background(Ink.copy(alpha = 0.07f))
-            .clickable(onClick = onClick)
+            .pressable(onClick = onClick)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
@@ -1300,7 +1365,7 @@ private fun PageRow(title: String, summary: String, onClick: () -> Unit) {
     Row(
         Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick)
+            .pressable(onClick = onClick)
             .padding(horizontal = 18.dp, vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -1742,7 +1807,7 @@ private fun PreferredLyricsSection(showSpotify: Boolean) {
         Row(
             Modifier
                 .fillMaxWidth()
-                .clickable { open = !open }
+                .pressable(onClick = { open = !open })
                 .padding(horizontal = 18.dp, vertical = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -1847,9 +1912,9 @@ private fun UpdateRow(onNeedsPermission: (Updater.State.Available) -> Unit) {
     Row(
         Modifier
             .fillMaxWidth()
-            .clickable(enabled = !busy) {
+            .pressable(enabled = !busy, onClick = {
                 scope.launch { updater.checkAndInstall()?.let(onNeedsPermission) }
-            }
+            })
             .padding(horizontal = 18.dp, vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -1885,7 +1950,7 @@ private fun Licences() {
         Row(
             Modifier
                 .fillMaxWidth()
-                .clickable { open = !open }
+                .pressable(onClick = { open = !open })
                 .padding(horizontal = 18.dp, vertical = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -2114,7 +2179,7 @@ private fun DownloadSwitch(
     Row(
         Modifier
             .fillMaxWidth()
-            .clickable { onChange(!checked) }
+            .pressable(onClick = { onChange(!checked) })
             .padding(start = 18.dp, end = 12.dp, top = 12.dp, bottom = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -2207,7 +2272,7 @@ private fun LazyListScope.groupHeading(group: Group, open: Boolean, onToggle: ()
                 .padding(start = GROUP_MARGIN, end = GROUP_MARGIN, top = 6.dp, bottom = gap)
                 .clip(RoundedCornerShape(GROUP_CORNER, GROUP_CORNER, lower, lower))
                 .background(groupPanel())
-                .clickable(onClick = onToggle)
+                .pressable(onClick = onToggle)
                 .padding(start = 18.dp, end = 20.dp, top = 16.dp, bottom = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(14.dp),
@@ -2381,7 +2446,7 @@ private fun ActionRow(
         Row(
             Modifier
                 .fillMaxWidth()
-                .clickable(onClick = onClick)
+                .pressable(onClick = onClick)
                 .padding(horizontal = 18.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -2404,7 +2469,7 @@ private fun ActionRow(
         color = if (destructive) MaterialTheme.colorScheme.error else Ink,
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick)
+            .pressable(onClick = onClick)
             .padding(horizontal = 18.dp, vertical = 16.dp),
     )
 }
@@ -2420,7 +2485,7 @@ private fun ChoiceRow(
     Row(
         Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick)
+            .pressable(onClick = onClick)
             .padding(horizontal = 18.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),

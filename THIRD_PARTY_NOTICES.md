@@ -11,3 +11,12 @@
 The original Spotui licence and copyright notices must be retained with any source files derived from that project. The complete GPL-3.0 text is provided in [LICENSE](LICENSE).
 
 Upstream project credits and dependencies remain attributable to their respective authors as documented in Spotui's README and source headers. This notice does not imply endorsement by Spotui or Spotify.
+
+
+## Spotifusion — GPL-3.0
+
+- Project: [p1di/spotifusion](https://github.com/p1di/spotifusion)
+- Licence: GNU General Public License, version 3 (GPL-3.0)
+- Use in Sonify: visual design reference and adapted Jetpack Compose interaction/motion patterns for the Home, Search, Library, Player, Settings and navigation experience.
+- Modifications: adapted to Sonify's existing screens, state, data models, playback services, account/session handling and navigation. Sonify's Liquid Glass mini-player and floating navigation remain Sonify components.
+- Copyright and licence: retain applicable upstream notices and provide the complete GPL-3.0 licence when distributing derivative source.

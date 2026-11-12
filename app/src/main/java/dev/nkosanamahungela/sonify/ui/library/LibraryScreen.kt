@@ -54,10 +54,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dev.nkosanamahungela.sonify.ui.glass.backdrop.Backdrop
 import dev.nkosanamahungela.sonify.R
 import dev.nkosanamahungela.sonify.data.CatalogPlaylist
@@ -373,7 +375,7 @@ fun LibraryScreen(
                         state = gridState,
                         // As many as fit: two on a phone held upright, five or six on its side,
                         // where two filled the screen with a pair of tiles taller than it.
-                        columns = GridCells.Adaptive(minSize = 150.dp),
+                        columns = GridCells.Fixed(3),
                         contentPadding = listPadding,
                         horizontalArrangement = Arrangement.spacedBy(14.dp),
                         verticalArrangement = Arrangement.spacedBy(18.dp),
@@ -586,30 +588,22 @@ private fun Header(
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(start = 24.dp, end = 20.dp, top = 18.dp),
-            verticalAlignment = Alignment.Bottom,
+                .padding(start = 20.dp, end = 20.dp, top = 14.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Column(Modifier.weight(1f)) {
-                // Counting whatever the chips are showing, and saying so: the
-                // same number labelled "playlists" under the albums chip is a
-                // line that contradicts the screen it sits on.
+                Text(
+                    "Your Library",
+                    style = MaterialTheme.typography.headlineMedium.copy(fontSize = 30.sp),
+                    fontWeight = FontWeight.Bold,
+                    color = Ink,
+                )
                 Text(
                     stringResource(filter.count, count),
-                    style = MaterialTheme.typography.labelLarge,
+                    style = MaterialTheme.typography.bodySmall,
                     color = InkDim,
+                    modifier = Modifier.padding(top = 2.dp),
                 )
-                Box(
-                    Modifier
-                        .padding(top = 10.dp)
-                        .height(44.dp),
-                    contentAlignment = Alignment.CenterStart,
-                ) {
-                    dev.nkosanamahungela.sonify.ui.components.SquareTitle(
-                        stringResource(R.string.library),
-                        height = dev.nkosanamahungela.sonify.ui.components.TITLE_HEIGHT,
-                        modifier = Modifier.offset(y = -dev.nkosanamahungela.sonify.ui.components.TITLE_HEIGHT * 0.15f),
-                    )
-                }
             }
 
             // Upstream's blend group: a pressed button swells into its
@@ -719,8 +713,8 @@ private fun GridTile(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
-                .softShadow(RoundedCornerShape(20.dp), elevation = 18.dp, spot = 0.4f),
-            corner = 20.dp,
+                .clip(RoundedCornerShape(8.dp)),
+            corner = 8.dp,
             decodeSize = 220.dp,
         )
         Row(
@@ -748,10 +742,10 @@ private fun ListRow(
     Row(
         Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(8.dp))
             .pressable(
                 onClick,
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(8.dp),
                 pressedScale = 0.98f,
                 onLongClick = onLongClick,
             )
@@ -763,8 +757,8 @@ private fun ListRow(
             title = playlist.name,
             modifier = Modifier
                 .size(52.dp)
-                .softShadow(RoundedCornerShape(14.dp), elevation = 10.dp),
-            corner = 14.dp,
+                .clip(RoundedCornerShape(6.dp)),
+            corner = 6.dp,
             decodeSize = 52.dp,
         )
         Text(

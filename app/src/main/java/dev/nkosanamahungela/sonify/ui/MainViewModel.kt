@@ -2494,6 +2494,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             loadSavedAlbums()
             loadFollowedArtists()
             loadSavedShows()
+            // The hybrid backend uses Spotify for catalogue metadata. Load its
+            // personalised Spotify home after the separate metadata session is
+            // connected; YouTube remains only the playback resolver.
+            if (dev.nkosanamahungela.sonify.auth.SpotifyMetadataSession.isConnected(container)) {
+                loadHomeShelves()
+            }
             return@launch
         }
 
@@ -3386,7 +3392,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         dev.nkosanamahungela.sonify.playback.OfflineMode.active,
         container.preferences.backend,
     ) { settled, offline, backend ->
-        !settled && !offline && backend == BackendId.SPOTIFY && container.spotifySignedIn
+        val spotifyCatalogueReady = when (backend) {
+            BackendId.SPOTIFY -> container.spotifySignedIn
+            BackendId.YOUTUBE_MUSIC ->
+                dev.nkosanamahungela.sonify.auth.SpotifyMetadataSession.isConnected(container)
+        }
+        !settled && !offline && spotifyCatalogueReady
     }.stateIn(viewModelScope, SharingStarted.Eagerly, container.spotifySignedIn)
 
     private suspend fun loadHomeShelvesTries() {
@@ -3413,20 +3424,28 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     private suspend fun fetchHomeShelves(): List<HomeShelf> {
-        val keys = container.pathfinderKeys
-        keys.refresh()
+        val backend = container.activeBackend.id
         return withContext(Dispatchers.IO) {
             runCatching {
-                SpotifyHome.parse(
+                val response = if (backend == BackendId.YOUTUBE_MUSIC) {
+                    // In hybrid mode this is Spotify's authenticated web-player
+                    // home query. Do not ask the YouTube playback backend for
+                    // catalogue shelves.
+                    container.gateway.homeFacet("")
+                        ?: error("Spotify did not return a home feed. Check the metadata session.")
+                } else {
+                    val keys = container.pathfinderKeys
+                    keys.refresh()
                     NativeBridge.homeFeed(
                         java.util.TimeZone.getDefault().id,
                         java.util.Locale.getDefault().language,
                         keys.home,
                         keys.appVersion,
-                    ),
-                )
+                    )
+                }
+                SpotifyHome.parse(response)
             }
-                .onFailure { android.util.Log.i(TAG, "no personalised home: ${describe(it)}") }
+                .onFailure { android.util.Log.i(TAG, "no personalised Spotify home: ${describe(it)}", it) }
                 .getOrDefault(emptyList())
         }
     }
@@ -6070,6 +6089,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }.getOrNull()
     }
 
+    private suspend fun tracksForCurrentPlayer(tracks: List<CatalogTrack>): List<CatalogTrack> =
+        (container.activeBackend as? dev.nkosanamahungela.sonify.backend.SpotifyMetadataYouTubeBackend)
+            ?.toPlayable(tracks) ?: tracks
+
     private suspend fun loadArtist(uri: String, knownName: String = ""): ArtistPage = coroutineScope {
         val id = uri.substringAfterLast(':')
         val market = userCountry
@@ -6155,6 +6178,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     tracks = nativeTracks.take(5)
                 }
             }
+
+            tracks = tracksForCurrentPlayer(tracks)
 
             if (tracks.isNotEmpty() || releases.isNotEmpty() || artist != null) {
                 if (following != null) {
@@ -6261,7 +6286,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 if (it.uri == uri) it.copy(following = isFollowed) else it
             }
 
-            return@coroutineScope webArtist.copy(tracks = enrichedTracks.take(5))
+            return@coroutineScope webArtist.copy(
+                tracks = tracksForCurrentPlayer(enrichedTracks).take(5),
+            )
         }
 
         // Resolve artist name & metadata if knownName is empty
@@ -6287,10 +6314,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             }.getOrNull()
 
             if (searchRes != null && (searchRes.tracks.isNotEmpty() || searchRes.albums.isNotEmpty())) {
-                val matchedTracks = searchRes.tracks
-                    .filter { it.artists.any { a -> a.name.contains(searchName, ignoreCase = true) } }
-                    .ifEmpty { searchRes.tracks }
-                    .take(5)
+                val matchedTracks = tracksForCurrentPlayer(
+                    searchRes.tracks
+                        .filter { it.artists.any { a -> a.name.contains(searchName, ignoreCase = true) } }
+                        .ifEmpty { searchRes.tracks }
+                        .take(5),
+                )
 
                 val matchedAlbums = searchRes.albums
                 val isFollowed = _followedArtists.value.any { it.uri == uri }
@@ -6320,9 +6349,11 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }
 
         // Last resort: native contextTracks
-        val nativeTracks = runCatching {
-            Catalog.tracks(Catalog.contextTrackUris(uri).take(10))
-        }.getOrDefault(emptyList()).take(5)
+        val nativeTracks = tracksForCurrentPlayer(
+            runCatching {
+                Catalog.tracks(Catalog.contextTrackUris(uri).take(10))
+            }.getOrDefault(emptyList()).take(5),
+        )
 
         val isFollowed = _followedArtists.value.any { it.uri == uri }
         _playlist.value = _playlist.value.let {
